@@ -13,8 +13,9 @@ Contents:
    :maxdepth: 4
    
    
-   BUMO_Keypair_Guide
-   BUMO_Java_SDK_Guide
-   API_Guide_for_Exchanges
-   Installation_Guide_for_BUMO
-   Syntax_in_Smart_Contract
+  
+   BUMO Keypair 手册
+   BUMO JAVA SDK 指南
+   BUMO交易所对接指南
+   BUMO节点安装运维指南
+   
