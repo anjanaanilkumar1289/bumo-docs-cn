@@ -14,8 +14,8 @@ Contents:
    
    
   
-   BUMO Keypair 手册
-   BUMO JAVA SDK 指南
-   BUMO交易所对接指南
-   BUMO节点安装运维指南
+   docs/BUMO Keypair 手册
+   docs/BUMO JAVA SDK 指南
+   docs/BUMO交易所对接指南
+   docs/BUMO节点安装运维指南
    
