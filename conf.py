@@ -59,7 +59,7 @@ templates_path = ['_templates']
 master_doc = 'index'
 
 # General information about the project.
-project = 'bubi'
+project = 'bumo'
 copyright = '2018, wilson'
 
 # The version info for the project you're documenting, acts as replacement for
