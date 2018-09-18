@@ -293,7 +293,7 @@ texinfo_documents = [
 # -- Options for Epub output ----------------------------------------------
 
 # Bibliographic Dublin Core info.
-epub_title = 'bubi'
+epub_title = 'bumo'
 epub_author = 'wilson'
 epub_publisher = 'wilson'
 epub_copyright = '2018, wilson'
