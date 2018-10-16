@@ -19,4 +19,5 @@ Contents:
    docs/BUMO交易所对接指南
    docs/BUMO节点安装运维指南
    docs/BUMO GO SDK指南
+   资产发行开发JAVA指南
    
