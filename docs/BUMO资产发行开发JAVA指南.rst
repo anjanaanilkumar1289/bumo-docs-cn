@@ -1,4 +1,4 @@
-资产发行开发JAVA指南
+BUMO资产发行开发JAVA指南
 ===================
 
 场景描述
@@ -395,6 +395,6 @@
 
 
 
-.. |BUBrowser| image:: /image/BUBrowser.png
-.. |execution_result_of_transaction| image:: /image/execution_result_of_transaction.png
+.. |BUBrowser| image:: /docs/image/BUBrowser.png
+.. |execution_result_of_transaction| image:: /docs/image/execution_result_of_transaction.png
 
