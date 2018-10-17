@@ -43,6 +43,10 @@ BUMO资产发行开发JAVA指南
 
 本文以Java语言为例，新创建一个资产发行方（简称为“资方”）并发行10亿GLA资产。
 
+.. note:: |
+       示例中的[资方账户地址]请替换为资方待发行资产的账户地址，[资方账户私钥]请替换为资方待发行资产的账户私钥。
+
+
 创建SDK实例
 ~~~~~~~~~~~
 
@@ -86,9 +90,9 @@ BUMO资产发行开发JAVA指南
 ::
 
  AccountCreateResult
-     address:  buQsurH1M4rjLkfjzkxR9KXJ6jSu2r9xBNEw
-     privateKey:  privbvTuL1k8z27i9eyBrFDUvAVVCSxKeLtzjMMZEqimFwbNchnejS81
-     publicKey: b00179b4adb1d3188aa1b98d6977a837bd4afdbb4813ac65472074fe3a491979bf256ba63895
+     address:  buQYszjqVYdhcPT56GZcKHVh4i7xtx6amr2g
+     privateKey:  privbUAYxPLLyaxvU3EMkSTfuEDTWxAYvyCasUcCgUxDihtNXQL4oHJx
+     publicKey: b001724ed9475ca4c8893329924c7dceae66c61d8577ab2c2c3b29376e143137c20a4bbed176
 
 
 .. note:: |
@@ -102,7 +106,8 @@ BUMO资产发行开发JAVA指南
 
 
 .. note:: |
-       账户激活可以通过小布口袋（钱包）给该资方账户转50.03BU（用于支付资产发行时需要的交易费用），即可激活该账户。
+       -主网环境：账户激活可以通过小布口袋（钱包）给该资方账户转50.03BU（用于支付资产发行时需要的交易费用），即可激活该账户。
+       -测试环境：资方向 gavin@bumo.io 发出申请，申请内容是资产的账户地址。
  
 
 获取资方账户的序列号
@@ -118,7 +123,7 @@ BUMO资产发行开发JAVA指南
  long nonce = 0;
 
     // Init request
-    String accountAddress = "buQsurH1M4rjLkfjzkxR9KXJ6jSu2r9xBNEw";
+    String accountAddress = [资方账户地址];
     AccountGetNonceRequest request = new AccountGetNonceRequest();
     request.setAddress(accountAddress);
 
@@ -151,7 +156,7 @@ BUMO资产发行开发JAVA指南
 
     public BaseOperation[] buildOperations() {
     // The account address to issue apt1.0 token
-    String issuerAddress = "buQsurH1M4rjLkfjzkxR9KXJ6jSu2r9xBNEw";
+    String issuerAddress = [资方账户地址];
     // The token name
     String name = "Global";
     // The token code
@@ -210,15 +215,15 @@ BUMO资产发行开发JAVA指南
 
 
 
-序列化交易的具体代码如下：
+序列化交易的具体代码如下,示例中的参数nonce是调用getAccountNonce得到的账户序列号，参数operations是调用buildOperations得到发行资产的操作。
 
 ::
 
- public String seralizeTransaction() {
+ public String seralizeTransaction(Long nonce,  BaseOperation[] operations) {
  String transactionBlob = null;
 
  // The account address to issue atp1.0 token
- String senderAddresss = "buQsurH1M4rjLkfjzkxR9KXJ6jSu2r9xBNEw";
+ String senderAddresss = [资方账户地址];
     // The gasPrice is fixed at 1000L, the unit is MO
     Long gasPrice = 1000L;
     // Set up the maximum cost 50.03BU
@@ -264,14 +269,14 @@ BUMO资产发行开发JAVA指南
 
 所有的交易都需要经过签名后，才是有效的。签名结果包括签名数据和公钥。
 
-签名交易的具体代码如下：
+签名交易的具体代码如下,示例中的参数transactionBlob是调用seralizeTransaction得到的序列化交易字符串。
 
 ::
 
- public Signature[] signTransaction() {
+ public Signature[] signTransaction(String transactionBlob) {
     Signature[] signatures = null;
     // The account private key to issue atp1.0 token
-  String senderPrivateKey = " privbvTuL1k8z27i9eyBrFDUvAVVCSxKeLtzjMMZEqimFwbNchnejS81";
+  String senderPrivateKey = [资方账户私钥];
  //调用上面封装的“序列化交易”接口
  String transactionBlob = seralizeTransaction();
 
@@ -303,11 +308,11 @@ BUMO资产发行开发JAVA指南
 
 将序列化的交易和签名发送到BuChain。
 
-发送交易具体代码如下：
+发送交易具体代码如下,示例中的参数transactionBlob是调用seralizeTransaction得到的序列化交易字符串，signatures是调用signTransaction得到的签名数据。
 
 ::
 
- public String submitTransaction() {
+ public String submitTransaction(String transactionBlo, Signature[] signatures) {
  String  hash = null;
  // 调用上面封装的“序列化交易”接口
  String transactionBlob = seralizeTransaction();
@@ -357,11 +362,11 @@ BUMO资产发行开发JAVA指南
 调用接口查询
 ^^^^^^^^^^^^
 
-调用接口查询的代码如下：
+调用接口查询的代码如下,示例中的参数txHash是调用submitTransaction得到的交易哈希(交易的惟一标识)。
 
 ::
 
- public boolean checkTransactionStatus() {
+ public boolean checkTransactionStatus(String txHash) {
     Boolean transactionStatus = false;
     // 调用上面封装的“发送交易”接口
  String txHash = submitTransaction();
