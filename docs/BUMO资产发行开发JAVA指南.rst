@@ -312,7 +312,7 @@ BUMO资产发行开发JAVA指南
 
 ::
 
- public String submitTransaction(String transactionBlo, Signature[] signatures) {
+ public String submitTransaction(String transactionBlob, Signature[] signatures) {
  String  hash = null;
  // 调用上面封装的“序列化交易”接口
  String transactionBlob = seralizeTransaction();
