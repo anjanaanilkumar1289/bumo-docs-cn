@@ -228,10 +228,7 @@ BUMO资产发行开发JAVA指南
     Long gasPrice = 1000L;
     // Set up the maximum cost 50.03BU
     Long feeLimit = ToBaseUnit.BU2MO("50.03");
-    // 调用上面封装的“获取账户序列号”接口，且序列号须递增1
- long nonce = getAccountNonce() + 1;
- // 调用上面封装的“组装发行资产操作”接口
- BaseOperation[] operations = buildOperations ();
+
 
  // Build transaction  Blob
  TransactionBuildBlobRequest transactionBuildBlobRequest = new TransactionBuildBlobRequest();
@@ -277,8 +274,7 @@ BUMO资产发行开发JAVA指南
     Signature[] signatures = null;
     // The account private key to issue atp1.0 token
   String senderPrivateKey = [资方账户私钥];
- //调用上面封装的“序列化交易”接口
- String transactionBlob = seralizeTransaction();
+
 
  // Sign transaction BLob
  TransactionSignRequest transactionSignRequest = new TransactionSignRequest();
@@ -314,10 +310,7 @@ BUMO资产发行开发JAVA指南
 
  public String submitTransaction(String transactionBlob, Signature[] signatures) {
  String  hash = null;
- // 调用上面封装的“序列化交易”接口
- String transactionBlob = seralizeTransaction();
- // 调用上面封装的“签名交易”接口
- Signature[] signatures = signTransaction();
+
 
  // Submit transaction
  TransactionSubmitRequest transactionSubmitRequest = new TransactionSubmitRequest();
@@ -368,8 +361,7 @@ BUMO资产发行开发JAVA指南
 
  public boolean checkTransactionStatus(String txHash) {
     Boolean transactionStatus = false;
-    // 调用上面封装的“发送交易”接口
- String txHash = submitTransaction();
+
  // 交易执行等待10秒
  try {
     Thread.sleep(10000);
