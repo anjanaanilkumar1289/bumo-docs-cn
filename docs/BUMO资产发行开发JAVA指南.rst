@@ -107,6 +107,7 @@ BUMO资产发行开发JAVA指南
 
 .. note:: |
        -主网环境：账户激活可以通过小布口袋（钱包）给该资方账户转50.03BU（用于支付资产发行时需要的交易费用），即可激活该账户。
+       
        -测试环境：资方向 gavin@bumo.io 发出申请，申请内容是资产的账户地址。
  
 
@@ -228,7 +229,8 @@ BUMO资产发行开发JAVA指南
     Long gasPrice = 1000L;
     // Set up the maximum cost 50.03BU
     Long feeLimit = ToBaseUnit.BU2MO("50.03");
-
+    // Nonce should add 1
+     nonce += 1;
 
  // Build transaction  Blob
  TransactionBuildBlobRequest transactionBuildBlobRequest = new TransactionBuildBlobRequest();
