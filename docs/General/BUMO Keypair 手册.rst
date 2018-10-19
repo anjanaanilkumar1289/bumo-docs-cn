@@ -268,7 +268,7 @@ Transaction\_blob是:
 交易的执行有两种接口调用方式：调用接口生成transaction_blob 和自己生成transaction_blob。
 
 .. _调用接口生成:
-调用接口生成:
+调用接口生成
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. attention:: 由于transaction\ *blob很可能被截取和篡改，因此不建议用这种方式生成transaction*\ blob。
