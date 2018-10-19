@@ -15,7 +15,7 @@ Contents:
  
 
    
-   docs/BUMO/index
+   docs/BUMO Keypair 手册
 
    
    
