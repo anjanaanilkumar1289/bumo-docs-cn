@@ -11,7 +11,7 @@ Contents:
 
 .. toctree::
    :maxdepth: 4
-   
+   :caption: BUMO
    
    
    docs/BUMO节点安装运维指南 
