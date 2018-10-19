@@ -11,11 +11,11 @@ Contents:
 
 .. toctree::
    :maxdepth: 1
-   :caption: BUMO
+   :caption: General
  
 
    
-   docs/BUMO/index
+   docs/General/index
 
    
    
