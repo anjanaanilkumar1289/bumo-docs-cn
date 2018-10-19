@@ -10,9 +10,10 @@ Welcome to bumo's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
    :caption: BUMO
-   
+ 
+
    
    docs/BUMO节点安装运维指南 
    docs/BUMO Keypair 手册  
@@ -21,12 +22,10 @@ Contents:
    
    
    
-   .. toctree::
+.. toctree::
    :maxdepth:1
    :caption: SDK
-   
-   
-   
+    
    
    docs/SDK/BUMO GO SDK指南
    docs/SDK/BUMO JAVA SDK 指南
