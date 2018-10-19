@@ -22,7 +22,13 @@ Contents:
    
    
    .. toctree::
-   :maxdepth: 4
+   :maxdepth:1
    :caption: SDK
-   docs/SDK/index
+   
+   
+   
+   
+   docs/SDK/BUMO GO SDK指南
+   docs/SDK/BUMO JAVA SDK 指南
+
    
