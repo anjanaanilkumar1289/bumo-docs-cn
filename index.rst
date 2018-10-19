@@ -11,7 +11,7 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
-   :caption: General
+
  
 
    
@@ -21,7 +21,7 @@ Contents:
    
 .. toctree::
    :maxdepth: 2
-   :caption: SDK
+
     
    
    docs/SDK/index
