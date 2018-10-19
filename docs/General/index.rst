@@ -1,8 +1,10 @@
+Welcome to bubi's documentation!
+================================
+
 .. toctree::
    :maxdepth: 4
 
-Welcome to bubi's documentation!
-================================
+
 
 
    BUMO Keypair 手册
