@@ -1,4 +1,4 @@
-BUMO交易所对接指南
+ BUMO交易所对接指南
 ==================
 
 概述
@@ -626,20 +626,20 @@ https://github.com/bumoproject/bumo-wallet/releases
 攻击，防止创建大量垃圾账户，BUMO激活的账户必须保留一定数量的BU，目前是0.1BU（可通过\ http://seed1.bumo.io:16002/getLedger?with_fee=true
 查询的结果 ``result.fees.base_reserve`` 字段得到）。
 
-.. |image0| image:: ../docs/General/image/download_bumo_back2.png
-.. |image1| image:: ../docs/General/image/compile_finished.png
-.. |image2| image:: ../docs/General/image/compile_installed.png
-.. |image3| image:: ../docs/General/image/clear_database.png
-.. |image4| image:: ../docs/General/image/BU-Ex-API-JAVA-v1.0.jpg
-.. |image5| image:: ../docs/General/image/2.jpg
-.. |image6| image:: ../docs/General/image/3.jpg
-.. |image7| image:: ../docs/General/image/4.jpg
-.. |image8| image:: ../docs/General/image/5.jpg
-.. |image9| image:: ../docs/General/image/1.png
-.. |image10| image:: ../docs/General/image/2.png
-.. |image11| image:: ../docs/General/image/3.png
-.. |image12| image:: ../docs/General/image/6.jpg
-.. |image13| image:: ../docs/General/image/7.jpg
-.. |image14| image:: ../docs/General/image/4.png
-.. |image15| image:: ../docs/General/image/5.png
+.. |image0| image:: ../image/download_bumo_back2.png
+.. |image1| image:: ../image/compile_finished.png
+.. |image2| image:: ../image/compile_installed.png
+.. |image3| image:: ../image/clear_database.png
+.. |image4| image:: ../image/BU-Ex-API-JAVA-v1.0.jpg
+.. |image5| image:: ../image/2.jpg
+.. |image6| image:: ../image/3.jpg
+.. |image7| image:: ../image/4.jpg
+.. |image8| image:: ../image/5.jpg
+.. |image9| image:: ../image/1.png
+.. |image10| image:: ../image/2.png
+.. |image11| image:: ../image/3.png
+.. |image12| image:: ../image/6.jpg
+.. |image13| image:: ../image/7.jpg
+.. |image14| image:: ../image/4.png
+.. |image15| image:: ../image/5.png
 
