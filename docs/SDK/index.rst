@@ -3,5 +3,5 @@
  
 
 
-   docs/SDK/BUMO GO SDK指南
-   docs/SDK/BUMO JAVA SDK 指南
+   BUMO GO SDK指南
+   BUMO JAVA SDK 指南
