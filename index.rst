@@ -13,11 +13,10 @@ Contents:
    :maxdepth: 4
    
    
-  
+   
    docs/BUMO节点安装运维指南 
-   docs/BUMO Keypair 手册
-   docs/BUMO GO SDK指南
-   docs/BUMO JAVA SDK 指南  
+   docs/BUMO Keypair 手册  
    docs/BUMO交易所对接指南  
    docs/BUMO资产发行开发JAVA指南
+   docs/SDK/index
    
