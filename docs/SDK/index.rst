@@ -1,4 +1,4 @@
-Welcome to bubi's documentation!
+SDK
 ================================
 
 .. toctree::
