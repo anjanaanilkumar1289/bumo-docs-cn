@@ -1,3 +1,6 @@
+Welcome to bubi's documentation!
+================================
+
 .. toctree::
    :maxdepth: 2
  
