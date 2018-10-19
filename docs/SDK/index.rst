@@ -1,6 +1,6 @@
 .. toctree::
    :maxdepth: 2
-   :caption: SDK
+ 
 
 
    docs/BUMO GO SDK指南
