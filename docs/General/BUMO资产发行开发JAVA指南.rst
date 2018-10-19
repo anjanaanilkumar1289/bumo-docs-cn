@@ -395,6 +395,6 @@ BUMO资产发行开发JAVA指南
 
 
 
-.. |BUBrowser| image:: /image/BUBrowser.png
-.. |execution_result_of_transaction| image:: /image/execution_result_of_transaction.png
+.. |BUBrowser| image:: ../image/BUBrowser.png
+.. |execution_result_of_transaction| image:: ../image/execution_result_of_transaction.png
 
