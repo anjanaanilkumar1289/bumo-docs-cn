@@ -10,7 +10,7 @@ Welcome to bumo's documentation!
 Contents:
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: General
  
 
@@ -20,7 +20,7 @@ Contents:
    
    
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :caption: SDK
     
    
