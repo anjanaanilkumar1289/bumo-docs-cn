@@ -18,5 +18,11 @@ Contents:
    docs/BUMO Keypair 手册  
    docs/BUMO交易所对接指南  
    docs/BUMO资产发行开发JAVA指南
+   
+   
+   
+   .. toctree::
+   :maxdepth: 4
+   :caption: SDK
    docs/SDK/index
    
