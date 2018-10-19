@@ -1195,14 +1195,14 @@ p2p 的 ``known_peers`` 必须为其他已知节点的 IP 和端口，用于节�
 
 .. note:: 至此就完成了BUMO节点的卸载。
 
-.. |image0| image:: ../docs/General/image/flow_diagram.png
-.. |image1| image:: ../docs/General/image/download_bumo_back2.png
-.. |image2| image:: ../docs/General/image/compile_finished.png
-.. |image3| image:: ../docs/General/image/compile_installed.png
-.. |image4| image:: ../docs/General/image/start_path.png
-.. |image5| image:: ../docs/General/image/add_start_command.png
-.. |image6| image:: ../docs/General/image/clear_database.png
-.. |image7| image:: ../docs/General/image/hard_fork_created.png
+.. |image0| image:: ../image/flow_diagram.png
+.. |image1| image:: ../image/download_bumo_back2.png
+.. |image2| image:: ../image/compile_finished.png
+.. |image3| image:: ../image/compile_installed.png
+.. |image4| image:: ../image/start_path.png
+.. |image5| image:: ../image/add_start_command.png
+.. |image6| image:: ../image/clear_database.png
+.. |image7| image:: ../image/hard_fork_created.png
 
 
 
