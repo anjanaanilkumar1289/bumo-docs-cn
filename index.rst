@@ -62,6 +62,6 @@
 .. toctree::
    :maxdepth: 2
    
-   docs/questions/question
+   docs/questions/questions
 
    
