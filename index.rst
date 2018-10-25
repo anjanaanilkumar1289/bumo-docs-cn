@@ -1,8 +1,17 @@
 
-.. bubi documentation master file, created by
-   sphinx-quickstart on Thu Aug  2 09:16:49 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+..  image:: img/bubi-logo.png
+..   :height: 500px
+..   :width: 394 px
+   :scale: 50 %
+   :alt: ethereum-logo
+   :align: center
+   
+布比文档中心处于持续建设当中，希望我们提供的文档内容对您能够有所帮助~~
+   
+   
+   
+   
+   
 
 欢迎访问BUMO文档！
 ================================
@@ -15,7 +24,7 @@
  
 
    
-   docs/General/index
+   docs/introduction
 
    
    
