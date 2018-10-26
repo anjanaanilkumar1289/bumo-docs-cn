@@ -6,7 +6,7 @@
 .. toctree::
    :maxdepth: 2
    
-   docs/underlyingTechnology/algorithmCN
+  algorithmCN
 
 
 
