@@ -56,7 +56,7 @@
 .. toctree::
    :maxdepth: 2
    
-   docs/terminologies/terminology
+   docs/terminologies/terminologyCN
    
    
 .. toctree::
