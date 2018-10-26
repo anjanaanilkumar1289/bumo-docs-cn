@@ -26,7 +26,7 @@
 .. toctree::
    :maxdepth: 2
    
-   docs/underlyingTechnology/
+   docs/underlyingTechnology/index
    
 .. toctree::
    :maxdepth: 2
