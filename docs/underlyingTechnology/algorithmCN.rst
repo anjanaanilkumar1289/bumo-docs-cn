@@ -3,11 +3,6 @@
 
 关于算法我们主要介绍hash算法和公私钥加密技术。区块链是结合多个技术的各自特点出现的一种新的技术架构，hash算法和加密技术为区块链的自证信任化及安全控制提供了基础。
 
-.. raw:: html
-
-    <div style="text-align: center; margin-bottom: 2em;">
-    <iframe width="100%" height="350" src="http://www.bubifans.com/article-161-1.html" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-    </div>
 
 Hash算法的特性
 --------------
