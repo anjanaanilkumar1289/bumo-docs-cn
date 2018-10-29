@@ -6,7 +6,7 @@
    :alt: ethereum-logo
    :align: center
    
-感谢您对BUMO文档中心的访问与关注，希望我们提供的文档内容对您能够有所帮助。BUMO文档中心处于持续建设当中，若您有任何问题或者反馈，欢迎发邮件到zhaobaoping@bubi.cn！
+感谢您对BUMO文档中心的访问与关注，希望我们提供的文档内容对您能够有所帮助。BUMO文档中心处于持续建设当中。
    
    
    
