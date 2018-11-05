@@ -1,9 +1,9 @@
 
-..  image:: docs/image/logo1.png
+..  image:: docs/image/logo.png
 ..   :height: 500px
 ..   :width: 394 px
    :scale: 50 %
-   :alt: ethereum-logo
+   :alt: BUMO-logo
    :align: center
    
 感谢您对BUMO文档中心的访问与关注，希望我们提供的文档内容对您能够有所帮助。BUMO文档中心处于持续建设当中。
