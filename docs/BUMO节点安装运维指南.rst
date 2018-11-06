@@ -389,8 +389,7 @@ log              运行日志存储目录（该目录在运行BUMO节点后才�
   cd /usr/local/buchain/config/
 
 
-.. note:: | 在该目录下提供了以下运行环境的配置文件。
-
+.. note::  在该目录下提供了以下运行环境的配置文件。
   - bumo-mainnet.json：该文件是主网环境的配置文件应用在生产环境中
   - bumo-testnet.json：该文件是测试网环境的配置文件
   - bumo-single.json：该文件是单节点调试环境的配置文件
@@ -556,7 +555,7 @@ MacOS中编译BUMO源代码
 .. note:: 编译完成后生成的可执行文件 **bumo** 和 **bumod** 存放在/bumo/bin目录下。
 
 MacOS中安装BUMO节点
-^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 在编译完成后才能安装BUMO节点。安装BUMO节点需要完成以下步骤：
 
 1. 输入以下命令进入到安装目录。
@@ -573,7 +572,7 @@ MacOS中安装BUMO节点
   sudo make install
 
 
-.. note:: | - 默认情况下服务安装在/usr/local/buchain/目录下。
+.. note:: - 默认情况下服务安装在/usr/local/buchain/目录下。
    - 安装完BUMO节点后在buchain/目录下有如下目录结构：
 
 =============   ======================================================
@@ -601,7 +600,7 @@ MacOS中获取安装包并解压
 
   sudo wget https://github.com/bumoproject/bumo/releases/download/1.0.0.7/buchain-1.0.0.7-macOS-x64.tar.gz
 
-.. note:: |- 如果您没有安装wget，可以用 ``apt-get install wget`` 命令来装 ``wget``。
+.. note:: - 如果您没有安装wget，可以用 ``apt-get install wget`` 命令来装 ``wget``。
    - 您可以在 https://github.com/bumoproject/bumo/releases 链接上找到需要的版本，然后右键单击该版本复制下载链接。
    - 在本示例中文件下载到根目录下。
 
@@ -653,7 +652,7 @@ MacOS中选择运行环境的配置文件
   cd /usr/local/buchain/config/
 
 
-.. note:: | 在该目录下提供了以下运行环境的配置文件。
+.. note::  在该目录下提供了以下运行环境的配置文件。
 
   - bumo-mainnet.json：该文件是主网环境的配置文件应用在生产环境中
   - bumo-testnet.json：该文件是测试网环境的配置文件
@@ -1066,8 +1065,7 @@ p2p 的 ``known_peers`` 必须为其他已知节点的 IP 和端口，用于节�
 
 |image7|
 
-.. note:: |
-   - 执行完上面的命令后，新的区块链网络只有一个验证节点即本节点。
+.. note:: - 执行完上面的命令后，新的区块链网络只有一个验证节点即本节点。
    - 执行完创建硬分叉命令后将获取如下Hash值：
 
 ::
