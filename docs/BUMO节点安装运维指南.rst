@@ -390,9 +390,9 @@ log              运行日志存储目录（该目录在运行BUMO节点后才�
 
 
 .. note::  在该目录下提供了以下运行环境的配置文件。
-  - bumo-mainnet.json：该文件是主网环境的配置文件应用在生产环境中
-  - bumo-testnet.json：该文件是测试网环境的配置文件
-  - bumo-single.json：该文件是单节点调试环境的配置文件
+   - bumo-mainnet.json：该文件是主网环境的配置文件应用在生产环境中
+   - bumo-testnet.json：该文件是测试网环境的配置文件
+   - bumo-single.json：该文件是单节点调试环境的配置文件
 
 2. 输入以下命令重命名运行环境的配置文件。
 
@@ -653,10 +653,9 @@ MacOS中选择运行环境的配置文件
 
 
 .. note::  在该目录下提供了以下运行环境的配置文件。
-
-  - bumo-mainnet.json：该文件是主网环境的配置文件应用在生产环境中
-  - bumo-testnet.json：该文件是测试网环境的配置文件
-  - bumo-single.json：该文件是单节点调试环境的配置文件
+   - bumo-mainnet.json：该文件是主网环境的配置文件应用在生产环境中
+   - bumo-testnet.json：该文件是测试网环境的配置文件
+   - bumo-single.json：该文件是单节点调试环境的配置文件
 
 2. 输入以下命令重命名运行环境的配置文件。
 
@@ -664,7 +663,7 @@ MacOS中选择运行环境的配置文件
 
   mv bumo-testnet.json bumo.json
 
-.. note:: |- 本示例中选取了测试网环境作为运行环境。您也可以根据自己的需要选取其他文件作为运行环境。
+.. note:: - 本示例中选取了测试网环境作为运行环境。您也可以根据自己的需要选取其他文件作为运行环境。
    - 重命名文件完成后进入到 /usr/local/buchain/bin 目录下，通过 ``./bumo`` 命令来启动bumo服务。
    - 安装完BUMO节点后可以在buchain/目录下查看安装文件的目录结构。
 
@@ -950,8 +949,7 @@ p2p 的 ``known_peers`` 必须为其他已知节点的 IP 和端口，用于节�
    "validators": ["buQBwe7LZYCYHfxiEGb1RE9XC9kN2qrGXWCY", "buQqkp5SDcsxpwWXQ2QFQbvHKnZ199HY3dHm"] //需要配置所有的验证节点地址，如果有两个验证节点，则配置两个地址。
    }
 
-.. note:: |
-   - 运行前请确保每个节点的初始数据一致，否则无法达成共识产生区块。
+.. note:: - 运行前请确保每个节点的初始数据一致，否则无法达成共识产生区块。
    - ``account`` 、``validation_address`` 可以通过 bumo 程序命令行工具 ``./bumo --create-account`` 获取，请妥善保存该账号信息，一旦丢失将无法找回。
 
 运维服务
@@ -1108,7 +1106,7 @@ p2p 的 ``known_peers`` 必须为其他已知节点的 IP 和端口，用于节�
   cd /usr/local/buchain/config/
 
 
-.. note:: | 在该目录下提供了以下运行环境的配置文件。
+.. note::  在该目录下提供了以下运行环境的配置文件。
    - bumo-mainnet.json：该文件是主网环境的配置文件，应用在生成环境中
    - bumo-testnet.json：该文件是测试网环境的配置文件
    - bumo-single.json：该文件是单节点调试环境的配置文件
@@ -1126,8 +1124,7 @@ p2p 的 ``known_peers`` 必须为其他已知节点的 IP 和端口，用于节�
   
   mv bumo-mainnet.json bumo.json
 
-.. note:: | 
-   - 本示例中把主网环境设置成了运行环境。
+.. note:: - 本示例中把主网环境设置成了运行环境。
    - 更改运行环境后需要清空数据库才能重启bumo服务。
 
 
