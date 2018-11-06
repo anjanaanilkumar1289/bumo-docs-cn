@@ -389,7 +389,8 @@ log              运行日志存储目录（该目录在运行BUMO节点后才�
   cd /usr/local/buchain/config/
 
 
-.. note::  在该目录下提供了以下运行环境的配置文件。
+.. note::  在该目录下提供了以下运行环境的配置文件。 
+
    - bumo-mainnet.json：该文件是主网环境的配置文件应用在生产环境中
    - bumo-testnet.json：该文件是测试网环境的配置文件
    - bumo-single.json：该文件是单节点调试环境的配置文件
@@ -653,6 +654,7 @@ MacOS中选择运行环境的配置文件
 
 
 .. note::  在该目录下提供了以下运行环境的配置文件。
+
    - bumo-mainnet.json：该文件是主网环境的配置文件应用在生产环境中
    - bumo-testnet.json：该文件是测试网环境的配置文件
    - bumo-single.json：该文件是单节点调试环境的配置文件
@@ -1107,6 +1109,7 @@ p2p 的 ``known_peers`` 必须为其他已知节点的 IP 和端口，用于节�
 
 
 .. note::  在该目录下提供了以下运行环境的配置文件。
+
    - bumo-mainnet.json：该文件是主网环境的配置文件，应用在生成环境中
    - bumo-testnet.json：该文件是测试网环境的配置文件
    - bumo-single.json：该文件是单节点调试环境的配置文件
