@@ -184,8 +184,7 @@ BUMO节点安装运维指南
 |image3|
 
 
-.. note:: | 
-   - 默认情况下服务安装在/usr/local/buchain/目录下。
+.. note:: - 默认情况下服务安装在/usr/local/buchain/目录下。
    - 安装完成后无需其他配置即可通过 ``service bumo start`` 命令来启动bumo服务。
    - 安装完BUMO节点后在buchain/目录下有如下目录结构：
 
@@ -217,9 +216,7 @@ log              运行日志存储目录（该目录在运行BUMO节点后才�
 
   wget https://github.com/bumoproject/bumo/releases/download/1.0.0.7/buchain-1.0.0.7-linux-x64.tar.gz
 
-.. note:: |
-
-   - 如果您没有安装wget，可以用 ``apt-get install wget`` 命令来装 ``wget``。
+.. note:: - 如果您没有安装wget，可以用 ``apt-get install wget`` 命令来装 ``wget``。
    - 您可以在 https://github.com/bumoproject/bumo/releases 链接上找到需要的版本，然后右键单击该版本复制下载链接。
    - 在本示例中文件下载到根目录下。
 
@@ -404,8 +401,7 @@ log              运行日志存储目录（该目录在运行BUMO节点后才�
 
   mv bumo-testnet.json bumo.json
 
-.. note:: |
-   - 本示例中选取了测试网环境作为运行环境。您也可以根据自己的需要选取其他文件作为运行环境。
+.. note:: - 本示例中选取了测试网环境作为运行环境。您也可以根据自己的需要选取其他文件作为运行环境。
    - 重命名文件完成后可以通过 ``service start bumo`` 来启动bumo服务。
    - 安装完BUMO节点后可以在buchain/目录下查看安装文件的目录结构。
 
@@ -577,8 +573,7 @@ MacOS中安装BUMO节点
   sudo make install
 
 
-.. note:: | 
-   - 默认情况下服务安装在/usr/local/buchain/目录下。
+.. note:: | - 默认情况下服务安装在/usr/local/buchain/目录下。
    - 安装完BUMO节点后在buchain/目录下有如下目录结构：
 
 =============   ======================================================
@@ -606,9 +601,7 @@ MacOS中获取安装包并解压
 
   sudo wget https://github.com/bumoproject/bumo/releases/download/1.0.0.7/buchain-1.0.0.7-macOS-x64.tar.gz
 
-.. note:: |
-
-   - 如果您没有安装wget，可以用 ``apt-get install wget`` 命令来装 ``wget``。
+.. note:: |- 如果您没有安装wget，可以用 ``apt-get install wget`` 命令来装 ``wget``。
    - 您可以在 https://github.com/bumoproject/bumo/releases 链接上找到需要的版本，然后右键单击该版本复制下载链接。
    - 在本示例中文件下载到根目录下。
 
@@ -672,8 +665,7 @@ MacOS中选择运行环境的配置文件
 
   mv bumo-testnet.json bumo.json
 
-.. note:: |
-   - 本示例中选取了测试网环境作为运行环境。您也可以根据自己的需要选取其他文件作为运行环境。
+.. note:: |- 本示例中选取了测试网环境作为运行环境。您也可以根据自己的需要选取其他文件作为运行环境。
    - 重命名文件完成后进入到 /usr/local/buchain/bin 目录下，通过 ``./bumo`` 命令来启动bumo服务。
    - 安装完BUMO节点后可以在buchain/目录下查看安装文件的目录结构。
 
