@@ -87,8 +87,7 @@ Ctp10Token服务提供了合约资产相关的有效性校验与查询接口，�
    AccountGetNonceResult result;
    }
 
-.. note:: |
-       - errorCode: 错误码。0表示无错误，大于0表示有错误 
+.. note:: - errorCode: 错误码。0表示无错误，大于0表示有错误 
        - errorDesc: 错误描述 
        - result: 返回结果。一个结构体，其类名由 **服务名+方法名+Result** 构成，其成员是各个接口返回值的成员，例如：账户服务下的 ``getNonce`` 接口的结果类名是 ``AccountGetNonceResult`` ，成员有nonce，完整结构如下：
 
