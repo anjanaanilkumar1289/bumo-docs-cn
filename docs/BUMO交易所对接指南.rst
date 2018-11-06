@@ -135,8 +135,7 @@ BUMO交易所对接指南
 
 |image2|
 
-.. note:: |
-  - 默认情况下服务安装在/usr/local/buchain/目录下。
+.. note:: - 默认情况下服务安装在/usr/local/buchain/目录下。
   - 安装完成后无需其他配置即可通过 ``service bumo start`` 命令来启动bumo服务。
   - 安装完BUMO节点后在buchain/目录下有如下目录结构：
 
@@ -327,9 +326,8 @@ SDK的使用包括了 生成用户充值地址_ 、检测账户地址的合法�
            }
        }
 
-.. note:: |
-  - 如果返回值为 ``true`` 则表示账户地址合法 
-  - 如果返回值为 ``false`` 则表示账户地址非法
+.. note:: - 如果返回值为 ``true`` 则表示账户地址合法。 
+  - 如果返回值为 ``false`` 则表示账户地址非法。
 
 资产交易
 ~~~~~~~~
@@ -364,9 +362,8 @@ SDK的使用包括了 生成用户充值地址_ 、检测账户地址的合法�
            System.out.println(response.getResult().getSynchronous());
        }
 
-.. note:: |
-  - 如果返回值为 ``true`` 则表示区块正常 
-  - 如果返回值为 ``false`` 则表示区块异常
+.. note:: - 如果返回值为 ``true`` 则表示区块正常。 
+  - 如果返回值为 ``false`` 则表示区块异常。
 
 
 **解析区块交易**
@@ -460,8 +457,7 @@ SDK的使用包括了 生成用户充值地址_ 、检测账户地址的合法�
   source_address 转出方地址
 
 
-.. note:: |
-  - 关于Bumo-sdk-java 如何使用，请访问以下链接：
+.. note:: - 关于Bumo-sdk-java 如何使用，请访问以下链接：
 
     https://github.com/bumoproject/bumo-sdk-java/tree/release2.0.0
 
@@ -503,8 +499,7 @@ SDK的使用包括了 生成用户充值地址_ 、检测账户地址的合法�
 
        }
 
-.. note:: |
-  - 记录提现操作的hash值，以便后续查看该笔提现操作的终态结果
+.. note:: - 记录提现操作的hash值，以便后续查看该笔提现操作的终态结果
   - ``gasPrice`` 目前（2018-04-23）最低值是1000MO
   - ``feeLimit`` 建议填写1000000MO，即0.01BU
 
@@ -522,8 +517,7 @@ SDK的使用包括了 生成用户充值地址_ 、检测账户地址的合法�
    System.out.println(tx);
  }
 
-.. note:: |
-  - ``tx.totalCount`` 数量大于等于1时说明交易历史存在
+.. note:: - ``tx.totalCount`` 数量大于等于1时说明交易历史存在
   - ``tx.transactions.errorCode`` 等于0表示交易成功，非0表示交易失败，具体原因查看 ``errorDesc``
   - 用户提现操作，交易所请关注 ``pay_coin`` 操作
   - 完整用户提现响应示例：
