@@ -96,8 +96,7 @@ Ctp10Token服务是指提供合约资产相关的有效性校验与查询接口�
    Result  AccountGetInfoResult
  }
 
-.. note:: |
-       - ErrorCode: 0表示无错误，大于0表示有错误。
+.. note:: - ErrorCode: 0表示无错误，大于0表示有错误。
 
        - ErrorDesc: 空表示无错误，有内容表示有错误。
 
@@ -242,8 +241,7 @@ Ctp10Token服务是指提供合约资产相关的有效性校验与查询接口�
  //调用BuildBlob接口
  resDataBlob := testSdk.Transaction.BuildBlob(reqDataBlob)
 
-.. note:: |
-  gasPrice和feeLimit的单位是MO，且 1 BU =10^8 MO。
+.. note:: gasPrice和feeLimit的单位是MO，且 1 BU =10^8 MO。
 
 4. 签名交易
 ^^^^^^^^^^^
