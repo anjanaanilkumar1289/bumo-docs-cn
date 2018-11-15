@@ -40,6 +40,7 @@
    
 .. toctree::
    :maxdepth: 2
+   
    docs/protocols/index
    
 .. toctree::
