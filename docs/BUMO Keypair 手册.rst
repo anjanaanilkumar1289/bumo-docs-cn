@@ -804,7 +804,10 @@ https://github.com/bumoproject/bumo/tree/develop/src/proto
 
     POST http://seed1.bumotest.io:26002/getTransactionBlob
 
-请求报文: 4.1.2中填充的json数据响应报文:
+请求报文: 
+请求报文请查看4.1.2中填充的json数据。
+
+响应报文: 
 
 .. code:: 
 
