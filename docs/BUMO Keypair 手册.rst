@@ -277,13 +277,13 @@ Transaction\_blob是:
 调用接口生成:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. attention:: 由于transaction\ *blob很可能被截取和篡改，因此不建议用这种方式生成transaction*\ blob。
+.. attention:: 由于transaction_blob很可能被截取和篡改，因此不建议用这种方式生成transaction_blob。
 
-如果需要调用接口生成transaction\_blob、签名并提交交易，请查看bumo的开发文档，地址如下：
+如果需要调用接口生成transaction_blob、签名并提交交易，请查看bumo的开发文档，地址如下：
 
 https://github.com/bumoproject/bumo/blob/master/docs/develop.md
 
-调用接口生成transation\_blob包含以下步骤：
+调用接口生成transation_blob包含以下步骤：
 
 1. 调用\ ``getAccount``\ 接口获取待发起交易账户的nonce值，代码如下所示：
 
