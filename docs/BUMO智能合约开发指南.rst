@@ -2414,11 +2414,11 @@ JavaScript 异常
 
 
 
-.. |warnings| image:: /image/try/warnings.png
-.. |nowarnings| image:: /image/try/nowarnings.png
-.. |compressedString| image:: /image/try/compressedString.png
-.. |BUBrowser| image:: /image/try/BUBrowser.png
-.. |execution_result_of_transaction| image:: /image/try/execution_result_of_transaction.png
+.. |warnings| image:: /image/warnings.png
+.. |nowarnings| image:: /image/nowarnings.png
+.. |compressedString| image:: /image/compressedString.png
+.. |BUBrowser| image:: /image/BUBrowser.png
+.. |execution_result_of_transaction| image:: /image/execution_result_of_transaction.png
 
 
 
