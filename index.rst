@@ -48,6 +48,13 @@
    
    docs/BUMO资产发行开发JAVA指南
    
+   
+.. toctree:: 
+   :maxdepth: 2
+   
+   docs/BUMO智能合约开发指南
+  
+   
 .. toctree::
    :maxdepth: 2
    
