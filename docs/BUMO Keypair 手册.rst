@@ -1022,4 +1022,4 @@ https://github.com/bumoproject/bumo/tree/develop/src/proto
 
 .. note:: "success\_count":1表明交易提交成功。
 
-.. |image0| image:: ../docs/image/schematic.png
+.. |image0| image:: ../docs/image/schematic_updated.png
