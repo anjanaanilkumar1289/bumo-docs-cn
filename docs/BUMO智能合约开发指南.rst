@@ -1920,12 +1920,12 @@ JavaScript 异常
 
 在BUMO区块链浏览器中查询上面的hash，主网(https://explorer.bumo.io)，测试网(http://explorer.bumotest.io)，操作如下图：
 
-|BUBrowser|
+|BUExplorer1|
 
 查询结果如下：
 
 
-|execution_result_of_transaction|
+|BUResult1|
 
 
 调用接口查询
@@ -2285,12 +2285,12 @@ JavaScript 异常
 
 在BUMO区块链浏览器中查询上面的hash，主网(https://explorer.bumo.io)，测试网(http://explorer.bumotest.io)，操作如下图：
 
-|BUBrowser|
+|BUExplorer2|
 
 查询结果如下：
 
 
-|execution_result_of_transaction|
+|BUResult2|
 
 
 调用接口查询
@@ -2417,8 +2417,10 @@ JavaScript 异常
 .. |warnings| image:: /image/warnings.png
 .. |nowarnings| image:: /image/nowarnings.png
 .. |compressedString| image:: /image/compressedString.png
-.. |BUBrowser| image:: /image/BUBrowser.png
-.. |execution_result_of_transaction| image:: /image/execution_result_of_transaction.png
+.. |BUExplorer1| image:: /image/BUExplorer1.png
+.. |BUExplorer2| image:: /image/BUExplorer2.png
+.. |BUResult1| image:: /image/BUResult1.png
+.. |BUResult2| image:: /image/BUResult2.png
 
 
 
