@@ -2414,13 +2414,13 @@ JavaScript 异常
 
 
 
-.. |warnings| image:: /image/warnings.png
-.. |nowarnings| image:: /image/nowarnings.png
-.. |compressedString| image:: /image/compressedString.png
-.. |BUExplorer1| image:: /image/BUExplorer1.png
-.. |BUExplorer2| image:: /image/BUExplorer2.png
-.. |BUResult1| image:: /image/BUResult1.png
-.. |BUResult2| image:: /image/BUResult2.png
+.. |warnings| image:: image/warnings.png
+.. |nowarnings| image:: image/nowarnings.png
+.. |compressedString| image:: image/compressedString.png
+.. |BUExplorer1| image:: image/BUExplorer1.png
+.. |BUExplorer2| image:: image/BUExplorer2.png
+.. |BUResult1| image:: image/BUResult1.png
+.. |BUResult2| image:: image/BUResult2.png
 
 
 
