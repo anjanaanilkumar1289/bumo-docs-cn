@@ -422,6 +422,8 @@ GetInfo-Account
 接口对象类型参考
 ^^^^^^^^^^^^^^^
 
+下面是 ``GetInfo-Account`` 的接口对象类型：
+
 Priv
 ++++
 
@@ -628,6 +630,8 @@ GetAssets
 接口对象类型参考
 ^^^^^^^^^^^^
 
+下面是 ``GetAssets`` 的接口对象类型：
+
 Asset
 +++++
 
@@ -709,6 +713,8 @@ GetMetadata
 
 接口对象类型参考
 ^^^^^^^^^^^^^^^
+
+下面是 ``GetMetadata`` 的接口对象类型：
 
 .. _Metadata-1:
 
@@ -1569,6 +1575,8 @@ Sign
 接口对象类型参考
 ^^^^^^^^^^^^^^^
 
+下面是 ``Sign`` 的接口对象类型：
+
 Signature
 +++++++++
 
@@ -1677,6 +1685,8 @@ GetInfo-transaction
 
 接口对象类型参考
 ^^^^^^^^^^^^^^^^
+
+下面是 ``GetInfo-transaction`` 的接口对象类型：
 
 TransactionHistory
 ++++++++++++++++++
@@ -2185,6 +2195,8 @@ GetValidators
 接口对象类型参考
 ^^^^^^^^^^^^^^^
 
+下面是 ``GetValidators`` 的接口对象类型：
+
 ValidatorInfo
 ++++++++++++++
 
@@ -2299,6 +2311,9 @@ GetReward
 接口对象类型参考
 ^^^^^^^^^^^^^^^
 
+
+下面是 ``GetReward`` 的接口对象类型：
+
 ValidatorReward
 ++++++++++++++++
 
@@ -2407,6 +2422,8 @@ GetFees
 
 接口对象类型参考
 ^^^^^^^^^^^^^^^
+
+下面是 ``GetFees`` 的接口对象类型：
 
 Fees
 +++++
