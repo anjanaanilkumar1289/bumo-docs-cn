@@ -482,7 +482,7 @@ symbol: 资产符号。
 
 decimals：小数位数。
 
-totalSupply：字符串格式，发行token 总数。例如发行 50000 个 token，其 totalSupply 值为 50000 * 100000000。
+totalSupply：字符串格式，发行 token 总数。例如，发行 50000 个 token，其 totalSupply 值为 50000 * 100000000。
 
 **返回值**
 
