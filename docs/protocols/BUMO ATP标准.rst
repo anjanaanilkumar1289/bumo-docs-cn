@@ -38,7 +38,7 @@ Token属性参数
 
  - code：推荐使用大写简拼。
  - decimals：小数位在 0~8 的范围，0 表示无小数位。
- - totalSupply：范围是 0~2^63-1。0 表示不固定 token 的上限。例如，发行一笔数量是10000、精度为 8 的ATP1.0 Token，则 totalSupply = 10 ^ 8 * 10000, 即totalSupply为 1000000000000。
+ - totalSupply：范围是 0~2^63-1。0 表示不固定 token 的上限。例如，发行一笔数量是10000、精度为 8 的ATP1.0 token，则 totalSupply = 10 ^ 8 * 10000, 即totalSupply为 1000000000000。
  - icon：base64 位编码，图标文件大小是 32k 以内，推荐 200*200 像素。
 
 操作
