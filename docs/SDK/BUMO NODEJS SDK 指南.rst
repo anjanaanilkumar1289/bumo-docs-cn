@@ -655,3 +655,8 @@ Object 的参数
  sdk.token.asset.getInfo(args).then(data => {
   console.log(data);
  });
+
+
+
+Object 的参数
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
