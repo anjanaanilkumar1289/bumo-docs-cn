@@ -710,18 +710,25 @@ buildBlob
 
 错误码如下表：
 
-======================================   ========   ====================================================
-  错误信息                                错误码       描述                                                
-======================================   ========   ====================================================
-  INVALID_SOURCEADDRESS_ERROR            11002        Invalid sourceAddress                                
-  INVALID_NONCE_ERROR                    11048        Nonce must be between 1 and max(int64)              
-  INVALID_GASPRICE_ERROR                 11049        GasPrice must be between 1 and max(int64)          
-  INVALID_FEELIMIT_ERROR                 11050        FeeLimit must be between 1 and max(int64)           
-  OPERATIONS_EMPTY_ERROR                 11051        Operations cannot be empty                         
-  INVALID_CEILLEDGERSEQ_ERROR            11052        CeilLedgerSeq must be equal or greater than 0      
-  INVALID_METADATA_ERROR                 11053        Invalid metadata                                     
-  SYSTEM_ERROR                           20000        System error                                       
-======================================   ========   ====================================================   
++-----------------------------------+--------------+---------------------------------------------------+
+|  错误信息                         |     错误码   |   描述                                            |   
++===================================+==============+===================================================+
+|  INVALID_SOURCEADDRESS_ERROR      |       11002  |      Invalid sourceAddress                        |  
++-----------------------------------+--------------+---------------------------------------------------+  
+|   INVALID_NONCE_ERROR             |       11048  |      Nonce must be between 1 and max(int64)       |   
++-----------------------------------+--------------+---------------------------------------------------+    
+|   INVALID_GASPRICE_ERROR          |       11049  |      GasPrice must be between 1 and max(int64)    | 
++-----------------------------------+--------------+---------------------------------------------------+     
+|   INVALID_FEELIMIT_ERROR          |       11050  |      FeeLimit must be between 1 and max(int64)    |   
++-----------------------------------+--------------+---------------------------------------------------+    
+|   OPERATIONS_EMPTY_ERROR          |       11051  |      Operations cannot be empty                   | 
++-----------------------------------+--------------+---------------------------------------------------+     
+|   INVALID_CEILLEDGERSEQ_ERROR     |       11052  |      CeilLedgerSeq must be equal or greater than 0|  
++-----------------------------------+--------------+---------------------------------------------------+    
+|   INVALID_METADATA_ERROR          |       11053  |      Invalid metadata                             | 
++-----------------------------------+--------------+---------------------------------------------------+         
+|   SYSTEM_ERROR                    |       20000  |      System error                                 |      
++-----------------------------------+--------------+---------------------------------------------------+
 
 
 
