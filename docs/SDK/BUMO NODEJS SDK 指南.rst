@@ -379,8 +379,8 @@ getInfo-Account
   console.log(err.message);
  });
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getInfo-Account）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 下面是 ``getInfo-Account`` 的接口对象类型：
 
@@ -586,8 +586,8 @@ getAssets
  });
 
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getAssets）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``getAssets`` 接口的响应数据 assets 数组元素为 Object 类型，其中包含如下参数:
 
@@ -658,8 +658,8 @@ Object 的参数
 
 
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getInfo-Asset）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``getInfo-Asset`` 接口请求参数 args 为 Object 类型，其中包含如下参数：
 
@@ -740,8 +740,8 @@ buildBlob
  };
  const blobInfo = sdk.transaction.buildBlob(args);
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（buildBlob）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``buildBlob`` 接口请求参数 args 为 Object 类型, 其中包含如下参数:
 
@@ -1475,8 +1475,8 @@ evaluateFee
  });
 
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（evaluateFee）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``evaluateFee`` 接口请求参数 args 为 Object 类型，其中包含如下参数：
 
@@ -1538,8 +1538,8 @@ sign
 
  console.log(signatureInfo);
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（sign）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``sign`` 接口请求参数 args 为 Object, 包含如下参数:
 
@@ -1602,8 +1602,8 @@ submit
   });
  
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（submit）
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``submit`` 接口请求参数 args 为 Object 类型, 包含如下参数：
 
@@ -1754,8 +1754,8 @@ getTransactions
 
 
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getTransactions）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ``getTransactions`` 接口中 Object 类型数据参数如下：
 
@@ -1966,8 +1966,8 @@ getValidators
   console.log(err.message);
  });
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getValidators）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 响应数据中 validators 的元素为 Object 类型，其中包含如下参数：
 
@@ -2017,8 +2017,8 @@ getLatestValidators
   console.log(err.message);
  });
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getLatestValidators）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 响应数据中 validators 的元素为 Object 类型，其中包含如下参数：
 
@@ -2081,8 +2081,8 @@ getReward
  });
 
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getReward）
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 响应数据中 validatorsReward 的元素为 Object 对象，其中包含如下参数：
 
@@ -2135,8 +2135,8 @@ getLatestReward
   console.log(err.message);
  });
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getLatestReward）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 响应数据中 validatorsReward 的元素为 Object 类型，其中包含如下参数：
 
@@ -2196,8 +2196,8 @@ getFees
   console.log(err.message);
  });
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getFees）
+^^^^^^^^^^^^^^^^^^^^^^^
 
 响应数据中 fees 的元素为 Object 类型，其中包含如下参数：
 
@@ -2423,8 +2423,8 @@ getAddress-contract
 
 
 
-Object 的参数
-^^^^^^^^^^^^^^^
+Object 的参数（getAddress-contract）
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 响应数据中 contractAddressList 中元素为 ContractAddressInfo 类型，包含如下参数：
 
