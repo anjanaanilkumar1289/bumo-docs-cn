@@ -80,7 +80,7 @@ Bumo 智能合约使用 ``JaveScript`` 语言进行编写，为了方便开发�
 
 使用本地检测工具可下载 `jslint <https://github.com/bumoproject/bumo/tree/master/src/web/jslint>`_，双击目标下的 index.html。
 
-使用线上检测工具可打开 `jslint.html <http://bumo.chinacloudapp.cn:36002/jslint.html>`_。
+使用线上检测工具可打开 `jslint.html <http://jslint.bumocdn.com/>`_。
 
 文本压缩工具
 ^^^^^^^^^^^^
@@ -1198,7 +1198,7 @@ JavaScript 异常
 验证代码是否有效
 ~~~~~~~~~~~~~~~~
 
-打开在线检测页面: http://bumo.chinacloudapp.cn:36002/jslint.html ，将上面的智能合约代码拷贝到编辑框中，点击 **JSLint** 按钮，这里提示智能合约代码没有问题。 
+打开在线检测页面: http://jslint.bumocdn.com/ ，将上面的智能合约代码拷贝到编辑框中，点击 **JSLint** 按钮，这里提示智能合约代码没有问题。 
 如果出现背景是红色的 warning 提示，表示语法有问题，如下图：
 
 |warnings|
@@ -1936,26 +1936,60 @@ JavaScript 异常
 ::
 
  public boolean checkTransactionStatus(String txHash) {
-    Boolean transactionStatus = false;
+    Boolean transactionStatus = true;
 
- // 交易执行等待10秒
- try {
-    Thread.sleep(10000);
- } catch (InterruptedException e) {
-    e.printStackTrace();
- }
- // Init request
- TransactionGetInfoRequest request = new TransactionGetInfoRequest();
- request.setHash(txHash);
+   long startTime = System.currentTimeMillis();
+   while (true) {
+      int status = 0;
 
- // Call getInfo
- TransactionGetInfoResponse response = sdk.getTransactionService().getInfo(request);
- if (response.getErrorCode() == 0) {
-    transactionStatus = true;
- } else {
-    System.out.println("error: " + response.getErrorDesc());
-  }
- return transactionStatus;
+      // Init request
+      TransactionGetInfoRequest request = new TransactionGetInfoRequest();
+      request.setHash(txHash);
+
+      // Call getInfo
+      TransactionGetInfoResponse response = sdk.getTransactionService().getInfo(request);
+      int errorCode = response.getErrorCode();
+      if (errorCode == 0) {
+         TransactionHistory transactionHistory = response.getResult().getTransactions()[0];
+         if (transactionHistory.getErrorCode() != 0) {
+            // 交易执行失败
+            status = 0;
+         }
+         else {
+            // 交易执行成功
+            status = 1;
+         }
+      } else if (errorCode == 4) {
+         // 暂未查询到交易
+         status = -1;
+      } else {
+         // 查询失败
+         status = 0;
+      }
+      
+      if (1 == status) {
+         break;
+      } else if (0 == status) {
+         System.out.println("error: 交易(" + txHash + ") 执行失败");
+         transactionStatus = false;
+         break;
+      }
+
+      // 交易执行等待10秒
+      try {
+         Thread.sleep(10000);
+      } catch (InterruptedException e) {
+         e.printStackTrace();
+      }
+      long endTime = System.currentTimeMillis();
+      // 交易超时
+      if (endTime - startTime > 50000) {
+         System.out.println("error: 交易(" + txHash + ") 执行超时");
+         transactionStatus = false;
+         break;
+      }
+   }
+   return transactionStatus;
  }
 
 
@@ -2300,28 +2334,63 @@ JavaScript 异常
 
 .. code:: javascript
 
- public boolean checkTransactionStatus(String txHash) { 
-    Boolean transactionStatus = false; 
-    // 调用上面封装的“发送交易”接口 
- // 交易执行等待10秒 
- try { 
-    Thread.sleep(10000); 
- } catch (InterruptedException e) { 
-    e.printStackTrace(); 
- } 
- // Init request 
- TransactionGetInfoRequest request = new TransactionGetInfoRequest(); 
- request.setHash(txHash); 
- 
- // Call getInfo 
- TransactionGetInfoResponse response = sdk.getTransactionService().getInfo(request); 
- if (response.getErrorCode() == 0) { 
-    transactionStatus = true; 
- } else { 
-    System.out.println("error: " + response.getErrorDesc()); 
- } 
- return transactionStatus; 
- } 
+ public boolean checkTransactionStatus(String txHash) {
+    Boolean transactionStatus = true;
+
+   long startTime = System.currentTimeMillis();
+   while (true) {
+      int status = 0;
+
+      // Init request
+      TransactionGetInfoRequest request = new TransactionGetInfoRequest();
+      request.setHash(txHash);
+
+      // Call getInfo
+      TransactionGetInfoResponse response = sdk.getTransactionService().getInfo(request);
+      int errorCode = response.getErrorCode();
+      if (errorCode == 0) {
+         TransactionHistory transactionHistory = response.getResult().getTransactions()[0];
+         if (transactionHistory.getErrorCode() != 0) {
+            // 交易执行失败
+            status = 0;
+         }
+         else {
+            // 交易执行成功
+            status = 1;
+         }
+      } else if (errorCode == 4) {
+         // 暂未查询到交易
+         status = -1;
+      } else {
+         // 查询失败
+         status = 0;
+      }
+      
+      if (1 == status) {
+         break;
+      } else if (0 == status) {
+         System.out.println("error: 交易(" + txHash + ") 执行失败");
+         transactionStatus = false;
+         break;
+      }
+
+      // 交易执行等待10秒
+      try {
+         Thread.sleep(10000);
+      } catch (InterruptedException e) {
+         e.printStackTrace();
+      }
+
+      // 交易超时
+      long endTime = System.currentTimeMillis();
+      if (endTime - startTime > 50000) {
+         System.out.println("error: 交易(" + txHash + ") 执行超时");
+         transactionStatus = false;
+         break;
+      }
+   }
+   return transactionStatus;
+ }
 
 
 
