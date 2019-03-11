@@ -183,13 +183,6 @@ class Index extends React.Component {
     };
     
     const FeatureCard = props => {
-      var {linkList} = props
-      var list = []
-      if (linkList.length > 3) {
-        list = linkList.slice(0, 3)
-      } else {
-        list = JSON.parse(JSON.stringify(linkList))
-      }
       return (
         <div className="card-item">
           <div className="item-top">
@@ -200,13 +193,20 @@ class Index extends React.Component {
           </div>
           <ul className="link-list">
             {
-              list.map((item, index) => (
-                <li key={index} className="link-item">
-                  <a href={item.url}>{item.label}</a>
-                </li>
-              ))
+              props.linkList.map((item, index) => {
+                if (index < 3) {
+                  return (
+                    <li key={index} className="link-item">
+                      <a href={item.url}>{item.label}</a>
+                    </li>
+                  )
+                }
+              })
             }
           </ul>
+          {props.linkList.length > 3 &&
+            <a className="link-all" href={props.linkList[0].url}>更多</a>
+          }
         </div>
       )
     }
