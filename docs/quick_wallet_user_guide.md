@@ -1,13 +1,13 @@
 ---
 id: quick_wallet_user_guide
-title: BOMO Quick Wallet用户手册
-sidebar_label: BUMO Quick Wallet用户手册
+title: BOMO 轻钱包用户手册
+sidebar_label: 轻钱包用户手册
 ---
 
-## QuickWallet 简介
+## 简介
 Quick Wallet是网页版轻量级钱包，用户可快速登录Quick Wallet 进行发送BU的操作。目前，Quick Wallet有正式版和测试版，正式版网址为 https://quickwallet.bumo.io，测试版网址为 https://quickwallet.bumotest.io。
 
-## 登录Quick Wallet
+## 登录
 
 登录Quick Wallet只需要输入私钥即可，具体步骤如下：
 1. 输入Quick Wallet网址进入登录界面。

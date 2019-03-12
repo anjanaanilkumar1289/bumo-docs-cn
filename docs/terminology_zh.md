@@ -1,7 +1,7 @@
 ---
 id: terminology
 title: BUMO 术语
-sidebar_label: BUMO 术语
+sidebar_label: 术语
 ---
 
 ## 账户nonce值

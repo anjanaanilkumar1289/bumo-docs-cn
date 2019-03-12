@@ -1,7 +1,7 @@
 ---
 id: smart_contract_development_guide
-title: BUMO智能合约开发指南
-sidebar_label: BUMO智能合约开发指南
+title: BUMO 智能合约开发指南
+sidebar_label: 智能合约开发指南
 ---
 
 ## 概述
@@ -12,7 +12,7 @@ sidebar_label: BUMO智能合约开发指南
 - [实例场景二](#实例场景二)主要实现合约的触发功能。
 - [实例场景三](#实例场景三)主要实现合约的查询功能。
 
-实例场景都是基于以下遵循 CTP 1.0 协议的智能合约代码，该代码来自 [contractBasedToken.js ](https://github.com/bumoproject/bumo/blob/master/src/ledger/contractBasedToken.js)。
+实例场景都是基于以下遵循 CTP 1.0 协议的智能合约代码，该代码来自 [contractBasedToken.js ](https://github.com/bumoproject/bumo/blob/master/src/contract/contractBasedToken.js)。
 
 ```javascript
 'use strict';

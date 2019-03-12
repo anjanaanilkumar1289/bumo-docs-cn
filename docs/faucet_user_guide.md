@@ -1,7 +1,7 @@
 ---
 id: faucet_user_guide
-title: BUMO Faucet用户手册
-sidebar_label: BUMO Faucet用户手册
+title: BUMO 水龙头用户手册
+sidebar_label: 水龙头用户手册
 ---
 
 Faucet 又称“水龙头”，是为用户获取测试BU的网页版应用。用户只要输入自己的测试账

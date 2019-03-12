@@ -1,7 +1,7 @@
 ---
 id: dex_10
 title: BUMO DEX 10 协议
-sidebar_label: BUMO DEX 10 协议
+sidebar_label: DEX 10
 ---
 
 ## 简介

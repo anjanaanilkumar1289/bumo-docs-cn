@@ -1,7 +1,7 @@
 ---
 id: integration_guide_for_exchanges
-title: BUMO交易所对接指南
-sidebar_label: BUMO交易所对接指南
+title: BUMO 交易所对接指南
+sidebar_label: 交易所对接指南
 ---
 
 

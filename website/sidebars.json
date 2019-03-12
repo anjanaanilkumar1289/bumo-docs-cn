@@ -6,12 +6,22 @@
       "bumo_command",
       "bumo_contract_hello_world"
     ],
+    "智能合约": [
+      "introduction_to_smart_contract",
+      "syntax_in_smart_contract",
+      "codemach_editor_user_guide"
+    ],
     "DEPs协议": [
+      "introduction_to_deps",
       "atp_10",
       "atp_20",
       "atp_30",
       "sto_10",
       "dex_10"
+    ],
+    "API": [
+      "bumo_keypair_guide",
+      "api_http"
     ],
     "SDK": [
       "sdk_java",

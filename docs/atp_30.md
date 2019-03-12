@@ -1,7 +1,7 @@
 ---
 id: atp_30
 title: BUMO ATP 30 协议
-sidebar_label: BUMO ATP 30 协议
+sidebar_label: ATP 30
 ---
 
 ## 简介

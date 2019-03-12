@@ -1,7 +1,7 @@
 ---
 id: sto_10
 title: BUMO STO 10 协议
-sidebar_label: BUMO STO 10 协议
+sidebar_label: STO 10
 ---
 
 ## 简介

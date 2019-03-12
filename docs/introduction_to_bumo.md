@@ -25,15 +25,3 @@ BUMO是专注于下一代公链基础设施的平台，并打造一个未来泛�
 
 <img src="/docs/Assets/arch.png"
      style= "margin-left: 20px">
-
-## 手册
-
- - [手册](/docs/manual.md) 
-
-##  开发
-
- - [开发文档](/docs/develop.md) 
-
-## 许可证
-
-BuChain受GPLv3许可保护。

@@ -1,7 +1,7 @@
 ---
 id: bupocket_user_guide
-title: 小布口袋APP用户手册
-sidebar_label: 小布口袋APP用户手册
+title: BUMO 小布口袋 APP 用户手册
+sidebar_label: 小布口袋 APP 用户手册
 ---
 
 ## 小布口袋APP 简介

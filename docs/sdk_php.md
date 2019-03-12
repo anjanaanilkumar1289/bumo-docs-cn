@@ -1,7 +1,7 @@
 ---
 id: sdk_php
 title: BUMO PHP SDK
-sidebar_label: BUMO PHP SDK
+sidebar_label: PHP
 ---
 
 ## 概述
@@ -491,7 +491,7 @@ address     |   String     |  必填，待查询的账户地址
 
 参数      |     类型     |        描述       
 ----------- | ------------ | ---------------- 
-	asset	    | [AssetInfo](#AssetInfo)[] |账户资产
+	asset	    | [AssetInfo](#assetinfo)[] |账户资产
 
 - **错误码**
 
@@ -549,7 +549,7 @@ key      |  String  |  选填，metadata关键字，长度限制[1, 1024]
 
 参数      |     类型    |        描述       
 ----------- | ----------- | ---------------- 
-metadata    |[MetadataInfo](#MetadataInfo)   |  账户
+metadata    |[MetadataInfo](#metadatainfo)   |  账户
 
 - **错误码**
 
@@ -616,7 +616,7 @@ issuer      |   String    |  必填，资产发行账户地址
 
 参数      |     类型     |        描述       
 ----------- | ------------ | ---------------- 
-	asset	    | [AssetInfo](#AssetInfo)[] |账户资产   
+	asset	    | [AssetInfo](#assetinfo)[] |账户资产   
 
 - **错误码**
 
@@ -858,8 +858,8 @@ gasPrice|Long|交易燃料单价，大小限制[1000, max(int64)]
 ----------- | ------------ | ---------------- 
 logs|JSONObject|日志信息
 queryRets|JSONArray|查询结果集
-stat|[ContractStat](#ContractStat)|合约资源占用信息
-txs|[TransactionEnvs](#TransactionEnvs)[]|交易集
+stat|[ContractStat](#contractstat)|合约资源占用信息
+txs|[TransactionEnvs](#transactionenvs)[]|交易集
 
 - **错误码**
 
@@ -1978,7 +1978,7 @@ if ($response->error_code == 0) {
 -----------  | ------------ | ---------------- 
 masterWeight |	 Long	    | 账户自身权重，大小限制[0, max(uint32)] 
 signers	     |[Signer](#signer)[]|   签名者权重列表
-threshold	 |[Threshold](#Threshold)|	门限
+threshold	 |[Threshold](#threshold)|	门限
 
 #### Signer
 成员      |     类型     |      描述       
@@ -2002,7 +2002,7 @@ threshold    |    Long      | 门限值，大小限制[0, max(int64)]
 
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
-key       | [Key](#Key)  | 资产惟一标识
+key       | [Key](#key)  | 资产惟一标识
 assetAmount    | Long        | 资产数量
 
  #### Key

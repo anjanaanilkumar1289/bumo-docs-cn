@@ -1,7 +1,7 @@
 ---
 id: sdk_go
 title: BUMO GO SDK
-sidebar_label: BUMO GO SDK
+sidebar_label: GO
 ---
 
 ## 概述
@@ -389,7 +389,7 @@ if resData.ErrorCode == 0 {
 
    参数      |     类型     |        描述       
    ----------- | ------------ | ---------------- 
-   asset	    | `[]`[AssetInfo](#AssetInfo) |账户资产
+   asset	    | `[]`[AssetInfo](#assetinfo) |账户资产
 
 - **错误码**
 
@@ -434,7 +434,7 @@ if resData.ErrorCode == 0 {
 
    参数      |     类型    |        描述       
    ----------- | ----------- | ---------------- 
-   metadata    |`[]`[Metadata](#Metadata)   |  账户
+   metadata    |`[]`[Metadata](#metadata)   |  账户
 
 - **错误码**
 
@@ -486,7 +486,7 @@ if resData.ErrorCode == 0 {
 
    参数      |     类型     |        描述       
    ----------- | ------------ | ---------------- 
-   asset	    | `[]`[AssetInfo](#AssetInfo) |账户资产   
+   asset	    | `[]`[AssetInfo](#assetinfo) |账户资产   
 
 - **错误码**
 
@@ -679,8 +679,8 @@ if resData.ErrorCode == 0 {
    ----------- | ------------ | ---------------- 
    logs|JSONObject|日志信息
    queryRets|JSONArray|查询结果集
-   stat|[ContractStat](#ContractStat)|合约资源占用信息
-   txs|`[]`[TransactionEnvs](#TransactionEnvs)|交易集
+   stat|[ContractStat](#contractstat)|合约资源占用信息
+   txs|`[]`[TransactionEnvs](#transactionenvs)|交易集
 
 - **错误码**
 
@@ -1609,7 +1609,7 @@ if resData.ErrorCode == 0 {
 | ------------ | ----------------------- | ------------------------------------------------------- |
 | masterWeight | int64                    | 账户自身权重，大小限制[0,max(uint32)] |
 | signers      | `[]`[Signer](#signer) | 签名者权重列表                                          |
-| threshold    | [Threshold](#Threshold) | 门限                                                    |
+| threshold    | [Threshold](#threshold) | 门限                                                    |
 
 #### Signer
 
@@ -1636,7 +1636,7 @@ if resData.ErrorCode == 0 {
 
 | 成员        | 类型        | 描述         |
 | ----------- | ----------- | ------------ |
-| key         | [Key](#Key) | 资产惟一标识 |
+| key         | [Key](#key) | 资产惟一标识 |
 | assetAmount | int64        | 资产数量     |
 
 #### Key

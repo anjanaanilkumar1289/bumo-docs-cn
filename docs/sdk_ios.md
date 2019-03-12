@@ -1,7 +1,7 @@
 ---
 id: sdk_ios
 title: BUMO IOS SDK
-sidebar_label: BUMO IOS SDK
+sidebar_label: IOS
 ---
 
 ## 概述
@@ -548,7 +548,7 @@ key      |  NSString*  |  选填，metadata关键字，长度限制[1, 1024]
 
 参数      |     类型    |        描述       
 ----------- | ----------- | ---------------- 
-metadata    |[MetadataInfo](#MetadataInfo)*   |  账户
+metadata    |[MetadataInfo](#metadatainfo)*   |  账户
 
 - **错误码**
 
@@ -608,7 +608,7 @@ if (response.errorCode == 0) {
 
    参数      |     类型     |        描述       
    ----------- | ------------ | ---------------- 
-   asset	    | NSArray<[AssetInfo](#AssetInfo) *> * |账户资产   
+   asset	    | NSArray<[AssetInfo](#assetinfo) *> * |账户资产   
 
 - **错误码**
 
@@ -825,8 +825,8 @@ gasPrice|int64_t|交易燃料单价，大小限制[1000, max(int64)]
 ----------- | ------------ | ---------------- 
 logs|JSONObject|日志信息
 queryRets|JSONArray|查询结果集
-stat|[ContractStat](#ContractStat)*|合约资源占用信息
-txs|NSArray<[TransactionEnvs](#TransactionEnvs) *> *|交易集
+stat|[ContractStat](#contractstat)*|合约资源占用信息
+txs|NSArray<[TransactionEnvs](#transactionenvs) *> *|交易集
 
 - **错误码**
 
@@ -1826,7 +1826,7 @@ else {
 -----------  | ------------ | ---------------- 
 masterWeight |	 int64_t	    |   账户自身权重，大小限制[0, max(uint32)]
 signers	     |NSArray<[SignerInfo](#signerinfo) *> *|   签名者权重列表
-threshold	 |[Threshold](#Threshold)*|	门限
+threshold	 |[Threshold](#threshold)*|	门限
 
 #### SignerInfo
 

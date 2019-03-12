@@ -58,7 +58,7 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
-            <Button href={docUrl('introduction_to_bumo')}>Get Started</Button>
+            <Button href={docUrl('introduction_to_bumo')}>快速入门</Button>
             <Button target='_blank' href={'https://github.com/bumoproject'}>Github</Button>
           </PromoSection>
         </div>
@@ -217,7 +217,7 @@ class Index extends React.Component {
         name: '智能合约',
         linkList: [
           {
-            url: `${baseUrl}docs/smart_contract_introduction`,
+            url: `${baseUrl}docs/introduction_to_smart_contract`,
             label: '介绍'
           },
           {
@@ -235,7 +235,7 @@ class Index extends React.Component {
         name: 'DEPs协议',
         linkList: [
           {
-            url: `${baseUrl}docs/deps_introduction`,
+            url: `${baseUrl}docs/introduction_to_deps`,
             label: '介绍'
           },
           {

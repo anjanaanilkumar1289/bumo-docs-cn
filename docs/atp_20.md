@@ -1,7 +1,7 @@
 ---
 id: atp_20
 title: BUMO ATP 20 协议
-sidebar_label: BUMO ATP 20 协议
+sidebar_label: ATP 20
 ---
 
 

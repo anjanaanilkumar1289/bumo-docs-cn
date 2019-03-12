@@ -1,7 +1,7 @@
 ---
 id: installation_maintenance_guide
-title: BUMO节点安装运维指南
-sidebar_label: BUMO节点安装运维指南
+title: BUMO 节点安装运维指南
+sidebar_label: 节点安装运维指南
 ---
 
 

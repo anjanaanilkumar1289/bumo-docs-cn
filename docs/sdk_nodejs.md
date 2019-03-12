@@ -1,7 +1,7 @@
 ---
 id: sdk_nodejs
 title: BUMO Nodejs SDK
-sidebar_label: BUMO Nodejs SDK
+sidebar_label: Nodejs
 ---
 
 ## 概述
@@ -379,7 +379,7 @@ const info = sdk.account.getBalance(address);
 
    参数      |     类型     |        描述       
    ----------- | ------------ | ---------------- 
-   asset	    | Array<[AssetInfo](#AssetInfo)> |账户资产
+   asset	    | Array<[AssetInfo](#assetinfo)> |账户资产
 
 - **错误码**
 
@@ -425,7 +425,7 @@ sdk.account.getAssets(address).then(result => {
 
    参数      |     类型    |        描述       
    ----------- | ----------- | ---------------- 
-   metadata    |[MetadataInfo](#MetadataInfo)   |  账户
+   metadata    |[MetadataInfo](#metadatainfo)   |  账户
 
 - **错误码**
 
@@ -482,7 +482,7 @@ sdk.account.getMetadata(args).then(result => {
 
    参数      |     类型     |        描述       
    ----------- | ------------ | ---------------- 
-   asset	    | [AssetInfo](#AssetInfo) |账户资产   
+   asset	    | [AssetInfo](#assetinfo) |账户资产   
 
 - **错误码**
 
@@ -670,8 +670,8 @@ sdk.contract.getAddress(hash).then(data => {
    ----------- | ------------ | ---------------- 
    logs|JSONObject|日志信息
    queryRets|JSONArray|查询结果集
-   stat|[ContractStat](#ContractStat)|合约资源占用信息
-   txs|Array<[TransactionEnvs](#TransactionEnvs)>|交易集
+   stat|[ContractStat](#contractstat)|合约资源占用信息
+   txs|Array<[TransactionEnvs](#transactionenvs)>|交易集
 
 - **错误码**
 
@@ -1776,7 +1776,7 @@ sdk.block.getLatestFees().then(result => {
 | ------------ | ----------------------- | ------------------------------------------------------- |
 | masterWeight | String                  | 账户自身权重，大小限制[0, (max(int32) * 2L + 1)] |
 | signers      | [Signer](#signer)[]     | 签名者权重列表                                          |
-| threshold    | [Threshold](#Threshold) | 门限                                                    |
+| threshold    | [Threshold](#threshold) | 门限                                                    |
 
 #### Signer
 
@@ -1803,7 +1803,7 @@ sdk.block.getLatestFees().then(result => {
 
 | 成员        | 类型        | 描述         |
 | ----------- | ----------- | ------------ |
-| key         | [Key](#Key) | 资产惟一标识 |
+| key         | [Key](#key) | 资产惟一标识 |
 | assetAmount | String      | 资产数量     |
 
 #### Key

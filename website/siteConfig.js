@@ -21,8 +21,8 @@ const users = [
 ];
 
 const siteConfig = {
-  title: 'Documentation', // Title for your website.
-  secTitle: 'Welcome to the documentation center of BUMO， where you can find any document that you would like to refer to when you come across any issue in using BUMO.',
+  title: '文档中心', // Title for your website.
+  secTitle: '欢迎来到 BUMO 文档中心，这里有全面的文档，包括 API 接口、开发指南、使用手册等，以便帮助您快速使用 BUMO；同时，在您遇到问题时，我们还提供技术支持。',
   tagline: '泛在价值流通体系',
   url: 'https://your-docusaurus-test-site.com', // Your website URL
   baseUrl: '/', // Base URL for your project */
@@ -42,7 +42,7 @@ const siteConfig = {
   
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    {doc: 'introduction_to_bumo', label: 'Docs'},
+    {doc: 'introduction_to_bumo', label: '文档'},
     { href: "https://github.com/bumoproject", label: "GitHub", target: "_blank" },
     { href: "https://github.com/bumoproject", label: "English", target: "_self" },
     { languages: true },
@@ -78,7 +78,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} BUMO Foundation`,
+  copyright: `Copyright © ${new Date().getFullYear()} BUMO Foundation. All Rights Reserved.`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
