@@ -1,6 +1,6 @@
 ---
-id: bumo_tool_application_scenario
-title: BUMO　工具应用场景示例
+id: tool_application_scenario
+title: BUMO 工具应用场景示例
 sidebar_label: 工具应用场景示例
 ---
 

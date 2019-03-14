@@ -41,7 +41,7 @@ Token 属性可以通过合约的 `tokenInfo` 功能函数查询到，存储在�
 
 ## 事件
 
-函数issue、transfer，approve，transferFrom会触发事件，事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
+函数[issue](#issue)、[transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)会触发事件，事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
 
 tlog定义如下:
 
@@ -55,7 +55,7 @@ tlog(topic,args...);
 
 ## 功能函数
 
-BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsupply)、[balanceOf](#balanceof)、[ownerOf](#ownerof)、[approve](#approve)、[transfer](#transfer)、[transferFrom](#transferfrom)、[tokensOfOwner](tokensofowner)、[tokenInfo](#tokeninfo)、[name](#name)、[symbol](#symbol)。
+BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsupply)、[balanceOf](#balanceof)、[ownerOf](#ownerof)、[approve](#approve)、[transfer](#transfer)、[transferFrom](#transferfrom)、[tokensOfOwner](#tokensofowner)、[tokenInfo](#tokeninfo)、[name](#name)、[symbol](#symbol)。
 
 #### issue
 
@@ -500,7 +500,7 @@ function init(input_str){
 
 #### main
 
-- 负责数据写入，其中包含了 `transfer`、`transferFrom`、`approve`。
+- 负责数据写入，其中包含了 [issue](#issue)、[transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)。
 
 - 函数体
 
@@ -511,8 +511,8 @@ function main(arg) {
   const param = data.param || {};
 
   switch (operation) {
-    case 'createToken':
-      createToken(param);
+    case 'issue':
+      issue(param);
       break;
     case 'approve':
       approve(param.to, param.tokenId);
@@ -531,11 +531,40 @@ function main(arg) {
 
 #### query
 
-> 执行查询操作
+- 负责数据查询，其中包含了[totalSupply](#totalsupply)、[balanceOf](#balanceof)、[ownerOf](#ownerof)、[tokensOfOwner](#tokensofowner)、[tokenInfo](#tokeninfo)、[name](#name)、[symbol](#symbol)等接口。
+
+- 函数体
 
 ```javascript
 function query(arg) {
-	
+    let result = {};
+    let input  = JSON.parse(input_str);
+
+    if(input.method === 'name'){
+        result.name = name();
+    }
+    else if(input.method === 'symbol'){
+        result = symbol();
+    }
+    else if(input.method === 'tokenInfo'){
+        result = tokenInfo(input.tokenId);
+    }
+    else if(input.method === 'totalSupply'){
+        result.totalSupply = totalSupply();
+    }
+    else if(input.method === 'balanceOf'){
+        result.balance = balanceOf(input.owner);
+    }
+    else if(input.method === 'ownerOf'){
+        result.owner = ownerOf(input.tokenId);
+    }
+    else if(input.method === 'tokensOfOwner'){
+        result.tokens = tokensOfOwner(input.owner);
+    }
+    else{
+       	throw '<Query interface passes an invalid operation type>';
+    }
+    return JSON.stringify(result);
 }
 ```
 

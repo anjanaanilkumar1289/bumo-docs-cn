@@ -5,7 +5,7 @@ sidebar_label: 语法说明
 ---
 
 ## 概述
-Bumo 智能合约使用 `JaveScript` 语言编写，为了方便开发者更规范的，更安全的开发合约，在做合约语法检测时候，使用了 JSLint 做限制。[参考JSLint GitHub](./)。编辑合约时候，首先需要在 JSLint 里检测通过，才可以被 Bumo 系统检测为一个合法的合约。
+Bumo 智能合约使用 `JaveScript` 语言编写，为了方便开发者更规范的，更安全的开发合约，在做合约语法检测时候，使用了 JSLint 做限制。[参考JSLint GitHub](https://github.com/bumoproject/bumo/tree/master/src/web/jslint)。编辑合约时候，首先需要在 JSLint 里检测通过，才可以被 Bumo 系统检测为一个合法的合约。
 
 JSLint 的标准语法在官方网站有详尽的说明。本文档的目的是作为一个完善文档，整理了原有的 JSLint 语法规则，同时对 Bumo 修改后的规则进行了补充说明，文档会举例说明其用法。对于本文没有提到的部分，请参考 [JsLint 帮助手册](http://jslint.bumocdn.com/help.html)。
 
@@ -52,7 +52,7 @@ function init(bar)
 ## 文本压缩
 合约文档写好之后，可以使用 JSMin 工具进行压缩，注意保存原文档，压缩是不可逆的操作。
 
-[工具地址](../../../deploy/jsmin/)
+[工具地址](https://github.com/bumoproject/bumo/tree/master/deploy/jsmin)
 
 ## Demo
 ```javascript

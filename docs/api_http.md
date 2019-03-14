@@ -1,10 +1,12 @@
 ---
 id: api_http
 title: BUMO HTTP/Restful
-sidebar_label: BUMO HTTP/Restful
+sidebar_label: HTTP/Restful
 ---
 
-## 基础知识
+## 概要
+
+在使用BUMO的http接口前需要对http接口中的数据格式、http的web服务器、端口配置、交易过程、交易的操作等基本信息进行了解。
 
 ### json
 
@@ -35,11 +37,11 @@ BUMO 区块链提供了http API接口。您可以在 安装目录/config/bumo.js
 
 - 根据意愿组装交易对象`Transaction`, 不同的交易有不同的数据结构(详见:[交易](#交易))
 - 交易对象序列化为字节流 `transaction_blob`(详见:[序列化交易](#序列化交易))
-- 用私钥`skey`对`transaction_blob`签名得到`sign_data`，`skey`的公钥为`pkey`(详见:[keypair](https://github.com/bumoproject/bumo/blob/master/docs/keypair_CN.md))
+- 用私钥`skey`对`transaction_blob`签名得到`sign_data`，`skey`的公钥为`pkey`(详见:[Keypair手册](keypair_guide)
 - 提交交易(详见:[提交交易](#提交交易))
 - 根据交易的hash查询以确定交易是否成功(详见:[查询交易](#查询交易))
 
-完整的交易过程参考[示例](#示例)
+完整的交易过程参考[示例](#示例)。
 
 
 
@@ -47,7 +49,7 @@ BUMO 区块链提供了http API接口。您可以在 安装目录/config/bumo.js
 
 如果您的区块链刚刚部署完成，那么目前区块链系统中只有创世账号。您可以通过http接口查询创世账号
 `HTTP GET host:36002/getGenesisAccount`
-您会得到类似这样的返回内容
+您会得到类似这样的返回内容：
 
 ```json
 {
@@ -68,7 +70,7 @@ BUMO 区块链提供了http API接口。您可以在 安装目录/config/bumo.js
 ```
 
 返回结果中的`address`的值就是创世账号。
-您还可以通过[查询账号](#查询账号)接口查询任意账号
+您还可以通过[查询账号](#查询账号)接口查询任意账号。
 
 ```http
 HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
@@ -104,13 +106,13 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字          | 类型   | 描述                                                         |
 | --------------- | ------ | ------------------------------------------------------------ |
-| source_address  | string | 交易源账号，即交易发起方的账号。当这笔交易成功后，交易源账号的nonce字段会自动加1。账号中的nonce意义是本账号作为交易源执行过的交易数量。 |
-| nonce           | int64  | 其值必须等于交易源账号的当前nonce+1，这是为了防止重放攻击而设计的。如何查询一个账号的nonce可参考[查询账号](#查询账号)。若查询账号没有显示nonce值，说明账号的当前nonce是0。 |
-| fee_limit       | int64  | 本交易能接受的最大的手续费。交易首先会按照这个费用收取手续费，若交易执行成功，则会收取实际的花费，否则将收取这个字段的费用。单位是MO，1 BU ＝ 10^8 MO。 |
-| gas_price       | int64  | 用于计算每个操作的手续费，还参与交易字节费的计算。单位是MO，1 BU ＝ 10^8 MO。 |
-| ceil_ledger_seq | int64  | 可选，针对本交易的区块高度限制条件，高级功能。               |
+| source_address  | string | 交易源账号，即交易发起方的账号。当这笔交易成功后，交易源账号的nonce字段会自动加1。账号中的nonce意义是本账号作为交易源执行过的交易数量 |
+| nonce           | int64  | 其值必须等于交易源账号的当前nonce+1，这是为了防止重放攻击而设计的。如何查询一个账号的nonce可参考[查询账号](#查询账号)。若查询账号没有显示nonce值，说明账号的当前nonce是0 |
+| fee_limit       | int64  | 本交易能接受的最大的手续费。交易首先会按照这个费用收取手续费，若交易执行成功，则会收取实际的花费，否则将收取这个字段的费用。单位是MO，1 BU ＝ 10^8 MO |
+| gas_price       | int64  | 用于计算每个操作的手续费，还参与交易字节费的计算。单位是MO，1 BU ＝ 10^8 MO |
+| ceil_ledger_seq | int64  | 可选，针对本交易的区块高度限制条件，高级功能               |
 | operations      | array  | 操作列表。本交易的有效负载，即本交易想要做什么事情。(详见:[操作](#操作)) |
-| metadata        | string | 可选，用户自定义字段，可以不填写，备注用。                   |
+| metadata        | string | 可选，用户自定义字段，可以不填写，备注用                   |
 
 
 
@@ -152,14 +154,14 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字         | 类型   | 描述                                                         |
 | -------------- | ------ | ------------------------------------------------------------ |
-| type           | int    | 操作码，不同的操作码执行不同的操作，详见[操作码](#操作码)。  |
-| source_address | string | 可选，操作源账户，即操作的执行方。当不填写时，默认与交易的源账户相同。 |
-| metadata       | string | 可选，用户自定义字段，可以不填写，备注用。                   |
+| type           | int    | 操作码，不同的操作码执行不同的操作，详见[操作码](#操作码) |
+| source_address | string | 可选，操作源账户，即操作的执行方。当不填写时，默认与交易的源账户相同 |
+| metadata       | string | 可选，用户自定义字段，可以不填写，备注用                  |
 | create_account | json   | [创建账号](#创建账号)操作                                    |
 | issue_asset    | json   | [发行资产](#发行资产)操作                                    |
 | pay_asset      | json   | [转移资产](#转移资产)操作                                    |
 | set_metadata   | json   | [设置metadata](#设置metadata)操作                            |
-| pay_coin       | json   | [支付BU COIN](#支付bu-coin)操作                              |
+| pay_coin       | json   | [转移BU资产](#转移bu资产)操作                              |
 | log            | json   | [记录日志](#记录日志)操作                                    |
 | set_privilege  | json   | [设置权限](#设置权限)操作                                    |
 
@@ -183,7 +185,7 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 #### 创建普通账号
 
-> **注：在当前操作中，master_weight和tx_threshold都必须是1。**
+> **注意**：在当前操作中，master_weight和tx_threshold都必须是1。
 
 - json结构
 ```json
@@ -203,19 +205,19 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字        | 类型   | 描述                                                         |
 | ------------- | ------ | ------------------------------------------------------------ |
-| dest_address  | string | 目标账号的地址。创建普通账号时，不能为空。                   |
-| init_balance  | int64  | 目标账户的初始化 BU 值，单位是MO，1 BU = 10^8 MO。           |
-| master_weight | int64  | 目标账号的 master 权重，数值范围［0, MAX(UINT32)]。          |
-| tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易，数值范围[0, MAX(INT64)]。 |
+| dest_address  | string | 目标账号的地址。创建普通账号时，不能为空                  |
+| init_balance  | int64  | 目标账户的初始化 BU 值，单位是MO，1 BU = 10^8 MO          |
+| master_weight | int64  | 目标账号的 master 权重，数值范围［0, MAX(UINT32)]          |
+| tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易，数值范围[0, MAX(INT64)] |
 
 - 查询
 
-  账户信息是通过[查询账户](#查询账户)接口查询的。
+  账户信息通过[查询账号](#查询账号)接口查询。
 
 
 #### 创建合约账号
 
-> **注：在当前操作中，master_weight必须是0，tx_threshold必须是1。**
+> **注意**：在当前操作中，`master_weight`必须是0，`tx_threshold`必须是1。
 
 - json结构
 ```json
@@ -252,17 +254,19 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 - json的关键字
 
-| 关键字        | 类型   | 描述                                                         |
-| ------------- | ------ | ------------------------------------------------------------ |
-| payload       | string | 合约代码内容                                                 |
-| init_balance  | int64  | 目标账户的初始化 BU 值，单位是MO，1 BU = 10^8 MO。           |
-| init_input    | string | 可选，合约代码中init函数的入参                               |
-| master_weight | int64  | 目标账号的 master 权重。                                     |
-| tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易。                     |
+| 关键字        | 类型   | 描述                                             |
+| ------------- | ------ | ------------------------------------------------ |
+| payload       | string | 合约代码内容                                     |
+| init_balance  | int64  | 目标账户的初始化 BU 值，单位是MO，1 BU = 10^8 MO |
+| init_input    | string | 可选，合约代码中init函数的入参                   |
+| master_weight | int64  | 目标账号的 master 权重                           |
+| tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易           |
 
 - 查询
-  - 账户信息是通过[查询账户](#查询账户)接口查询的。
-  - 合约账户地址是通过[查询交易](#查询交易)接口查询的，在`result`中`transactions`的`error_desc`字段中，结果如下：
+
+  - 账户信息通过[查询账号](#查询账号)接口查询。
+
+  - 通过[查询交易](#查询交易)接口查询，在`result`中`transactions`的`error_desc`字段中，结果如下：
 
 ```json
 [
@@ -294,18 +298,18 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字 | 类型   | 描述                                       |
 | ------ | ------ | ------------------------------------------ |
-| code   | string | 待发行资产的代码，长度范围[1, 64]。        |
-| amount | int64  | 待发行资产的数量，数值范围(0,MAX(int64))。 |
+| code   | string | 待发行资产的代码，长度范围[1, 64]        |
+| amount | int64  | 待发行资产的数量，数值范围(0,MAX(int64)) |
 
 
 
 ### 转移资产
 
-> **如果目标账户是合约账户，则当前操作会触发目标账户的合约执行。**
+> **注意**：如果目标账户是合约账户，则当前操作会触发目标账户的合约执行。
 
 - 功能
 
-  操作源账号将一笔资产转给目标账户
+  操作源账号将一笔资产转给目标账户。
 
 - json结构
 
@@ -327,11 +331,11 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字       | 类型   | 描述                                                         |
 | ------------ | ------ | ------------------------------------------------------------ |
-| dest_address | string | 目标账户地址。                                               |
-| issuer       | string | 资产发行方地址。                                             |
-| code         | string | 资产代码，长度范围[1, 64]。                                  |
+| dest_address | string | 目标账户地址                                            |
+| issuer       | string | 资产发行方地址                                             |
+| code         | string | 资产代码，长度范围[1, 64]                                  |
 | amount       | int64  | 资产数量，数值范围(0,MAX(int64))                             |
-| input        | string | 可选，如果目标账户是合约账户，input会被传递给合约代码的main函数的参数。如果目标账户是普通账户，则该设置无效。 |
+| input        | string | 可选，如果目标账户是合约账户，input会被传递给合约代码的main函数的参数。如果目标账户是普通账户，则该设置无效 |
 
 
 
@@ -355,9 +359,9 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字  | 类型   | 描述                                                         |
 | ------- | ------ | ------------------------------------------------------------ |
-| key     | string | metadata的关键字。长度范围(0, 1024]。                        |
-| value   | string | metadata的内容。长度范围[0, 256K]。                          |
-| version | int64  | 可选，metadata版本号。默认值是0。0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法。 |
+| key     | string | metadata的关键字。长度范围(0, 1024]                        |
+| value   | string | metadata的内容。长度范围[0, 256K]                          |
+| version | int64  | 可选，metadata版本号。默认值是0。0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法|
 
 
 
@@ -400,12 +404,12 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字          | 类型   | 描述                                                         |
 | --------------- | ------ | ------------------------------------------------------------ |
-| master_weight   | string | 可选，default ""，表示该账号的 master 权重。 "" ：不设置该值；"0": 设置 master 权重为 0；("0", "MAX(UINT32)"]：设置权重值为该值；其他：非法。 |
-| signers         | array  | 可选，需要操作的 signer 列表，default 为空对象。空对象不设置。 |
-| address         | string | 需要操作的 signer 地址，符合地址校验规则。                   |
+| master_weight   | string | 可选，default ""，表示该账号的 master 权重。 "" ：不设置该值；"0": 设置 master 权重为 0；("0", "MAX(UINT32)"]：设置权重值为该值；其他：非法 |
+| signers         | array  | 可选，需要操作的 signer 列表，default 为空对象。空对象不设置 |
+| address         | string | 需要操作的 signer 地址，符合地址校验规则                   |
 | weight          | int64  | 可选，default 0。0 ：删除该 signer; (0, MAX(UINT32)]：设置权重值为该值，其他：非法 |
-| tx_threshold    | string | 可选，default ""，表示该账号的最低权限。""，不设置该值；"0": 设置 tx_threshold 权重为 0；("0", "MAX(INT64)"]：设置权重值为该值；其他：非法。 |
-| type_thresholds | array  | 可选，不同操作需要的权力值列表，default 为空对象。空对象不设置。 |
+| tx_threshold    | string | 可选，default ""，表示该账号的最低权限。""，不设置该值；"0": 设置 tx_threshold 权重为 0；("0", "MAX(INT64)"]：设置权重值为该值；其他：非法 |
+| type_thresholds | array  | 可选，不同操作需要的权力值列表，default 为空对象。空对象不设置 |
 | type            | int    | 表示某种类型的操作  (0, 100]                                 |
 | threshold       | int64  | 可选，default 0。 0 ：删除该类型操作；(0, MAX(INT64)]：设置权重值为该值；其他：非法 |
 
@@ -413,7 +417,7 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 ### 转移BU资产
 
-> **如果目标账户是合约账户，则当前操作会触发目标账户的合约执行。**
+> **注意**：如果目标账户是合约账户，则当前操作会触发目标账户的合约执行。
 
 - 功能
 
@@ -436,9 +440,9 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字       | 类型   | 描述                                                         |
 | ------------ | ------ | ------------------------------------------------------------ |
-| dest_address | string | 目标账户。                                                   |
-| amount       | array  | 可选，需要操作的 signer 列表，default 为空对象。空对象不设置。 |
-| input        | string | 可选，如果目标账户是合约账户，input会被传递给合约代码的main函数的参数。如果目标账户是普通账户，则该设置无效。 |
+| dest_address | string | 目标账户                                                   |
+| amount       | array  | 可选，需要操作的 signer 列表，default 为空对象。空对象不设置 |
+| input        | string | 可选，如果目标账户是合约账户，input会被传递给合约代码的main函数的参数。如果目标账户是普通账户，则该设置无效 |
 
 
 
@@ -465,14 +469,14 @@ HTTP GET host:36002/getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 关键字 | 类型   | 描述                             |
 | ------ | ------ | -------------------------------- |
-| topic  | string | 日志主题。参数长度(0,128]。      |
-| datas  | array  | 日志内容。每个元素长度(0,1024]。 |
+| topic  | string | 日志主题。参数长度(0,128]      |
+| datas  | array  | 日志内容。每个元素长度(0,1024] |
 
 
 
 ## 控制权的分配
 
-您在创建一个账号时，可以指定这个账号的控制权分配。您可以通过设置priv的值设置。下面是一个简单的例子
+您在创建一个账号时，可以指定这个账号的控制权分配。您可以通过设置`priv`的值设置。下面是一个简单的例子。
 
 ```json
 {
@@ -529,7 +533,7 @@ HTTP GET /createKeyPair
 
 - 功能
 
-  该接口只为方便测试使用，**请勿在生产环境使用该接口（生产环境下请用SDK或者命令行生成）**，因为调用该接口后，如果节点服务器作恶会导致账户私钥泄露。该接口仅产生一个公私钥对，不会写入全网区块链。
+  **注意**：该接口只为方便测试使用，请勿在生产环境使用该接口（生产环境下请用SDK或者命令行生成），因为调用该接口后，如果节点服务器作恶会导致账户私钥泄露。该接口仅产生一个公私钥对，不会写入全网区块链。
 
 - 返回值
 
@@ -564,9 +568,9 @@ HTTP GET /getAccount?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3&key=hello&code
 
   | 参数         | 描述                                                         |
   | ------------ | ------------------------------------------------------------ |
-  | address      | 账号地址， 必填。                                            |
-  | key          | 账号的 metadata 中指定的key的值，如果不填写，那么返回结果中含有所有的metadata。 |
-  | code, issuer | 资产代码,资产发行商。这两个变量要么同时填写，要么同时不填写。若不填写，返回的结果中包含所有的资产。若填写，返回的结果中只显示由code和issuer。 |
+  | address      | 账号地址， 必填                                            |
+  | key          | 账号的 metadata 中指定的key的值，如果不填写，那么返回结果中含有所有的metadata |
+  | code, issuer | 资产代码，资产发行商。这两个变量要么同时填写，要么同时不填写。若不填写，返回的结果中包含所有的资产。若填写，返回的结果中只显示由code和issuer |
 
 - 返回值
 
@@ -652,7 +656,7 @@ HTTP GET /getAccountBase?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 参数         | 描述|
 | :----------- | ---------- |
-| address      | 账号地址， 必填。    |
+| address      | 账号地址， 必填    |
 
 - 返回值
 
@@ -707,7 +711,7 @@ HTTP GET /getAccountAssets?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 | 参数         | 描述     |
 | :----------- | ----------- |
 | address      | 账号地址， 必填。 |
-| code, issuer | issuer表示资产发行账户地址，code表示资产代码。只有同时填写正确code&issuer才能正确显示指定资产否则默认显示所有资产。 |
+| code, issuer | issuer表示资产发行账户地址，code表示资产代码。只有同时填写正确code&issuer才能正确显示指定资产否则默认显示所有资产 |
 
 - 返回值
 
@@ -765,8 +769,8 @@ HTTP GET /getAccountMetaData?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 | 参数         | 描述     |
 | :----------- | ----------- |
-| address      | 账号地址， 必填。 |
-| key      | 指定metadata中的key值。 选填。 |
+| address      | 账号地址， 必填 |
+| key      | 指定metadata中的key值， 选填 |
 
 - 返回值
 
@@ -798,7 +802,7 @@ HTTP GET /getAccountMetaData?address=buQs9npaCq9mNFZG18qu88ZcmXYqd6bqpTU3
 
 
 
-如果该账号不存在metadata,则返回内容：
+如果该账号不存在metadata，则返回内容：
 
 ```json
 {
@@ -823,15 +827,15 @@ GET /getTransactionHistory?ledger_seq=6
 
 | 参数       | 描述                       |
 | :--------- | -------------------------- |
-| hash       | 用交易的唯一标识hash查询。 |
-| ledger_seq | 查询指定区块中的所有交易。 |
-　　**注：**上述两个参数产生的约束条件是逻辑与的关系，如果您同时指定两个参数，系统将在指定的区块中查询指定的交易
+| hash       | 用交易的唯一标识hash查询 |
+| ledger_seq | 查询指定区块中的所有交易|
+**注意**：上述两个参数产生的约束条件是逻辑与的关系，如果您同时指定两个参数，系统将在指定的区块中查询指定的交易
 
 - 返回值
 
 正常返回内容如下：
 
-> **下面包含2个交易，且第2个交易是创建合约账户的交易，请注意"error_desc"字段内容。**
+> **注意**：下面包含2个交易，且第2个交易是创建合约账户的交易**error_des**字段内容尤需注意。
 
 ```json
 {
@@ -951,9 +955,9 @@ GET /getTransactionCache?hash=ad545bfc26c440e324076fbbe1d8affbd8a2277858dc35927d
 
 | 参数       | 描述                     |
 | :--------- | ------------------------ |
-| hash       | 用交易的唯一标识hash查询。 |
-| limit      | 查询交易队列前N个正在处理的交易。 |
-　　**注：**上述两个参数产生的约束条件是逻辑或的关系，如果您同时指定两个参数，系统将hash查询
+| hash       | 用交易的唯一标识hash查询 |
+| limit      | 查询交易队列前N个正在处理的交易|
+**注意**：上述两个参数产生的约束条件是逻辑或的关系，如果您同时指定两个参数，系统将hash查询
 
 - 返回值
 
@@ -1033,11 +1037,11 @@ GET /getLedger?seq=xxxx&with_validator=true&with_consvalue=true&with_fee=true&wi
 
 | 参数           | 描述                                      |
 | :------------- | ----------- |
-| seq            | ledger的序号， 如果不填写，返回当前ledger。 |
-| with_validator | 默认false，不显示验证节点列表。      |
-| with_consvalue | 默认false，不显示共识值。            |
-| with_fee       | 默认false，不显示费用配置。            |
-| with_block_reward | 默认false，不显示区块奖励和验证节点奖励。            |
+| seq            | ledger的序号， 如果不填写，返回当前ledger |
+| with_validator | 默认false，不显示验证节点列表      |
+| with_consvalue | 默认false，不显示共识值            |
+| with_fee       | 默认false，不显示费用配置            |
+| with_block_reward | 默认false，不显示区块奖励和验证节点奖励            |
 
 - 返回值
 
@@ -1264,13 +1268,13 @@ POST /submitTransaction
 
 | 参数             | 类型   | 描述                                                         |
 | :--------------- | ------ | ------------------------------------------------------------ |
-| transaction_blob | string | 交易序列化之后的16进制格式。                                 |
-| sign_data        | string | 签名数据， 16进制格式。其值为对transaction_blob进行签名(动词)得到的签名数据。__注意，签名时要先将transaction_blob转成字节流再签名，不要对16进制字符串直接签名__ |
-| public_key       | string | 公钥， 16进制格式。                                          |
+| transaction_blob | string | 交易序列化之后的16进制格式                                 |
+| sign_data        | string | 签名数据， 16进制格式。其值为对transaction_blob进行签名(动词)得到的签名数据。**注意**：签名时要先将transaction_blob转成字节流再签名，不要对16进制字符串直接签 |
+| public_key       | string | 公钥， 16进制格式                                        |
 
 - 返回值
 
-**注：**提交交易成功，并不表示交易执行成功。
+**注意**：提交交易成功，并不表示交易执行成功。
 
 ```json
 {
@@ -1292,7 +1296,7 @@ POST /callContract
 
 - 功能
 
-在智能合约模块的设计中，我们提供了沙箱环境来进行调试合约，且调试过程中不会更改区块链和合约的状态。在 BUMO 链上，我们为用户提供了 callContract 接口来帮助用户来调试智能合约，智能合约可以是公链上已存的，也可以是通过参数上传本地的合约代码进行测试，使用 callContract 接口不会发送交易，也就无需支付上链手续费。
+在智能合约模块的设计中，我们提供了沙箱环境来进行调试合约，且调试过程中不会更改区块链和合约的状态。在 BUMO 链上，我们为用户提供了 `callContract` 接口来帮助用户来调试智能合约，智能合约可以是公链上已存的，也可以是通过参数上传本地的合约代码进行测试，使用 `callContract` 接口不会发送交易，也就无需支付上链手续费。
 
 - body的json结构
 
@@ -1313,14 +1317,14 @@ POST /callContract
 
 | 关键字           | 类型   | 描述                                                         |
 | ---------------- | ------ | ------------------------------------------------------------ |
-| contract_address | string | 调用的智能合约地址，如果从数据库查询不到则返回错误。如果填空，则默认读取 code 字段的内容。 |
-| code             | string | 需要调试的合约代码，如果 contract_address 为空，则使用 code 字段，如果code字段你也为空，则返回错误。 |
-| input            | string | 给被调用的合约传参。                                         |
-| contract_balance | string | 赋予合约的初始 BU 余额。                                     |
-| fee_limit        | int64  | 手续费。                                                     |
-| gas_price        | int64  | gas价格。                                                    |
-| opt_type         | int    | 0: 调用合约的读写接口 init, 1: 调用合约的读写接口 main, 2 :调用只读接口 query。 |
-| source_address   | string | 模拟调用合约的原地址。                                       |
+| contract_address | string | 调用的智能合约地址，如果从数据库查询不到则返回错误。如果填空，则默认读取 **code** 字段的内容 |
+| code             | string | 需要调试的合约代码，如果 `contract_address` 为空，则使用 **code** 字段，如果**code**字段你也为空，则返回错误 |
+| input            | string | 给被调用的合约传参                                         |
+| contract_balance | string | 赋予合约的初始 BU 余额                                   |
+| fee_limit        | int64  | 手续费                                                    |
+| gas_price        | int64  | gas价格                                                    |
+| opt_type         | int    | 0: 调用合约的读写接口 `init`, 1: 调用合约的读写接口 `main`, 2 :调用只读接口 `query` |
+| source_address   | string | 模拟调用合约的原地址                                       |
 
 - 返回值
 
@@ -1392,11 +1396,11 @@ POST /callContract
 
 | 关键字           | 类型   | 描述                                                         |
 | ---------------- | ------ | ------------------------------------------------------------ |
-| source_address   | string | 模拟交易的原地址。                                           |
-| nonce            | int64  | 在原账号基础上加1。                                          |
-| signature_number | int64  | 签名个数，默认为1；不填写系统会设置为1。                     |
-| metadata         | string | 可选，签名个数。                                             |
-| operations       | array  | 操作列表。本交易的有效负载，即本交易想要做什么事情。(详见:[操作](#操作)) |
+| source_address   | string | 模拟交易的原地址                                         |
+| nonce            | int64  | 在原账号基础上加1                                         |
+| signature_number | int64  | 签名个数，默认为1；不填写系统会设置为1                    |
+| metadata         | string | 可选，签名个数                                             |
+| operations       | array  | 操作列表。本交易的有效负载，即本交易想要做什么事情 (详见:[操作](#操作)) |
 
 - 返回值
 
@@ -1450,13 +1454,13 @@ POST /callContract
 
 [组装操作](#组装操作)
 
-[生成交易对象](＃生成交易对象)
+[生成交易对象](#生成交易对象)
 
 
 
 #### 获取账户nonce值
 
-在交易的结构中，需要确认交易在交易发起账户的序号，因此，需要通过[查询账户基本信息](#查询账户基本信息)接口获取交易发起账户的nonce值，并在其nonce值基础上增加1。
+在交易的结构中，需要确认交易在交易发起账户的序号，因此，需要通过[查询账号基本信息](#查询账号基本信息)接口获取交易发起账户的nonce值，并在其nonce值基础上增加1。
 
 接口调用如下：
 
@@ -1506,7 +1510,7 @@ POST /callContract
 
 #### 生成交易对象
 
-在[获取账户nonce值](#获取账户nonce值)得到nonce值是**20**，那么新交易的序号是21。再根据[组装操作](#组装操作)中得到的操作结构，从而生成交易的json结构如下：
+在[获取账户nonce值](#获取账户nonce值)得到`nonce`值是*20*，那么新交易的序号是*21*。再根据[组装操作](#组装操作)中得到的操作结构，从而生成交易的json结构如下：
 
   ```json
 {
@@ -1529,7 +1533,7 @@ POST /callContract
 
 ### 序列化交易数据
 
-通过[序列化交易](序列化交易)接口来实现该功能。
+通过[序列化交易](#序列化交易)接口来实现该功能。
 
 接口调用如下：
 
@@ -1675,9 +1679,9 @@ GET /getTransactionHistory?hash=3f90865062d7737904ea929cbde7c45e831e4972cf582b69
 | 2                 | ERRCODE_INVALID_PARAMETER              | 参数错误                                                                                     |
 | 3                 | ERRCODE_ALREADY_EXIST                  | 对象已存在， 如重复提交交易                                                                  |
 | 4                 | ERRCODE_NOT_EXIST                      | 对象不存在，如查询不到账号、TX、区块等                                                       |
-| 5                 | ERRCODE_TX_TIMEOUT                     | TX 超时，指该 TX 已经被当前节点从 TX 缓存队列去掉，**但并不代表这个一定不能被执行**          |
+| 5                 | ERRCODE_TX_TIMEOUT                     | TX 超时，指该 TX 已经被当前节点从 TX 缓存队列去掉，但并不代表这个一定不能被执行         |
 | 7 | ERRCODE_MATH_OVERFLOW | 数学计算溢出 |
-| 20 | ERRCODE_EXPR_CONDITION_RESULT_FALSE | 指表达式执行结果为 false，意味着该 TX 当前没有执行成功，**但这并不代表在以后的区块不能成功** |
+| 20 | ERRCODE_EXPR_CONDITION_RESULT_FALSE | 指表达式执行结果为 false，意味着该 TX 当前没有执行成功，但这并不代表在以后的区块不能成功 |
 | 21 | ERRCODE_EXPR_CONDITION_SYNTAX_ERROR | 指表达式语法分析错误，代表该 TX 一定会失败 |
 | 90 | ERRCODE_INVALID_PUBKEY | 公钥非法 |
 | 91 | ERRCODE_INVALID_PRIKEY | 私钥非法 |
@@ -1696,8 +1700,8 @@ GET /getTransactionHistory?hash=3f90865062d7737904ea929cbde7c45e831e4972cf582b69
 | 106 | ERRCODE_ACCOUNT_INIT_LOW_RESERVE | 创建账号初始化资 |
 | 111 | ERRCODE_FEE_NOT_ENOUGH | 费用不足 |
 | 114 | ERRCODE_OUT_OF_TXCACHE | TX 缓存队列已满 |
-| 120 | ERRCODE_WEIGHT_NOT_VALID | 权重值不在有效范 |
-| 121 | ERRCODE_THRESHOLD_NOT_VALID | 门限值不在有效范 |
+| 120 | ERRCODE_WEIGHT_NOT_VALID | 权重值不在有效范围 |
+| 121 | ERRCODE_THRESHOLD_NOT_VALID | 门限值不在有效范围 |
 | 144 | ERRCODE_INVALID_DATAVERSION | metadata的version版本号不与已有的匹配（一个版本化的数据库） |
 | 146 | ERRCODE_TX_SIZE_TOO_BIG | 交易数据超出上限 |
 | 151 | ERRCODE_CONTRACT_EXECUTE_FAIL | 合约执行失败 |
@@ -1706,3 +1710,4 @@ GET /getTransactionHistory?hash=3f90865062d7737904ea929cbde7c45e831e4972cf582b69
 | 154 | ERRCODE_CONTRACT_TOO_MANY_TRANSACTIONS | 合约产生的交易超出上限 |
 | 155 | ERRCODE_CONTRACT_EXECUTE_EXPIRED | 合约执行超时 |
 | 160 | ERRCODE_TX_INSERT_QUEUE_FAIL | 插入交易缓存队列失败 |
+

@@ -38,7 +38,7 @@ ATP 10(Account based Tokenization Protocol) 指基于 BuChain的账号结构对�
 
 ## 操作过程
 
-BUMO ATP 10协议中的操作包括 [登记Token](#登记token)、[发行Token](#登记token)、[转移Token](#转移token)、[增发Token](#增发token)、[查询Token](查询token)、[查询指定Metadata](#查询指定metadata)。
+BUMO ATP 10协议中的操作包括 [登记Token](#登记token)、[发行Token](#登记token)、[转移Token](#转移token)、[增发Token](#增发token)、[查询Token](#查询token)、[查询指定Metadata](#查询指定metadata)。
 
 
 

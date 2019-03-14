@@ -221,6 +221,10 @@ class Index extends React.Component {
             label: '介绍'
           },
           {
+            url: `${baseUrl}docs/contract_new_interfaces`,
+            label: '新接口'
+          },
+          {
             url: `${baseUrl}docs/syntax_in_smart_contract`,
             label: '语法'
           },
@@ -231,11 +235,11 @@ class Index extends React.Component {
         ]
       },
       {
-        image: `${baseUrl}img/index/dep.png`,
-        name: 'DEPs协议',
+        image: `${baseUrl}img/index/beps.png`,
+        name: 'BEPs协议',
         linkList: [
           {
-            url: `${baseUrl}docs/introduction_to_deps`,
+            url: `${baseUrl}docs/introduction_to_beps`,
             label: '介绍'
           },
           {
@@ -310,15 +314,19 @@ class Index extends React.Component {
         linkList: [
           {
             url: `${baseUrl}docs/integration_guide_for_exchanges`,
-            label: '交易所对接指南'
+            label: '交易所对接'
           },
           {
             url: `${baseUrl}docs/asset_issuance_development_guide_for_java`,
-            label: '资产开发JAVA指南'
+            label: '资产发行 Java 开发指南'
+          },
+          {
+            url: `${baseUrl}docs/asset_issuance_development_guide_for_java`,
+            label: '存证 Java 开发指南 '
           },
           {
             url: `${baseUrl}docs/smart_contract_development_guide`,
-            label: '智能合约开发指南'
+            label: '智能合约 Java 开发指南'
           }
         ]
       },
@@ -333,10 +341,6 @@ class Index extends React.Component {
           {
             url: `${baseUrl}docs/bupocket_user_guide`,
             label: '小布口袋'
-          },
-          {
-            url: `${baseUrl}docs/full_node_wallet_user_guide`,
-            label: '全节点钱包'
           }
         ]
       },
@@ -344,6 +348,10 @@ class Index extends React.Component {
         image: `${baseUrl}img/index/tools.png`,
         name: '工具箱',
         linkList: [
+          {
+            url: `${baseUrl}docs/tool_application_scenario`,
+            label: '工具应用场景示例'
+          },
           {
             url: `${baseUrl}docs/keypair_generator_user_guide`,
             label: 'keypair生成器'

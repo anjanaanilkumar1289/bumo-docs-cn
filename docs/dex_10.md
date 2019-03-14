@@ -35,7 +35,7 @@ DEX 属性可以通过合约的 `dexInfo` 功能函数查询到，存储在智�
 
 ## 事件
 
-函数makeOrder，cancelOrder，takeOrder，updateFeeRate，clearExpiredOrder，withdrawFee会触发事件，事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
+函数[makeOrder](#makeorder)、[cancelOrder](#cancelorder)、[takeOrder](#takeorder)、[updateFeeRate](#updatefeerate)、[updateOwner](#updateowner)、[clearExpiredOrder](#clearexpiredorder)、[withdrawFee](#withdrawfee)会触发事件，事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
 
 tlog定义如下:
 
@@ -327,7 +327,7 @@ version：DEX 的版本。如 1.0
 
 ### main
 
-- 负责数据写入，其中包含了 `makeOrder`、`cancelOrder`、`takeOrder`、`updateFeeRate`、`updateOwner`、`clearExpiredOrder`、`withdrawFee`等接口。
+- 负责数据写入，其中包含了 [makeOrder](#makeorder)、[cancelOrder](#cancelorder)、[takeOrder](#takeorder)、[updateFeeRate](#updatefeerate)、[updateOwner](#updateowner)、[clearExpiredOrder](#clearexpiredorder)、[withdrawFee](#withdrawfee)等接口。
 - 函数体
 
 ```js
@@ -363,7 +363,7 @@ function main(input_str){
 
 ### query
 
-- 负责数据查询，其中包含了`dexInfo`、`dexInfo`、`getOrder`、`getOrderInterval`等接口。
+- 负责数据查询，其中包含了[dexInfo](#dexinfo)、[dexInfo](#dexinfo)、[getOrder](#getorder)、[getOrderInterval](#getorderinterval)等接口。
 - 函数体
 
 ```js

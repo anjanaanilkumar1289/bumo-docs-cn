@@ -189,11 +189,9 @@ JAVA SDK的使用包括了[生成用户充值地址](#生成用户充值地址)�
 ```
 
 **注意**：
-- 关于Bumo-sdk-java 如何使用，请访问以下链接：
-    https://github.com/bumoproject/bumo-sdk-java/tree/release2.0.0
+- 关于Bumo-sdk-java 如何使用，请访问：[JAVA](sdk_java)
 
-- 关于交易所对接示例，请访问以下链接：
-    https://github.com/bumoproject/bumo-sdk-java/blob/release2.0.0/examples/src/main/java/io/bumo/sdk/example/ExchangeDemo.java
+- 关于交易所对接示例，请访问以下链接：[ExchangeDemo.java](https://github.com/bumoproject/bumo-sdk-java/blob/release2.0.0/examples/src/main/java/io/bumo/sdk/example/ExchangeDemo.java)
 
 #### 用户提现或转账
 

@@ -138,7 +138,7 @@ value: {
 
 ## 事件
 
-函数setDocument，createTranche，transferWithData，transferFromWithData，transferFromToTranche，transferTranche，transferToTranche，transfersToTranche，controllerTransfer，controllerRedeem，authorizeOperator，revokeOperator，authorizeOperatorForTranche，revokeOperatorForTranche，operatorTransferTranche，operatorRedeemTranche，issue，issueToTranche，redeemFrom，redeemTranche，redeemFromTranche，transfer，approve，transferFrom会触发事件，事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
+函数[setDocument](#setdocument)、[createTranche](#createtranche)、[transferWithData](#transferwithdata)、[transferFromWithData](#transferfromwithdata)、[transferFromToTranche](#transferfromtotranche)、[transferTranche](#transfertranche)、[transferToTranche](#transfertotranche)、[transfersToTranche](#transferstotranche)、[controllerTransfer](#controllertransfer)、[controllerRedeem](#controllerredeem)、[authorizeOperator](#authorizeoperator)、[revokeOperator](#revokeoperator)、[authorizeOperatorForTranche](#authorizeoperatorfortranche)、[revokeOperatorForTranche](#revokeoperatorfortranche)、[operatorTransferTranche](#operatortransfertranche)、[operatorRedeemTranche](#operatorredeemtranche)、[issue](#issue)、[issueToTranche](#issuetotranche)、[redeem](#redeem)、[redeemFrom](#redeemfrom)、[redeemTranche](#redeemtranche)、[redeemFromTranche](#redeemfromtranche)、[transfer](#transfer)、[approve](#approve)、[approveTranche](#approvetranche)、[transferFrom](#transferfrom)会触发事件，事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
 
 tlog定义如下:
 
@@ -155,11 +155,11 @@ tlog(topic,args...);
 
 ## 功能函数
 
-BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#setdocument)、[getDocument](#getdocument)、[createTranche](#createtranche)、[balanceOf](#balanceof)、[balanceOfTranche](#balanceoftranche)、[tranchesOf](#tranchesof)、[transferWithData](#transferwithdata)、[transferFromToTranche](#transferfromtotranche)、[transferTranche](#transfertranche)、[transferToTranche](#transfertotranche)、[transfersToTranche](#transferstotranche)[isControllable](#iscontrollable)、[controllerTransfer](#controllertransfer)、[controllerRedeem](#controllerredeem)、[authorizeOperator](#authorizeoperator)、[revokeOperator](#revokeoperator)、[authorizeOperatorForTranche](#authorizeoperatorfortranche)、[revokeOperatorForTranche](#revokeOperatorfortranche)、[isOperator](#isoperator)、[isOperatorForTranche](#isoperatorfortranche)、[operatorTransferTranche](#operatortransfertranche)、[operatorRedeemTranche](#operatorredeemtranche)、[isIssuable](#isissuable)[issue](#issue)、[issueToTranche](#issuetotranche)、[redeem](#redeem)、[redeemFrom](#redeemfrom)、[redeemTranche](#redeemtranche)、[redeemFromTranche](#redeemfromtranche)、[canTransfer](#cantransfer)、[canTransferTranche](#cantransfertranche)、[canTransferToTranche](#cantransfertotranche)、[transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)、[approveTranche](#approvetranche)、[allowance](#allowance)、[allowanceForTranche](#allowancefortranche)。
+BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#setdocument)、[getDocument](#getdocument)、[createTranche](#createtranche)、[balanceOf](#balanceof)、[balanceOfTranche](#balanceoftranche)、[tranchesOf](#tranchesof)、[transferWithData](#transferwithdata)、[transferFromToTranche](#transferfromtotranche)、[transferTranche](#transfertranche)、[transferToTranche](#transfertotranche)、[transfersToTranche](#transferstotranche)[isControllable](#iscontrollable)、[controllerTransfer](#controllertransfer)、[controllerRedeem](#controllerredeem)、[authorizeOperator](#authorizeoperator)、[revokeOperator](#revokeoperator)、[authorizeOperatorForTranche](#authorizeoperatorfortranche)、[revokeOperatorForTranche](#revokeoperatorfortranche)、[isOperator](#isoperator)、[isOperatorForTranche](#isoperatorfortranche)、[operatorTransferTranche](#operatortransfertranche)、[operatorRedeemTranche](#operatorredeemtranche)、[isIssuable](#isissuable)[issue](#issue)、[issueToTranche](#issuetotranche)、[redeem](#redeem)、[redeemFrom](#redeemfrom)、[redeemTranche](#redeemtranche)、[redeemFromTranche](#redeemfromtranche)、[canTransfer](#cantransfer)、[canTransferTranche](#cantransfertranche)、[canTransferToTranche](#cantransfertotranche)、[transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)、[approveTranche](#approvetranche)、[allowance](#allowance)、[allowanceForTranche](#allowancefortranche)。
 
 
 
-### tranchesOfTokenInfo
+### tokenInfo
 
 - 描述
 
@@ -1625,7 +1625,7 @@ function init(input_str){
 
 
 ### main
-- 负责数据写入，其中包含了 `setDocument`、`createTranche`、`changeOwnership`、`issue`、`issueToTranche`、`approveTranche`、`approve`、`transfer`、`transferFrom`、`transferWithData`、`transferFromWithData`、`transferTranche`、`transferToTranche`、`transfersToTranche`、`transferFromToTranche`、`controllerTransfer`、`controllerRedeem`、`authorizeOperator`、`revokeOperator`、`revokeOperatorForTranche`、`operatorTransferTranche`、`redeem`、`redeemFrom`、`redeemTranche`、`operatorRedeemTranche`等接口。
+- 负责数据写入，其中包含了 [setDocument](#setdocument)、[createTranche](#createtranche)、[transferWithData](#transferwithdata)、[transferFromWithData](#transferfromwithdata)、[transferFromToTranche](#transferfromtotranche)、[transferTranche](#transfertranche)、[transferToTranche](#transfertotranche)、[transfersToTranche](#transferstotranche)、[controllerTransfer](#controllertransfer)、[controllerRedeem](#controllerredeem)、[authorizeOperator](#authorizeoperator)、[revokeOperator](#revokeoperator)、[authorizeOperatorForTranche](#authorizeoperatorfortranche)、[revokeOperatorForTranche](#revokeoperatorfortranche)、[operatorTransferTranche](#operatortransfertranche)、[operatorRedeemTranche](#operatorredeemtranche)、[issue](#issue)、[issueToTranche](#issuetotranche)、[redeem](#redeem)、[redeemFrom](#redeemfrom)、[redeemTranche](#redeemtranche)、[redeemFromTranche](#redeemfromtranche)、[transfer](#transfer)、[approve](#approve)、[approveTranche](#approvetranche)、[transferFrom](#transferfrom)等接口。
 - 函数体
 
 ```js
@@ -1718,7 +1718,7 @@ function main(input_str){
 
 ### query
 
-- 负责数据查询，其中包含了`getDocument`、`isIssuable`、`tokenInfo`、`balanceOf`、`tranchesOf`、`balanceOfTranche`、`allowance`、`allowanceForTranche`、`isControllable`、`isOperator`、`isOperatorForTranche`、`canTransfer`、`canTransferTranche`、`canTransferToTranche`等接口。
+- 负责数据查询，其中包含了[getDocument](#getdocument)、[isIssuable](#isissuable)、[tokenInfo](#tokeninfo)、[balanceOf](#balanceof)、[tranchesOf](#tranchesof)、[balanceOfTranche](#balanceoftranche)、[allowance](#allowance)、[allowanceForTranche](#allowancefortranche)、[isControllable](#iscontrollable)、[isOperator](#isoperator)、[isOperatorForTranche](#isoperatorfortranche)、[canTransfer](#cantransfer)、[canTransferTranche](#cantransfertranche)、[canTransferToTranche](#cantransfertotranche)等接口。
 
 - 函数体
 

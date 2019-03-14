@@ -1,10 +1,16 @@
 ---
-id: smart_contract_development_guide
-title: BUMO 智能合约开发指南
-sidebar_label: 智能合约开发指南
+id: smart_contract_development_guide_for_java
+title: BUMO 智能合约 Java 开发指南
+sidebar_label: 智能合约 Java 开发指南
 ---
 
 ## 概述
+
+合约是一段`JavaScript`代码,标准(`ECMAScript` as specified in `ECMA-262`)。合约的初始化函数是`init`, 执行的入口函数是`main`函数，您写的合约代码中必须有`init`和`main`函数的定义。该函数的入参是字符串`input`，是调用该合约的时候指定的。
+
+- 详细的合约的介绍，请看[合约](introduction_to_smart_contract)。
+- 详细的合约的语法，请看[合约语法]()。
+- 详细的合约编辑器的用户手册，请看[合约编辑器的介绍](introduction_to_smart_contract)。
 
 本章节介绍了三个基于Java语言的智能合约开发实例场景，三个场景都是相关联的。
 

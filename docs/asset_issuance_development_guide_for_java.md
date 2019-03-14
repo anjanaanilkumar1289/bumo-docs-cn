@@ -1,7 +1,7 @@
 ---
 id: asset_issuance_development_guide_for_java
-title: BUMO 资产发行开发 JAVA 指南
-sidebar_label: 资产发行开发 JAVA 指南
+title: BUMO 资产发行 JAVA 开发指南
+sidebar_label: 资产发行 JAVA 开发指南
 ---
 
 

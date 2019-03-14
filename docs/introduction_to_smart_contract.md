@@ -6,7 +6,9 @@ sidebar_label: 介绍
 
 ## 合约定义
 
-合约是一段`JavaScript`代码,标准(`ECMAScript` as specified in `ECMA-262`)。合约的初始化函数是`init`, 执行的入口函数是`main`函数，您写的合约代码中必须有`init`和`main`函数的定义。该函数的入参是字符串`input`，是调用该合约的时候指定的。 语法请参考[合约语法]()
+推荐使用新的接口 [新的智能合约接口](new_contract_interfaces)。
+
+合约是一段`JavaScript`代码,标准(`ECMAScript` as specified in `ECMA-262`)。合约的初始化函数是`init`, 执行的入口函数是`main`函数，您写的合约代码中必须有`init`和`main`函数的定义。该函数的入参是字符串`input`，是调用该合约的时候指定的。 语法请参考[合约语法](syntax_in_smart_contract)。
 
 下面是一个简单的例子
 
@@ -39,7 +41,7 @@ function query(input)
 
 ## 全局函数和内置变量
 
-> 自定义的函数和变量不要与**全局函数**和**内置变量**重名，否则会造成不可控的数据错误。
+> **注意：自定义的函数和变量不要与**全局函数**和**内置变量**重名，否则会造成不可控的数据错误。**
 
 
 
@@ -92,8 +94,9 @@ issueAsset("CNY", 10000);
   `assert` 函数用于断言验证。
 
 - **函数调用**
-
+  ```JavaScript
   assert(condition[, message]);
+  ```
 
 - **参数说明**
 
@@ -102,13 +105,13 @@ issueAsset("CNY", 10000);
 
 - **示例**
 
-```JavaScript
- assert(1===1, "Not valid");
- /*
- 权限：只读
- 返回：成功返回 true，失败抛异常
- */
-```
+  ```JavaScript
+  assert(1===1, "Not valid");
+  /*
+  权限：只读
+  返回：成功返回 true，失败抛异常
+  */
+  ```
 
 
 
@@ -116,11 +119,13 @@ issueAsset("CNY", 10000);
 
 - **函数描述**
 
-`getBalance` 函数用于获取账号信息（不包含 metada 和资产信息）。
+  `getBalance` 函数用于获取账号信息（不包含 metada 和资产信息）。
 
 - **函数调用**
 
-getBalance(address);
+  ```JavaScript
+  getBalance(address);
+  ```
 
 - **参数说明**
 
@@ -128,23 +133,25 @@ getBalance(address);
 
 - **示例**
 
-```JavaScript
- let balance = getBalance('buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY');
- /*
-    权限：只读
-    返回：字符串格式数字 '9999111100000'
- */
-```
+  ```JavaScript
+  let balance = getBalance('buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY');
+  /*
+      权限：只读
+      返回：字符串格式数字 '9999111100000'
+  */
+  ```
 
 ##### storageStore
 
 - **函数描述**
 
-`storageStore` 函数用于存储合约账号的 metadata 信息。
+  `storageStore` 函数用于存储合约账号的 metadata 信息。
 
 - **函数调用**
 
-storageStore(metadata_key, metadata_value);
+  ```JavaScript
+  storageStore(metadata_key, metadata_value);
+  ```
 
 - **参数说明**
 
@@ -153,45 +160,50 @@ storageStore(metadata_key, metadata_value);
 
 - **示例**
 
-```JavaScript
-storageStore('abc', 'values');
- /* 权限：可写
-    返回：成功返回true, 失败抛异常
- */
-```
+  ```JavaScript
+  storageStore('abc', 'values');
+  /* 权限：可写
+      返回：成功返回true, 失败抛异常
+  */
+  ```
 
 ##### storageLoad
 
 - **函数描述**
 
-`storageLoad` 函数用于获取合约账号的 metadata 信息。
+  `storageLoad` 函数用于获取合约账号的 metadata 信息。
 
 - **函数调用**
 
-storageLoad(metadata_key);
+  ```JavaScript
+  storageLoad(metadata_key);
+  ```
+
 - **参数说明**
 
   - metadata_key：metadata 的 key 值。
 
 - **示例**
 
-```JavaScript
- let value = storageLoad('abc');
- /* 权限：只读
-    返回：成功返回字符串，如 'values', 失败返回 false
-    本示例得到合约账号中自定数据的 abc 的值
- */
-```
+  ```JavaScript
+  let value = storageLoad('abc');
+  /* 权限：只读
+      返回：成功返回字符串，如 'values', 失败返回 false
+      本示例得到合约账号中自定数据的 abc 的值
+  */
+  ```
 
 ##### storageDel
 
 - **函数描述**
 
-`storageDel` 函数用于删除合约账号的 metadata 信息。
+  `storageDel` 函数用于删除合约账号的 metadata 信息。
 
 - **函数调用**
 
-storageDel(metadata_key);
+  ```JavaScript
+  storageDel(metadata_key);
+  ```
 
 - **参数说明**
 
@@ -199,24 +211,26 @@ storageDel(metadata_key);
 
 - **示例**
 
-```JavaScript
- storageDel('abc');
- /*
-  权限：可写
-  返回：成功返回 true, 失败抛异常
-  本示例删除本合约账号中自定数据的 abc 的值
- */
-```
+  ```JavaScript
+  storageDel('abc');
+  /*
+    权限：可写
+    返回：成功返回 true, 失败抛异常
+    本示例删除本合约账号中自定数据的 abc 的值
+  */
+  ```
 
 ##### getAccountAsset
 
 - **函数描述**
 
-`getAccountAsset` 函数用于获取某个账号的资产信息。
+  `getAccountAsset` 函数用于获取某个账号的资产信息。
 
 - **函数调用**
 
-getAccountAsset(account_address, asset_key);
+  ```JavaScript
+  getAccountAsset(account_address, asset_key);
+  ```
 
 - **参数说明**
 
@@ -225,29 +239,31 @@ getAccountAsset(account_address, asset_key);
 
 - **示例**
 
-```JavaScript
- let asset_key =
- {
- 'issuer' : 'buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY',
- 'code' : 'CNY'
- };
- let bar = getAccountAsset('buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY',
- asset_key);
- /*
- 权限：只读
- 返回：成功返回资产数字如'10000'，失败返回 false
- */
-```
+  ```JavaScript
+  let asset_key =
+  {
+  'issuer' : 'buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY',
+  'code' : 'CNY'
+  };
+  let bar = getAccountAsset('buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY',
+  asset_key);
+  /*
+  权限：只读
+  返回：成功返回资产数字如'10000'，失败返回 false
+  */
+  ```
 
 ##### getBlockHash
 
 - **函数描述**
 
-`getBlockHash` 函数用于获取区块信息。
+  `getBlockHash` 函数用于获取区块信息。
 
 - **函数调用**
 
-getBlockHash(offset_seq);
+  ```JavaScript
+  getBlockHash(offset_seq);
+  ```
 
 - **参数说明**
 
@@ -255,25 +271,27 @@ getBlockHash(offset_seq);
 
 - **示例**
 
-```JavaScript
- let ledger = getBlockHash(4);
- /*
- 权限：只读
- 返回：成功返回字符串，如
- 'c2f6892eb934d56076a49f8b01aeb3f635df3d51aaed04ca521da3494451afb3'，
- 失败返回 false
- */
-```
+  ```JavaScript
+  let ledger = getBlockHash(4);
+  /*
+  权限：只读
+  返回：成功返回字符串，如
+  'c2f6892eb934d56076a49f8b01aeb3f635df3d51aaed04ca521da3494451afb3'，
+  失败返回 false
+  */
+  ```
 
 ##### addressCheck
 
 - **函数描述**
 
-`addressCheck` 函数用于地址合法性检查。
+  `addressCheck` 函数用于地址合法性检查。
 
 - **函数调用**
 
-addressCheck(address);
+  ```JavaScript
+  addressCheck(address);
+  ```
 
 - **参数说明**
 
@@ -281,23 +299,25 @@ addressCheck(address);
 
 - **示例**
 
-```JavaScript
- let ret = addressCheck('buQgmhhxLwhdUvcWijzxumUHaNqZtJpWvNsf');
- /*
- 权限：只读
- 返回：成功返回 true，失败返回 false
- */
-```
+  ```JavaScript
+  let ret = addressCheck('buQgmhhxLwhdUvcWijzxumUHaNqZtJpWvNsf');
+  /*
+  权限：只读
+  返回：成功返回 true，失败返回 false
+  */
+  ```
 
 ##### stoI64Check
 
 - **函数描述**
 
-`stoI64Check` 函数用于字符串数字合法性检查。
+  `stoI64Check` 函数用于字符串数字合法性检查。
 
 - **函数调用**
 
-stoI64Check(strNumber);
+  ```JavaScript
+  stoI64Check(strNumber);
+  ```
 
 - **参数说明**
 
@@ -305,23 +325,25 @@ stoI64Check(strNumber);
 
 - **示例**
 
-```JavaScript
- let ret = stoI64Check('12345678912345');
- /*
- 权限：只读
- 返回：成功返回 true，失败返回 false
- */
-```
+  ```JavaScript
+  let ret = stoI64Check('12345678912345');
+  /*
+  权限：只读
+  返回：成功返回 true，失败返回 false
+  */
+  ```
 
 ##### int64Add
 
 - **函数描述**
 
-`int64Add` 函数用于64 位加法运算。
+  `int64Add` 函数用于64 位加法运算。
 
 - **函数调用**
 
-int64Add(left_value, right_value);
+  ```JavaScript
+  int64Add(left_value, right_value);
+  ```
 
 - **参数说明**
 
@@ -330,23 +352,25 @@ int64Add(left_value, right_value);
 
 - **示例**
 
-```JavaScript
- let ret = int64Add('12345678912345', 1);
- /*
- 权限：只读
- 返回：成功返回字符串 '12345678912346', 失败抛异常
- */
-```
+  ```JavaScript
+  let ret = int64Add('12345678912345', 1);
+  /*
+  权限：只读
+  返回：成功返回字符串 '12345678912346', 失败抛异常
+  */
+  ```
 
 ##### int64Sub
 
 - **函数描述**
 
-`int64Sub` 函数用于64位减法运算。
+  `int64Sub` 函数用于64位减法运算。
 
 - **函数调用**
 
-int64Sub(left_value, right_value);
+  ```JavaScript
+  int64Sub(left_value, right_value);
+  ```
 
 - **参数说明**
 
@@ -355,23 +379,25 @@ int64Sub(left_value, right_value);
 
 - **示例**
 
-```JavaScript
- let ret = int64Sub('12345678912345', 1);
- /*
- 权限：只读
- 返回：成功返回字符串 '123456789123464'，失败抛异常
- */
-```
+  ```JavaScript
+  let ret = int64Sub('12345678912345', 1);
+  /*
+  权限：只读
+  返回：成功返回字符串 '123456789123464'，失败抛异常
+  */
+  ```
 
 ##### int64Mul
 
 - **函数描述**
 
-`int64Mul` 函数用于64位乘法运算。
+  `int64Mul` 函数用于64位乘法运算。
 
 - **函数调用**
 
-int64Mul(left_value, right_value);
+  ```JavaScript
+  int64Mul(left_value, right_value);
+  ```
 
 - **参数说明**
 
@@ -380,23 +406,25 @@ int64Mul(left_value, right_value);
 
 - **示例**
 
-```JavaScript
- let ret = int64Mul('12345678912345', 2);
- /*
- 权限：只读
- 返回：成功返回字符串 '24691357824690'，失败抛异常
- */
-```
+  ```JavaScript
+  let ret = int64Mul('12345678912345', 2);
+  /*
+  权限：只读
+  返回：成功返回字符串 '24691357824690'，失败抛异常
+  */
+  ```
 
 ##### int64Div
 
 - **函数描述**
 
-`int64Div` 函数用于64位除法运算。
+  `int64Div` 函数用于64位除法运算。
 
 - **函数调用**
 
-int64Div(left_value, right_value);
+  ```JavaScript
+  int64Div(left_value, right_value);
+  ```
 
 - **参数说明**
 
@@ -405,23 +433,25 @@ int64Div(left_value, right_value);
 
 - **示例**
 
-```JavaScript
- let ret = int64Div('12345678912345', 2);
- /*
- 权限：只读
- 返回：成功返回 '6172839456172'，失败抛异常
- */
-```
+  ```JavaScript
+  let ret = int64Div('12345678912345', 2);
+  /*
+  权限：只读
+  返回：成功返回 '6172839456172'，失败抛异常
+  */
+  ```
 
 ##### int64Mod
 
 - **函数描述**
 
-`int64Mod` 函数用于64位取模运算。
+  `int64Mod` 函数用于64位取模运算。
 
 - **函数调用**
 
-int64Mod(left_value, right_value);
+  ```JavaScript
+  int64Mod(left_value, right_value);
+  ```
 
 - **参数说明**
 
@@ -430,53 +460,54 @@ int64Mod(left_value, right_value);
 
 - **示例**
 
-```JavaScript
- let ret = int64Mod('12345678912345', 2);
- /*
- 权限：只读
- 返回：成功返回字符串 '1'，失败抛异常
- */
-```
+  ```JavaScript
+  let ret = int64Mod('12345678912345', 2);
+  /*
+  权限：只读
+  返回：成功返回字符串 '1'，失败抛异常
+  */
+  ```
 
 ##### int64Compare
 
 - **函数描述**
 
-`int64Compare` 函数用于64位比较运算。
+  `int64Compare` 函数用于64位比较运算。
 
 - **函数调用**
 
-int64Compare(left_value, right_value);
+  ```JavaScript
+  int64Compare(left_value, right_value);
+  ```
 
 - **参数说明**
 
   - left_value：左值。
   - right_value：右值。
-
-- **示例**
-
-```JavaScript
- let ret = int64Compare('12345678912345', 2);
- /*
- 权限：只读
- 返回：成功返回数字 1（左值大于右值），失败抛异常
- */
-```
-- ** 返回值**
-
+- **返回值**
   - 1：左值大于右值。
   - 0：左值等于右值。
   - 1 ：左值小于右值。
+- **示例**
 
+  ```JavaScript
+  let ret = int64Compare('12345678912345', 2);
+  /*
+  权限：只读
+  返回：成功返回数字 1（左值大于右值），失败抛异常
+  */
+  ```
 ##### toBaseUnit
 
 - **函数描述**
 
-`toBaseUnit` 函数用于变换单位。
+  `toBaseUnit` 函数用于变换单位。
 
 - **函数调用**
 
-toBaseUnit(value);
+  ```JavaScript
+  toBaseUnit(value);
+  ```
 
 - **参数说明**
 
@@ -484,23 +515,25 @@ toBaseUnit(value);
 
 - **示例**
 
-```JavaScript
- let ret = toBaseUnit('12345678912');
- /*
- 权限：只读
- 返回：成功会返回乘以 108 的字符串，本例返回字符串 '1234567891200000000'，失败抛异常
- */
-```
+  ```JavaScript
+  let ret = toBaseUnit('12345678912');
+  /*
+  权限：只读
+  返回：成功会返回乘以 108 的字符串，本例返回字符串 '1234567891200000000'，失败抛异常
+  */
+  ```
 
 ##### log
 
 - **函数描述**
 
-`log` 函数用于输出日志。
+  `log` 函数用于输出日志。
 
 - **函数调用**
 
-log(info);
+  ```JavaScript
+  log(info);
+  ```
 
 - **参数说明**
 
@@ -508,23 +541,25 @@ log(info);
 
 - **示例**
 
-```JavaScript
- let ret = log('buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY');
- /*
- 权限：只读
- 返回：成功无返回值，失败返回 false
- */
-```
+  ```JavaScript
+   let ret = log('buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY');
+   /*
+   权限：只读
+   返回：成功无返回值，失败返回 false
+   */
+  ```
 
 ##### tlog
 
 - **函数描述**
 
-`tlog` 函数用于输出交易日志，调用该函数会产生一笔交易写在区块上。
+  `tlog` 函数用于输出交易日志，调用该函数会产生一笔交易写在区块上。
 
 - **函数调用**
 
-tlog(topic,args...);
+  ```JavaScript
+  tlog(topic,args...);
+  ```
 
 - **参数说明**
 
@@ -533,23 +568,25 @@ tlog(topic,args...);
 
 - **示例**
 
-```JavaScript
- tlog('transfer',sender +' transfer 1000',true);
- /*
- 权限：可写
- 返回：成功返回 true，失败抛异常
- */
-```
+  ```JavaScript
+   tlog('transfer',sender +' transfer 1000',true);
+   /*
+   权限：可写
+   返回：成功返回 true，失败抛异常
+   */
+  ```
 
 ##### issueAsset
 
 - **函数描述**
 
-`issueAsset` 函数用于发行资产。
+  `issueAsset` 函数用于发行资产。
 
 - **函数调用**
 
-issueAsset(code, amount);
+  ```JavaScript
+  issueAsset(code, amount);
+  ```
 
 - **参数说明**
 
@@ -558,23 +595,25 @@ issueAsset(code, amount);
 
 - **示例**
 
-```JavaScript
- issueAsset("CNY", "10000");
- /*
- 权限：可写
- 返回：成功返回 true，失败抛异常
- */
-```
+  ```JavaScript
+   issueAsset("CNY", "10000");
+   /*
+   权限：可写
+   返回：成功返回 true，失败抛异常
+   */
+  ```
 
 ##### payAsset
 
 - **函数描述**
 
-`payAsset` 函数用于转移资产。
+  `payAsset` 函数用于转移资产。
 
 - **函数调用**
 
-payAsset(address, issuer, code, amount[, input]);
+  ```JavaScript
+  payAsset(address, issuer, code, amount[, input]);
+  ```
 
 - **参数说明**
 
@@ -586,24 +625,26 @@ payAsset(address, issuer, code, amount[, input]);
 
 - **示例**
 
-```JavaScript
- payAsset("buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY",
- "buQgmhhxLwhdUvcWijzxumUHaNqZtJpWvNsf", "CNY", "10000", "{}");
- /*
- 权限：可写
- 返回：成功返回 true，失败抛异常
- */
-```
+  ```JavaScript
+   payAsset("buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY",
+   "buQgmhhxLwhdUvcWijzxumUHaNqZtJpWvNsf", "CNY", "10000", "{}");
+   /*
+   权限：可写
+   返回：成功返回 true，失败抛异常
+   */
+  ```
 
 ##### payCoin
 
 - **函数描述**
 
-`payCoin` 函数用于转账资产。
+  `payCoin` 函数用于转账资产。
 
 - **函数调用**
 
-payCoin(address, amount[, input]);
+  ```JavaScript
+  payCoin(address, amount[, input]);
+  ```
 
 - **参数说明**
 
@@ -613,13 +654,13 @@ payCoin(address, amount[, input]);
 
 - **示例**
 
-```JavaScript
- payCoin("buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY", "10000", "{}");
- /*
- 权限：可写
- 返回：成功返回 true，失败抛异常
- */
-```
+  ```JavaScript
+   payCoin("buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY", "10000", "{}");
+   /*
+   权限：可写
+   返回：成功返回 true，失败抛异常
+   */
+  ```
 
 ### 内置变量
 
@@ -629,88 +670,93 @@ payCoin(address, amount[, input]);
 
 - **变量描述**
 
-内置变量 **thisAddress** 的值等于该合约账号的地址。
-
-例如，账号 x 发起了一笔交易调用合约 Y ，本次执行过程中，thisAddress 的值就是 Y 合约账号的地址。
+  内置变量 **thisAddress** 的值等于该合约账号的地址。
 
 - **示例**
 
-```JavaScript
- let bar = thisAddress;
-  /*
-  bar的值是Y合约的账号地址。
- */
-```
+  例如，账号 x 发起了一笔交易调用合约 Y ，本次执行过程中，thisAddress 的值就是 Y 合约账号的地址。
+
+  ```JavaScript
+  let bar = thisAddress;
+    /*
+    bar的值是Y合约的账号地址。
+  */
+  ```
 
 #### thisPayCoinAmount
 
 - **变量描述**
 
-本次支付操作的 BU Coin。
+  本次支付操作的 BU Coin。
 
 #### thisPayAsset
 
 - **变量描述**
 
-本次支付操作的 Asset，为对象类型，如下：
+  本次支付操作的 Asset，为对象类型，如下：
 
-```JavaScript
- {"amount": 1000, "key" : {"issuer": "buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY", "code":"CNY"}}。
-```
+- **示例**
+  ```JavaScript
+  {"amount": 1000, "key" : {"issuer": "buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY", "code":"CNY"}}。
+  ```
 
 #### blockNumber
 
 - **变量描述**
 
-当前区块高度。
+  当前区块高度。
 
 #### blockTimestamp
 
 - **变量描述**
 
-当前区块时间戳。
+  当前区块时间戳。
 
 #### sender
 
 - **变量描述**
 
-调用者的地址。sender 的值为本次调用该合约的账号。
-
-例如，某账号发起了一笔交易，该交易中某个操作是调用合约 Y（该操作的 source_address 是 x），那么在合约 Y 的执行过程中，sender 的值就是 x 账号的地址。
+  调用者的地址。sender 的值为本次调用该合约的账号。
 
 - **示例**
 
-```JavaScript
- let bar = sender;
+  例如，某账号发起了一笔交易，该交易中某个操作是调用合约 Y（该操作的 source_address 是 x），那么在合约 Y 的执行过程中，sender 的值就是 x 账号的地址。
+
+  ```JavaScript
+  let bar = sender;
   /*
-   那么bar的值是x的账号地址。
- */
-```
+  那么bar的值是x的账号地址。
+  */
+  ```
 
 #### triggerIndex
 
-triggerIndex 的值为触发本次合约的操作的序号。例如，某账号 A 发起了一笔交易 tx0，tx0 中第 0（从 0 开始计数）个操作是给某个合约账户转移资产（调用合约），那么 triggerIndex 的值就是 0。
+- 变量描述
+  triggerIndex 的值为触发本次合约的操作的序号。
 
 - **示例**
 
-```JavaScript
- let bar = triggerIndex;
-  /*
-   bar 是一个非负整数
- */
-```
+  例如，某账号 A 发起了一笔交易 tx0，tx0 中第 0（从 0 开始计数）个操作是给某个合约账户转移资产（调用合约），那么 triggerIndex 的值就是 0。
+
+  ```JavaScript
+   let bar = triggerIndex;
+    /*
+     bar 是一个非负整数
+   */
+  ```
 
 
 
 ## 异常处理
 
-### JavaScript 异常
+- JavaScript异常
 
-当合约运行中出现未捕获的 JavaScript 异常时，做以下处理：
+  当合约运行中出现未捕获的JavaScript异常时，处理规定：
 
-- 本次合约执行失败，合约中所有交易都不会生效。
-- 触发本次合约的交易为失败。错误代码为 151。
+  1. 本次合约执行失败，合约中做的所有交易都不会生效。
+  2. 触发本次合约的这笔交易为失败。错误代码为`151`。
 
-### 执行交易失败
+- 执行交易失败
 
-合约中可以执行多个交易，只要有一个交易失败，就会抛出异常，导致整个交易失败。
+  <font color=red>合约中可以执行多个交易，只要有一个交易失败，就会抛出异常，导致整个交易失败</font>
+

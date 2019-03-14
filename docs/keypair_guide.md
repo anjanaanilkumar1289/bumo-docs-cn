@@ -1,62 +1,18 @@
 ---
-id: bumo_keypair_guide
+id: keypair_guide
 title: BUMO Keypair手册
-sidebar_label: BUMO Keypair手册
+sidebar_label: Keypair手册
 ---
 
 ## 概述
 
 本文档详细介绍了Keypair（公、私钥对）的生成过程以及在此基础上如何生成地址（address）并对交易签名，介绍了执行交易调用的两种接口方式以及相关流程，提供了多种ProtoBuf数据结构参考信息，最后以示例的方式详细介绍了两种交易提交方式，即调用接口生成transaction blob和自己生成transaction blob。
 
-
-
-## 术语
-
-本章节对该文档中使用到的术语进行了详细说明。
-
-**keypair**
-
- 是BUMO工程中生成公钥、私钥、地址及签名的接口。在签名过程中仅支持 `ED25519` 签名算法。
-
-**私钥**
-
- 私钥是通过算法生成的一串字符串，是生成公钥和地址的前提条件，同时也是完成签名的基本要素。私钥生成后不能更改，一旦丢失将无法找回，因此需要妥善保管。
-
-**公钥**
-
- 公钥是基于私钥产生的一串字符串，可以对私钥加密的字符串进行验证，在网络间传输时不会导致私钥泄露，同时也是生成地址的必要条件。
-
-
-**地址**
-
- 地址是基于公钥产生的一串字符串。与现实生活中的地址类似，没有地址就无法找到联系人，因此也就无法完成交易。
-
-**签名**
-
- 签名是指通过算法和私钥对交易数据进行加密确认并得到签名数据的过程。用户可以通过签名数据判断交易数据的完整性和正确性。
-
-**交易**
-
- 在BUMO中所有修改区块链数据的操作都称为交易，比如发行资产、转移资产、发送BU、创建账号、设置metadata、设置权限等都是交易。
-
-**Transaction Blob**
-
- Transaction Blob是指对一个交易对象进行序列化处理之后得到的16进制字符串。交易序列化是指通过ProtoBuf数据结构将交易对象的状态信息转换成可以存储和传输的字符串的过程。
-
-**Raw Private Key**
-
- Raw Private Key是指通过随机算法得到的字节数组，该字节数组是生成私钥的前提条件。
-
-**Raw Public Key**
-
- Raw Public Key 是指通过 `ED25519` 算法对 raw private key进行处理生成的字节数组，该字节数组是生成公钥的前提条件。
-
-
-
 ## 原理图
 
  下图说明了私钥、公钥和地址的生成原理。
-![原理图](../../image/schematic.png)
+
+ <img src="/docs/Assets/schematic.png" style= "margin-left: 20px">
 
 
 
@@ -256,7 +212,7 @@ a46ee590a84abdeb8cc38ade1ae8e8a2c71bb69bdc4cd7dc0de1b74b37e2cbd1696229687f80dff4
 交易的执行有两种接口调用方式：调用接口生成`transaction_blob` 和自己生成`transaction_blob`。
 
 由于`transaction_blob`很可能被截取和篡改，因此不建议调用接口生成`transaction_blob`。
-如果需要调用接口生成transaction_blob、签名并提交交易，请查看bumo的[开发文档](https://github.com/bumoproject/bumo/blob/master/docs/develop.md)。
+如果需要调用接口生成transaction_blob、签名并提交交易，请查看HTTP中的[序列化交易](api_http#序列化交易)接口。
 
 ### 调用接口
 
@@ -651,23 +607,23 @@ Protocol Buffers（ProtoBuf）是一种轻便高效的结构化数据存储格�
 
 ### 使用示例
 
-本节中提供了proto脚本，以及 `cpp`、`java`、`javascript`、`pyton`、`object-c` 和 `php` 生成的proto源码的示例，详细信息请查看[proto源码](https://github.com/bumoproject/bumo/tree/develop/src/proto):
+本节中提供了proto脚本，以及 `cpp`、`java`、`javascript`、`pyton`、`object-c` 和 `php` 生成的proto源码的示例，详细信息请查看[proto源码](https://github.com/bumoproject/bumo/tree/develop/src/proto)。
 
 链接中的目录结构说明：
 
 1. cpp: [C++的源码](https://github.com/bumoproject/bumo/tree/master/src/proto/cpp)
 
-2. io: [ Java的源码](https://github.com/bumoproject/bumo/tree/master/src/proto/io)
+2. io: [ Java的测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/io)
 
-3. go: [Go的源码及测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/go)
+3. go: [Go的测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/go)
 
-4. js: [Javascript的源码及测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/js)
+4. js: [Javascript的测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/js)
 
-5. python: [Python的源码及测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/python)
+5. python: [Python的测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/python)
 
-6. ios: [Object-c的源码及测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/ios)
+6. ios: [Object-C的测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/ios)
 
-7. php: [PHP的源码及测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/php)
+7. php: [PHP的测试程序](https://github.com/bumoproject/bumo/tree/master/src/proto/php)
 
 
 

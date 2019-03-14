@@ -40,7 +40,7 @@ Token 属性可以通过合约的 `tokenInfo` 功能函数查询到，存储在�
 
 ## 事件
 
-函数transfer，approve，transferFrom会触发事件（详情请见各函数说明），事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
+函数[transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)会触发事件（详情请见各函数说明），事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
 
 tlog定义如下:
 
@@ -330,7 +330,7 @@ function init(input_str){
 
 ### main
 
-- 负责数据写入，其中包含了 `transfer`、`transferFrom`、`approve`。
+- 负责数据写入，其中包含了 [transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)。
 
 - 函数体
 
@@ -355,7 +355,7 @@ function main(input_str){
 
 ### query
 
-- 负责数据查询，其中包含了`tokenInfo`、`allowance`等接口。
+- 负责数据查询，其中包含了[tokenInfo](#tokeninfo)、[allowance](#allowance)等接口。
 
 - 函数体
 
