@@ -1,7 +1,7 @@
 ---
 id: contract_new_interfaces
-title: BUMO 智能合约新接口
-sidebar_label: 新接口
+title: BUMO 智能合约新接口
+sidebar_label: 新接口
 ---
 
 

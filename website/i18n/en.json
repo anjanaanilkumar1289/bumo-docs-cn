@@ -42,8 +42,8 @@
         "sidebar_label": "智能合约（hello world）"
       },
       "contract_new_interfaces": {
-        "title": "BUMO 智能合约新接口\b",
-        "sidebar_label": "新接口\b"
+        "title": "BUMO 智能合约新接口",
+        "sidebar_label": "新接口"
       },
       "dex_10": {
         "title": "BUMO DEX 10 协议",

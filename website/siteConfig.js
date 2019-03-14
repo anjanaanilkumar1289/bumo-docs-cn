@@ -15,7 +15,7 @@ const users = [
     // You will need to prepend the image path with your baseUrl
     // if it is not '/', like: '/test-site/img/docusaurus.svg'.
     image: '/img/docusaurus.svg',
-    infoLink: 'https://www.facebook.com',
+    infoLink: 'https://www.bumo.io',
     pinned: true,
   },
 ];
@@ -24,19 +24,20 @@ const siteConfig = {
   title: '文档中心', // Title for your website.
   secTitle: '欢迎来到 BUMO 文档中心，这里有全面的文档，包括 API 接口、开发指南、使用手册等，以便帮助您快速使用 BUMO；同时，在您遇到问题时，我们还提供技术支持。',
   tagline: '泛在价值流通体系',
-  url: 'https://your-docusaurus-test-site.com', // Your website URL
+  url: 'https://www.bumo.io', // Your website URL
   baseUrl: '/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'Bumo',
-  organizationName: 'Bumo',
+  projectName: 'BUMO 文档中心',
+  organizationName: 'BUMO',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
   //   organizationName: 'JoelMarcey'
   
+  editUrl: 'https://github.com/bumoproject/bumo-docs-cn/tree/develop/docs/',
   docsSideNavCollapsible: true,
   scrollToTop: true,
   
@@ -78,7 +79,7 @@ const siteConfig = {
   */
 
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
-  copyright: `Copyright © ${new Date().getFullYear()} BUMO Foundation. All Rights Reserved.`,
+  copyright: `Copyright © ${new Date().getFullYear()}`,
 
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
