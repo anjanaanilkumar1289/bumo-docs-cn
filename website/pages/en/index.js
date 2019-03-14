@@ -59,7 +59,7 @@ class HomeSplash extends React.Component {
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
             <Button href={docUrl('introduction_to_bumo')}>快速入门</Button>
-            <Button target='_blank' href={'https://github.com/bumoproject'}>Github</Button>
+            <Button target='_blank' href={'https://github.com/bumoproject/bumo'}>Github</Button>
           </PromoSection>
         </div>
       </SplashContainer>
