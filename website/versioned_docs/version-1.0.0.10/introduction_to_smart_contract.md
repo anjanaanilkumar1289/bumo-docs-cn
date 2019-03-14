@@ -7,8 +7,6 @@ original_id: introduction_to_smart_contract
 
 ## 合约定义
 
-推荐使用新的接口 [新的智能合约接口](contract_new_interfaces)。
-
 合约是一段`JavaScript`代码,标准(`ECMAScript` as specified in `ECMA-262`)。合约的初始化函数是`init`, 执行的入口函数是`main`函数，您写的合约代码中必须有`init`和`main`函数的定义。该函数的入参是字符串`input`，是调用该合约的时候指定的。 语法请参考[合约语法](syntax_in_smart_contract)。
 
 下面是一个简单的例子

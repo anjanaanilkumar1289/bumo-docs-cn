@@ -1,5 +1,5 @@
 ---
-id: bumo_contract_hello_world
+id: contract_hello_world
 title: BUMO 智能合约（hello world）
 sidebar_label: 智能合约（hello world）
 ---

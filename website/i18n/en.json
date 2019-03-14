@@ -37,7 +37,7 @@
         "title": "BUMO 合约编辑器用户手册",
         "sidebar_label": "合约编辑器用户手册"
       },
-      "bumo_contract_hello_world": {
+      "contract_hello_world": {
         "title": "BUMO 智能合约（hello world）",
         "sidebar_label": "智能合约（hello world）"
       },
@@ -161,7 +161,7 @@
         "title": "BUMO 合约编辑器用户手册",
         "sidebar_label": "合约编辑器用户手册"
       },
-      "version-1.0.0.10-bumo_contract_hello_world": {
+      "version-1.0.0.10-contract_hello_world": {
         "title": "BUMO 智能合约（hello world）",
         "sidebar_label": "智能合约（hello world）"
       },

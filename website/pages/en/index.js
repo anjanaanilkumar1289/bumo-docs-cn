@@ -221,10 +221,6 @@ class Index extends React.Component {
             label: '介绍'
           },
           {
-            url: `${baseUrl}docs/contract_new_interfaces`,
-            label: '新接口'
-          },
-          {
             url: `${baseUrl}docs/syntax_in_smart_contract`,
             label: '语法'
           },
