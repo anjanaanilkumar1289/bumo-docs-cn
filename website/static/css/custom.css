@@ -11,6 +11,15 @@
   color: #fff;
 }
 
+.toc .toggleNav .navGroup .navGroupCategoryTitle {
+  color: #393939;
+  font-size: 16px;
+  font-weight: 550;
+  line-height: 1.2em;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
 /* 公共header样式重置 */
 .fixedHeaderContainer{
   background: #282E3B;
