@@ -25,7 +25,7 @@ const siteConfig = {
   secTitle: '欢迎来到 BUMO 文档中心，这里有全面的文档，包括 API 接口、开发指南、使用手册等，以便帮助您快速使用 BUMO；同时，在您遇到问题时，我们还提供技术支持。',
   tagline: '泛在价值流通体系',
   url: 'https://www.bumo.io', // Your website URL
-  baseUrl: '/', // Base URL for your project */
+  baseUrl: '/cn/', // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
   //   baseUrl: '/test-site/',
@@ -45,7 +45,7 @@ const siteConfig = {
   headerLinks: [
     {doc: 'introduction_to_bumo', label: '文档'},
     { href: "https://github.com/bumoproject/bumo", label: "GitHub", target: "_blank" },
-    { href: "https://www.ducumentation.en.bumo.io", label: "English", target: "_self" },
+    { href: "https://www.ducs.bumo.io/", label: "English", target: "_self" },
     { languages: true },
     { search: true }
   ],
@@ -85,10 +85,10 @@ const siteConfig = {
     // Highlight.js theme to use for syntax highlighting in code blocks.
     theme: 'github',
   },
-  algolia: {
-    apiKey: '0f9f28b9ab9efae89810921a351753b5',
-    indexName: 'github',
-  },
+  //algolia: {
+  //  apiKey: '0f9f28b9ab9efae89810921a351753b5',
+  //  indexName: 'github',
+  //},
   // Add custom scripts here that would be placed in <script> tags.
   scripts: ['https://buttons.github.io/buttons.js'],
 
