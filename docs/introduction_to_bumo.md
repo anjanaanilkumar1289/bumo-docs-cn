@@ -23,4 +23,4 @@ BUMO是专注于下一代公链基础设施的平台，并打造一个未来泛�
 
 ## 架构
 
-<img src="/docs/Assets/arch.png" style= "margin-left: 20px">
+<img src="/docs/assets/arch.png" style= "margin-left: 20px">

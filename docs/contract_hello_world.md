@@ -55,7 +55,7 @@ function query(input)
   `storageStore`：全局函数，将指定的key-value对保存到区块链中。key是第一个参数，value是第二个参数。
 
 - 效果展示
-<img src="/docs/Assets/contractcodehelloworld.png" style= "margin-left: 20px">
+<img src="/docs/assets/contractcodehelloworld.png" style= "margin-left: 20px">
 
 
 
@@ -78,7 +78,7 @@ function query(input)
 - 运行效果
 
   点击Deploy按钮，效果如下：
-  <img src="/docs/Assets/contractdeploy.png" style= "margin-left: 20px">
+  <img src="/docs/assets/contractdeploy.png" style= "margin-left: 20px">
 
 
 
@@ -102,7 +102,7 @@ function query(input)
 
   点击最下面的Invoke按钮，运行效果如下：
 
-  <img src="/docs/Assets/contractmain.png" style= "margin-left: 20px">
+  <img src="/docs/assets/contractmain.png" style= "margin-left: 20px">
 
 
 
@@ -124,4 +124,4 @@ function query(input)
 
   点击最下面的Invoke按钮，运行效果如下：
 
-  <img src="/docs/Assets/contractquery.png" style= "margin-left: 20px">
+  <img src="/docs/assets/contractquery.png" style= "margin-left: 20px">

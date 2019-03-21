@@ -60,21 +60,31 @@ BUMO ATP 20 协议中的函数包括 [transfer](#transfer)、[transferFrom](#tra
 
 ### transfer
 
-- 转移 value 数量的 token 到目的地址 to，并且必须触发 log 事件。 如果资金转出账户余额没有足够的token来支出，该函数应该被throw。
-- 入口函数 main。
+- 功能
+
+    转移 value 数量的 token 到目的地址 to，并且必须触发 log 事件。 如果资金转出账户余额没有足够的token来支出，该函数应该被throw。
+
+- 入口函数
+
+    `main`
 
 - 参数 json 结构
-```json
-{
-    "method":"transfer",
-    "params":{
-        "to":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj",
-        "value":"1000000"
+    ```json
+    {
+        "method":"transfer",
+        "params":{
+            "to":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj",
+            "value":"1000000"
+        }
     }
-}
-```
-​       to：目标账户地址；
-​       value：转移数量（字符串类型）
+    ```
+
+- json参数
+
+     | 参数  | 描述                   |
+     | ----- | ---------------------- |
+     | to    | 目标账户地址           |
+     | value | 转移数量（字符串类型） |
 
 - 函数
 
@@ -87,38 +97,47 @@ BUMO ATP 20 协议中的函数包括 [transfer](#transfer)、[transferFrom](#tra
   true或者抛异常
 
 - 事件
-``` javascript
-  tlog('transfer', sender, to, value);
-```
+    ``` javascript
+    tlog('transfer', sender, to, value);
+    ```
 
-​          topic: 方法名，这里是transfer
+    ​topic: 方法名，这里是transfer
 
-​          sender:  合约调用账户地址
+    ​sender:  合约调用账户地址
 
-​          to: 目标账户地址
+    ​to: 目标账户地址
 
-​          value: 转移数量(字符串类型)
+    value: 转移数量(字符串类型)
 
 
 
 ### approve
 
-- 授权账户 spender 可以从交易发送者账户转出数量为 value 的token。
-- 入口函数 main。
+- 功能
+
+  授权账户 spender 可以从交易发送者账户转出数量为 value 的token。
+
+- 入口函数 
+
+  `main`
 
 - 参数json结构
 
-```json
-{
-    "method":"approve",
-    "params":{
-        "spender":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj",
-        "value":"1000000"
+    ```json
+    {
+        "method":"approve",
+        "params":{
+            "spender":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj",
+            "value":"1000000"
+        }
     }
-}
-```
-​       spender： 账户地址；
-​       value： 被授权可转移数量（字符串类型）
+    ```
+- json参数
+
+    | 参数    | 描述                           |
+    | ------- | ------------------------------ |
+    | spender | 账户地址                       |
+    | value   | 被授权可转移数量（字符串类型） |
 
 - 函数
 
@@ -132,40 +151,49 @@ BUMO ATP 20 协议中的函数包括 [transfer](#transfer)、[transferFrom](#tra
 
 - 事件
 
-``` javascript
-  tlog('approve', sender, spender, value);
-```
+    ``` javascript
+    tlog('approve', sender, spender, value);
+    ```
 
-​           topic: 方法名，这里是'approve'
+	topic: 方法名，这里是'approve'
 
-​           sender:  合约调用账户地址
+	​sender:  合约调用账户地址
 
-​           spender: 被授权账户地址
+	​spender: 被授权账户地址
 
-​           value: 被授权可转移数量（字符串类型）
+	​value: 被授权可转移数量（字符串类型）
 
 
 
 ### transferFrom
 
-- 从from发送数量为 value 的 token 到 to，必须触发 log 事件。 在 transferFrom 之前，from 必须给当前交易的发起者进行授权额度(即approve操作)。如果 from 余额没有足够的 token 来支出或者 from 授权给当前交易的发起者的额度不足，该函数应该被 throw。
-- 入口函数 main。
+- 功能
+
+  从from发送数量为 value 的 token 到 to，必须触发 log 事件。 在 transferFrom 之前，from 必须给当前交易的发起者进行授权额度(即approve操作)。如果 from 余额没有足够的 token 来支出或者 from 授权给当前交易的发起者的额度不足，该函数应该被 throw。
+
+- 入口函数
+
+  `main`
 
 - 参数json结构
 
-```json
-{
-    "method":"transferFrom",
-    "params":{
-        "from":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj",
-        "to":"buQYH2VeL87svMuj2TdhgmoH9wSmcqrfBner",
-        "value":"1000000"
+    ```json
+    {
+        "method":"transferFrom",
+        "params":{
+            "from":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj",
+            "to":"buQYH2VeL87svMuj2TdhgmoH9wSmcqrfBner",
+            "value":"1000000"
+        }
     }
-}
-```
-​       from： 源账户地址；
-​       to： 目标账户地址；
-​       value： 转移数量（字符串类型）
+    ```
+- json参数
+
+  | 参数  | 描述                   |
+  | ----- | ---------------------- |
+  | from  | 源账户地址             |
+  | to    | 目标账户地址           |
+  | value | 转移数量（字符串类型） |
 
 - 函数
 
@@ -178,121 +206,149 @@ BUMO ATP 20 协议中的函数包括 [transfer](#transfer)、[transferFrom](#tra
   true或者抛异常
 
 - 事件
-``` javascript
-tlog('transferFrom', sender, from, to, value);
-```
 
-​      topic: 方法名，这里是'transferFrom'
+    ``` javascript
+    tlog('transferFrom', sender, from, to, value);
+    ```
 
-​      sender:  合约调用账户地址
+	​      topic: 方法名，这里是'transferFrom'
 
-​      from: 源账户地址
+	​      sender:  合约调用账户地址
 
-​      to: 目标账户地址
+	​      from: 源账户地址
 
-​      value: 转移数量（字符串类型）
+	​      to: 目标账户地址
+
+	​      value: 转移数量（字符串类型）
 
 
 
 ### balanceOf
 
-- 返回指定账户的 token
-- 入口函数 query。
+- 功能
+
+  返回指定账户的 token。
+
+- 入口函数
+
+  `query`
 
 - 参数json结构
-```json
-{
-    "method":"balanceOf",
-    "params":{
-        "address":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj"
+    ```json
+    {
+        "method":"balanceOf",
+        "params":{
+            "address":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj"
+        }
     }
-}
-```
-​       address： 账户地址
+    ```
 
-- 函数：
+- json参数 
+
+     | 参数    | 描述     |
+     | ------- | -------- |
+     | address | 账户地址 |
+
+- 函数
 
   ```js
   function balanceOf(owner)
   ```
 
 - 返回值：指定地址的余额
-```json
-{
-    "result":{
-        "balanceOf":"100000000000000",
-    }
-} 
-```
+
+    ```json
+    {
+        "result":{
+            "balanceOf":"100000000000000",
+        }
+    } 
+    ```
 
 ### tokenInfo
 
-- 返回 Token 的基本信息。
-- 入口函数 query。
+- 功能
+
+  返回 Token 的基本信息。
+
+- 入口函数
+
+  `query`
 
 - 参数json结构
-```json
-{
-    "method":"tokenInfo"
-}
-```
-- 函数：
+
+    ```json
+    {
+        "method":"tokenInfo"
+    }
+    ```
+- 函数
 
   ``` js
   function tokenInfo()
   ```
 
-- 返回值：
-```json
-{
-    "result":{
-        "type": "string",
-        "value": {
-            "tokenInfo": {
-                "name": "DemoToken",
-                "symbol": "DT",
-                "decimals": 8,
-                "totalSupply": "5000000000000",
-                "version": "1.0"
+- 返回值
+
+    ```json
+    {
+        "result":{
+            "type": "string",
+            "value": {
+                "tokenInfo": {
+                    "name": "DemoToken",
+                    "symbol": "DT",
+                    "decimals": 8,
+                    "totalSupply": "5000000000000",
+                    "version": "1.0"
+                }
             }
         }
-    }
-} 
-```
+    } 
+    ```
 
 ### allowance
 
-- 返回 spender 仍然被允许从 owner 提取的金额
-- 入口函数 query
+- 功能
+
+  返回 spender 仍然被允许从 owner 提取的金额。
+
+- 入口函数
+
+  `query`
 
 - 参数json结构
-```json
-{
-    "method":"allowance",
-    "params":{
-        "owner":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj",
-        "spender":"buQYH2VeL87svMuj2TdhgmoH9wSmcqrfBner"
+    ```json
+    {
+        "method":"allowance",
+        "params":{
+            "owner":"buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj",
+            "spender":"buQYH2VeL87svMuj2TdhgmoH9wSmcqrfBner"
+        }
     }
-}
-```
-​       owner：账户地址；
+    ```
 
-​       spender：账户地址；
+- json参数
 
-- 函数：
+    | 参数    | 描述     |
+    | ------- | -------- |
+    | owner   | 账户地址 |
+    | spender | 账户地址 |
+
+- 函数
 
   ```js
   function allowance(owner, spender)
   ```
 
-- 返回值：
-```json
-{
-    "result":{
-        "allowance":"1000000",
-    }
-} 
-```
+- 返回值
+    ```json
+    {
+        "result":{
+            "allowance":"1000000",
+        }
+    } 
+    ```
 
 
 
@@ -304,25 +360,24 @@ tlog('transferFrom', sender, from, to, value);
 
 - 函数
 
-```js
-function init(input_str){
-}
-
-```
+    ```js
+    function init(input_str){
+    }
+    ```
 
 - 参数Json结构
 
-```json
-{
-    "params":{
-        "name":"DemoToken",
-        "symbol":"DT",
-        "decimals":8,
-        "totalSupply":"5000000000000",
-        "version": "1.0"
+    ```json
+    {
+        "params":{
+            "name":"DemoToken",
+            "symbol":"DT",
+            "decimals":8,
+            "totalSupply":"5000000000000",
+            "version": "1.0"
+        }
     }
-}
-```
+    ```
 - 返回值
 
   true或者抛异常
@@ -334,24 +389,24 @@ function init(input_str){
 
 - 函数体
 
-```js
-function main(input_str){
-    let input = JSON.parse(input_str);
+    ```js
+    function main(input_str){
+        let input = JSON.parse(input_str);
 
-    if(input.method === 'transfer'){
-        transfer(input.params.to, input.params.value);
+        if(input.method === 'transfer'){
+            transfer(input.params.to, input.params.value);
+        }
+        else if(input.method === 'transferFrom'){
+            transferFrom(input.params.from, input.params.to, input.params.value);
+        }
+        else if(input.method === 'approve'){
+            approve(input.params.spender, input.params.value);
+        }
+        else{
+            throw '<Main interface passes an invalid operation type>';
+        }
     }
-    else if(input.method === 'transferFrom'){
-        transferFrom(input.params.from, input.params.to, input.params.value);
-    }
-    else if(input.method === 'approve'){
-        approve(input.params.spender, input.params.value);
-    }
-    else{
-        throw '<Main interface passes an invalid operation type>';
-    }
-}
-```
+    ```
 
 ### query
 
@@ -359,22 +414,22 @@ function main(input_str){
 
 - 函数体
 
-```js
-function query(input_str){
-    globalAttribute = JSON.parse(storageLoad(globalAttributeKey));
+    ```js
+    function query(input_str){
+        globalAttribute = JSON.parse(storageLoad(globalAttributeKey));
 
-    let result = {};
-    let input  = JSON.parse(input_str);
+        let result = {};
+        let input  = JSON.parse(input_str);
 
-    if(input.method === 'tokenInfo'){
-        result.tokenInfo = globalAttribute;
+        if(input.method === 'tokenInfo'){
+            result.tokenInfo = globalAttribute;
+        }
+        else if(input.method === 'allowance'){
+            result.allowance = allowance(input.params.owner, input.params.spender);
+        }
+        else{
+            throw '<Query interface passes an invalid operation type>';
+        }
+        return JSON.stringify(result);
     }
-    else if(input.method === 'allowance'){
-        result.allowance = allowance(input.params.owner, input.params.spender);
-    }
-    else{
-       	throw '<Query interface passes an invalid operation type>';
-    }
-    return JSON.stringify(result);
-}
-```
+    ```

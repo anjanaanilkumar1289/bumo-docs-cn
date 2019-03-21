@@ -37,7 +37,7 @@ A的地址：*buQttWTBP6tVRo9jALUT3UqFzopuXKiogbed*
 
 A的密钥：*privby33VzSZySr7TbjHLoRgz9r2kpMyLMtXnebWUNQTiTuTj8kdhn4Y*
 
-<img src="/docs/Assets/accountaddressgeneration_1.jpg"
+<img src="/docs/assets/accountaddressgeneration_1.jpg"
      style= "margin-left: 20px">
 
 3. 再次单击**Generator**生成账户B的地址和私钥，如下图所示：
@@ -46,7 +46,7 @@ B的地址：*buQtFLZgUH7Pu31X8SreKhxWsx4Y6HfaaY4F*
 
 B的密钥：*privbzvYJo6XR6JfQNobxpJjd6F5erzzEZbpGzMZENjppovFVe5JDMdh*  
 
-<img src="/docs/Assets/accountaddressgeneration_2.jpg"
+<img src="/docs/assets/accountaddressgeneration_2.jpg"
      style= "margin-left: 20px">
 
 **说明**：单击**Go Quick Wallet* 可直接跳转到Quick Wallet页面，Quick Wallet 使用说明请参考*Quick Wallet用户手册*。
@@ -56,12 +56,12 @@ B的密钥：*privbzvYJo6XR6JfQNobxpJjd6F5erzzEZbpGzMZENjppovFVe5JDMdh*
 用户可通过Faucet 软件获取测试BU，具体步骤如下：
 1. 登录到Faucet入口，如图所示：
 
-<img src="/docs/Assets/acquiretestbu_1.jpg"
+<img src="/docs/assets/acquiretestbu_1.jpg"
      style= "margin-left: 20px">
 
 2. 在**Account Address**字段输入A的账户地址并单击**Confirm**，会显示发送测试BU 到A账户成功，如图所示，此时A账户拥有100 测试BU。过一段时间后再次重复为A账户获取BU，则A账户拥有200 测试BU。
 
-<img src="/docs/Assets/acquiretestbu_2.jpg"
+<img src="/docs/assets/acquiretestbu_2.jpg"
      style= "margin-left: 20px">
 
 ### 转账BU
@@ -70,7 +70,7 @@ B的密钥：*privbzvYJo6XR6JfQNobxpJjd6F5erzzEZbpGzMZENjppovFVe5JDMdh*
 1. 登录Quick Wallet 入口。
 2. 输入A 账户的私钥登录A账户，A账户页面显示余额200BU，页面下方显示交易详情，如下图所示。 
 
-<img src="/docs/Assets/transferbu_1.jpg"
+<img src="/docs/assets/transferbu_1.jpg"
      style= "margin-left: 20px">  
 
 交易详细信息如下表所示：
@@ -87,7 +87,7 @@ B的密钥：*privbzvYJo6XR6JfQNobxpJjd6F5erzzEZbpGzMZENjppovFVe5JDMdh*
 4. 在**Amount**字段输入转账数量，这里我们输入50，即向B账户转账50BU。
 5. 单击**Send**后转账成功。则A账户显示BU剩余数量为149.99754，页面下方显示交易详情，如下图所示。
 
-<img src="/docs/Assets/transferbu_2.jpg"
+<img src="/docs/assets/transferbu_2.jpg"
      style= "margin-left: 20px">  
 
 ### 查看转账结果
@@ -95,6 +95,6 @@ B的密钥：*privbzvYJo6XR6JfQNobxpJjd6F5erzzEZbpGzMZENjppovFVe5JDMdh*
 登录Quick Wallet入口，输入B账户的私钥登录后，显示B账户有50BU，页面下方显示交
 易详情，如图所示。
 
-<img src="/docs/Assets/checktransfer
+<img src="/docs/assets/checktransfer
 .jpg"
      style= "margin-left: 20px">  

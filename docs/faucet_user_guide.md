@@ -11,21 +11,21 @@ Faucet 又称“水龙头”，是为用户获取测试BU的网页版应用。�
 
 1. 进入Faucet入口，如下图所示。
 
-<img src="/docs/Assets/faucet_1.jpg"
+<img src="/docs/assets/faucet_1.jpg"
      style= "margin-left: 20px">
 
 2. 在**Account Address**字段输入要获取测试BU的账户地址，如
 *buQttWTBP6tVRo9jALUT3UqFzopuXKiogbed*。
 
-<img src="/docs/Assets/faucet_2.jpg"
+<img src="/docs/assets/faucet_2.jpg"
      style= "margin-left: 20px">
 
 3. 单击**Confirm**则相应账户获取100个测试BU。
 
-<img src="/docs/Assets/faucet_3.jpg"
+<img src="/docs/assets/faucet_3.jpg"
      style= "margin-left: 20px">
 
 **注意**：如果获取操作过于频繁，系统提示稍后获取，如下图所示。
 
-<img src="/docs/Assets/faucet_4.jpg"
+<img src="/docs/assets/faucet_4.jpg"
      style= "margin-left: 20px">
