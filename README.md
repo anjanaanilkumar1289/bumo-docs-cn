@@ -26,3 +26,13 @@
    ```shell
    npm run start -- --port 8080 或 yarn run start --port 8080
    ```
+
+1. 在`website`目录下构建静态HTML页面，命令如下：
+
+   ```shell
+   npm run build 或者　　yarn run build
+   ```
+
+   此时，将在`website`目录下生成一个`build`文件夹，`build`文件夹下生成一个`bumo`文件夹。将根目录下的`codetabs.js`文件覆盖`bumo`文件夹下`js`文件夹下的`codetabs.js`文件即可。
+
+   至此，`bumo`文件夹下就包含所有文档和其他页面中所含的 `.html` 文件。
