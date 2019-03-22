@@ -53,7 +53,7 @@ sidebar_label: 资产发行 JAVA 开发指南
 | 网络环境 | IP                | Port  | 区块链浏览器                |
 | -------- | ----------------- | ----- | --------------------------- |
 | 主网     | seed1.bumo.io     | 16002 | https://explorer.bumo.io    |
-| 测试     | seed1.bumotest.io | 26002 | http://explorer.bumotest.io |
+| 测试     | seed1.bumotest.io | 26002 | https://explorer.bumotest.io |
 
 
 ### 创建资方账户
@@ -297,7 +297,7 @@ public static AccountCreateResult createAccount() {
 
 #### 区块链浏览器查询
 
-在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](http://explorer.bumotest.io)，操作如下图：
+在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
 <img src="/docs/assets/BUBrowser.png"
      style= "margin-left: 20px">

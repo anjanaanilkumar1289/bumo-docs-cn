@@ -9,7 +9,7 @@ sidebar_label: 智能合约 Java 开发指南
 合约是一段`JavaScript`代码,标准(`ECMAScript` as specified in `ECMA-262`)。合约的初始化函数是`init`, 执行的入口函数是`main`函数，您写的合约代码中必须有`init`和`main`函数的定义。该函数的入参是字符串`input`，是调用该合约的时候指定的。
 
 - 详细的合约的介绍，请看[合约](../introduction_to_smart_contract)。
-- 详细的合约的语法，请看[合约语法](../syntax-in-smart-contract)。
+- 详细的合约的语法，请看[合约语法](../syntax_in_smart_contract)。
 - 详细的合约编辑器的用户手册，请看[合约编辑器的介绍](../introduction_to_smart_contract)。
 
 本章节介绍了三个基于Java语言的智能合约开发实例场景，三个场景都是相关联的。
@@ -195,7 +195,7 @@ function query(input_str){
 
 ### 验证代码是否有效
 
-打开在线检测页面: [bumo-jslint](#http://jslint.bumocdn.com/ )，将上面的智能合约代码拷贝到编辑框中，点击 **JSLint** 按钮，这里提示智能合约代码没有问题。 
+打开在线检测页面: [bumo-jslint](http://jslint.bumocdn.com/ )，将上面的智能合约代码拷贝到编辑框中，点击 **JSLint** 按钮，这里提示智能合约代码没有问题。 
 如果出现背景是红色的 warning 提示，表示语法有问题，如下图：
 
 <img src="/docs/assets/warnings.png"
@@ -222,7 +222,7 @@ function query(input_str){
 | 网络环境 | IP                | Port  | 区块链浏览器                |
 | -------- | ----------------- | ----- | --------------------------- |
 | 主网     | seed1.bumo.io     | 16002 | https://explorer.bumo.io    |
-| 测试     | seed1.bumotest.io | 26002 | http://explorer.bumotest.io |
+| 测试     | seed1.bumotest.io | 26002 | https://explorer.bumotest.io |
 
 
 代码示例：
@@ -468,7 +468,7 @@ public String submitTransaction(String transactionBlob, Signature[] signatures) 
 
 #### 区块链浏览器查询-1
 
-在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](http://explorer.bumotest.io)，操作如下图：
+在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
 <img src="/docs/assets/BUExplorer1.png"
      style= "margin-left: 20px">
@@ -574,7 +574,7 @@ public String submitTransaction(String transactionBlob, Signature[] signatures) 
 | 网络环境 | IP                | Port  | 区块链浏览器                |
 | -------- | ----------------- | ----- | --------------------------- |
 | 主网     | seed1.bumo.io     | 16002 | https://explorer.bumo.io    |
-| 测试     | seed1.bumotest.io | 26002 | http://explorer.bumotest.io |
+| 测试     | seed1.bumotest.io | 26002 | https://explorer.bumotest.io |
 
 
 ### 获取资方账户的序列号-2
@@ -757,7 +757,7 @@ public Signature[] signTransaction(String transactionBlob) {
 
 #### 区块链浏览器查询-2
 
-在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](http://explorer.bumotest.io)，操作如下图：
+在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
 <img src="/docs/assets/BUExplorer2.png"
      style= "margin-left: 20px">
@@ -862,7 +862,7 @@ public Signature[] signTransaction(String transactionBlob) {
 | 网络环境 | IP                | Port  | 区块链浏览器                |
 | -------- | ----------------- | ----- | --------------------------- |
 | 主网     | seed1.bumo.io     | 16002 | https://explorer.bumo.io    |
-| 测试     | seed1.bumotest.io | 26002 | http://explorer.bumotest.io |
+| 测试     | seed1.bumotest.io | 26002 | https://explorer.bumotest.io |
 
 
 

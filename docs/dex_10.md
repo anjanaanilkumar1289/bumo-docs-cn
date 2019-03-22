@@ -53,46 +53,39 @@ tlog(topic,args...);
 ### makeOrder
 
 - 发布 ATP token 或 CTP token 与 BU 兑换的订单，支持 ATP 兑换 BU，CTP 兑换 BU，BU 兑换 ATP，BU 兑换 CTP 。
-
 - ATP token 兑换时，使用 issuer(发行者地址)、code(资产代码) 和 value(兑换数量) 标注；
-
 - CTP token 兑换时，使用 issuer(CTP合约地址) 和 value(兑换数量) 标注；
-
 - BU 为 BUMO 内置原生 token ，不需要标识，兑换时只需要给出 value(数量) 即可；
-
 - 如果订单的兑出 token 为 CTP 资产，发布订单之前，订单用户需先在对应的 CTP 合约内授信 DEX 合约，授信额度为兑出 token 的额度；
-
 - 如果订单的兑出 token 为 ATP 资产，发布订单时，需用 payAsset(转移资产) 操作触发，转移的资产内容和数额为兑出资产的内容和数额；
-
 - 如果订单的兑出 token 为 BU，发布订单时，需用 payCoin(转账) 操作触发，转账的数额为兑出 BU 的数额加兑换服务费；
-
 - 入口函数 main。
 
 - 参数 json 结构:
-    ```json
-    {  
-        'method':'makeOrder',
-        'params':{
-            'own':{ //ATP token
-                'issuer':buQxxx',
-                'code':'EUR',
-                'value':10000,
-            },
-           'target':{ //BU
-               'value':1000,
-            },
-           'fee':5,
-           'expiration':'2018...'
-        }
+```json
+{  
+    'method':'makeOrder',
+    'params':{
+        'own':{ //ATP token
+            'issuer':buQxxx',
+            'code':'EUR',
+            'value':10000,
+        },
+       'target':{ //BU
+           'value':1000,
+        },
+       'fee':5,
+       'expiration':'2018...'
     }
-    ```
-    参数：own 订单兑出的 token 信息，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
+}
+```
+参数：own 订单兑出的 token 信息，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
 
-    参数：target 订单兑入的token，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
+参数：target 订单兑入的token，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
 
-    参数：fee 挂单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除。
+参数：fee 挂单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除。
 
-    参数：expiration 订单的截止日期，过期后订单无效。
+参数：expiration 订单的截止日期，过期后订单无效。
 
 - 函数：function makeOrder(own, target, fee, expiration);
 - 返回值：true或者抛异常。
@@ -103,16 +96,15 @@ tlog(topic,args...);
 - 入口函数 main。
 
 - 参数json结构:
-
     ```json
     {
-    'method':'cancelOrder',
-    'params':{
-    'order':'order_1'
-    }
+        'method':'cancelOrder',
+        'params':{
+            'order':'order_1'
+        }
     }
     ```
-	​	参数：order 取消的订单号；
+    参数：order 取消的订单号；
 
 - 函数：function cancelOrder(order)
 - 返回值：true 或者抛异常
@@ -126,15 +118,16 @@ tlog(topic,args...);
 - 入口函数 main。
 
 - 参数json结构:
-   ```json
-   {
-       'method':'takeOrder',
-       'params':{
-         'order':'order_1',
-         'fee':5,
-       }
-   }
-	```
+    ```json
+    {
+        'method':'takeOrder',
+        'params':{
+          'order':'order_1',
+          'fee':5,
+        }
+    }
+
+    ```
     参数：order 填单或局部填单的订单号；
 
     参数：fee 填单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除；
@@ -191,8 +184,8 @@ tlog(topic,args...);
         'method' : 'clearExpiredOrder',
     }
     ```
-    - 函数：function clearExpiredOrder()
-    - 返回值：true或者抛异常
+- 函数：function clearExpiredOrder()
+- 返回值：true或者抛异常
 
 ### withdrawFee
 
@@ -200,7 +193,6 @@ tlog(topic,args...);
 - 入口函数 main。
 
 - 参数json结构:
-
     ```json
     {
         'method' : 'withdrawFee',
@@ -225,8 +217,8 @@ tlog(topic,args...);
         'method':'dexInfo'
     }
     ```
-    - 函数：function dexInfo()
-    - 返回值：
+- 函数：function dexInfo()
+- 返回值：
     ```json
     {
         'result':{
@@ -247,7 +239,6 @@ tlog(topic,args...);
 - 根据订单号获取订单详细信息。
 - 入口函数 query。
 - 参数json结构:
-
     ```json
     {
         'method':'getOrder',
@@ -303,14 +294,12 @@ tlog(topic,args...);
 
 - 创建合约时候，触发合约 `init` 入口函数，负责合约创建时的初始化。
 - 函数
-
     ```js
     function init(input_str){
     }
     ```
 
 - 参数Json结构
-
     ```json
     {
         'params':{
@@ -326,11 +315,11 @@ tlog(topic,args...);
 
     version：DEX 的版本。如 1.0
 
-返回值：
+- 返回值：
 
-​	成功：无
+    ​成功：无
 
-​	失败：抛出异常
+    ​失败：抛出异常
 
 ### main
 
