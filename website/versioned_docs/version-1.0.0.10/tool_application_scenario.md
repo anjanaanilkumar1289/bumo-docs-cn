@@ -11,14 +11,14 @@ original_id: tool_application_scenario
 
 ### Faucet
 
-Faucet 又称“水龙头”，是为用户获取测试BU 的网页版应用。用户只要输入自己的测试账户地址即可获取100 测试BU。用户可连续获取测试BU，但不能过于频繁。Faucet 测试版网址为https://faucet.bumotest.io/。具体使用步骤可参考*Faucet 用户手册*。
+Faucet 又称“水龙头”，是为用户获取测试BU 的网页版应用。用户只要输入自己的测试账户地址即可获取100 测试BU。用户可连续获取测试BU，但不能过于频繁。Faucet 测试版网址为https://faucet.bumotest.io/。具体使用步骤可参考 [Faucet 用户手册](../faucet_user_guide)。
 
 ### QuickWallet
 
-QuickWallet 是网页版轻量级钱包，用户可快速登录QuickWallet 进行发送BU 操作。目前，QuickWallet 有正式版和测试版，正式版网址为 https://quickwallet.bumo.io，测试版网址为 https://quickwallet.bumotest.io。具体使用步骤可参考*QuickWallet 用户手册*。
+QuickWallet 是网页版轻量级钱包，用户可快速登录QuickWallet 进行发送BU 操作。目前，QuickWallet 有正式版和测试版，正式版网址为 https://quickwallet.bumo.io，测试版网址为 https://quickwallet.bumotest.io。具体使用步骤可参考 [QuickWallet 用户手册](../quick_wallet_user_guide)。
 
 ### Keypair Generator
-Keypair Generator 是网页版地址和私钥生成器，通过该入口，可随机生成账户地址和私钥。Keypair Generator 目前有正式版和测试版，正式版网址为 https://keypair.bumo.io/, 测试版网址为 https://keypair.bumotest.io/ 。具体使用步骤可参考 *Keypair Generator 用户手册*。
+Keypair Generator 是网页版地址和私钥生成器，通过该入口，可随机生成账户地址和私钥。Keypair Generator 目前有正式版和测试版，正式版网址为 https://keypair.bumo.io/, 测试版网址为 https://keypair.bumotest.io/ 。具体使用步骤可参考 [Keypair Generator 用户手册](../keypair_generator_user_guide)。
 
 ## 场景示例介绍
 

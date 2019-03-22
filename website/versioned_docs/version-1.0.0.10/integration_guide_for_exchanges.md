@@ -190,9 +190,9 @@ JAVA SDK的使用包括了[生成用户充值地址](#生成用户充值地址)�
 ```
 
 **注意**：
-- 关于Bumo-sdk-java 如何使用，请访问：[JAVA](sdk_java)
+- 关于Bumo-sdk-java 如何使用，请访问：[JAVA SDK](../sdk_java)
 
-- 关于交易所对接示例，请访问以下链接：[ExchangeDemo.java](https://github.com/bumoproject/bumo-sdk-java/blob/release2.0.0/examples/src/main/java/io/bumo/sdk/example/ExchangeDemo.java)
+- 关于交易所对接示例，请访问以下链接：[ExchangeDemo.java](https://github.com/bumoproject/bumo-sdk-java/blob/master/examples/src/main/java/io/bumo/sdk/example/ExchangeDemo.java)
 
 #### 用户提现或转账
 
@@ -343,13 +343,13 @@ https://github.com/bumoproject/bumo-wallet/releases
 
 答：不是固定。但目前(2018-04-23) `gas_price` 是1000MO，`gas_price`
 越大越优先打包。`fee_limit` 是交易时交易发起方最多给区块链的交易费用，在正常合法的交易情况下区块链收取的真实费用小于调用方填写的 `fee_limit` 。( `gas_price`
-可通过\ http://seed1.bumo.io:16002/getLedger?with_fee=true\ 查询的结果 `result.fees.gas_price` 字段得到）。
+可通过 http://seed1.bumo.io:16002/getLedger?with_fee=true 查询的结果 `result.fees.gas_price` 字段得到）。
 
 **账户余额转出** 
 
 问：账户的余额能否全部转出？
 
 答：不能。为了防止DDOS
-攻击，防止创建大量垃圾账户，BUMO激活的账户必须保留一定数量的BU，目前是0.1BU（可通过\ http://seed1.bumo.io:16002/getLedger?with_fee=true
+攻击，防止创建大量垃圾账户，BUMO激活的账户必须保留一定数量的BU，目前是0.1BU（可通过 http://seed1.bumo.io:16002/getLedger?with_fee=true
 查询的结果 `result.fees.base_reserve` 字段得到）。
 

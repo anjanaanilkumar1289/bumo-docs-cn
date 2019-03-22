@@ -3,7 +3,6 @@
     "快速入门": [
       "introduction_to_bumo",
       "installation_maintenance_guide",
-      "command",
       "contract_hello_world"
     ],
     "智能合约": [
