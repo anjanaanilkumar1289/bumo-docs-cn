@@ -11,7 +11,7 @@ BUMO为用户提供了开发者友好的智能合约编辑器CodeMach Editor，�
 
 下面是合约编辑器CodeMach Editor 的默认页面，页面主要分为五个区域，下面参照此界面来说明CodeMach Editor 的功能。
 
-<img src="/docs/Assets/codemacheditoroverview.jpg"
+<img src="/docs/assets/codemacheditoroverview.jpg"
      style= "margin-left: 20px">
 
 - **区域1** 为浏览区，显示文件目录，其中**Example**是默认生成的例子，可以复制里面的代码直接使用。**Customize** 是自定义文件夹，用户可通过旁边的+创建文件，也可单击上方的**+Folder**来创建自己的文件夹。
@@ -33,17 +33,17 @@ BUMO为用户提供了开发者友好的智能合约编辑器CodeMach Editor，�
 用户可在CodeMach Editor 中自定义文件，具体步骤如下：
 1. 单击浏览区右上角的**+Folder**，或者**Customize**文件夹右侧的 **+**。
 
-<img src="/docs/Assets/customfolder.jpg"
+<img src="/docs/assets/customfolder.jpg"
      style= "margin-left: 20px">
 
 2. 在弹出的对话框中输入新文件夹的名字，如*bumotest*。
 
-<img src="/docs/Assets/newfolder.jpg"
+<img src="/docs/assets/newfolder.jpg"
      style= "margin-left: 20px">  
 
 3. 单击Enter则新建文件夹完成，新文件夹显示在左侧列表中。
 
-<img src="/docs/Assets/foldercreated.jpg"
+<img src="/docs/assets/foldercreated.jpg"
      style= "margin-left: 20px">  
 
 
@@ -53,12 +53,12 @@ BUMO为用户提供了开发者友好的智能合约编辑器CodeMach Editor，�
 1. 单击要新建文件的文件夹右侧的 **+**，例如选择新建的文件夹*bumotest*。
 2. 在弹出的对话框中输入新建文件的名字,如*newfile*。
 
-<img src="/docs/Assets/newfile.jpg"
+<img src="/docs/assets/newfile.jpg"
      style= "margin-left: 20px">  
 
 3. 单击**Enter**则新建文件完成，新文件显示在bumotest文件夹下面。
 
-<img src="/docs/Assets/newfilecreated.jpg"
+<img src="/docs/assets/newfilecreated.jpg"
      style= "margin-left: 20px">  
 
 ## 生成智能合约
@@ -67,7 +67,7 @@ BUMO为用户提供了开发者友好的智能合约编辑器CodeMach Editor，�
 1. 在Deploy the contract 处输入init函数的参数，如输入*5*。
 2. 单击**Deploy**则生成智能合约。
 
-<img src="/docs/Assets/smartcontractgenerated.jpg"
+<img src="/docs/assets/smartcontractgenerated.jpg"
      style= "margin-left: 20px">
 
 **说明**：
@@ -89,7 +89,7 @@ BUMO为用户提供了开发者友好的智能合约编辑器CodeMach Editor，�
 3. 在**Amount of BU to be sent to the contract address**字段输入要发送的BU 数量。
 4. 单击**Invoke**则调用完成。
 
-<img src="/docs/Assets/callmain.jpg"
+<img src="/docs/assets/callmain.jpg"
      style= "margin-left: 20px">
 
 **说明**：main函数调用完成后控制台显示交易哈希值和交易结果。 
@@ -101,7 +101,7 @@ BUMO为用户提供了开发者友好的智能合约编辑器CodeMach Editor，�
 2. 在参数输入框中输入参数值，如*3*。
 3. 单击**Invoke**则调用完成。
 
-<img src="/docs/Assets/callquery.jpg"
+<img src="/docs/assets/callquery.jpg"
      style= "margin-left: 20px">
 
 **说明**：query函数调用完成后控制台显示查询结果。   

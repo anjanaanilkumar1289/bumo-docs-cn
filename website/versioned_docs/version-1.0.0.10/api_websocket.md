@@ -64,7 +64,7 @@ BUMO 区块链提供了websocket API 接口。您可以在 安装目录/config/b
 
 - 根据意愿组装交易对象`Transaction`, 不同的交易有不同的数据结构（详见:[交易](#交易)）
 - 交易对象序列化为字节流 `transaction_blob`，`Transaction`对象有序列化的方法，调用之后可得到字节流 `transaction_blob`。
-- 用私钥`skey`对`transaction_blob`签名得到`sign_data`，`skey`的公钥为`pkey`。（详见:[Keypair 手册](keypair_guide)）
+- 用私钥`skey`对`transaction_blob`签名得到`sign_data`，`skey`的公钥为`pkey`。（详见:[Keypair 手册](../keypair_guide)）
 - 提交交易，并可通过响应消息得到是否执行成功的消息。（详见:[提交交易](#提交交易)）
 
 
@@ -95,7 +95,7 @@ message Transaction {
 | 关键字          | 类型   | 描述                                                         |
 | --------------- | ------ | ------------------------------------------------------------ |
 | source_address  | string | 交易源账号，即交易发起方的账号。当这笔交易成功后，交易源账号的nonce字段会自动加1。账号中的nonce意义是本账号作为交易源执行过的交易数量。 |
-| nonce           | int64  | 其值必须等于交易源账号的当前nonce+1，这是为了防止重放攻击而设计的。如何查询一个账号的nonce可参考HTTP中的[查询账号](api_http#查询账号)接口。若查询账号没有显示nonce值，说明账号的当前nonce是0。 |
+| nonce           | int64  | 其值必须等于交易源账号的当前nonce+1，这是为了防止重放攻击而设计的。如何查询一个账号的nonce可参考HTTP中的[查询账号](../api_http#查询账号)接口。若查询账号没有显示nonce值，说明账号的当前nonce是0。 |
 | fee_limit       | int64  | 本交易能接受的最大的手续费。交易首先会按照这个费用收取手续费，若交易执行成功，则会收取实际的花费，否则将收取这个字段的费用。单位是MO，1 BU ＝ 10^8 MO。 |
 | gas_price       | int64  | 用于计算每个操作的手续费，还参与交易字节费的计算。单位是MO，1 BU ＝ 10^8 MO。 |
 | ceil_ledger_seq | int64  | 可选，针对本交易的区块高度限制条件，高级功能。               |
@@ -245,7 +245,7 @@ message OperationCreateAccount{
 
 - 查询
 
-  账户信息通过HTTP中的[查询账号](api_http#查询账号)接口查询。
+  账户信息通过HTTP中的[查询账号](../api_http#查询账号)接口查询。
 
 
 
@@ -264,8 +264,8 @@ message OperationCreateAccount{
 | tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易。           |
 
 - 查询
-  - 账户信息通过HTTP中的[查询账号](api_http#查询账号)接口查询。
-  - 通过通过HTTP中的[查询交易](api_http#查询交易)接口查询，在`result`中`transactions`的`error_desc`字段中，结果如下：
+  - 账户信息通过HTTP中的[查询账号](../api_http#查询账号)接口查询。
+  - 通过通过HTTP中的[查询交易](../api_http#查询交易)接口查询，在`result`中`transactions`的`error_desc`字段中，结果如下：
 
 ```protobuf
 [
@@ -376,7 +376,7 @@ message OperationSetMetadata{
 
 - 功能
 
-  设置签名者拥有的权重，设置各个操作所需要的门限。详情请见HTTP中的[控制权的分配](api_http#控制权的分配)的介绍。
+  设置签名者拥有的权重，设置各个操作所需要的门限。详情请见HTTP中的[控制权的分配](../api_http#控制权的分配)的介绍。
 
 - protobuf结构
 

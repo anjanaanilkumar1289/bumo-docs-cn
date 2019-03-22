@@ -13,8 +13,8 @@ BEPs（Bumo Enhancement Proposals，Bumo增强协议）描述了Bumo平台的标
 ## 内容
 
 BEPS目前包括以下几种协议：
-1. [BU.ATP10.a](atp_10)
-1. [BU.ATP20.a](atp_20)
-1. [BU.ATP30.a](atp_30)
-1. [BU.STO10.a](sto_10)
-1. [BU.DEX10.a](dex_10)
+1. [BU.ATP10.a](../atp_10)
+1. [BU.ATP20.a](../atp_20)
+1. [BU.ATP30.a](../atp_30)
+1. [BU.STO10.a](../sto_10)
+1. [BU.DEX10.a](../dex_10)

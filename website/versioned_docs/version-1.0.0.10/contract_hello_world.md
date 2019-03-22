@@ -8,9 +8,9 @@ original_id: bumo_contract_hello_world
 ## 概述
 合约是一段`JavaScript`代码,标准(`ECMAScript` as specified in `ECMA-262`)。合约的初始化函数是`init`, 执行的入口函数是`main`函数，您写的合约代码中必须有`init`和`main`函数的定义。该函数的入参是字符串`input`，是调用该合约的时候指定的。
 
-- 详细的合约的介绍，请看[合约](introduction_to_smart_contract)。
-- 详细的合约的语法，请看[合约语法]()。
-- 详细的合约编辑器的用户手册，请看[合约编辑器的介绍](introduction_to_smart_contract)。
+- 详细的合约的介绍，请看[合约](../introduction_to_smart_contract)。
+- 详细的合约的语法，请看[合约语法](../syntax-in-smart-contract)。
+- 详细的合约编辑器的用户手册，请看[合约编辑器的介绍](../introduction_to_smart_contract)。
 
 下面的示例是在[合约编辑器](https://cme.bumo.io)下来实现的。
 
@@ -56,7 +56,7 @@ function query(input)
   `storageStore`：全局函数，将指定的key-value对保存到区块链中。key是第一个参数，value是第二个参数。
 
 - 效果展示
-<img src="/docs/Assets/contractcodehelloworld.png" style= "margin-left: 20px">
+<img src="/docs/assets/contractcodehelloworld.png" style= "margin-left: 20px">
 
 
 
@@ -79,7 +79,7 @@ function query(input)
 - 运行效果
 
   点击Deploy按钮，效果如下：
-  <img src="/docs/Assets/contractdeploy.png" style= "margin-left: 20px">
+  <img src="/docs/assets/contractdeploy.png" style= "margin-left: 20px">
 
 
 
@@ -103,7 +103,7 @@ function query(input)
 
   点击最下面的Invoke按钮，运行效果如下：
 
-  <img src="/docs/Assets/contractmain.png" style= "margin-left: 20px">
+  <img src="/docs/assets/contractmain.png" style= "margin-left: 20px">
 
 
 
@@ -125,4 +125,4 @@ function query(input)
 
   点击最下面的Invoke按钮，运行效果如下：
 
-  <img src="/docs/Assets/contractquery.png" style= "margin-left: 20px">
+  <img src="/docs/assets/contractquery.png" style= "margin-left: 20px">

@@ -113,7 +113,7 @@ sudo apt-get install automake
   git clone https://github.com/bumoproject/bumo.git
 ```
 
-<img src="/docs/Assets/download_bumo_back2.png"
+<img src="/docs/assets/download_bumo_back2.png"
      style= "margin-left: 20px">
 
 
@@ -143,7 +143,7 @@ sudo apt-get install automake
   make
 ```
 
-<img src="/docs/Assets/compile_finished.png"
+<img src="/docs/assets/compile_finished.png"
      style= "margin-left: 20px">
 
 
@@ -165,7 +165,7 @@ sudo apt-get install automake
   make install
 ```
 
-<img src="/docs/Assets/compile_installed.png"
+<img src="/docs/assets/compile_installed.png"
      style= "margin-left: 20px">
 
 
@@ -258,7 +258,7 @@ sudo apt-get install automake
   install_dir=/usr/local/buchain
 ```
 
-<img src="/docs/Assets/start_path.png"
+<img src="/docs/assets/start_path.png"
      style= "margin-left: 20px">
 
 **注意**： 默认情况下install_dir的目录在/usr/local/buchain下；您可以根据bumo的具体安装目录来修改。
@@ -326,7 +326,7 @@ sudo apt-get install automake
 ```
   /etc/init.d/bumod start
 ```
-<img src="/docs/Assets/add_start_command.png"
+<img src="/docs/assets/add_start_command.png"
      style= "margin-left: 20px">
 
 8. 单击 `Esc` 键退出编辑。
@@ -469,7 +469,7 @@ sudo apt-get install automake
 ```  
   sudo git clone https://github.com/bumoproject/bumo.git
 ```
-<img src="/docs/Assets/download_bumo_back2.png"
+<img src="/docs/assets/download_bumo_back2.png"
      style= "margin-left: 20px">
 
 
@@ -964,7 +964,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
 ```
 **注意**： 数据库成功清空后能看到如下所示的信息。
 
-<img src="/docs/Assets/clear_database.png"
+<img src="/docs/assets/clear_database.png"
      style= "margin-left: 20px">
 
 
@@ -979,7 +979,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
 ```
 2. 在提示界面上输入 `y` 然后单击 `Enter` 键。创建成功后将出现以下界面。
 
-<img src="/docs/Assets/hard_fork_created.png"
+<img src="/docs/assets/hard_fork_created.png"
      style= "margin-left: 20px">
 
 **注意**： 

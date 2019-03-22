@@ -13,7 +13,7 @@ original_id: keypair_guide
 
  下图说明了私钥、公钥和地址的生成原理。
 
- <img src="/docs/Assets/schematic.png" style= "margin-left: 20px">
+ <img src="/docs/assets/schematic.png" style= "margin-left: 20px">
 
 
 

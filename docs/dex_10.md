@@ -53,39 +53,46 @@ tlog(topic,args...);
 ### makeOrder
 
 - 发布 ATP token 或 CTP token 与 BU 兑换的订单，支持 ATP 兑换 BU，CTP 兑换 BU，BU 兑换 ATP，BU 兑换 CTP 。
+
 - ATP token 兑换时，使用 issuer(发行者地址)、code(资产代码) 和 value(兑换数量) 标注；
+
 - CTP token 兑换时，使用 issuer(CTP合约地址) 和 value(兑换数量) 标注；
+
 - BU 为 BUMO 内置原生 token ，不需要标识，兑换时只需要给出 value(数量) 即可；
+
 - 如果订单的兑出 token 为 CTP 资产，发布订单之前，订单用户需先在对应的 CTP 合约内授信 DEX 合约，授信额度为兑出 token 的额度；
+
 - 如果订单的兑出 token 为 ATP 资产，发布订单时，需用 payAsset(转移资产) 操作触发，转移的资产内容和数额为兑出资产的内容和数额；
+
 - 如果订单的兑出 token 为 BU，发布订单时，需用 payCoin(转账) 操作触发，转账的数额为兑出 BU 的数额加兑换服务费；
+
 - 入口函数 main。
 
 - 参数 json 结构:
-```json
-{  
-    'method':'makeOrder',
-    'params':{
-        'own':{ //ATP token
-            'issuer':buQxxx',
-            'code':'EUR',
-            'value':10000,
-        },
-       'target':{ //BU
-           'value':1000,
-        },
-       'fee':5,
-       'expiration':'2018...'
+    ```json
+    {  
+        'method':'makeOrder',
+        'params':{
+            'own':{ //ATP token
+                'issuer':buQxxx',
+                'code':'EUR',
+                'value':10000,
+            },
+           'target':{ //BU
+               'value':1000,
+            },
+           'fee':5,
+           'expiration':'2018...'
+        }
     }
-}
-```
-参数：own 订单兑出的 token 信息，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
+    ```
+    参数：own 订单兑出的 token 信息，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
 
-参数：target 订单兑入的token，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
+    参数：target 订单兑入的token，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
 
-参数：fee 挂单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除。
+    参数：fee 挂单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除。
 
-参数：expiration 订单的截止日期，过期后订单无效。
+    参数：expiration 订单的截止日期，过期后订单无效。
 
 - 函数：function makeOrder(own, target, fee, expiration);
 - 返回值：true或者抛异常。
@@ -95,16 +102,17 @@ tlog(topic,args...);
 - 挂单账户取消订单。
 - 入口函数 main。
 
-参数json结构:
-```json
-{
+- 参数json结构:
+
+    ```json
+    {
     'method':'cancelOrder',
     'params':{
-        'order':'order_1'
+    'order':'order_1'
     }
-}
-```
-参数：order 取消的订单号；
+    }
+    ```
+	​	参数：order 取消的订单号；
 
 - 函数：function cancelOrder(order)
 - 返回值：true 或者抛异常
@@ -117,20 +125,19 @@ tlog(topic,args...);
 - 如果填单的兑出 token 为 BU，填单时，需用 payCoin(转账) 操作触发，转账的数额为兑出 BU 的数额加兑换服务费；
 - 入口函数 main。
 
-参数json结构:
-```json
-{
-    'method':'takeOrder',
-    'params':{
-      'order':'order_1',
-      'fee':5,
-    }
-}
+- 参数json结构:
+   ```json
+   {
+       'method':'takeOrder',
+       'params':{
+         'order':'order_1',
+         'fee':5,
+       }
+   }
+	```
+    参数：order 填单或局部填单的订单号；
 
-```
-参数：order 填单或局部填单的订单号；
-
-参数：fee 填单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除；
+    参数：fee 填单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除；
 
 - 函数：function takeOrder(order)
 - 返回值：true或者抛异常
@@ -141,15 +148,15 @@ tlog(topic,args...);
 - 入口函数 main。
 
 - 参数json结构:
-```json
-{
-    'method' : 'updateFeeRate',
-    'params' : {
-         'rate' : '50000' //单位为 1/(10^8)
+    ```json
+    {
+        'method' : 'updateFeeRate',
+        'params' : {
+             'rate' : '50000' //单位为 1/(10^8)
+        }
     }
-}
-```
-参数：rate 服务费与 token 兑换额的比率。
+    ```
+    参数：rate 服务费与 token 兑换额的比率。
 
 - 函数：function updateFeeRate(rate)
 - 返回值：true或者抛异常
@@ -160,15 +167,15 @@ tlog(topic,args...);
 - 入口函数 main。
 
 - 参数json结构:
-```json
-{
-    'method' : 'updateOwner',
-    'params' : {
-         'address' : 'buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj'
+    ```json
+    {
+        'method' : 'updateOwner',
+        'params' : {
+             'address' : 'buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj'
+        }
     }
-}
-```
-参数：address DEX 合约新拥有者的地址。
+    ```
+    参数：address DEX 合约新拥有者的地址。
 
 - 函数：function updateOwner(address)
 - 返回值：true或者抛异常
@@ -179,13 +186,13 @@ tlog(topic,args...);
 - 入口函数 main。
 
 - 参数json结构:
-```json
-{
-    'method' : 'clearExpiredOrder',
-}
-```
-- 函数：function clearExpiredOrder()
-- 返回值：true或者抛异常
+    ```json
+    {
+        'method' : 'clearExpiredOrder',
+    }
+    ```
+    - 函数：function clearExpiredOrder()
+    - 返回值：true或者抛异常
 
 ### withdrawFee
 
@@ -194,15 +201,15 @@ tlog(topic,args...);
 
 - 参数json结构:
 
-```json
-{
-    'method' : 'withdrawFee',
-    'params' : {
-         'value': 10000
+    ```json
+    {
+        'method' : 'withdrawFee',
+        'params' : {
+             'value': 10000
+        }
     }
-}
-```
-参数：value 提现的数额；
+    ```
+    参数：value 提现的数额；
 
 - 函数：function withdrawFee(value)
 - 返回值：true或者抛异常
@@ -213,27 +220,27 @@ tlog(topic,args...);
 - 入口函数 query。
 
 - 参数json结构:
-```json
-{
-    'method':'dexInfo'
-}
-```
-- 函数：function dexInfo()
-- 返回值：
-```json
-{
-    'result':{
-        'type': 'string',
-        'value': {
-            'dexInfo': {
-                'owner': 'buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj',
-                'feeRate': 50000, //单位为 1/(10^8)
-                'version': '1.0'
+    ```json
+    {
+        'method':'dexInfo'
+    }
+    ```
+    - 函数：function dexInfo()
+    - 返回值：
+    ```json
+    {
+        'result':{
+            'type': 'string',
+            'value': {
+                'dexInfo': {
+                    'owner': 'buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj',
+                    'feeRate': 50000, //单位为 1/(10^8)
+                    'version': '1.0'
+                }
             }
         }
-    }
-} 
-```
+    } 
+    ```
 
 ### getOrder
 
@@ -241,34 +248,34 @@ tlog(topic,args...);
 - 入口函数 query。
 - 参数json结构:
 
-```json
-{
-    'method':'getOrder',
-    'params' : {
-         'order': 'order_1'
+    ```json
+    {
+        'method':'getOrder',
+        'params' : {
+             'order': 'order_1'
+        }
     }
-}
-```
-参数：order 订单号；
+    ```
+    参数：order 订单号；
 
 - 函数：function getOrder(order)
 - 返回值：
-```json
-{  
-    'order_1':{
-        'own':{ //ATP token
-            'issuer':buQxxx',
-            'code':'EUR',
-            'value':10000,
-        },
-       'target':{ //BU
-           'value':1000,
-        },
-       'fee':5,
-       'expiration':'2018...'
+    ```json
+    {  
+        'order_1':{
+            'own':{ //ATP token
+                'issuer':buQxxx',
+                'code':'EUR',
+                'value':10000,
+            },
+           'target':{ //BU
+               'value':1000,
+            },
+           'fee':5,
+           'expiration':'2018...'
+        }
     }
-}
-```
+    ```
 
 ### getOrderInterval
 
@@ -276,19 +283,19 @@ tlog(topic,args...);
 - 入口函数 query。
 
 - 参数json结构:
-```json
-{
-    'method':'getOrderInterval',
-}
-```
+    ```json
+    {
+        'method':'getOrderInterval',
+    }
+    ```
 
 - 函数：function getOrderInterval()
 - 返回值：
-```json
-{  
-    'orderInterval':[9, 1000]
-}
-```
+    ```json
+    {  
+        'orderInterval':[9, 1000]
+    }
+    ```
 
 ## 合约入口
 
@@ -297,27 +304,27 @@ tlog(topic,args...);
 - 创建合约时候，触发合约 `init` 入口函数，负责合约创建时的初始化。
 - 函数
 
-```js
-function init(input_str){
-}
-```
+    ```js
+    function init(input_str){
+    }
+    ```
 
 - 参数Json结构
 
-```json
-{
-    'params':{
-        'owner':'buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj',
-        'feeRate':'50000',
-        'version': '1.0'
+    ```json
+    {
+        'params':{
+            'owner':'buQnTmK9iBFHyG2oLce7vcejPQ1g5xLVycsj',
+            'feeRate':'50000',
+            'version': '1.0'
+        }
     }
-}
-```
-owner：如果创建 DEX 合约时，没有给出默认值，那么默认 DEX 合约的创建者。
+    ```
+    owner：如果创建 DEX 合约时，没有给出默认值，那么默认 DEX 合约的创建者。
 
-feeRate: 单位为 1/(10^8)，例如 feeRate 的值为 50000，那么服务费率是 50000/(10^8) = 5/10000。
+    feeRate: 单位为 1/(10^8)，例如 feeRate 的值为 50000，那么服务费率是 50000/(10^8) = 5/10000。
 
-version：DEX 的版本。如 1.0
+    version：DEX 的版本。如 1.0
 
 返回值：
 
@@ -330,60 +337,60 @@ version：DEX 的版本。如 1.0
 - 负责数据写入，其中包含了 [makeOrder](#makeorder)、[cancelOrder](#cancelorder)、[takeOrder](#takeorder)、[updateFeeRate](#updatefeerate)、[updateOwner](#updateowner)、[clearExpiredOrder](#clearexpiredorder)、[withdrawFee](#withdrawfee)等接口。
 - 函数体
 
-```js
-function main(input_str){
-    let input = JSON.parse(input_str);
+    ```js
+    function main(input_str){
+        let input = JSON.parse(input_str);
 
-    if(input.method === 'makeOrder'){
-        makeOrder(input.params.own, input.params.target, input.params.fee, input.params.expiration);
+        if(input.method === 'makeOrder'){
+            makeOrder(input.params.own, input.params.target, input.params.fee, input.params.expiration);
+        }
+        else if(input.method === 'cancelOrder'){
+            cancelOrder(input.params.order);
+        }
+        else if(input.method === 'takeOrder'){
+            takeOrder(input.params.order);
+        }
+        else if(input.method === 'updateFeeRate'){
+            updateFeeRate(input.params.rate);
+        }
+        else if(input.method === 'updateOwner'){
+            updateOwner(input.params.owner);
+        }
+        else if(input.method === 'clearExpiredOrder'){
+            clearExpiredOrder();
+        }
+        else if(input.method === 'withdrawFee'){
+            withdrawFee(input.params.value);
+        }
+        else{
+            throw '<Main interface passes an invalid operation type>';
+        }
     }
-    else if(input.method === 'cancelOrder'){
-        cancelOrder(input.params.order);
-    }
-    else if(input.method === 'takeOrder'){
-        takeOrder(input.params.order);
-    }
-    else if(input.method === 'updateFeeRate'){
-        updateFeeRate(input.params.rate);
-    }
-    else if(input.method === 'updateOwner'){
-        updateOwner(input.params.owner);
-    }
-    else if(input.method === 'clearExpiredOrder'){
-        clearExpiredOrder();
-    }
-    else if(input.method === 'withdrawFee'){
-        withdrawFee(input.params.value);
-    }
-    else{
-        throw '<Main interface passes an invalid operation type>';
-    }
-}
-```
+    ```
 
 ### query
 
 - 负责数据查询，其中包含了[dexInfo](#dexinfo)、[dexInfo](#dexinfo)、[getOrder](#getorder)、[getOrderInterval](#getorderinterval)等接口。
 - 函数体
 
-```js
-function query(input_str){
+    ```js
+    function query(input_str){
 
-    let result = {};
-    let input  = JSON.parse(input_str);
+        let result = {};
+        let input  = JSON.parse(input_str);
 
-    if(input.method === 'dexInfo'){
-        result.dexInfo = dexInfo();
+        if(input.method === 'dexInfo'){
+            result.dexInfo = dexInfo();
+        }
+        else if(input.method === 'getOrder'){
+            result.order = getOrder(input.params.order);
+        }
+        else if(input.method === 'getOrderInterval'){
+            result.interval = getOrderInterval();
+        }
+        else{
+            throw '<Query interface passes an invalid operation type>';
+        }
+        return JSON.stringify(result);
     }
-    else if(input.method === 'getOrder'){
-        result.order = getOrder(input.params.order);
-    }
-    else if(input.method === 'getOrderInterval'){
-        result.interval = getOrderInterval();
-    }
-    else{
-       	throw '<Query interface passes an invalid operation type>';
-    }
-    return JSON.stringify(result);
-}
-```
+    ```
