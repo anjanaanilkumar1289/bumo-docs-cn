@@ -31,7 +31,7 @@ const siteConfig = {
   //   baseUrl: '/test-site/',
 
   // Used for publishing and more
-  projectName: 'bumo-docs-cn',
+  projectName: 'bumo',
   organizationName: 'bumoproject',
   // For top-level user or org sites, the organization is still the same.
   // e.g., for the https://JoelMarcey.github.io site, it would be set like...
@@ -89,7 +89,7 @@ const siteConfig = {
     apiKey: 'd4c9fe4edd1bc00c3fab7c201e7330ee',
     indexName: 'bumo',
     algoliaOptions: {
-      facetFilters: ['language:en', 'version:VERSION'],
+      facetFilters: ['language:cn', 'version:VERSION'],
     }
   },
   // Add custom scripts here that would be placed in <script> tags.
