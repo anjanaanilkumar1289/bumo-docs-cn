@@ -29,9 +29,9 @@ composer require bumo/bumo-sdk:^v1.0.0
 
 ### 请求参数
 
-接口的请求参数的类名，是**服务名** + **方法名** + **Request**，比如: 账户服务下的getInfo接口的请求参数格式是AccountGetInfoRequest。
+接口的请求参数的类名，是**服务名** + **方法名** + **Request**，比如: 账户服务下的[getInfo](#getinfo)接口的请求参数格式是AccountGetInfoRequest。
 
-请求参数的成员，是各个接口的入参的成员。例如：账户服务下的getInfo接口的入参成员是address，那么该接口的请求参数的完整结构如下：
+请求参数的成员，是各个接口的入参的成员。例如：账户服务下的[getInfo](#getinfo)接口的入参成员是address，那么该接口的请求参数的完整结构如下：
 ```php
 class AccountGetInfoRequest {
 	$address; // string
@@ -40,9 +40,9 @@ class AccountGetInfoRequest {
 
 ### 响应数据
 
-接口的响应数据的类名，是**服务名** + **方法名** + **Response**，比如：账户服务下的getNonce接口的响应数据格式是AccountGetNonceResponse。
+接口的响应数据的类名，是**服务名** + **方法名** + **Response**，比如：账户服务下的[getNonce](#getnonce)接口的响应数据格式是AccountGetNonceResponse。
 
-响应数据的成员，包括错误码、错误描述和返回结果，比如资产服务下的getInfo接口的响应数据的成员如下：
+响应数据的成员，包括错误码、错误描述和返回结果，比如资产服务下的[getNonce](#getnonce)接口的响应数据的成员如下：
 ```php
 class AccountGetNonceResponse {
 	$errorCode; // int
@@ -238,7 +238,7 @@ if (0 == $response->error_code) {
 
 账户服务主要是账户相关的接口，包括6个接口：`checkValid`、 `getInfo`、 `getNonce`、 `getBalance`, `getAssets`、 `getMetadata`。
 
-### checkValid-账户
+### checkValid
 - **接口说明**
 
    该接口用于检查区块链账户地址的有效性
@@ -291,7 +291,7 @@ if(0 == $response->error_code) {
 }
 ```
 
-### getInfo-账户
+### getInfo
 
 - **接口说明**
 
@@ -407,7 +407,7 @@ if(0 == $response->error_code){
 }
 ```
 
-### getBalance-账户
+### getBalance
 
 - **接口说明**
 
@@ -587,7 +587,7 @@ if ($response->error_code == 0) {
 
 遵循ATP1.0协议，账户服务主要是资产相关的接口，目前有1个接口：getInfo
 
-### getInfo-资产
+### getInfo
 
 - **接口说明**
 
@@ -654,7 +654,7 @@ if ($response->error_code == 0) {
 
 合约服务主要是合约相关的接口，目前有4个接口：checkValid, getInfo, getAddress, call
 
-### checkValid-合约
+### checkValid
 
 - **接口说明**
 
@@ -709,7 +709,7 @@ if ($response->error_code == 0) {
 }
 ```
 
-### getInfo-合约
+### getInfo
 
 - **接口说明**
 
@@ -1372,7 +1372,7 @@ if (0 == $response->error_code) { // 交易提交成功
 }
 ```
 
-### getInfo-交易
+### getInfo
 
 - **接口说明**
 
@@ -1573,7 +1573,7 @@ if(0 == $response->error_code){
 }
 ```
 
-### getInfo-区块
+### getInfo
 
 - **接口说明**
 

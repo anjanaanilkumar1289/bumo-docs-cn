@@ -113,7 +113,7 @@ sudo apt-get install automake
 ```
 
 <img src="/docs/assets/download_bumo_back2.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 
 **注意**：在BUMO的源代码下载过程中将自动创建bumo/目录，源代码文件将存放到该目录下。
@@ -143,7 +143,7 @@ sudo apt-get install automake
 ```
 
 <img src="/docs/assets/compile_finished.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 
 **注意**：编译完成后生成的可执行文件 **bumo** 和 **bumod** 存放在/bumo/bin目录下。
@@ -165,7 +165,7 @@ sudo apt-get install automake
 ```
 
 <img src="/docs/assets/compile_installed.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 
 **注意**： 
@@ -173,7 +173,7 @@ sudo apt-get install automake
    - 安装完成后无需其他配置即可通过 `service bumo start` 命令来启动bumo服务。
    - 安装完BUMO节点后在buchain/目录下有如下目录结构：
 
-|目录 | 说明| 
+|目录 | 说明|
 |-----|:------:|
 |bin |     存放可执行文件（编译后的bumo可执行程序）|
 |jslib |    存放第三方js库|
@@ -258,7 +258,7 @@ sudo apt-get install automake
 ```
 
 <img src="/docs/assets/start_path.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 **注意**： 默认情况下install_dir的目录在/usr/local/buchain下；您可以根据bumo的具体安装目录来修改。
 
@@ -293,27 +293,27 @@ sudo apt-get install automake
 
 ```  
   ln -s -f /etc/init.d/bumod /etc/rc1.d/S99bumod
-``` 
+```
 2. 输入以下命令设置2级。
 
 ```  
   ln -s -f /etc/init.d/bumod /etc/rc2.d/S99bumod
-```   
+```
 3. 输入以下命令设置3级。
 
 ``` 
   ln -s -f /etc/init.d/bumod /etc/rc3.d/S99bumod
-``` 
+```
 4. 输入以下命令设置4级。
 
 ```  
   ln -s -f /etc/init.d/bumod /etc/rc4.d/S99bumod
-``` 
+```
 5. 输入以下命令设置5级。
 
 ```   
   ln -s -f /etc/init.d/bumod /etc/rc5.d/S99bumod
-``` 
+```
 6. 输入以下命令打开rc.local文件。
 
 ```
@@ -326,7 +326,7 @@ sudo apt-get install automake
   /etc/init.d/bumod start
 ```
 <img src="/docs/assets/add_start_command.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 8. 单击 `Esc` 键退出编辑。
 
@@ -369,7 +369,7 @@ sudo apt-get install automake
 
 ## 在MacOS下安装BUMO节点
 
-在MacOS下安装BUMO节点包括编译安装和安装包安装。
+在MacOS下安装BUMO节点包括[MacOS中的编译安装](#macos中的编译安装)和[MacOS中安装包安装](#macos中安装包安装)。
 
 ### MacOS中的编译安装
 
@@ -415,7 +415,7 @@ sudo apt-get install automake
 
 ``` 
  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
- ```
+```
 
 3. 按下 `Enter` 键，进行安装。
 
@@ -469,7 +469,7 @@ sudo apt-get install automake
   sudo git clone https://github.com/bumoproject/bumo.git
 ```
 <img src="/docs/assets/download_bumo_back2.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 
 **注意**：在BUMO的源代码下载过程中将自动创建bumo/目录，源代码文件将存放到该目录下。
@@ -643,7 +643,7 @@ sudo apt-get install automake
    ]
    }
    }
-``` 
+```
 
 **WEB API 配置**
 
@@ -651,7 +651,7 @@ sudo apt-get install automake
    "webserver":{
    "listen_addresses":"0.0.0.0:16002"
    }
-``` 
+```
 
 **WebSocket API 配置**
 
@@ -660,7 +660,7 @@ sudo apt-get install automake
    {
    "listen_address":"0.0.0.0:36003"
    }
-``` 
+```
 
 **区块配置**
 
@@ -676,7 +676,7 @@ sudo apt-get install automake
    "queue_per_account_txs_limit":64 //单个账号的交易缓冲最大值
    }
    }
-``` 
+```
 
 **注意**：validation_address 和 validation_private_key 可以通过 bumo 程序命令行工具获得，请妥善保存该账号信息，一旦丢失将无法找回。
 
@@ -692,7 +692,7 @@ sudo apt-get install automake
    "public_key_raw" : "08d329d5ff69a70177a60bf1b68972576b35a22d99d0b9a61541ab568521db5e", //原始公钥
    "sign_type" : "ed25519" //ed25519 加密方式
    }
-``` 
+```
 
 **创世区块**
 
@@ -708,7 +708,7 @@ sudo apt-get install automake
    },
    "validators": ["buQBwe7LZYCYHfxiEGb1RE9XC9kN2qrGXWCY"] //验证节点区块列表
    }
-``` 
+```
 
 **注意**：同一个区块链上的 `genesis` 配置，必须保持一致。`account` 可以通过 bumo 程序命令行工具 `./bumo --create-account` 获取，请妥善保存该账号信息，一旦丢失将无法找回。
 
@@ -724,7 +724,7 @@ sudo apt-get install automake
    "size_capacity":10, //大小容量，兆
    "expire_days":10 //清理日志周期，天
    }
-``` 
+```
 
 ### 多节点配置示例
 
@@ -786,7 +786,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
    ]
    }
    }
-``` 
+```
 **leger模块配置**
 
 验证节点的 ledger 的 `validation_address` 和 `validation_private_key` 必须要匹配。并且需要把所有验证节点的 `validation_address` 填写到 `genesis.validators` 里。
@@ -828,7 +828,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
    "queue_per_account_txs_limit":64
    }
    }
-``` 
+```
 **genesis模块配置**
 
 同一个区块链上的 genesis 配置，必须保持一致。
@@ -872,7 +872,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
    },
    "validators": ["buQBwe7LZYCYHfxiEGb1RE9XC9kN2qrGXWCY", "buQqkp5SDcsxpwWXQ2QFQbvHKnZ199HY3dHm"] //需要配置所有的验证节点地址，如果有两个验证节点，则配置两个地址。
    }
-``` 
+```
 **注意**：
    - 运行前请确保每个节点的初始数据一致，否则无法达成共识产生区块。
    - `account` 、`validation_address` 可以通过 bumo 程序命令行工具 `./bumo --create-account` 获取，请妥善保存该账号信息，一旦丢失将无法找回。
@@ -887,7 +887,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
 
 ``` 
    service bumo start
-``` 
+```
 **注意**：在MacOS中启动bumo服务需要进入到/usr/local/buchain/bin目录下，然后通过 `./bumo` 命令在启动bumo服务。
 
 **关闭BUMO服务**
@@ -896,7 +896,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
 
 ``` 
    service bumo stop
-``` 
+```
 **注意**：在MacOS中关闭bumo服务可以通过 `control+c` 键来完成。
 
 **查询BUMO服务状态**
@@ -905,7 +905,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
 
 ``` 
    service bumo status
-``` 
+```
 **注意**：在MacOS中没有service服务。
 
 **查询系统详细状态**
@@ -964,7 +964,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
 **注意**： 数据库成功清空后能看到如下所示的信息。
 
 <img src="/docs/assets/clear_database.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 
 **创建硬分叉**
@@ -979,7 +979,7 @@ p2p 的 `known_peers` 必须为其他已知节点的 IP 和端口，用于节点
 2. 在提示界面上输入 `y` 然后单击 `Enter` 键。创建成功后将出现以下界面。
 
 <img src="/docs/assets/hard_fork_created.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 **注意**： 
    - 执行完上面的命令后，新的区块链网络只有一个验证节点即本节点。

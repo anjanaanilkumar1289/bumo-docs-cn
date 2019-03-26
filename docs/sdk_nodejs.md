@@ -193,7 +193,7 @@ sdk.account.create().then(result => {
 });
 ```
 
-### checkValid-账户
+### checkValid
 - **接口说明**
 
    该接口用于检查区块链账户地址的有效性
@@ -234,7 +234,7 @@ sdk.account.checkValid(address).then(result => {
 });
 ```
 
-### getInfo-账户
+### getInfo
 
 - **接口说明**
 
@@ -321,7 +321,7 @@ sdk.account.getNonce(address).then(result => {
 });
 ```
 
-### getBalance-账户
+### getBalance
 
 - **接口说明**
 
@@ -458,7 +458,7 @@ sdk.account.getMetadata(args).then(result => {
 
 遵循ATP1.0协议，账户服务提供资产相关的接口，目前有1个接口：`getInfo`
 
-### getInfo-资产
+### getInfo
 
 - **接口说明**
 
@@ -513,7 +513,7 @@ sdk.token.asset.getInfo(args).then(data => {
 
 合约服务提供合约相关的接口，目前有4个接口：`checkValid`、 `getInfo`、 `getAddress`、 `call`
 
-### checkValid-合约
+### checkValid
 
 - **接口说明**
 
@@ -555,7 +555,7 @@ sdk.contract.checkValid(contractAddress).then(result => {
 });
 ```
 
-### getInfo-合约
+### getInfo
 
 - **接口说明**
 
@@ -1310,7 +1310,7 @@ const args = {
 let transactionInfo = yield sdk.transaction.submit(args);
 ```
 
-### getInfo-交易
+### getInfo
 
 - **接口说明**
 
@@ -1465,7 +1465,7 @@ sdk.block.getTransactions(100).then(result => {
 });
 ```
 
-### getInfo-区块
+### getInfo
 
 - **接口说明**
 
