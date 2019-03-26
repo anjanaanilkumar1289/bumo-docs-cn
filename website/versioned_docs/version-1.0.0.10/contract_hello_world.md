@@ -26,28 +26,28 @@ original_id: contract_hello_world
 
 - 合约源码
 
-编辑一段合约代码，如下：
+    编辑一段合约代码，如下：
 
-```javascript
-"use strict";
-function init(bar)
-{
-  assert(typeof bar === 'string' && bar.length > 0, 'The param of init must be a not empty string');
-  storageStore(bar, 'init : ' + bar);
-}
+    ```javascript
+    "use strict";
+    function init(bar)
+    {
+      assert(typeof bar === 'string' && bar.length > 0, 'The param of init must be a not empty string');
+      storageStore(bar, 'init : ' + bar);
+    }
 
-function main(input)
-{
-  assert(typeof input === 'string' && input.length > 0, 'The param of main must be a not empty string');
-  storageStore(input, 'main : ' + input);
-}
+    function main(input)
+    {
+      assert(typeof input === 'string' && input.length > 0, 'The param of main must be a not empty string');
+      storageStore(input, 'main : ' + input);
+    }
 
-function query(input)
-{ 
-  assert(typeof input === 'string' && input.length > 0, 'The param of query must be a not empty string');
-  return storageLoad(input);
-}
-```
+    function query(input)
+    { 
+      assert(typeof input === 'string' && input.length > 0, 'The param of query must be a not empty string');
+      return storageLoad(input);
+    }
+    ```
 
 - 简单介绍
 
