@@ -211,7 +211,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 入口函数
 
-   main
+   `main`
 
 - 参数
 
@@ -265,9 +265,9 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 入口函数
 
-  query
+  `query`
 
--   参数
+- 参数
 
     ```json
     {
@@ -279,7 +279,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     - name: 文档名称
     ```
 
--   返回值
+- 返回值
     ```json
     {
         "result": {
@@ -314,7 +314,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   `main`
 
--   参数
+- 参数
 
     ```json
     {
@@ -411,7 +411,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   `query`
 
--   参数
+- 参数
 
     ```json
     {
@@ -423,7 +423,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     }
     ```
 
--   返回值
+- 返回值
 
     ```json
     {
@@ -446,7 +446,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   `query`
 
--   参数
+- 参数
 
     ```json
     {
@@ -457,7 +457,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     }
     ```
 
--   返回值
+- 返回值
 
     ```json
     {
@@ -478,7 +478,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 入口函数
 
-  main
+  `main`
 
 - 参数
 
@@ -756,7 +756,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   `query`
 
--   参数
+- 参数
 
     ```json
     {
@@ -1295,11 +1295,11 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   能否传输成功。
 
--   入口函数
+- 入口函数
 
   `main`
 
--   参数
+- 参数
 
     ```json
     {
@@ -1313,7 +1313,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     }
     ```
 
--   返回值
+- 返回值
 
 成功: true
 失败: 抛出错误信息
@@ -1324,11 +1324,11 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   指定 tranche 内的 token 能否被传输成功。
 
--   入口函数
+- 入口函数
 
   `main`
 
--   参数
+- 参数
 
     ```json
     {
@@ -1343,10 +1343,10 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     }
     ```
 
--   返回值
+- 返回值
 
-成功: true
-失败: 抛出错误信息
+　　成功: true
+　　失败: 抛出错误信息
 
 ### canTransferToTranche
 
@@ -1354,11 +1354,11 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   指定 tranche 内的 token 转移给目标指定 tranche 内能否被传输成功。
 
--   入口函数
+- 入口函数
 
   `main`
 
--   参数
+- 参数
 
     ```json
     {
@@ -1374,10 +1374,10 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     }
     ```
 
--   返回值
+- 返回值
 
-成功: true
-失败: 抛出错误信息
+　　成功: true
+　　失败: 抛出错误信息
 
 
 
@@ -1551,11 +1551,11 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   查询允许指定账户代表 token持有者操作 token数量。
 
--   入口函数
+- 入口函数
 
 > query
 
--   参数
+- 参数
 
     ```json
     {
@@ -1567,7 +1567,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     }
     ```
 
--   返回值
+- 返回值
 
     ```json
     {
@@ -1591,7 +1591,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   `query`
 
--   参数
+- 参数
 
     ```json
     {
@@ -1604,7 +1604,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     }
     ```
 
--   返回值
+- 返回值
 
     ```json
     {

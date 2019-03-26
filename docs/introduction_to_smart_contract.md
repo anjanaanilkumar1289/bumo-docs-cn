@@ -492,7 +492,7 @@ issueAsset("CNY", 10000);
   let ret = int64Compare('12345678912345', 2);
   /*
   权限：只读
-  返回：成功返回数字 1（左值大于右值），失败抛异常
+  返回：成功返回数字 1（左值大于右值），0(相等)，-1(小于)，失败抛异常
   */
   ```
 ##### toBaseUnit
@@ -695,7 +695,7 @@ issueAsset("CNY", 10000);
 
 - **示例**
   ```JavaScript
-  {"amount": 1000, "key" : {"issuer": "buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY", "code":"CNY"}}。
+  {"amount": 1000, "key": {"issuer": "buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY", "code":"CNY"}}
   ```
 
 #### blockNumber

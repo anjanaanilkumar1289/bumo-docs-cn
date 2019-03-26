@@ -213,7 +213,7 @@ a46ee590a84abdeb8cc38ade1ae8e8a2c71bb69bdc4cd7dc0de1b74b37e2cbd1696229687f80dff4
 交易的执行有两种接口调用方式：调用接口生成`transaction_blob` 和自己生成`transaction_blob`。
 
 由于`transaction_blob`很可能被截取和篡改，因此不建议调用接口生成`transaction_blob`。
-如果需要调用接口生成transaction_blob、签名并提交交易，请查看HTTP中的[序列化交易](api_http#序列化交易)接口。
+如果需要调用接口生成transaction_blob、签名并提交交易，请查看HTTP中的[序列化交易](../api_http#序列化交易)接口。
 
 ### 调用接口
 

@@ -73,34 +73,34 @@ BUMO 区块链提供了websocket API 接口。您可以在 安装目录/config/b
 
 - protobuf结构
 
-```protobuf
-message Transaction {
-	enum Limit{
-		UNKNOWN = 0;
-		OPERATIONS = 1000;
-	};
-	string source_address = 1;
-	int64 nonce = 2;
-	int64  fee_limit = 3;
-	int64  gas_price =4;
-	int64 ceil_ledger_seq = 5;
-	bytes metadata = 6;
-	repeated Operation operations = 7;
-	int64 chain_id = 8;
-}
-```
+    ```protobuf
+    message Transaction {
+        enum Limit{
+            UNKNOWN = 0;
+            OPERATIONS = 1000;
+        };
+        string source_address = 1;
+        int64 nonce = 2;
+        int64  fee_limit = 3;
+        int64  gas_price =4;
+        int64 ceil_ledger_seq = 5;
+        bytes metadata = 6;
+        repeated Operation operations = 7;
+        int64 chain_id = 8;
+    }
+    ```
 
 - 关键字
 
-| 关键字          | 类型   | 描述                                                         |
-| --------------- | ------ | ------------------------------------------------------------ |
-| source_address  | string | 交易源账号，即交易发起方的账号。当这笔交易成功后，交易源账号的nonce字段会自动加1。账号中的nonce意义是本账号作为交易源执行过的交易数量。 |
-| nonce           | int64  | 其值必须等于交易源账号的当前nonce+1，这是为了防止重放攻击而设计的。如何查询一个账号的nonce可参考HTTP中的[查询账号](../api_http#查询账号)接口。若查询账号没有显示nonce值，说明账号的当前nonce是0。 |
-| fee_limit       | int64  | 本交易能接受的最大的手续费。交易首先会按照这个费用收取手续费，若交易执行成功，则会收取实际的花费，否则将收取这个字段的费用。单位是MO，1 BU ＝ 10^8 MO。 |
-| gas_price       | int64  | 用于计算每个操作的手续费，还参与交易字节费的计算。单位是MO，1 BU ＝ 10^8 MO。 |
-| ceil_ledger_seq | int64  | 可选，针对本交易的区块高度限制条件，高级功能。               |
-| operations      | array  | 操作列表。本交易的有效负载，即本交易想要做什么事情。(详见:[操作](#操作)) |
-| metadata        | string | 可选，用户自定义字段，可以不填写，备注用。                   |
+    | 关键字          | 类型   | 描述                                                         |
+    | --------------- | ------ | ------------------------------------------------------------ |
+    | source_address  | string | 交易源账号，即交易发起方的账号。当这笔交易成功后，交易源账号的nonce字段会自动加1。账号中的nonce意义是本账号作为交易源执行过的交易数量。 |
+    | nonce           | int64  | 其值必须等于交易源账号的当前nonce+1，这是为了防止重放攻击而设计的。如何查询一个账号的nonce可参考HTTP中的[查询账号](../api_http#查询账号)接口。若查询账号没有显示nonce值，说明账号的当前nonce是0。 |
+    | fee_limit       | int64  | 本交易能接受的最大的手续费。交易首先会按照这个费用收取手续费，若交易执行成功，则会收取实际的花费，否则将收取这个字段的费用。单位是MO，1 BU ＝ 10^8 MO。 |
+    | gas_price       | int64  | 用于计算每个操作的手续费，还参与交易字节费的计算。单位是MO，1 BU ＝ 10^8 MO。 |
+    | ceil_ledger_seq | int64  | 可选，针对本交易的区块高度限制条件，高级功能。               |
+    | operations      | array  | 操作列表。本交易的有效负载，即本交易想要做什么事情。(详见:[操作](#操作)) |
+    | metadata        | string | 可选，用户自定义字段，可以不填写，备注用。                   |
 
 
 
@@ -110,50 +110,50 @@ message Transaction {
 
 - protobuf结构
 
-```protobuf
-message Operation {
-	enum Type {
-		UNKNOWN = 0;
-		CREATE_ACCOUNT 			= 1;
-		ISSUE_ASSET 			= 2;
-		PAY_ASSET               = 3;
-		SET_METADATA			= 4;
-		SET_SIGNER_WEIGHT		= 5;
-		SET_THRESHOLD			= 6;
-		PAY_COIN                = 7;
-		LOG						= 8;
-		SET_PRIVILEGE			= 9;
-	};
-	Type type = 1;
-	string source_address = 2;
-	bytes metadata	= 3;
+    ```protobuf
+    message Operation {
+        enum Type {
+            UNKNOWN = 0;
+            CREATE_ACCOUNT 			= 1;
+            ISSUE_ASSET 			= 2;
+            PAY_ASSET               = 3;
+            SET_METADATA			= 4;
+            SET_SIGNER_WEIGHT		= 5;
+            SET_THRESHOLD			= 6;
+            PAY_COIN                = 7;
+            LOG						= 8;
+            SET_PRIVILEGE			= 9;
+        };
+        Type type = 1;
+        string source_address = 2;
+        bytes metadata	= 3;
 
-	OperationCreateAccount		create_account 	   = 4;
-	OperationIssueAsset			issue_asset 	   = 5;
-	OperationPayAsset			pay_asset 		   = 6;
-	OperationSetMetadata		set_metadata	   = 7;
-	OperationSetSignerWeight	set_signer_weight  = 8;
-	OperationSetThreshold		set_threshold 	   = 9;
-	OperationPayCoin			pay_coin           = 10;
-	OperationLog				log				   = 11;
-	OperationSetPrivilege		set_privilege	   = 12;
-}
-```
+        OperationCreateAccount		create_account 	   = 4;
+        OperationIssueAsset			issue_asset 	   = 5;
+        OperationPayAsset			pay_asset 		   = 6;
+        OperationSetMetadata		set_metadata	   = 7;
+        OperationSetSignerWeight	set_signer_weight  = 8;
+        OperationSetThreshold		set_threshold 	   = 9;
+        OperationPayCoin			pay_coin           = 10;
+        OperationLog				log				   = 11;
+        OperationSetPrivilege		set_privilege	   = 12;
+    }
+    ```
 
 - 关键字
 
-| 关键字         | 类型                   | 描述                                                         |
-| -------------- | ---------------------- | ------------------------------------------------------------ |
-| type           | Type                   | 操作码，不同的操作码执行不同的操作，详见[操作码](#操作码)。  |
-| source_address | string                 | 可选，操作源账户，即操作的执行方。当不填写时，默认与交易的源账户相同。 |
-| metadata       | bytes                  | 可选，用户自定义字段，可以不填写，备注用。                   |
-| create_account | OperationCreateAccount | [创建账号](#创建账号)操作                                    |
-| issue_asset    | OperationIssueAsset    | [发行资产](#发行资产)操作                                    |
-| pay_asset      | OperationPayAsset      | [转移资产](#转移资产)操作                                    |
-| set_metadata   | OperationSetMetadata   | [设置metadata](#设置metadata)操作                            |
-| pay_coin       | OperationPayCoin       | [转移BU资产](#转移bu资产)操作                                |
-| log            | OperationLog           | [记录日志](#记录日志)操作                                    |
-| set_privilege  | OperationSetPrivilege  | [设置权限](#设置权限)操作                                    |
+    | 关键字         | 类型                   | 描述                                                         |
+    | -------------- | ---------------------- | ------------------------------------------------------------ |
+    | type           | Type                   | 操作码，不同的操作码执行不同的操作，详见[操作码](#操作码)。  |
+    | source_address | string                 | 可选，操作源账户，即操作的执行方。当不填写时，默认与交易的源账户相同。 |
+    | metadata       | bytes                  | 可选，用户自定义字段，可以不填写，备注用。                   |
+    | create_account | OperationCreateAccount | [创建账号](#创建账号)操作                                    |
+    | issue_asset    | OperationIssueAsset    | [发行资产](#发行资产)操作                                    |
+    | pay_asset      | OperationPayAsset      | [转移资产](#转移资产)操作                                    |
+    | set_metadata   | OperationSetMetadata   | [设置metadata](#设置metadata)操作                            |
+    | pay_coin       | OperationPayCoin       | [转移BU资产](#转移bu资产)操作                                |
+    | log            | OperationLog           | [记录日志](#记录日志)操作                                    |
+    | set_privilege  | OperationSetPrivilege  | [设置权限](#设置权限)操作                                    |
 
 
 
@@ -236,12 +236,12 @@ message OperationCreateAccount{
 
 - 关键字
 
-| 关键字        | 类型   | 描述                                                         |
-| ------------- | ------ | ------------------------------------------------------------ |
-| dest_address  | string | 目标账号的地址。创建普通账号时，不能为空。                   |
-| init_balance  | int64  | 目标账户的初始化 BU 值，单位是MO，1 BU = 10^8 MO。           |
-| master_weight | int64  | 目标账号的 master 权重，数值范围［0, MAX(UINT32)]。          |
-| tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易，数值范围[0, MAX(INT64)]。 |
+    | 关键字        | 类型   | 描述                                                         |
+    | ------------- | ------ | ------------------------------------------------------------ |
+    | dest_address  | string | 目标账号的地址。创建普通账号时，不能为空。                   |
+    | init_balance  | int64  | 目标账户的初始化 BU 值，单位是MO，1 BU = 10^8 MO。           |
+    | master_weight | int64  | 目标账号的 master 权重，数值范围［0, MAX(UINT32)]。          |
+    | tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易，数值范围[0, MAX(INT64)]。 |
 
 - 查询
 
@@ -255,26 +255,26 @@ message OperationCreateAccount{
 
 - 关键字
 
-| 关键字        | 类型   | 描述                                               |
-| ------------- | ------ | -------------------------------------------------- |
-| payload       | string | 合约代码内容。                                     |
-| init_balance  | int64  | 目标账户的初始化 BU 值，单位是MO，1 BU = 10^8 MO。 |
-| init_input    | string | 可选，合约代码中init函数的入参。                   |
-| master_weight | int64  | 目标账号的 master 权重。                           |
-| tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易。           |
+    | 关键字        | 类型   | 描述                                               |
+    | ------------- | ------ | -------------------------------------------------- |
+    | payload       | string | 合约代码内容。                                     |
+    | init_balance  | int64  | 目标账户的初始化 BU 值，单位是MO，1 BU = 10^8 MO。 |
+    | init_input    | string | 可选，合约代码中init函数的入参。                   |
+    | master_weight | int64  | 目标账号的 master 权重。                           |
+    | tx_threshold  | int64  | 发起交易的门限，低于该值，无法发起交易。           |
 
 - 查询
   - 账户信息通过HTTP中的[查询账号](../api_http#查询账号)接口查询。
   - 通过通过HTTP中的[查询交易](../api_http#查询交易)接口查询，在`result`中`transactions`的`error_desc`字段中，结果如下：
 
-```protobuf
-[
-    {
-        "contract_address": "buQm5RazrT9QYjbTPDwMkbVqjkVqa7WinbjM", //合约账号
-        "operation_index": 0                                        //交易数组中的操作索引值，0 表示第一笔交易
-    }
-]
-```
+    ```protobuf
+    [
+        {
+            "contract_address": "buQm5RazrT9QYjbTPDwMkbVqjkVqa7WinbjM", //合约账号
+            "operation_index": 0                                        //交易数组中的操作索引值，0 表示第一笔交易
+        }
+    ]
+    ```
 
 
 
@@ -286,19 +286,19 @@ message OperationCreateAccount{
 
 - protobuf结构
 
-```protobuf
-message OperationIssueAsset{
-	string code = 1;
-	int64 amount = 2;
-}
-```
+    ```protobuf
+    message OperationIssueAsset{
+        string code = 1;
+        int64 amount = 2;
+    }
+    ```
 
 - 关键字
 
-| 关键字 | 类型   | 描述                                     |
-| ------ | ------ | ---------------------------------------- |
-| code   | string | 待发行资产的代码，长度范围[1, 64]        |
-| amount | int64  | 待发行资产的数量，数值范围(0,MAX(int64)) |
+    | 关键字 | 类型   | 描述                                     |
+    | ------ | ------ | ---------------------------------------- |
+    | code   | string | 待发行资产的代码，长度范围[1, 64]        |
+    | amount | int64  | 待发行资产的数量，数值范围(0,MAX(int64)) |
 
 
 
@@ -312,35 +312,35 @@ message OperationIssueAsset{
 
 - protobuf结构
 
-```protobuf
-message AssetKey{
-	 string issuer = 1;
-	 string code = 2;
-	 int32 type = 3;
-}
-message Asset{
-	 AssetKey	key = 1;
-	 int64		amount = 2;
-}
+    ```protobuf
+    message AssetKey{
+         string issuer = 1;
+         string code = 2;
+         int32 type = 3;
+    }
+    message Asset{
+         AssetKey	key = 1;
+         int64		amount = 2;
+    }
 
-//　转移资产操作对象
-message OperationPayAsset{
-	string dest_address = 1;
-	Asset asset = 2;
-	string input = 3;
-}
-```
+    //　转移资产操作对象
+    message OperationPayAsset{
+        string dest_address = 1;
+        Asset asset = 2;
+        string input = 3;
+    }
+    ```
 
 - 关键字
 
-| 关键字       | 类型   | 描述                                                         |
-| ------------ | ------ | ------------------------------------------------------------ |
-| dest_address | string | 目标账户地址。                                               |
-| issuer       | string | 资产发行方地址。                                             |
-| code         | string | 资产代码，长度范围[1, 64]。                                  |
-| type         | int32  | 仅允许填0。                                                  |
-| amount       | int64  | 资产数量，数值范围(0,MAX(int64))。                           |
-| input        | string | 可选，如果目标账户是合约账户，input会被传递给合约代码的main函数的参数。如果目标账户是普通账户，则该设置无效。 |
+    | 关键字       | 类型   | 描述                                                         |
+    | ------------ | ------ | ------------------------------------------------------------ |
+    | dest_address | string | 目标账户地址。                                               |
+    | issuer       | string | 资产发行方地址。                                             |
+    | code         | string | 资产代码，长度范围[1, 64]。                                  |
+    | type         | int32  | 仅允许填0。                                                  |
+    | amount       | int64  | 资产数量，数值范围(0,MAX(int64))。                           |
+    | input        | string | 可选，如果目标账户是合约账户，input会被传递给合约代码的main函数的参数。如果目标账户是普通账户，则该设置无效。 |
 
 
 
@@ -352,23 +352,23 @@ message OperationPayAsset{
 
 - protobuf结构
 
-```protobuf
-message OperationSetMetadata{
-	string	key = 1;  
-	string  value = 2;
-	int64 	version = 3;
-	bool    delete_flag = 4;
-}
-```
+    ```protobuf
+    message OperationSetMetadata{
+        string	key = 1;  
+        string  value = 2;
+        int64 	version = 3;
+        bool    delete_flag = 4;
+    }
+    ```
 
 - 关键字
 
-| 关键字      | 类型   | 描述                                                         |
-| ----------- | ------ | ------------------------------------------------------------ |
-| key         | string | metadata的关键字。长度范围(0, 1024]                          |
-| value       | string | metadata的内容。长度范围[0, 256K]                            |
-| version     | int64  | 可选，metadata版本号。默认值是0。0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法 |
-| delete_flag | bool   | 是否删除该metadata。                                         |
+    | 关键字      | 类型   | 描述                                                         |
+    | ----------- | ------ | ------------------------------------------------------------ |
+    | key         | string | metadata的关键字。长度范围(0, 1024]                          |
+    | value       | string | metadata的内容。长度范围[0, 256K]                            |
+    | version     | int64  | 可选，metadata版本号。默认值是0。0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法 |
+    | delete_flag | bool   | 是否删除该metadata。                                         |
 
 
 
@@ -380,41 +380,41 @@ message OperationSetMetadata{
 
 - protobuf结构
 
-```protobuf
-message Signer {
-	enum Limit{
-		SIGNER_NONE = 0;
-		SIGNER = 100;
-	};
-	string address = 1;
-	int64 weight = 2;
-}
-message OperationTypeThreshold{
-	Operation.Type type = 1;
-	int64 threshold = 2;
-}
+    ```protobuf
+    message Signer {
+        enum Limit{
+            SIGNER_NONE = 0;
+            SIGNER = 100;
+        };
+        string address = 1;
+        int64 weight = 2;
+    }
+    message OperationTypeThreshold{
+        Operation.Type type = 1;
+        int64 threshold = 2;
+    }
 
-//　设置权限操作对象
-message OperationSetPrivilege{
-	string master_weight = 1;
-	repeated Signer signers = 2;
-	string tx_threshold = 3;
-	repeated OperationTypeThreshold type_thresholds = 4;
-}
-```
+    //　设置权限操作对象
+    message OperationSetPrivilege{
+        string master_weight = 1;
+        repeated Signer signers = 2;
+        string tx_threshold = 3;
+        repeated OperationTypeThreshold type_thresholds = 4;
+    }
+    ```
 
 - protobuf关键字
 
-| 关键字          | 类型   | 描述                                                         |
-| --------------- | ------ | ------------------------------------------------------------ |
-| master_weight   | string | 可选，default ""，表示该账号的 master 权重。 "" ：不设置该值；"0": 设置 master 权重为 0；("0", "MAX(UINT32)"]：设置权重值为该值；其他：非法 |
-| signers         | array  | 可选，需要操作的 signer 列表，default 为空对象。空对象不设置 |
-| address         | string | 需要操作的 signer 地址，符合地址校验规则                     |
-| weight          | int64  | 可选，default 0。0 ：删除该 signer; (0, MAX(UINT32)]：设置权重值为该值，其他：非法 |
-| tx_threshold    | string | 可选，default ""，表示该账号的最低权限。""，不设置该值；"0": 设置 tx_threshold 权重为 0；("0", "MAX(INT64)"]：设置权重值为该值；其他：非法 |
-| type_thresholds | array  | 可选，不同操作需要的权力值列表，default 为空对象。空对象不设置 |
-| type            | int    | 表示某种类型的操作  (0, 100]                                 |
-| threshold       | int64  | 可选，default 0。 0 ：删除该类型操作；(0, MAX(INT64)]：设置权重值为该值；其他：非法 |
+    | 关键字          | 类型   | 描述                                                         |
+    | --------------- | ------ | ------------------------------------------------------------ |
+    | master_weight   | string | 可选，default ""，表示该账号的 master 权重。 "" ：不设置该值；"0": 设置 master 权重为 0；("0", "MAX(UINT32)"]：设置权重值为该值；其他：非法 |
+    | signers         | array  | 可选，需要操作的 signer 列表，default 为空对象。空对象不设置 |
+    | address         | string | 需要操作的 signer 地址，符合地址校验规则                     |
+    | weight          | int64  | 可选，default 0。0 ：删除该 signer; (0, MAX(UINT32)]：设置权重值为该值，其他：非法 |
+    | tx_threshold    | string | 可选，default ""，表示该账号的最低权限。""，不设置该值；"0": 设置 tx_threshold 权重为 0；("0", "MAX(INT64)"]：设置权重值为该值；其他：非法 |
+    | type_thresholds | array  | 可选，不同操作需要的权力值列表，default 为空对象。空对象不设置 |
+    | type            | int    | 表示某种类型的操作  (0, 100]                                 |
+    | threshold       | int64  | 可选，default 0。 0 ：删除该类型操作；(0, MAX(INT64)]：设置权重值为该值；其他：非法 |
 
 
 
@@ -431,21 +431,21 @@ message OperationSetPrivilege{
 
 - protobuf结构
 
-```protobuf
-message OperationPayCoin{
-	string dest_address = 1;
-	int64 amount = 2;
-	string input = 3;
-}
-```
+    ```protobuf
+    message OperationPayCoin{
+        string dest_address = 1;
+        int64 amount = 2;
+        string input = 3;
+    }
+    ```
 
 - protobuf关键字
 
-| 关键字       | 类型   | 描述                                                         |
-| ------------ | ------ | ------------------------------------------------------------ |
-| dest_address | string | 目标账户                                                     |
-| amount       | array  | 可选，需要操作的 signer 列表，default 为空对象。空对象不设置 |
-| input        | string | 可选，如果目标账户是合约账户，input会被传递给合约代码的main函数的参数。如果目标账户是普通账户，则该设置无效 |
+    | 关键字       | 类型   | 描述                                                         |
+    | ------------ | ------ | ------------------------------------------------------------ |
+    | dest_address | string | 目标账户                                                     |
+    | amount       | array  | 可选，需要操作的 signer 列表，default 为空对象。空对象不设置 |
+    | input        | string | 可选，如果目标账户是合约账户，input会被传递给合约代码的main函数的参数。如果目标账户是普通账户，则该设置无效 |
 
 
 
@@ -457,19 +457,19 @@ message OperationPayCoin{
 
 - protobuf结构
 
-```protobuf
-message OperationLog{
-	string topic = 1;
-	repeated string datas = 2;
-}
-```
+    ```protobuf
+    message OperationLog{
+        string topic = 1;
+        repeated string datas = 2;
+    }
+    ```
 
 - protobuf关键字
 
-| 关键字 | 类型   | 描述                           |
-| ------ | ------ | ------------------------------ |
-| topic  | string | 日志主题。参数长度(0,128]      |
-| datas  | array  | 日志内容。每个元素长度(0,1024] |
+    | 关键字 | 类型   | 描述                           |
+    | ------ | ------ | ------------------------------ |
+    | topic  | string | 日志主题。参数长度(0,128]      |
+    | datas  | array  | 日志内容。每个元素长度(0,1024] |
 
 
 
@@ -517,10 +517,10 @@ enum ChainMessageType {
 
 - 请求参数
 
-  | 参数      | 类型                    | 描述                   |
-  | --------- | ----------------------- | ---------------------- |
-  | api_list  | array<ChainMessageType> | 申请注册的消息类型列表 |
-  | timestamp | int64                   | 申请时间               |
+      | 参数      | 类型                    | 描述                   |
+      | --------- | ----------------------- | ---------------------- |
+      | api_list  | array<ChainMessageType> | 申请注册的消息类型列表 |
+      | timestamp | int64                   | 申请时间               |
 
 - 响应消息类型
 
