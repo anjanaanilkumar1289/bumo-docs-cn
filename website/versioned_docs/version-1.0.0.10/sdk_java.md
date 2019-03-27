@@ -1,7 +1,7 @@
 ---
 id: version-1.0.0.10-sdk_java
-title: BUMO Java SDK
-sidebar_label: Java
+title: BUMO JAVA SDK
+sidebar_label: JAVA
 original_id: sdk_java
 ---
 

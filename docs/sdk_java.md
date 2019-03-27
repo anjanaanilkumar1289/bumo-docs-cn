@@ -1,7 +1,7 @@
 ---
 id: sdk_java
-title: BUMO Java SDK
-sidebar_label: Java
+title: BUMO JAVA SDK
+sidebar_label: JAVA
 ---
 
 ## 概述
