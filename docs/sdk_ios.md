@@ -163,7 +163,7 @@ if (response.errorCode == 0) {
 
 #### 构建操作
 
-这里的操作是指在交易中做的一些动作，便于序列化交易和评估费用。操作详情请见[操作列表](#操作列表)。例如：构建发送BU操作BUSendOperation，接口调用如下：
+这里的操作是指在交易中做的一些动作，便于序列化交易和评估费用。操作详情请见[操作](#操作)。例如：构建发送BU操作BUSendOperation，接口调用如下：
 ```objc
 // 初始化变量
 NSString *sourceAddress = @"buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp";
@@ -241,6 +241,584 @@ if (submitResponse.errorCode == 0) {
     NSLog(@"error: %@", submitResponse.errorDesc);
 }
 ```
+
+
+## 交易服务
+
+交易服务主要是交易相关的接口，目前有5个接口：`buildBlob`, `evaluateFee`, `sign`, `submit`, `getInfo`。
+
+### buildBlob
+
+> **注意:** 调用**buildBlob**之前需要构建一些操作，详情见[操作](#操作)。
+
+- **接口说明**
+
+   该接口用于序列化交易，生成交易Blob串，便于网络传输
+
+- **调用方法**
+
+`TransactionBuildBlobResponse *) buildBlob : (TransactionBuildBlobRequest *) transactionBuildBlobRequest;`
+
+- **请求参数**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   sourceAddress|NSString*|必填，发起该操作的源账户地址
+   nonce|int64_t|必填，待发起的交易序列号，函数里+1，大小限制[1, max(int64)]
+   gasPrice|int64_t|必填，交易燃料单价，单位MO，1 BU = 10^8 MO，大小限制[1000, max(int64)]
+   feeLimit|int64_t|必填，交易要求的最低的手续费，单位MO，1 BU = 10^8 MO，大小限制[1, max(int64)]
+   operation|NSArray<BaseOperation *> *|必填，待提交的操作列表，不能为空
+   ceilLedgerSeq|int64_t|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
+   metadata|NSString*|选填，备注
+
+- **响应数据**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   transactionBlob|NSString*|Transaction序列化后的16进制字符串
+   hash|NSString*|交易hash
+
+- **错误码**
+
+   异常       |     错误码   |   描述   
+   -----------  | ----------- | -------- 
+   INVALID_SOURCEADDRESS_ERROR|11002|Invalid sourceAddress
+   INVALID_NONCE_ERROR|11048|Nonce must be between 1 and max(int64)
+   INVALID_DESTADDRESS_ERROR|11003|Invalid destAddress
+   INVALID_INITBALANCE_ERROR|11004|InitBalance must be between 1 and max(int64) 
+   SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR|11005|SourceAddress cannot be equal to destAddress
+   INVALID_ISSUE_AMMOUNT_ERROR|11008|AssetAmount this will be issued must be between 1 and max(int64)
+   INVALID_DATAKEY_ERROR|11011|The length of key must be between 1 and 1024
+   INVALID_DATAVALUE_ERROR|11012|The length of value must be between 0 and 256000
+   INVALID_DATAVERSION_ERROR|11013|The version must be equal to or greater than 0 
+   INVALID_MASTERWEIGHT _ERROR|11015|MasterWeight must be between 0 and max(uint32)
+   INVALID_SIGNER_ADDRESS_ERROR|11016|Invalid signer address
+   INVALID_SIGNER_WEIGHT _ERROR|11017|Signer weight must be between 0 and max(uint32)
+   INVALID_TX_THRESHOLD_ERROR|11018|TxThreshold must be between 0 and max(int64)
+   INVALID_OPERATION_TYPE_ERROR|11019|Operation type must be between 1 and 100
+   INVALID_TYPE_THRESHOLD_ERROR|11020|TypeThreshold must be between 0 and max(int64)
+   INVALID_ASSET_CODE _ERROR|11023|The length of asset code must be between 1 and 64
+   INVALID_ASSET_AMOUNT_ERROR|11024|AssetAmount must be between 0 and max(int64)
+   INVALID_BU_AMOUNT_ERROR|11026|BuAmount must be between 0 and max(int64)
+   INVALID_ISSUER_ADDRESS_ERROR|11027|Invalid issuer address
+   NO_SUCH_TOKEN_ERROR|11030|No such token
+   INVALID_TOKEN_NAME_ERROR|11031|The length of token name must be between 1 and 1024
+   INVALID_TOKEN_SYMBOL_ERROR|11032|The length of symbol must be between 1 and 1024
+   INVALID_TOKEN_DECIMALS_ERROR|11033|Decimals must be between 0 and 8
+   INVALID_TOKEN_TOTALSUPPLY_ERROR|11034|TotalSupply must be between 1 and max(int64)
+   INVALID_TOKENOWNER_ERRPR|11035|Invalid token owner
+   INVALID_CONTRACTADDRESS_ERROR|11037|Invalid contract address
+   CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR|11038|ContractAddress is not a contract account
+   INVALID_TOKEN_AMOUNT_ERROR|11039|Token amount must be between 1 and max(int64)
+   SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR|11040|SourceAddress cannot be equal to contractAddress
+   INVALID_FROMADDRESS_ERROR|11041|Invalid fromAddress
+   FROMADDRESS_EQUAL_DESTADDRESS_ERROR|11042|FromAddress cannot be equal to destAddress
+   INVALID_SPENDER_ERROR|11043|Invalid spender
+   PAYLOAD_EMPTY_ERROR|11044|Payload cannot be empty
+   INVALID_LOG_TOPIC_ERROR|11045|The length of a log topic must be between 1 and 128
+   INVALID_LOG_DATA_ERROR|11046|The length of one piece of log data must be between 1 and1024
+   INVALID_CONTRACT_TYPE_ERROR|11047|Type must be equal or bigger than 0 
+   INVALID_NONCE_ERROR|11048|Nonce must be between 1 and max(int64)
+   INVALID_ GASPRICE_ERROR|11049|GasPrice must be between 1000 and max(int64)
+   INVALID_FEELIMIT_ERROR|11050|FeeLimit must be between 1 and max(int64)
+   OPERATIONS_EMPTY_ERROR|11051|Operations cannot be empty
+   INVALID_CEILLEDGERSEQ_ERROR|11052|CeilLedgerSeq must be equal to or greater than 0
+   OPERATIONS_ONE_ERROR|11053|One of the operations cannot be resolved
+   REQUEST_NULL_ERROR|12001|Request parameter cannot be null
+   SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```objc
+// 初始化变量
+NSString* senderAddresss = @"buQfnVYgXuMo3rvCEpKA6SfRrDpaz8D8A9Ea";
+NSString* destAddress = @"buQsurH1M4rjLkfjzkxR9KXJ6jSu2r9xBNEw";
+int64_t buAmount = [Tools BU2MO : 10.9];
+int64_t gasPrice = 1000;
+int64_t feeLimit = [Tools BU2MO : 0.01];
+int64_t nonce = 1;
+
+// 构建sendBU操作
+BUSendOperation *operation = [BUSendOperation new];
+[operation setSourceAddress: senderAddresss];
+[operation setDestAddress: destAddress];
+[operation setAmount: buAmount];
+
+// 初始化请求参数
+TransactionBuildBlobRequest *buildBlobRequest = [TransactionBuildBlobRequest new];
+[buildBlobRequest setSourceAddress : senderAddresss];
+[buildBlobRequest setNonce : nonce];
+[buildBlobRequest setGasPrice : gasPrice];
+[buildBlobRequest setFeeLimit : feeLimit];
+[buildBlobRequest addOperation : operation];
+
+// 调用buildBlob接口
+TransactionService *transactionServer = [[[SDK sharedInstance] setUrl:@"http://seed1.bumotest.io:26002"] getTransactionService];
+TransactionBuildBlobResponse *buildBlobResponse = [transactionServer buildBlob : buildBlobRequest];
+if (buildBlobResponse.errorCode == 0) {
+    NSLog(@"blob: %@, hash: %@", buildBlobResponse.result.transactionBlob, buildBlobResponse.result.transactionHash);
+} else {
+    NSLog(@"error: %@", buildBlobResponse.errorDesc);
+    return;
+}
+```
+
+### evaluateFee
+
+- **接口说明**
+
+   该接口实现交易的费用评估
+
+- **调用方法**
+
+`TransactionEvaluateFeeResponse *) evaluateFee : (TransactionEvaluateFeeRequest *) transactionEvaluateFeeRequest;`
+
+- **请求参数**
+
+参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+sourceAddress|NSString*|必填，发起该操作的源账户地址
+nonce|int64_t|必填，待发起的交易序列号，大小限制[1, max(int64)]
+operation|NSArray<BaseOperation *> *|必填，待提交的操作列表，不能为空
+signtureNumber|int32_t|选填，待签名者的数量，默认是1，大小限制[1, max(int32)]
+ceilLedgerSeq|int64_t|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
+metadata|NSString*|选填，备注
+
+- **响应数据**
+
+参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+txs     |   NSArray<[TestTx](#testtx) *> *     |  评估交易集   
+
+- **错误码**
+
+异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+INVALID_SOURCEADDRESS_ERROR|11002|Invalid sourceAddress
+INVALID_NONCE_ERROR|11045|Nonce must be between 1 and max(int64)
+OPERATIONS_EMPTY_ERROR|11051|Operations cannot be empty
+OPERATIONS_ONE_ERROR|11053|One of the operations cannot be resolved
+INVALID_SIGNATURENUMBER_ERROR|11054|SignagureNumber must be between 1 and max(int32)
+REQUEST_NULL_ERROR|12001|Request parameter cannot be null
+SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```objc
+// 初始化变量
+NSString* senderAddresss = @"buQfnVYgXuMo3rvCEpKA6SfRrDpaz8D8A9Ea";
+NSString* destAddress = @"buQsurH1M4rjLkfjzkxR9KXJ6jSu2r9xBNEw";
+int64_t buAmount = [Tools BU2MO : 10.9];
+int64_t gasPrice = 1000;
+int64_t feeLimit = [Tools BU2MO : 0.01];
+int64_t nonce = 1;
+
+// 构建sendBU操作
+BUSendOperation *operation = [BUSendOperation new];
+[operation setSourceAddress: senderAddresss];
+[operation setDestAddress: destAddress];
+[operation setAmount: buAmount];
+
+// 初始化评估交易请求参数
+TransactionEvaluateFeeRequest *request = [TransactionEvaluateFeeRequest new];
+[request addOperation : buSendOperation];
+[request setSourceAddress : senderAddresss];
+[request setNonce : nonce];
+[request setSignatureNumber : 1];
+[request setMetadata : @"evaluate fees"];
+
+// 调用evaluateFee接口
+TransactionService *transactionServer = [[[SDK sharedInstance] setUrl:@"http://seed1.bumotest.io:26002"] getTransactionService];
+TransactionEvaluateFeeResponse* response = [transactionServer evaluateFee : request];
+if (response.errorCode == 0) {
+    NSLog(@"%@", [response.result yy_modelToJSONString]);
+}
+else {
+    NSLog(@"error: %@", response.errorDesc);
+}
+```
+
+### sign
+
+- **接口说明**
+
+   该接口用于实现交易的签名
+
+- **调用方法**
+
+`TransactionSignResponse *) sign : (TransactionSignRequest *) transactionSignRequest;`
+
+- **请求参数**
+
+参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+blob|NSString*|必填，待签名的交易Blob
+privateKeys|NSArray<NSString *> *|必填，私钥列表
+
+
+- **响应数据**
+
+参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+signatures|[SignatureInfo](#signatureinfo)*| 签名后的数据列表
+
+- **错误码**
+
+异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+INVALID_BLOB_ERROR|11056|Invalid blob
+PRIVATEKEY_NULL_ERROR|11057|PrivateKeys cannot be empty
+PRIVATEKEY_ONE_ERROR|11058|One of privateKeys is invalid
+REQUEST_NULL_ERROR|12001|Request parameter cannot be null
+SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```objc
+// 初始化请求参数
+NSString* issuePrivateKey = @"privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq";
+NSString* transactionBlob = @"0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704";
+TransactionSignRequest *signRequest = [TransactionSignRequest new];
+[signRequest setBlob : transactionBlob];
+[signRequest addPrivateKey : issuePrivateKey];
+
+// 调用sign接口
+TransactionService *transactionServer = [[[SDK sharedInstance] setUrl:@"http://seed1.bumotest.io:26002"] getTransactionService];
+TransactionSignResponse * signResponse = [transactionServer sign : signRequest];
+if (signResponse.errorCode == 0) {
+    NSLog(@"sign response: %@", [signResponse yy_modelToJSONString]);
+} else {
+    NSLog(@"error: %@", signResponse.errorDesc);
+    return;
+}
+```
+
+### submit
+
+- **接口说明**
+
+   该接口用于实现交易的提交。
+
+- **调用方法**
+
+`TransactionSubmitResponse *) submit : (TransactionSubmitRequest *) transactionSubmitRequest;`
+
+- **请求参数**
+
+参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+blob|NSString*|必填，交易blob
+signature|[SignatureInfo](#signatureinfo)|必填，签名列表
+
+- **响应数据**
+
+参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+hash|NSString*|交易hash
+
+- **错误码**
+
+异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+INVALID_BLOB_ERROR|11056|Invalid blob
+SIGNATURE_EMPTY_ERROR|11067|The signatures cannot be empty
+REQUEST_NULL_ERROR|12001|Request parameter cannot be null
+SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```objc
+// 初始化请求参数
+NSString* transactionBlob = @"0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704";
+SignatureInfo *signature = [SignatureInfo new];
+signature.signData = @"D2B5E3045F2C1B7D363D4F58C1858C30ABBBB0F41E4B2E18AF680553CA9C3689078E215C097086E47A4393BCA715C7A5D2C180D8750F35C6798944F79CC5000A";
+signature.publicKey = @"b0011765082a9352e04678ef38d38046dc01306edef676547456c0c23e270aaed7ffe9e31477";
+TransactionSubmitRequest *submitRequest = [TransactionSubmitRequest new];
+[submitRequest setTransactionBlob : transactionBlob];
+[submitRequest addSignature : signature];
+
+// 调用submit接口
+TransactionSubmitResponse *submitResponse = [transactionServer submit : submitRequest];
+if (submitResponse.errorCode == 0) {
+    NSLog(@"submit response: %@", [submitResponse yy_modelToJSONString]);
+} else {
+    NSLog(@"error: %@", submitResponse.errorDesc);
+}
+```
+
+### getInfo
+
+- **接口说明**
+
+   该接口用于实现根据交易hash查询交易
+
+- **调用方法**
+
+`TransactionGetInfoResponse *) getInfo : (TransactionGetInfoRequest *) transactionGetInfoRequest;`
+
+- **请求参数**
+
+参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+hash|NSString*|交易hash
+
+- **响应数据**
+
+参数      |     类型     |        描述       
+----------- | ------------ | ---------------- 
+totalCount|int64_t|返回的总交易数
+transactions|NSArray<[TransactionHistory](#transactionhistory) *> *|交易内容
+
+- **错误码**
+
+异常       |     错误码   |   描述   
+-----------  | ----------- | -------- 
+INVALID_HASH_ERROR|11055|Invalid transaction hash
+REQUEST_NULL_ERROR|12001|Request parameter cannot be null
+CONNECTNETWORK_ERROR|11007|Failed to connect to the network
+SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```objc
+// 初始化请求参数
+TransactionGetInfoRequest *request = [TransactionGetInfoRequest new];
+[request setHash: @"389d53e55929c997d22f25d3757b088e2e869403ac0f2d13712ba877762b3d45"];
+
+// 调用getInfo接口
+TransactionService *service = [[[SDK sharedInstance] setUrl: @"http://seed1.bumotest.io:26002"] getTransactionService];
+TransactionGetInfoResponse *response = [service getInfo: request];
+if (response.errorCode == 0) {
+    NSLog(@"%@", [response.result yy_modelToJSONString]);
+}
+else {
+    NSLog(@"error: %@", response.errorDesc);
+}
+```
+
+## 操作
+
+操作是指在交易在要做的事情，在构建操作之前，需要构建操作。目前操作有10种，分别是 [AccountActivateOperation](#accountactivateoperation)、[AccountSetMetadataOperation](#accountsetmetadataoperation)、 [AccountSetPrivilegeOperation](#accountsetprivilegeoperation)、 [AssetIssueOperation](#assetissueoperation)、 [AssetSendOperation](#assetsendoperation)、 [BUSendOperation](#busendoperation)、 [ContractCreateOperation](#contractcreateoperation)、 [ContractInvokeByAssetOperation](#contractinvokebyassetoperation)、 [ContractInvokeByBUOperation](#contractinvokebybuoperation)、 [LogCreateOperation](#logcreateoperation)。
+
+**BaseOperation**
+
+BaseOperation是buildBlob接口中所有操作的基类。
+
+成员变量    |     类型  |        描述                           
+------------- | -------- | ----------------------------------   
+sourceAddress |   String |  选填，操作源账户地址
+metadata      |   String |  选填，备注
+
+### AccountActivateOperation
+
+- 功能
+
+  该操作用于激活账户。AccountActivateOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit目前(2018.07.26)固定是0.01 BU。
+
+- 成员
+
+   成员变量    |     类型  |        描述                           
+   ------------- | -------- | ---------------------------------- 
+   sourceAddress |   String |  选填，操作源账户地址 
+   destAddress   |   String |  必填，目标账户地址                     
+   initBalance   |   Long   |  必填，初始化资产，单位MO，1 BU = 10^8 MO, 大小(0, Long.MAX_VALUE] 
+   metadata|String|选填，备注
+
+### AccountSetMetadataOperation
+
+- 功能
+
+  该操作用于设置账户metadata。AccountSetMetadataOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit目前(2018.07.26)固定是0.01 BU。
+
+- 成员
+
+   成员变量    |     类型   |        描述                         
+   ------------- | --------- | ------------------------------- 
+   sourceAddress |   String |  选填，操作源账户地址
+   key           |   String  |  必填，metadata的关键词，长度限制[1, 1024]
+   value         |   String  |  必填，metadata的内容，长度限制[0, 256000]
+   version       |   Long    |  选填，metadata的版本
+   deleteFlag    |   Boolean |  选填，是否删除metadata
+   metadata|String|选填，备注           
+
+### AccountSetPrivilegeOperation
+
+- 功能
+
+  该操作用于设置账户权限。AccountSetPrivilegeOperation继承于BaseOperation。
+
+- 费用
+
+  feeLimit目前(2018.07.26)固定是0.01 BU。
+
+- 成员
+
+   成员变量    |     类型   |        描述               
+   ------------- | --------- | --------------------------
+   sourceAddress |   String |  选填，操作源账户地址
+   masterWeight|String|选填，账户自身权重，大小限制[0, (Integer.MAX_VALUE * 2L + 1)]
+   signers|[Signer](#signer)[]|选填，签名者权重列表
+   txThreshold|String|选填，交易门限，大小限制[0, Long.MAX_VALUE]
+   typeThreshold|[TypeThreshold](#typethreshold)[]|选填，指定类型交易门限
+   metadata|String|选填，备注
+
+### AssetIssueOperation
+
+- 功能
+
+  该操作用于发行资产。AssetIssueOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit目前(2018.07.26)固定是50.01 BU。
+
+- 成员
+
+   成员变量    |     类型   |        描述             
+   ------------- | --------- | ------------------------
+   sourceAddress|String|选填，操作源账户地址
+   code|String|必填，资产编码，长度限制[1, 64]
+   assetAmount|Long|必填，资产发行数量，大小限制[0, Long.MAX_VALUE]
+   metadata|String|选填，备注
+
+### AssetSendOperation
+
+**注意**：若目标账户未激活，必须先调用激活账户操作。
+
+- 功能
+
+  该操作用于转移资产。AssetSendOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit目前(2018.07.26)固定是0.01 BU。
+
+- 成员
+
+   成员变量    |     类型   |        描述            
+   ------------- | --------- | ----------------------
+   sourceAddress|String|选填，操作源账户地址
+   destAddress|String|必填，目标账户地址
+   code|String|必填，资产编码，长度限制[1, 64]
+   issuer|String|必填，资产发行账户地址
+   assetAmount|Long|必填，资产数量，大小限制[0, Long.MAX_VALUE]
+   metadata|String|选填，备注
+
+### BUSendOperation
+
+**注意**：若目标账户未激活，该操作也可使目标账户激活。
+
+- 功能
+
+  该操作用于转移BU。BUSendOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit目前(2018.07.26)固定是0.01 BU。
+
+- 成员
+
+   成员变量    |     类型   |        描述          
+   ------------- | --------- | ---------------------
+   sourceAddress|String|选填，操作源账户地址
+   destAddress|String|必填，目标账户地址
+   buAmount|Long|必填，资产发行数量，大小限制[0, Long.MAX_VALUE]
+   metadata|String|选填，备注
+
+### ContractCreateOperation
+
+- 功能
+
+  该操作用于创建合约。ContractCreateOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit目前(2018.07.26)固定是10.01 BU。
+
+- 成员
+
+   成员变量    |     类型   |        描述          
+   ------------- | --------- | ---------------------
+   sourceAddress|String|选填，操作源账户地址
+   initBalance|Long|必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, Long.MAX_VALUE]
+   type|Integer|选填，合约的语种，默认是0
+   payload|String|必填，对应语种的合约代码
+   initInput|String|选填，合约代码中init方法的入参
+   metadata|String|选填，备注
+
+### ContractInvokeByAssetOperation
+
+**注意**：若合约账户不存在，必须先创建合约账户。
+
+- 功能
+
+  该操作用于转移资产并触发合约。ContractInvokeByAssetOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit要根据合约中执行交易来做添加手续费，首先发起交易手续费目前(2018.07.26)是0.01BU，然后合约中的交易也需要交易发起者添加相应交易的手续费。
+
+- 成员
+
+   成员变量    |     类型   |        描述          
+   ------------- | --------- | ---------------------
+   sourceAddress|String|选填，操作源账户地址
+   contractAddress|String|必填，合约账户地址
+   code|String|选填，资产编码，长度限制[0, 64];当为空时，仅触发合约;
+   issuer|String|选填，资产发行账户地址，当null时，仅触发合约
+   assetAmount|Long|选填，资产数量，大小限制[0, Long.MAX_VALUE]，当是0时，仅触发合约
+   input|String|选填，待触发的合约的main()入参
+   metadata|String|选填，备注
+
+### ContractInvokeByBUOperation
+
+**注意**：若目标账户非合约账户且未激活，该操作也可使目标账户激活。
+
+- 功能
+
+  该操作用于转移BU并触发合约。ContractInvokeByBUOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit要根据合约中执行交易来做添加手续费，首先发起交易手续费目前(2018.07.26)是0.01BU，然后合约中的交易也需要交易发起者添加相应交易的手续费。
+
+- 成员
+
+   成员变量    |     类型   |        描述          
+   ------------- | --------- | ---------------------
+   sourceAddress|String|选填，操作源账户地址
+   contractAddress|String|必填，合约账户地址
+   buAmount|Long|选填，资产发行数量，大小限制[0, Long.MAX_VALUE]，当0时仅触发合约
+   input|String|选填，待触发的合约的main()入参
+   metadata|String|选填，备注
+
+### LogCreateOperation
+
+- 功能
+
+  该操作用于记录日志。LogCreateOperation继承于BaseOperation。
+
+- 费用
+
+  FeeLimit目前(2018.07.26)固定是0.01 BU。
+
+- 成员
+
+   成员变量    |     类型   |        描述          
+   ------------- | --------- | ---------------------
+   sourceAddress|String|选填，操作源账户地址
+   topic|String|必填，日志主题，长度限制[1, 128]
+   datas|List<String>|必填，日志内容，每个字符串长度限制[1, 1024]
+   metadata|String|选填，备注
+
 
 ## 账户服务
 
@@ -860,489 +1438,6 @@ else {
 }
 ```
 
-## 交易服务
-
-交易服务主要是交易相关的接口，目前有5个接口：buildBlob, evaluateFee, sign, submit, getInfo。
-
-其中调用buildBlob之前需要构建一些操作，目前操作有10种，分别是`AccountActivateOperation`、`AccountSetMetadataOperation`、 `AccountSetPrivilegeOperation`、`AssetIssueOperation`、`AssetSendOperation`、`BUSendOperation`、`ContractCreateOperation`、`ContractInvokeByAssetOperation`、`ContractInvokeByBUOperation`、`LogCreateOperation`
-
-### 操作说明
-
-- **BaseOperation**
-
-成员变量    |     类型  |        描述                           
-------------- | -------- | ----------------------------------   
-sourceAddress |   NSString* |  选填，操作源账户地址
-metadata      |   NSString* |  选填，备注
-
-- **AccountActivateOperation**
-
-继承于BaseOperation，feeLimit目前(2018.07.26)固定是0.01 BU
-
-成员变量    |     类型  |        描述                           
-------------- | -------- | ---------------------------------- 
-sourceAddress |   NSString* |  选填，操作源账户地址 
-destAddress   |   NSString* |  必填，目标账户地址                     
-initBalance   |   int64_t   |  必填，初始化资产，单位MO，1 BU = 10^8 MO, 大小(0, max(int64)] 
-metadata|NSString*|选填，备注
-
-- **AccountSetMetadataOperation**
-
-继承于BaseOperation，feeLimit目前(2018.07.26)固定是0.01 BU
-
-成员变量    |     类型   |        描述                         
-------------- | --------- | ------------------------------- 
-sourceAddress |   NSString* |  选填，操作源账户地址
-key           |   NSString*  |  必填，metadata的关键词，长度限制[1, 1024]
-value         |   NSString*  |  必填，metadata的内容，长度限制[0, 256000]
-version       |   int64_t    |  选填，metadata的版本
-deleteFlag    |   BOOL |  选填，是否删除metadata
-metadata|NSString*|选填，备注           
-
-- **AccountSetPrivilegeOperation**
-
-继承于BaseOperation，feeLimit目前(2018.07.26)固定是0.01 BU
-
-成员变量    |     类型   |        描述               
-------------- | --------- | --------------------------
-sourceAddress |   NSString* |  选填，操作源账户地址
-masterWeight|NSString*|选填，账户自身权重，大小限制[0, max(uint32)]
-signers|NSArray<[Signer](#signer) *> *|选填，签名者权重列表
-txThreshold|NSString*|选填，交易门限，大小限制[0, max(int64)]
-typeThreshold|NSArray<[TypeThreshold](#typethreshold) *> *|选填，指定类型交易门限
-metadata|NSString*|选填，备注
-
-- **AssetIssueOperation**
-
-继承于BaseOperation，feeLimit目前(2018.07.26)固定是50.01 BU
-
-成员变量    |     类型   |        描述             
-------------- | --------- | ------------------------
-sourceAddress|NSString*|选填，操作源账户地址
-code|NSString*|必填，资产编码，长度限制[1, 64]
-assetAmount|int64_t|必填，资产发行数量，大小限制(0, max(int64)]
-metadata|NSString*|选填，备注
-
-- **AssetSendOperation**
-
-继承于BaseOperation，feeLimit目前(2018.07.26)固定是0.01 BU
-
-成员变量    |     类型   |        描述            
-------------- | --------- | ----------------------
-sourceAddress|NSString*|选填，操作源账户地址
-destAddress|NSString*|必填，目标账户地址
-code|NSString*|必填，资产编码，长度限制[1, 64]
-issuer|NSString*|必填，资产发行账户地址
-assetAmount|int64_t|必填，资产数量，大小限制[0, max(int64)]
-metadata|NSString*|选填，备注
-
-- **BUSendOperation**
-
-继承于BaseOperation，feeLimit目前(2018.07.26)固定是0.01 BU
-
-成员变量    |     类型   |        描述          
-------------- | --------- | ---------------------
-sourceAddress|NSString*|选填，操作源账户地址
-destAddress|NSString*|必填，目标账户地址
-buAmount|int64_t|必填，资产发行数量，大小限制[0, max(int64)]
-metadata|NSString*|选填，备注
-
-- **ContractCreateOperation**
-
-继承于BaseOperation，feeLimit目前(2018.07.26)固定是10.01 BU
-
-成员变量    |     类型   |        描述          
-------------- | --------- | ---------------------
-sourceAddress|NSString*|选填，操作源账户地址
-initBalance|int64_t|必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, max(int64)]
-type|int32_t|选填，合约的语种，默认是0
-payload|NSString*|必填，对应语种的合约代码
-initInput|NSString*|选填，合约代码中init方法的入参
-metadata|NSString*|选填，备注
-
-- **ContractInvokeByAssetOperation**
-
-继承于BaseOperation，feeLimit要根据合约中执行交易来做添加手续费，首先发起交易手续费目前(2018.07.26)是0.01BU，然后合约中的交易也需要交易发起者添加相应交易的手续费
-
-成员变量    |     类型   |        描述          
-------------- | --------- | ---------------------
-sourceAddress|NSString*|选填，操作源账户地址
-contractAddress|NSString*|必填，合约账户地址
-code|NSString*|选填，资产编码，长度限制[0, 1024];当为空时，仅触发合约;
-issuer|NSString*|选填，资产发行账户地址，当null时，仅触发合约
-assetAmount|int64_t|选填，资产数量，大小限制[0, max(int64)]，当是0时，仅触发合约
-input|NSString*|选填，待触发的合约的main()入参
-metadata|NSString*|选填，备注
-
-- **ContractInvokeByBUOperation**
-
-继承于BaseOperation，feeLimit要根据合约中执行交易来做添加手续费，首先发起交易手续费目前(2018.07.26)是0.01BU，然后合约中的交易也需要交易发起者添加相应交易的手续费
-
-成员变量    |     类型   |        描述          
-------------- | --------- | ---------------------
-sourceAddress|NSString*|选填，操作源账户地址
-contractAddress|NSString*|必填，合约账户地址
-buAmount|int64_t|选填，资产发行数量，大小限制[0, max(int64)]，当0时仅触发合约
-input|NSString*|选填，待触发的合约的main()入参
-metadata|NSString*|选填，备注
-
-- **LogCreateOperation**
-
-继承于BaseOperation，feeLimit目前(2018.07.26)固定是0.01 BU
-
-成员变量    |     类型   |        描述          
-------------- | --------- | ---------------------
-sourceAddress|NSString*|选填，操作源账户地址
-topic|NSString*|必填，日志主题，长度限制[1, 128]
-datas|List<NSString*>|必填，日志内容，每个字符串长度限制[1, 1024]
-metadata|NSString*|选填，备注
-
-### buildBlob
-
-- **接口说明**
-
-   该接口用于序列化交易，生成交易Blob串，便于网络传输
-
-- **调用方法**
-
-`TransactionBuildBlobResponse *) buildBlob : (TransactionBuildBlobRequest *) transactionBuildBlobRequest;`
-
-- **请求参数**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   sourceAddress|NSString*|必填，发起该操作的源账户地址
-   nonce|int64_t|必填，待发起的交易序列号，函数里+1，大小限制[1, max(int64)]
-   gasPrice|int64_t|必填，交易燃料单价，单位MO，1 BU = 10^8 MO，大小限制[1000, max(int64)]
-   feeLimit|int64_t|必填，交易要求的最低的手续费，单位MO，1 BU = 10^8 MO，大小限制[1, max(int64)]
-   operation|NSArray<BaseOperation *> *|必填，待提交的操作列表，不能为空
-   ceilLedgerSeq|int64_t|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
-   metadata|NSString*|选填，备注
-
-- **响应数据**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   transactionBlob|NSString*|Transaction序列化后的16进制字符串
-   hash|NSString*|交易hash
-
-- **错误码**
-
-   异常       |     错误码   |   描述   
-   -----------  | ----------- | -------- 
-   INVALID_SOURCEADDRESS_ERROR|11002|Invalid sourceAddress
-   INVALID_NONCE_ERROR|11048|Nonce must be between 1 and max(int64)
-   INVALID_DESTADDRESS_ERROR|11003|Invalid destAddress
-   INVALID_INITBALANCE_ERROR|11004|InitBalance must be between 1 and max(int64) 
-   SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR|11005|SourceAddress cannot be equal to destAddress
-   INVALID_ISSUE_AMMOUNT_ERROR|11008|AssetAmount this will be issued must be between 1 and max(int64)
-   INVALID_DATAKEY_ERROR|11011|The length of key must be between 1 and 1024
-   INVALID_DATAVALUE_ERROR|11012|The length of value must be between 0 and 256000
-   INVALID_DATAVERSION_ERROR|11013|The version must be equal to or greater than 0 
-   INVALID_MASTERWEIGHT _ERROR|11015|MasterWeight must be between 0 and max(uint32)
-   INVALID_SIGNER_ADDRESS_ERROR|11016|Invalid signer address
-   INVALID_SIGNER_WEIGHT _ERROR|11017|Signer weight must be between 0 and max(uint32)
-   INVALID_TX_THRESHOLD_ERROR|11018|TxThreshold must be between 0 and max(int64)
-   INVALID_OPERATION_TYPE_ERROR|11019|Operation type must be between 1 and 100
-   INVALID_TYPE_THRESHOLD_ERROR|11020|TypeThreshold must be between 0 and max(int64)
-   INVALID_ASSET_CODE _ERROR|11023|The length of asset code must be between 1 and 64
-   INVALID_ASSET_AMOUNT_ERROR|11024|AssetAmount must be between 0 and max(int64)
-   INVALID_BU_AMOUNT_ERROR|11026|BuAmount must be between 0 and max(int64)
-   INVALID_ISSUER_ADDRESS_ERROR|11027|Invalid issuer address
-   NO_SUCH_TOKEN_ERROR|11030|No such token
-   INVALID_TOKEN_NAME_ERROR|11031|The length of token name must be between 1 and 1024
-   INVALID_TOKEN_SYMBOL_ERROR|11032|The length of symbol must be between 1 and 1024
-   INVALID_TOKEN_DECIMALS_ERROR|11033|Decimals must be between 0 and 8
-   INVALID_TOKEN_TOTALSUPPLY_ERROR|11034|TotalSupply must be between 1 and max(int64)
-   INVALID_TOKENOWNER_ERRPR|11035|Invalid token owner
-   INVALID_CONTRACTADDRESS_ERROR|11037|Invalid contract address
-   CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR|11038|ContractAddress is not a contract account
-   INVALID_TOKEN_AMOUNT_ERROR|11039|Token amount must be between 1 and max(int64)
-   SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR|11040|SourceAddress cannot be equal to contractAddress
-   INVALID_FROMADDRESS_ERROR|11041|Invalid fromAddress
-   FROMADDRESS_EQUAL_DESTADDRESS_ERROR|11042|FromAddress cannot be equal to destAddress
-   INVALID_SPENDER_ERROR|11043|Invalid spender
-   PAYLOAD_EMPTY_ERROR|11044|Payload cannot be empty
-   INVALID_LOG_TOPIC_ERROR|11045|The length of a log topic must be between 1 and 128
-   INVALID_LOG_DATA_ERROR|11046|The length of one piece of log data must be between 1 and1024
-   INVALID_CONTRACT_TYPE_ERROR|11047|Type must be equal or bigger than 0 
-   INVALID_NONCE_ERROR|11048|Nonce must be between 1 and max(int64)
-   INVALID_ GASPRICE_ERROR|11049|GasPrice must be between 1000 and max(int64)
-   INVALID_FEELIMIT_ERROR|11050|FeeLimit must be between 1 and max(int64)
-   OPERATIONS_EMPTY_ERROR|11051|Operations cannot be empty
-   INVALID_CEILLEDGERSEQ_ERROR|11052|CeilLedgerSeq must be equal to or greater than 0
-   OPERATIONS_ONE_ERROR|11053|One of the operations cannot be resolved
-   REQUEST_NULL_ERROR|12001|Request parameter cannot be null
-   SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```objc
-// 初始化变量
-NSString* senderAddresss = @"buQfnVYgXuMo3rvCEpKA6SfRrDpaz8D8A9Ea";
-NSString* destAddress = @"buQsurH1M4rjLkfjzkxR9KXJ6jSu2r9xBNEw";
-int64_t buAmount = [Tools BU2MO : 10.9];
-int64_t gasPrice = 1000;
-int64_t feeLimit = [Tools BU2MO : 0.01];
-int64_t nonce = 1;
-
-// 构建sendBU操作
-BUSendOperation *operation = [BUSendOperation new];
-[operation setSourceAddress: senderAddresss];
-[operation setDestAddress: destAddress];
-[operation setAmount: buAmount];
-
-// 初始化请求参数
-TransactionBuildBlobRequest *buildBlobRequest = [TransactionBuildBlobRequest new];
-[buildBlobRequest setSourceAddress : senderAddresss];
-[buildBlobRequest setNonce : nonce];
-[buildBlobRequest setGasPrice : gasPrice];
-[buildBlobRequest setFeeLimit : feeLimit];
-[buildBlobRequest addOperation : operation];
-
-// 调用buildBlob接口
-TransactionService *transactionServer = [[[SDK sharedInstance] setUrl:@"http://seed1.bumotest.io:26002"] getTransactionService];
-TransactionBuildBlobResponse *buildBlobResponse = [transactionServer buildBlob : buildBlobRequest];
-if (buildBlobResponse.errorCode == 0) {
-    NSLog(@"blob: %@, hash: %@", buildBlobResponse.result.transactionBlob, buildBlobResponse.result.transactionHash);
-} else {
-    NSLog(@"error: %@", buildBlobResponse.errorDesc);
-    return;
-}
-```
-
-### evaluateFee
-
-- **接口说明**
-
-   该接口实现交易的费用评估
-
-- **调用方法**
-
-`TransactionEvaluateFeeResponse *) evaluateFee : (TransactionEvaluateFeeRequest *) transactionEvaluateFeeRequest;`
-
-- **请求参数**
-
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-sourceAddress|NSString*|必填，发起该操作的源账户地址
-nonce|int64_t|必填，待发起的交易序列号，大小限制[1, max(int64)]
-operation|NSArray<BaseOperation *> *|必填，待提交的操作列表，不能为空
-signtureNumber|int32_t|选填，待签名者的数量，默认是1，大小限制[1, max(int32)]
-ceilLedgerSeq|int64_t|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
-metadata|NSString*|选填，备注
-
-- **响应数据**
-
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-txs     |   NSArray<[TestTx](#testtx) *> *     |  评估交易集   
-
-- **错误码**
-
-异常       |     错误码   |   描述   
------------  | ----------- | -------- 
-INVALID_SOURCEADDRESS_ERROR|11002|Invalid sourceAddress
-INVALID_NONCE_ERROR|11045|Nonce must be between 1 and max(int64)
-OPERATIONS_EMPTY_ERROR|11051|Operations cannot be empty
-OPERATIONS_ONE_ERROR|11053|One of the operations cannot be resolved
-INVALID_SIGNATURENUMBER_ERROR|11054|SignagureNumber must be between 1 and max(int32)
-REQUEST_NULL_ERROR|12001|Request parameter cannot be null
-SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```objc
-// 初始化变量
-NSString* senderAddresss = @"buQfnVYgXuMo3rvCEpKA6SfRrDpaz8D8A9Ea";
-NSString* destAddress = @"buQsurH1M4rjLkfjzkxR9KXJ6jSu2r9xBNEw";
-int64_t buAmount = [Tools BU2MO : 10.9];
-int64_t gasPrice = 1000;
-int64_t feeLimit = [Tools BU2MO : 0.01];
-int64_t nonce = 1;
-
-// 构建sendBU操作
-BUSendOperation *operation = [BUSendOperation new];
-[operation setSourceAddress: senderAddresss];
-[operation setDestAddress: destAddress];
-[operation setAmount: buAmount];
-
-// 初始化评估交易请求参数
-TransactionEvaluateFeeRequest *request = [TransactionEvaluateFeeRequest new];
-[request addOperation : buSendOperation];
-[request setSourceAddress : senderAddresss];
-[request setNonce : nonce];
-[request setSignatureNumber : 1];
-[request setMetadata : @"evaluate fees"];
-
-// 调用evaluateFee接口
-TransactionService *transactionServer = [[[SDK sharedInstance] setUrl:@"http://seed1.bumotest.io:26002"] getTransactionService];
-TransactionEvaluateFeeResponse* response = [transactionServer evaluateFee : request];
-if (response.errorCode == 0) {
-    NSLog(@"%@", [response.result yy_modelToJSONString]);
-}
-else {
-    NSLog(@"error: %@", response.errorDesc);
-}
-```
-
-### sign
-
-- **接口说明**
-
-   该接口用于实现交易的签名
-
-- **调用方法**
-
-`TransactionSignResponse *) sign : (TransactionSignRequest *) transactionSignRequest;`
-
-- **请求参数**
-
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-blob|NSString*|必填，待签名的交易Blob
-privateKeys|NSArray<NSString *> *|必填，私钥列表
-
-
-- **响应数据**
-
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-signatures|[SignatureInfo](#signatureinfo)*| 签名后的数据列表
-
-- **错误码**
-
-异常       |     错误码   |   描述   
------------  | ----------- | -------- 
-INVALID_BLOB_ERROR|11056|Invalid blob
-PRIVATEKEY_NULL_ERROR|11057|PrivateKeys cannot be empty
-PRIVATEKEY_ONE_ERROR|11058|One of privateKeys is invalid
-REQUEST_NULL_ERROR|12001|Request parameter cannot be null
-SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```objc
-// 初始化请求参数
-NSString* issuePrivateKey = @"privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq";
-NSString* transactionBlob = @"0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704";
-TransactionSignRequest *signRequest = [TransactionSignRequest new];
-[signRequest setBlob : transactionBlob];
-[signRequest addPrivateKey : issuePrivateKey];
-
-// 调用sign接口
-TransactionService *transactionServer = [[[SDK sharedInstance] setUrl:@"http://seed1.bumotest.io:26002"] getTransactionService];
-TransactionSignResponse * signResponse = [transactionServer sign : signRequest];
-if (signResponse.errorCode == 0) {
-    NSLog(@"sign response: %@", [signResponse yy_modelToJSONString]);
-} else {
-    NSLog(@"error: %@", signResponse.errorDesc);
-    return;
-}
-```
-
-### submit
-
-- **接口说明**
-
-   该接口用于实现交易的提交。
-
-- **调用方法**
-
-`TransactionSubmitResponse *) submit : (TransactionSubmitRequest *) transactionSubmitRequest;`
-
-- **请求参数**
-
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-blob|NSString*|必填，交易blob
-signature|[SignatureInfo](#signatureinfo)|必填，签名列表
-
-- **响应数据**
-
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-hash|NSString*|交易hash
-
-- **错误码**
-
-异常       |     错误码   |   描述   
------------  | ----------- | -------- 
-INVALID_BLOB_ERROR|11056|Invalid blob
-SIGNATURE_EMPTY_ERROR|11067|The signatures cannot be empty
-REQUEST_NULL_ERROR|12001|Request parameter cannot be null
-SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```objc
-// 初始化请求参数
-NSString* transactionBlob = @"0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704";
-SignatureInfo *signature = [SignatureInfo new];
-signature.signData = @"D2B5E3045F2C1B7D363D4F58C1858C30ABBBB0F41E4B2E18AF680553CA9C3689078E215C097086E47A4393BCA715C7A5D2C180D8750F35C6798944F79CC5000A";
-signature.publicKey = @"b0011765082a9352e04678ef38d38046dc01306edef676547456c0c23e270aaed7ffe9e31477";
-TransactionSubmitRequest *submitRequest = [TransactionSubmitRequest new];
-[submitRequest setTransactionBlob : transactionBlob];
-[submitRequest addSignature : signature];
-
-// 调用submit接口
-TransactionSubmitResponse *submitResponse = [transactionServer submit : submitRequest];
-if (submitResponse.errorCode == 0) {
-    NSLog(@"submit response: %@", [submitResponse yy_modelToJSONString]);
-} else {
-    NSLog(@"error: %@", submitResponse.errorDesc);
-}
-```
-
-### getInfo
-
-- **接口说明**
-
-   该接口用于实现根据交易hash查询交易
-
-- **调用方法**
-
-`TransactionGetInfoResponse *) getInfo : (TransactionGetInfoRequest *) transactionGetInfoRequest;`
-
-- **请求参数**
-
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-hash|NSString*|交易hash
-
-- **响应数据**
-
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-totalCount|int64_t|返回的总交易数
-transactions|NSArray<[TransactionHistory](#transactionhistory) *> *|交易内容
-
-- **错误码**
-
-异常       |     错误码   |   描述   
------------  | ----------- | -------- 
-INVALID_HASH_ERROR|11055|Invalid transaction hash
-REQUEST_NULL_ERROR|12001|Request parameter cannot be null
-CONNECTNETWORK_ERROR|11007|Failed to connect to the network
-SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```objc
-// 初始化请求参数
-TransactionGetInfoRequest *request = [TransactionGetInfoRequest new];
-[request setHash: @"389d53e55929c997d22f25d3757b088e2e869403ac0f2d13712ba877762b3d45"];
-
-// 调用getInfo接口
-TransactionService *service = [[[SDK sharedInstance] setUrl: @"http://seed1.bumotest.io:26002"] getTransactionService];
-TransactionGetInfoResponse *response = [service getInfo: request];
-if (response.errorCode == 0) {
-    NSLog(@"%@", [response.result yy_modelToJSONString]);
-}
-else {
-    NSLog(@"error: %@", response.errorDesc);
-}
-```
 
 ## 区块服务
 

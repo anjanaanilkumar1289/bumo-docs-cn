@@ -111,7 +111,7 @@ sdk.account.getNonce(address).then(info => {
 
 #### 构建操作
 
-这里的操作是指在交易中做的一些动作，便于序列化交易和评估费用。操作详情请见[操作列表](#操作列表)。例如，构建发送BU操作(`BUSendOperation`)，接口调用如下：
+这里的操作是指在交易中做的一些动作，便于序列化交易和评估费用。操作详情请见[操作](#操作)。例如，构建发送BU操作(`BUSendOperation`)，接口调用如下：
 ```js
 const destAddress = 'buQWESXjdgXSFFajEZfkwi5H4fuAyTGgzkje';
 
@@ -161,6 +161,664 @@ sdk.transaction.submit({
       console.log(data);
 });
 ```
+
+## 交易服务
+
+交易服务提供交易相关的接口，目前有5个接口：`buildBlob`、 `evaluateFee`、 `sign`、 `submit`、 `getInfo`。
+
+### buildBlob
+
+> **注意:** 调用**buildBlob**之前需要构建一些操作，详情见[操作](#操作)。
+
+- **接口说明**
+
+   该接口用于序列化交易，生成交易Blob串，便于网络传输
+
+- **调用方法**
+
+`sdk.transaction.buildBlob(args);`
+
+- **请求参数**
+
+   args 为 Object 类型，其中包含如下参数：
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   sourceAddress|String|必填，发起该操作的源账户地址
+   nonce|String|必填，待发起的交易序列号，函数里+1，大小限制[1, max(int64)]，不能以0开头
+   gasPrice|String|必填，交易燃料单价，单位MO，1 BU = 10^8 MO，大小限制[1000, max(int64)]，不能以0开头
+   feeLimit|String|必填，交易要求的最低的手续费，单位MO，1 BU = 10^8 MO，大小限制[1, max(int64)]，不能以0开头
+   operation|BaseOperation[]|必填，待提交的操作列表，不能为空
+   ceilLedgerSeq|String|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制，不能以0开头
+   metadata|String|选填，备注
+
+- **响应数据**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   transactionBlob|String|Transaction序列化后的16进制字符串
+   hash|String|交易hash
+
+- **错误码**
+
+   异常       |     错误码   |   描述   
+   -----------  | ----------- | -------- 
+   INVALID_SOURCEADDRESS_ERROR|11002|Invalid sourceAddress
+   INVALID_NONCE_ERROR|11048|Nonce must be between 1 and max(int64)
+   INVALID_NONCE_ERROR|11048|Nonce must be between 1 and max(int64)
+   INVALID_ GASPRICE_ERROR|11049|GasPrice must be between 1000 and max(int64)
+   INVALID_FEELIMIT_ERROR|11050|FeeLimit must be between 1 and max(int64)
+   OPERATIONS_EMPTY_ERROR|11051|Operations cannot be empty
+   INVALID_CEILLEDGERSEQ_ERROR|11052|CeilLedgerSeq must be equal to or greater than 0
+   OPERATIONS_ONE_ERROR|11053|One of the operations cannot be resolved
+   SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```js
+const args = {
+ sourceAddress,
+ gasPrice,
+ feeLimit,
+ nonce,
+ operations: [ sendBuOperation ],
+ metadata: '6f68206d79207478',
+};
+const blobInfo = sdk.transaction.buildBlob(args);
+```
+
+### evaluateFee
+
+- **接口说明**
+
+   该接口实现交易的费用评估。
+
+- **调用方法**
+
+`sdk.transaction.evaluateFee(args)`
+
+- **请求参数**
+
+   args 为 Object 类型，其中包含如下参数：
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   sourceAddress|String|必填，发起该操作的源账户地址
+   nonce|String|必填，待发起的交易序列号，大小限制[1, max(int64)]
+   operation|Array|必填，待提交的操作列表，不能为空
+   signtureNumber|Integer|选填，待签名者的数量，默认是1，大小限制[1, max(int32)]
+   ceilLedgerSeq|String|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
+   metadata|String|选填，备注
+
+- **响应数据**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+    feeLimit | String | 交易费用 
+   gasPrice | String | 打包费用 
+
+- **错误码**
+
+   异常       |     错误码   |   描述   
+   -----------  | ----------- | -------- 
+   INVALID_SOURCEADDRESS_ERROR|11002|Invalid sourceAddress
+    INVALID_ARGUMENTS           | 15016      | Arguments of the function are invalid 
+   SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```js
+const args = {
+       sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
+       nonce: '101',
+       operations: [sendBuOperation],
+       signtureNumber: '1',
+       metadata: '54657374206576616c756174696f6e20666565',
+};
+
+sdk.transaction.evaluateFee(args).then(data => {
+ console.log(data);
+});
+
+```
+
+### sign
+
+- **接口说明**
+
+   该接口用于实现交易的签名
+
+- **调用方法**
+
+```js
+sdk.transaction.sign(args);
+```
+
+- **请求参数**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   blob|String|必填，待签名的交易Blob
+   privateKeys|Array|必填，私钥列表
+
+
+- **响应数据**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   signatures|Array<[Signature](#signature)>|签名后的数据列表
+
+- **错误码**
+
+   异常       |     错误码   |   描述   
+   -----------  | ----------- | -------- 
+   INVALID_BLOB_ERROR|11056|Invalid blob
+   PRIVATEKEY_NULL_ERROR|11057|PrivateKeys cannot be empty
+   PRIVATEKEY_ONE_ERROR|11058|One of privateKeys is invalid
+   SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```js
+const signatureInfo = sdk.transaction.sign({
+       privateKeys: [ 'privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq' ],
+       blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704'
+});
+
+console.log(signatureInfo);
+```
+
+### submit
+
+- **接口说明**
+
+   该接口用于实现交易的提交。
+
+- **调用方法**
+
+`sdk.transaction.submit(args);`
+
+- **请求参数**
+
+   参数 args 为 Object 类型, 包含如下参数：
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   blob|String|必填，交易blob
+   signature|Array<[Signature](#signature)>|必填，签名列表
+
+- **响应数据**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   hash|String|交易hash
+
+- **错误码**
+
+   异常       |     错误码   |   描述   
+   -----------  | ----------- | -------- 
+   INVALID_BLOB_ERROR|11056|Invalid blob
+    INVALID_SIGNATURE_ERROR | 15027      | Invalid signature 
+   SYSTEM_ERROR|20000|System error
+
+- **示例**
+
+```js
+const args = {
+  blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704',
+  signature: {
+     signData: 'D2B5E3045F2C1B7D363D4F58C1858C30ABBBB0F41E4B2E18AF680553CA9C3689078E215C097086E47A4393BCA715C7A5D2C180D8750F35C6798944F79CC5000A',
+     publicKey: 'b0011765082a9352e04678ef38d38046dc01306edef676547456c0c23e270aaed7ffe9e31477'
+  },
+
+let transactionInfo = yield sdk.transaction.submit(args);
+```
+
+### getInfo
+
+- **接口说明**
+
+   该接口用于实现根据交易hash查询交易。
+
+- **调用方法**
+
+`sdk.transaction.getInfo(hash);`
+
+- **请求参数**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   hash|String|交易hash
+
+- **响应数据**
+
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   totalCount|String|返回的总交易数
+   transactions|Array<[TransactionHistory](#transactionhistory)>|交易内容
+
+- **错误码**
+
+   异常       |     **错误码**   
+   -----------  | ----------- 
+   INVALID_HASH_ERROR|11055
+   REQUEST_NULL_ERROR|12001
+   CONNECTNETWORK_ERROR|11007
+   SYSTEM_ERROR|20000
+
+- **示例**
+
+```js
+const hash = '1653f54fbba1134f7e35acee49592a7c29384da10f2f629c9a214f6e54747705';
+sdk.transaction.getInfo(hash).then(data => {
+ console.log(data);
+})
+```
+
+## 操作
+
+操作是指在交易在要做的事情，在构建操作之前，需要构建操作。目前操作有10种，分别是: [激活账户](#激活账户)、[设置账户metadata](#设置账户metadata)、[设置账户权限](#设置账户权限)、[发送BU](#发送bu)、[发行资产](#发行资产)、[转移资产](#转移资产)、[创建合约](#创建合约)、[发送资产触发合约](#发送资产触发合约)、[发送BU触发合约](#发送bu触发合约)、[日志](#日志)。
+
+### 激活账户
+
+- **费用**
+
+  feeLimit目前(2018.07.26)是0.01 BU。
+
+- **调用方法**
+
+`sdk.operation.accountActivateOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 参数          | 类型   | 描述                                                         |
+  | ------------- | ------ | ------------------------------------------------------------ |
+  | sourceAddress | String | 选填，合约触发账户地址                                       |
+  | destAddress   | String | 必填，目标账户地址                                           |
+  | initBalance   | String | 必填，初始化资产，其值只能是包含数字的字符 串且不能以0开头，大小[1, max(int64)]，单位是 MO，1 BU = 10 ^ 8 MO |
+  | metadata      | String | 选填，备注                                                   |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述               |
+  | --------- | ----------------------- | ------------------ |
+  | operation | [Operation](#operation) | 激活账户的操作对象 |
+
+- **错误码**
+
+  | 异常                                  | **错误码** | 描述                                         |
+  | ------------------------------------- | ---------- | -------------------------------------------- |
+  | INVALID_SOURCEADDRESS_ERROR           | 11002      | Invalid sourceAddress                        |
+  | INVALID_DESTADDRESS_ERROR             | 11003      | Invalid destAddress                          |
+  | INVALID_INITBALANCE_ERROR             | 11004      | InitBalance must be between 1 and max(int64) |
+  | SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005      | SourceAddress cannot be equal to destAddress |
+  | INVALID_METADATA_ERROR                | 15028      | Invalid metadata                             |
+  | SYSTEM_ERROR                          | 20000      | System error                                 |
+
+###　设置账户metadata
+
+- **费用**
+
+  feeLimit目前(2018.07.26)是0.01 BU。
+
+- **调用方法**
+
+`sdk.operation.accountSetMetadataOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 参数       | 类型    | 描述                                  |
+  | ---------- | ------- | ------------------------------------- |
+  | key        | String  | 必填，metadata的关键词，长度[1, 1024] |
+  | value      | String  | 选填，metadata的内容，长度[0, 256K]   |
+  | version    | String  | 选填，metadata的版本                  |
+  | deleteFlag | Boolean | 选填，是否删除metadata                |
+  | metadata   | String  | 选填，备注                            |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述                       |
+  | --------- | ----------------------- | -------------------------- |
+  | operation | [Operation](#operation) | 设置账户metadata的操作对象 |
+
+- **错误码**
+
+  | 异常                        | **错误码** | 描述                                             |
+  | --------------------------- | ---------- | ------------------------------------------------ |
+  | INVALID_SOURCEADDRESS_ERROR | 11002      | Invalid sourceAddress                            |
+  | INVALID_DATAKEY_ERROR       | 11011      | The length of key must be between 1 and 1024     |
+  | INVALID_DATAVALUE_ERROR     | 11012      | The length of value must be between 0 and 256000 |
+  | INVALID_DATAVERSION_ERROR   | 11013      | The version must be equal to or greater than 0   |
+  | SYSTEM_ERROR                | 20000      | System error                                     |
+
+### 设置账户权限
+
+- **费用**
+
+  feeLimit目前(2018.07.26)是0.01 BU。
+
+- **调用方法**
+
+`sdk.operation.accountSetPrivilegeOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 成员变量      | 类型                                   | 描述                                         |
+  | ------------- | -------------------------------------- | -------------------------------------------- |
+  | sourceAddress | String                                 | 选填，操作源账户地址                         |
+  | masterWeight  | String                                 | 选填，账户自身权重，大小限制[0, max(uint32)] |
+  | signers       | [Array<Signer](#signer)>               | 选填，签名者权重列表                         |
+  | txThreshold   | String                                 | 选填，交易门限，大小限制[0, max(int64)]      |
+  | typeThreshold | Array<[TypeThreshold](#typethreshold)> | 选填，指定类型交易门限                       |
+  | metadata      | String                                 | 选填，备注                                   |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述                   |
+  | --------- | ----------------------- | ---------------------- |
+  | operation | [Operation](#operation) | 设置账户权限的操作对象 |
+
+- **错误码**
+
+  | 异常                         | **错误码** | 描述                                            |
+  | ---------------------------- | ---------- | ----------------------------------------------- |
+  | INVALID_SOURCEADDRESS_ERROR  | 11002      | Invalid sourceAddress                           |
+  | INVALID_MASTERWEIGHT_ERROR   | 11015      | MasterWeight must be between 0 and max(uint32)  |
+  | INVALID_SIGNER_ADDRESS_ERROR | 11016      | Invalid signer address                          |
+  | INVALID_SIGNER_WEIGHT_ERROR  | 11017      | Signer weight must be between 0 and max(uint32) |
+  | INVALID_TX_THRESHOLD_ERROR   | 11018      | TxThreshold must be between 0 and max(int64)    |
+  | INVALID_OPERATION_TYPE_ERROR | 11019      | The type of typeThreshold is invalid            |
+  | INVALID_TYPE_THRESHOLD_ERROR | 11020      | TypeThreshold must be between 0 and max(int64)  |
+  | SYSTEM_ERROR                 | 20000      | System error                                    |
+
+### 发送BU
+
+**注意**：若目标账户未激活，该操作也可使目标账户激活。
+
+- **费用**
+
+  feeLimit目前(2018.07.26)是0.01 BU。
+
+- **调用方法**
+
+`sdk.operation.buSendOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 成员变量      | 类型   | 描述                                                         |
+  | ------------- | ------ | ------------------------------------------------------------ |
+  | sourceAddress | String | 选填，操作源账户地址                                         |
+  | destAddress   | String | 必填，目标账户地址                                           |
+  | buAmount      | String | 必填，资产发行数量，大小限制[0, max(int64)]，单位是MO，1 BU = 10^8 MO |
+  | metadata      | String | 选填，备注                                                   |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述             |
+  | --------- | ----------------------- | ---------------- |
+  | operation | [Operation](#operation) | 发送BU的操作对象 |
+
+- **错误码**
+
+  | 异常                                  | **错误码** | 描述                                         |
+  | ------------------------------------- | ---------- | -------------------------------------------- |
+  | INVALID_SOURCEADDRESS_ERROR           | 11002      | Invalid sourceAddress                        |
+  | INVALID_DESTADDRESS_ERROR             | 11003      | Invalid destAddress                          |
+  | SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005      | SourceAddress cannot be equal to destAddress |
+  | INVALID_BU_AMOUNT_ERROR               | 11026      | BuAmount must be between 1 and max(int64)    |
+  | INVALID_ISSUER_ADDRESS_ERROR          | 11027      | Invalid issuer address                       |
+  | SYSTEM_ERROR                          | 20000      | System error                                 |
+
+### 发行资产
+
+- **费用**
+
+  feeLimit目前(2018.07.26)是50.01 BU。
+
+- **调用方法**
+
+`sdk.operation.assetIssueOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 成员变量      | 类型   | 描述                                        |
+  | ------------- | ------ | ------------------------------------------- |
+  | sourceAddress | String | 选填，操作源账户地址                        |
+  | code          | String | 必填，资产编码，长度限制[1, 64]             |
+  | assetAmount   | String | 必填，资产发行数量，大小限制[0, max(int64)] |
+  | metadata      | String | 选填，备注                                  |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述               |
+  | --------- | ----------------------- | ------------------ |
+  | operation | [Operation](#operation) | 发行资产的操作对象 |
+
+- **错误码**
+
+  | 异常                        | **错误码** | 描述                                         |
+  | --------------------------- | ---------- | -------------------------------------------- |
+  | INVALID_SOURCEADDRESS_ERROR | 11002      | Invalid sourceAddress                        |
+  | INVALID_ASSET_CODE_ERROR    | 11023      | The length of key must be between 1 and 64   |
+  | INVALID_ASSET_AMOUNT_ERROR  | 11024      | AssetAmount must be between 1 and max(int64) |
+  | SYSTEM_ERROR                | 20000      | System error                                 |
+
+### 转移资产
+
+> **注意**：若目标账户未激活，必须先调用激活账户操作。
+
+- **费用**
+
+  feeLimit目前(2018.07.26)是0.01 BU。
+
+- **调用方法**
+
+`sdk.operation.assetSendOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 成员变量      | 类型   | 描述                                          |
+  | ------------- | ------ | --------------------------------------------- |
+  | sourceAddress | String | 选填，操作源账户地址                          |
+  | destAddress   | String | 必填，目标账户地址                            |
+  | code          | String | 必填，资产编码，长度限制[1, 64]               |
+  | issuer        | String | 必填，资产发行账户地址                        |
+  | assetAmount   | String | 必填，资产数量，大小限制[0, max(int64)] |
+  | metadata      | String | 选填，备注                                    |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述               |
+  | --------- | ----------------------- | ------------------ |
+  | operation | [Operation](#operation) | 转移资产的操作对象 |
+
+- **错误码**
+
+  | 异常                                  | **错误码** | 描述                                         |
+  | ------------------------------------- | ---------- | -------------------------------------------- |
+  | INVALID_SOURCEADDRESS_ERROR           | 11002      | Invalid sourceAddress                        |
+  | INVALID_DESTADDRESS_ERROR             | 11003      | Invalid destAddress                          |
+  | SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005      | SourceAddress cannot be equal to destAddress |
+  | INVALID_ASSET_CODE_ERROR              | 11023      | The length of key must be between 1 and 64   |
+  | INVALID_ASSET_AMOUNT_ERROR            | 11024      | AssetAmount must be between 1 and max(int64) |
+  | INVALID_ISSUER_ADDRESS_ERROR          | 11027      | Invalid issuer address                       |
+  | SYSTEM_ERROR                          | 20000      | System error                                 |
+
+### 创建合约
+
+- **费用**
+
+  feeLimit目前(2018.07.26)是10.01 BU。
+
+- **调用方法**
+
+`sdk.operation.contractCreateOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 成员变量      | 类型    | 描述                                                         |
+  | ------------- | ------- | ------------------------------------------------------------ |
+  | sourceAddress | String  | 选填，操作源账户地址                                         |
+  | initBalance   | String  | 必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, max(int64)] |
+  | type          | Integer | 选填，合约的语种，默认是0                                    |
+  | payload       | String  | 必填，对应语种的合约代码                                     |
+  | initInput     | String  | 选填，合约代码中init方法的入参                               |
+  | metadata      | String  | 选填，备注                                                   |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述               |
+  | --------- | ----------------------- | ------------------ |
+  | operation | [Operation](#operation) | 创建合约的操作对象 |
+
+- **错误码**
+
+  | 异常                                      | **错误码** | 描述                                      |
+  | ----------------------------------------- | ---------- | ----------------------------------------- |
+  | INVALID_SOURCEADDRESS_ERROR               | 11002      | Invalid sourceAddress                     |
+  | INVALID_CONTRACTADDRESS_ERROR             | 11037      | Invalid contract address                  |
+  | CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038      | ContractAddress is not a contract account |
+  |                                           |            |                                           |
+  | SYSTEM_ERROR                              | 20000      | System error                              |
+
+### 发送资产触发合约
+
+> **注意**：若合约账户不存在，必须先创建合约账户。
+
+- **费用**
+
+  feeLimit要根据合约中执行交易来做添加手续费，首先发起交易手续费目前(2018.07.26)是0.01BU，然后合约中的交易也需要交易发起者添加相应交易的手续费。
+
+- **调用方法**
+
+`sdk.operation.contractInvokeByAssetOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 成员变量        | 类型   | 描述                                                         |
+  | --------------- | ------ | ------------------------------------------------------------ |
+  | sourceAddress   | String | 选填，操作源账户地址                                         |
+  | contractAddress | String | 必填，合约账户地址                                           |
+  | code            | String | 选填，资产编码，长度限制[0, 64];当为空时，仅触发合约;        |
+  | issuer          | String | 选填，资产发行账户地址，当null时，仅触发合约                 |
+  | assetAmount     | String | 选填，资产数量，大小限制[0, max(int64)]，当是0时，仅触发合约。不能以0开头。 |
+  | input           | String | 选填，待触发的合约的main()入参                               |
+  | metadata        | String | 选填，备注                                                   |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述                       |
+  | --------- | ----------------------- | -------------------------- |
+  | operation | [Operation](#operation) | 发送资产触发合约的操作对象 |
+
+- **错误码**
+
+  | 异常                                      | **错误码** | 描述                                              |
+  | ----------------------------------------- | ---------- | ------------------------------------------------- |
+  | INVALID_SOURCEADDRESS_ERROR               | 11002      | Invalid sourceAddress                             |
+  | INVALID_INITBALANCE_ERROR                 | 11004      | InitBalance must be between 1 and max(int64)      |
+  | PAYLOAD_EMPTY_ERROR                       | 11044      | Payload must be a non-empty string                |
+  | SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040      | SourceAddress cannot be equal to contractAddress  |
+  | INVALID_ASSET_CODE_ERROR                  | 11023      | The length of asset code must be between 0 and 64 |
+  | INVALID_CONTRACT_ASSET_AMOUNT_ERROR       | 15031      | AssetAmount must be between 0 and max(int64)      |
+  | INVALID_ISSUER_ADDRESS_ERROR              | 11027      | Invalid issuer address                            |
+  | INVALID_INPUT_ERROR                       | 15029      | Invalid input                                     |
+  | SYSTEM_ERROR                              | 20000      | System error                                      |
+
+### 发送BU触发合约
+
+**注意**：若目标账户非合约账户且未激活，该操作也可使目标账户激活。
+
+- **费用**
+
+  feeLimit要根据合约中执行交易来做添加手续费，首先发起交易手续费目前(2018.07.26)是0.01BU，然后合约中的交易也需要交易发起者添加相应交易的手续费。
+
+- **调用方法**
+
+`sdk.operation.contractInvokeByBUOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 成员变量        | 类型   | 描述                                                         |
+  | --------------- | ------ | ------------------------------------------------------------ |
+  | sourceAddress   | String | 选填，操作源账户地址                                         |
+  | contractAddress | String | 必填，合约账户地址                                           |
+  | buAmount        | String | 选填，资产发行数量，大小限制[0, max(int64)]，当0时仅触发合约 |
+  | input           | String | 选填，待触发的合约的main()入参                               |
+  | metadata        | String | 选填，备注                                                   |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述                     |
+  | --------- | ----------------------- | ------------------------ |
+  | operation | [Operation](#operation) | 发送BU触发合约的操作对象 |
+
+- **错误码**
+
+  | 异常                                      | **错误码** | 描述                                             |
+  | ----------------------------------------- | ---------- | ------------------------------------------------ |
+  | INVALID_SOURCEADDRESS_ERROR               | 11002      | Invalid sourceAddress                            |
+  | INVALID_CONTRACTADDRESS_ERROR             | 11037      | Invalid contract address                         |
+  | CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038      | ContractAddress is not a contract account        |
+  | SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040      | SourceAddress cannot be equal to contractAddress |
+  | INVALID_CONTRACT_BU_AMOUNT_ERROR          | 15030      | BuAmount must be between 0 and max(int64)        |
+  | INVALID_INPUT_ERROR                       | 15029      | Invalid input                                    |
+  | SYSTEM_ERROR                              | 20000      | System error                                     |
+
+### 日志
+
+- **费用**
+
+  feeLimit目前(2018.07.26)是0.01 BU。
+
+- **调用方法**
+
+`sdk.operation.logCreateOperation(args);`
+
+- **请求参数**
+
+  args 为 Object 类型，其中包含如下参数：
+
+  | 成员变量      | 类型         | 描述                                        |
+  | ------------- | ------------ | ------------------------------------------- |
+  | sourceAddress | String       | 选填，操作源账户地址                        |
+  | topic         | String       | 必填，日志主题，长度限制[1, 128]            |
+  | datas         | List<String> | 必填，日志内容，每个字符串长度限制[1, 1024] |
+  | metadata      | String       | 选填，备注                                  |
+
+- **响应数据**
+
+  | 参数      | 类型                    | 描述           |
+  | --------- | ----------------------- | -------------- |
+  | operation | [Operation](#operation) | 日志的操作对象 |
+
+- **错误码**
+
+  | 异常                        | **错误码** | 描述                                           |
+  | --------------------------- | ---------- | ---------------------------------------------- |
+  | INVALID_SOURCEADDRESS_ERROR | 11002      | Invalid sourceAddress                          |
+  | INVALID_LOG_TOPIC_ERROR     | 11045      | The length of key must be between 1 and 128    |
+  | INVALID_LOG_DATA_ERROR      | 11046      | The length of value must be between 1 and 1024 |
+  | SYSTEM_ERROR                | 20000      | System error                                   |
+
 
 ## 账户服务
 
@@ -701,656 +1359,6 @@ sdk.contract.call(args).then(result => {
 });
 ```
 
-## 交易服务
-
-交易服务提供交易相关的接口，目前有5个接口：`buildBlob`、 `evaluateFee`、 `sign`、 `submit`、 `getInfo`。
-
-**注意:** 
-
-其中调用**buildBlob**之前需要构建一些操作（详情见[操作列表](#操作列表)），包括: [激活账户](#激活账户)、[设置账户metadata](#设置账户metadata)、[设置账户权限](#设置账户权限)、[发送BU](#发送bu)、[发行资产](#发行资产)、[转移资产](#转移资产)、[发送资产触发合约](#发送资产触发合约)、[发送BU触发合约](#发送bu触发合约)、[日志](#日志)。
-
-### 操作列表
-
-#### 激活账户
-
-- **费用**
-
-  feeLimit目前(2018.07.26)是0.01 BU。
-
-- **调用方法**
-
-`sdk.operation.accountActivateOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 参数          | 类型   | 描述                                                         |
-  | ------------- | ------ | ------------------------------------------------------------ |
-  | sourceAddress | String | 选填，合约触发账户地址                                       |
-  | destAddress   | String | 必填，目标账户地址                                           |
-  | initBalance   | String | 必填，初始化资产，其值只能是包含数字的字符 串且不能以0开头，大小[1, max(int64)]，单位是 MO，1 BU = 10 ^ 8 MO |
-  | metadata      | String | 选填，备注                                                   |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述               |
-  | --------- | ----------------------- | ------------------ |
-  | operation | [Operation](#operation) | 激活账户的操作对象 |
-
-- **错误码**
-
-  | 异常                                  | **错误码** | 描述                                         |
-  | ------------------------------------- | ---------- | -------------------------------------------- |
-  | INVALID_SOURCEADDRESS_ERROR           | 11002      | Invalid sourceAddress                        |
-  | INVALID_DESTADDRESS_ERROR             | 11003      | Invalid destAddress                          |
-  | INVALID_INITBALANCE_ERROR             | 11004      | InitBalance must be between 1 and max(int64) |
-  | SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005      | SourceAddress cannot be equal to destAddress |
-  | INVALID_METADATA_ERROR                | 15028      | Invalid metadata                             |
-  | SYSTEM_ERROR                          | 20000      | System error                                 |
-
-#### 设置账户metadata
-
-- **费用**
-
-  feeLimit目前(2018.07.26)是0.01 BU。
-
-- **调用方法**
-
-`sdk.operation.accountSetMetadataOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 参数       | 类型    | 描述                                  |
-  | ---------- | ------- | ------------------------------------- |
-  | key        | String  | 必填，metadata的关键词，长度[1, 1024] |
-  | value      | String  | 选填，metadata的内容，长度[0, 256K]   |
-  | version    | String  | 选填，metadata的版本                  |
-  | deleteFlag | Boolean | 选填，是否删除metadata                |
-  | metadata   | String  | 选填，备注                            |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述                       |
-  | --------- | ----------------------- | -------------------------- |
-  | operation | [Operation](#operation) | 设置账户metadata的操作对象 |
-
-- **错误码**
-
-  | 异常                        | **错误码** | 描述                                             |
-  | --------------------------- | ---------- | ------------------------------------------------ |
-  | INVALID_SOURCEADDRESS_ERROR | 11002      | Invalid sourceAddress                            |
-  | INVALID_DATAKEY_ERROR       | 11011      | The length of key must be between 1 and 1024     |
-  | INVALID_DATAVALUE_ERROR     | 11012      | The length of value must be between 0 and 256000 |
-  | INVALID_DATAVERSION_ERROR   | 11013      | The version must be equal to or greater than 0   |
-  | SYSTEM_ERROR                | 20000      | System error                                     |
-
-#### 设置账户权限
-
-- **费用**
-
-  feeLimit目前(2018.07.26)是0.01 BU。
-
-- **调用方法**
-
-`sdk.operation.accountSetPrivilegeOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 成员变量      | 类型                                   | 描述                                         |
-  | ------------- | -------------------------------------- | -------------------------------------------- |
-  | sourceAddress | String                                 | 选填，操作源账户地址                         |
-  | masterWeight  | String                                 | 选填，账户自身权重，大小限制[0, max(uint32)] |
-  | signers       | [Array<Signer](#signer)>               | 选填，签名者权重列表                         |
-  | txThreshold   | String                                 | 选填，交易门限，大小限制[0, max(int64)]      |
-  | typeThreshold | Array<[TypeThreshold](#typethreshold)> | 选填，指定类型交易门限                       |
-  | metadata      | String                                 | 选填，备注                                   |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述                   |
-  | --------- | ----------------------- | ---------------------- |
-  | operation | [Operation](#operation) | 设置账户权限的操作对象 |
-
-- **错误码**
-
-  | 异常                         | **错误码** | 描述                                            |
-  | ---------------------------- | ---------- | ----------------------------------------------- |
-  | INVALID_SOURCEADDRESS_ERROR  | 11002      | Invalid sourceAddress                           |
-  | INVALID_MASTERWEIGHT_ERROR   | 11015      | MasterWeight must be between 0 and max(uint32)  |
-  | INVALID_SIGNER_ADDRESS_ERROR | 11016      | Invalid signer address                          |
-  | INVALID_SIGNER_WEIGHT_ERROR  | 11017      | Signer weight must be between 0 and max(uint32) |
-  | INVALID_TX_THRESHOLD_ERROR   | 11018      | TxThreshold must be between 0 and max(int64)    |
-  | INVALID_OPERATION_TYPE_ERROR | 11019      | The type of typeThreshold is invalid            |
-  | INVALID_TYPE_THRESHOLD_ERROR | 11020      | TypeThreshold must be between 0 and max(int64)  |
-  | SYSTEM_ERROR                 | 20000      | System error                                    |
-
-#### 发送BU
-
-- **费用**
-
-  feeLimit目前(2018.07.26)是0.01 BU。
-
-- **调用方法**
-
-`sdk.operation.buSendOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 成员变量      | 类型   | 描述                                                         |
-  | ------------- | ------ | ------------------------------------------------------------ |
-  | sourceAddress | String | 选填，操作源账户地址                                         |
-  | destAddress   | String | 必填，目标账户地址                                           |
-  | buAmount      | String | 必填，资产发行数量，大小限制[0, max(int64)]，单位是MO，1 BU = 10^8 MO |
-  | metadata      | String | 选填，备注                                                   |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述             |
-  | --------- | ----------------------- | ---------------- |
-  | operation | [Operation](#operation) | 发送BU的操作对象 |
-
-- **错误码**
-
-  | 异常                                  | **错误码** | 描述                                         |
-  | ------------------------------------- | ---------- | -------------------------------------------- |
-  | INVALID_SOURCEADDRESS_ERROR           | 11002      | Invalid sourceAddress                        |
-  | INVALID_DESTADDRESS_ERROR             | 11003      | Invalid destAddress                          |
-  | SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005      | SourceAddress cannot be equal to destAddress |
-  | INVALID_BU_AMOUNT_ERROR               | 11026      | BuAmount must be between 1 and max(int64)    |
-  | INVALID_ISSUER_ADDRESS_ERROR          | 11027      | Invalid issuer address                       |
-  | SYSTEM_ERROR                          | 20000      | System error                                 |
-
-#### 发行资产
-
-- **费用**
-
-  feeLimit目前(2018.07.26)是50.01 BU。
-
-- **调用方法**
-
-`sdk.operation.assetIssueOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 成员变量      | 类型   | 描述                                        |
-  | ------------- | ------ | ------------------------------------------- |
-  | sourceAddress | String | 选填，操作源账户地址                        |
-  | code          | String | 必填，资产编码，长度限制[1, 64]             |
-  | assetAmount   | String | 必填，资产发行数量，大小限制[0, max(int64)] |
-  | metadata      | String | 选填，备注                                  |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述               |
-  | --------- | ----------------------- | ------------------ |
-  | operation | [Operation](#operation) | 发行资产的操作对象 |
-
-- **错误码**
-
-  | 异常                        | **错误码** | 描述                                         |
-  | --------------------------- | ---------- | -------------------------------------------- |
-  | INVALID_SOURCEADDRESS_ERROR | 11002      | Invalid sourceAddress                        |
-  | INVALID_ASSET_CODE_ERROR    | 11023      | The length of key must be between 1 and 64   |
-  | INVALID_ASSET_AMOUNT_ERROR  | 11024      | AssetAmount must be between 1 and max(int64) |
-  | SYSTEM_ERROR                | 20000      | System error                                 |
-
-#### 转移资产
-
-- **费用**
-
-  feeLimit目前(2018.07.26)是0.01 BU。
-
-- **调用方法**
-
-`sdk.operation.assetSendOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 成员变量      | 类型   | 描述                                          |
-  | ------------- | ------ | --------------------------------------------- |
-  | sourceAddress | String | 选填，操作源账户地址                          |
-  | destAddress   | String | 必填，目标账户地址                            |
-  | code          | String | 必填，资产编码，长度限制[1, 64]               |
-  | issuer        | String | 必填，资产发行账户地址                        |
-  | assetAmount   | String | 必填，资产数量，大小限制[0, max(int64)] |
-  | metadata      | String | 选填，备注                                    |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述               |
-  | --------- | ----------------------- | ------------------ |
-  | operation | [Operation](#operation) | 转移资产的操作对象 |
-
-- **错误码**
-
-  | 异常                                  | **错误码** | 描述                                         |
-  | ------------------------------------- | ---------- | -------------------------------------------- |
-  | INVALID_SOURCEADDRESS_ERROR           | 11002      | Invalid sourceAddress                        |
-  | INVALID_DESTADDRESS_ERROR             | 11003      | Invalid destAddress                          |
-  | SOURCEADDRESS_EQUAL_DESTADDRESS_ERROR | 11005      | SourceAddress cannot be equal to destAddress |
-  | INVALID_ASSET_CODE_ERROR              | 11023      | The length of key must be between 1 and 64   |
-  | INVALID_ASSET_AMOUNT_ERROR            | 11024      | AssetAmount must be between 1 and max(int64) |
-  | INVALID_ISSUER_ADDRESS_ERROR          | 11027      | Invalid issuer address                       |
-  | SYSTEM_ERROR                          | 20000      | System error                                 |
-
-#### 创建合约
-
-- **费用**
-
-  feeLimit目前(2018.07.26)是10.01 BU。
-
-- **调用方法**
-
-`sdk.operation.contractCreateOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 成员变量      | 类型    | 描述                                                         |
-  | ------------- | ------- | ------------------------------------------------------------ |
-  | sourceAddress | String  | 选填，操作源账户地址                                         |
-  | initBalance   | String  | 必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, max(int64)] |
-  | type          | Integer | 选填，合约的语种，默认是0                                    |
-  | payload       | String  | 必填，对应语种的合约代码                                     |
-  | initInput     | String  | 选填，合约代码中init方法的入参                               |
-  | metadata      | String  | 选填，备注                                                   |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述               |
-  | --------- | ----------------------- | ------------------ |
-  | operation | [Operation](#operation) | 创建合约的操作对象 |
-
-- **错误码**
-
-  | 异常                                      | **错误码** | 描述                                      |
-  | ----------------------------------------- | ---------- | ----------------------------------------- |
-  | INVALID_SOURCEADDRESS_ERROR               | 11002      | Invalid sourceAddress                     |
-  | INVALID_CONTRACTADDRESS_ERROR             | 11037      | Invalid contract address                  |
-  | CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038      | ContractAddress is not a contract account |
-  |                                           |            |                                           |
-  | SYSTEM_ERROR                              | 20000      | System error                              |
-
-#### 发送资产触发合约
-
-**注意**：若合约账户不存在，必须先创建合约账户。
-
-- **费用**
-
-  feeLimit要根据合约中执行交易来做添加手续费，首先发起交易手续费目前(2018.07.26)是0.01BU，然后合约中的交易也需要交易发起者添加相应交易的手续费。
-
-- **调用方法**
-
-`sdk.operation.contractInvokeByAssetOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 成员变量        | 类型   | 描述                                                         |
-  | --------------- | ------ | ------------------------------------------------------------ |
-  | sourceAddress   | String | 选填，操作源账户地址                                         |
-  | contractAddress | String | 必填，合约账户地址                                           |
-  | code            | String | 选填，资产编码，长度限制[0, 64];当为空时，仅触发合约;        |
-  | issuer          | String | 选填，资产发行账户地址，当null时，仅触发合约                 |
-  | assetAmount     | String | 选填，资产数量，大小限制[0, max(int64)]，当是0时，仅触发合约。不能以0开头。 |
-  | input           | String | 选填，待触发的合约的main()入参                               |
-  | metadata        | String | 选填，备注                                                   |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述                       |
-  | --------- | ----------------------- | -------------------------- |
-  | operation | [Operation](#operation) | 发送资产触发合约的操作对象 |
-
-- **错误码**
-
-  | 异常                                      | **错误码** | 描述                                              |
-  | ----------------------------------------- | ---------- | ------------------------------------------------- |
-  | INVALID_SOURCEADDRESS_ERROR               | 11002      | Invalid sourceAddress                             |
-  | INVALID_INITBALANCE_ERROR                 | 11004      | InitBalance must be between 1 and max(int64)      |
-  | PAYLOAD_EMPTY_ERROR                       | 11044      | Payload must be a non-empty string                |
-  | SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040      | SourceAddress cannot be equal to contractAddress  |
-  | INVALID_ASSET_CODE_ERROR                  | 11023      | The length of asset code must be between 0 and 64 |
-  | INVALID_CONTRACT_ASSET_AMOUNT_ERROR       | 15031      | AssetAmount must be between 0 and max(int64)      |
-  | INVALID_ISSUER_ADDRESS_ERROR              | 11027      | Invalid issuer address                            |
-  | INVALID_INPUT_ERROR                       | 15029      | Invalid input                                     |
-  | SYSTEM_ERROR                              | 20000      | System error                                      |
-
-#### 发送BU触发合约
-
-- **费用**
-
-  feeLimit要根据合约中执行交易来做添加手续费，首先发起交易手续费目前(2018.07.26)是0.01BU，然后合约中的交易也需要交易发起者添加相应交易的手续费。
-
-- **调用方法**
-
-`sdk.operation.contractInvokeByBUOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 成员变量        | 类型   | 描述                                                         |
-  | --------------- | ------ | ------------------------------------------------------------ |
-  | sourceAddress   | String | 选填，操作源账户地址                                         |
-  | contractAddress | String | 必填，合约账户地址                                           |
-  | buAmount        | String | 选填，资产发行数量，大小限制[0, max(int64)]，当0时仅触发合约 |
-  | input           | String | 选填，待触发的合约的main()入参                               |
-  | metadata        | String | 选填，备注                                                   |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述                     |
-  | --------- | ----------------------- | ------------------------ |
-  | operation | [Operation](#operation) | 发送BU触发合约的操作对象 |
-
-- **错误码**
-
-  | 异常                                      | **错误码** | 描述                                             |
-  | ----------------------------------------- | ---------- | ------------------------------------------------ |
-  | INVALID_SOURCEADDRESS_ERROR               | 11002      | Invalid sourceAddress                            |
-  | INVALID_CONTRACTADDRESS_ERROR             | 11037      | Invalid contract address                         |
-  | CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038      | ContractAddress is not a contract account        |
-  | SOURCEADDRESS_EQUAL_CONTRACTADDRESS_ERROR | 11040      | SourceAddress cannot be equal to contractAddress |
-  | INVALID_CONTRACT_BU_AMOUNT_ERROR          | 15030      | BuAmount must be between 0 and max(int64)        |
-  | INVALID_INPUT_ERROR                       | 15029      | Invalid input                                    |
-  | SYSTEM_ERROR                              | 20000      | System error                                     |
-
-#### 日志
-
-- **费用**
-
-  feeLimit目前(2018.07.26)是0.01 BU。
-
-- **调用方法**
-
-`sdk.operation.logCreateOperation(args);`
-
-- **请求参数**
-
-  args 为 Object 类型，其中包含如下参数：
-
-  | 成员变量      | 类型         | 描述                                        |
-  | ------------- | ------------ | ------------------------------------------- |
-  | sourceAddress | String       | 选填，操作源账户地址                        |
-  | topic         | String       | 必填，日志主题，长度限制[1, 128]            |
-  | datas         | List<String> | 必填，日志内容，每个字符串长度限制[1, 1024] |
-  | metadata      | String       | 选填，备注                                  |
-
-- **响应数据**
-
-  | 参数      | 类型                    | 描述           |
-  | --------- | ----------------------- | -------------- |
-  | operation | [Operation](#operation) | 日志的操作对象 |
-
-- **错误码**
-
-  | 异常                        | **错误码** | 描述                                           |
-  | --------------------------- | ---------- | ---------------------------------------------- |
-  | INVALID_SOURCEADDRESS_ERROR | 11002      | Invalid sourceAddress                          |
-  | INVALID_LOG_TOPIC_ERROR     | 11045      | The length of key must be between 1 and 128    |
-  | INVALID_LOG_DATA_ERROR      | 11046      | The length of value must be between 1 and 1024 |
-  | SYSTEM_ERROR                | 20000      | System error                                   |
-
-### buildBlob
-
-- **接口说明**
-
-   该接口用于序列化交易，生成交易Blob串，便于网络传输
-
-- **调用方法**
-
-`sdk.transaction.buildBlob(args);`
-
-- **请求参数**
-
-   args 为 Object 类型，其中包含如下参数：
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   sourceAddress|String|必填，发起该操作的源账户地址
-   nonce|String|必填，待发起的交易序列号，函数里+1，大小限制[1, max(int64)]，不能以0开头
-   gasPrice|String|必填，交易燃料单价，单位MO，1 BU = 10^8 MO，大小限制[1000, max(int64)]，不能以0开头
-   feeLimit|String|必填，交易要求的最低的手续费，单位MO，1 BU = 10^8 MO，大小限制[1, max(int64)]，不能以0开头
-   operation|BaseOperation[]|必填，待提交的操作列表，不能为空
-   ceilLedgerSeq|String|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制，不能以0开头
-   metadata|String|选填，备注
-
-- **响应数据**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   transactionBlob|String|Transaction序列化后的16进制字符串
-   hash|String|交易hash
-
-- **错误码**
-
-   异常       |     错误码   |   描述   
-   -----------  | ----------- | -------- 
-   INVALID_SOURCEADDRESS_ERROR|11002|Invalid sourceAddress
-   INVALID_NONCE_ERROR|11048|Nonce must be between 1 and max(int64)
-   INVALID_NONCE_ERROR|11048|Nonce must be between 1 and max(int64)
-   INVALID_ GASPRICE_ERROR|11049|GasPrice must be between 1000 and max(int64)
-   INVALID_FEELIMIT_ERROR|11050|FeeLimit must be between 1 and max(int64)
-   OPERATIONS_EMPTY_ERROR|11051|Operations cannot be empty
-   INVALID_CEILLEDGERSEQ_ERROR|11052|CeilLedgerSeq must be equal to or greater than 0
-   OPERATIONS_ONE_ERROR|11053|One of the operations cannot be resolved
-   SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```js
-const args = {
- sourceAddress,
- gasPrice,
- feeLimit,
- nonce,
- operations: [ sendBuOperation ],
- metadata: '6f68206d79207478',
-};
-const blobInfo = sdk.transaction.buildBlob(args);
-```
-
-### evaluateFee
-
-- **接口说明**
-
-   该接口实现交易的费用评估。
-
-- **调用方法**
-
-`sdk.transaction.evaluateFee(args)`
-
-- **请求参数**
-
-   args 为 Object 类型，其中包含如下参数：
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   sourceAddress|String|必填，发起该操作的源账户地址
-   nonce|String|必填，待发起的交易序列号，大小限制[1, max(int64)]
-   operation|Array|必填，待提交的操作列表，不能为空
-   signtureNumber|Integer|选填，待签名者的数量，默认是1，大小限制[1, max(int32)]
-   ceilLedgerSeq|String|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
-   metadata|String|选填，备注
-
-- **响应数据**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-    feeLimit | String | 交易费用 
-   gasPrice | String | 打包费用 
-
-- **错误码**
-
-   异常       |     错误码   |   描述   
-   -----------  | ----------- | -------- 
-   INVALID_SOURCEADDRESS_ERROR|11002|Invalid sourceAddress
-    INVALID_ARGUMENTS           | 15016      | Arguments of the function are invalid 
-   SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```js
-const args = {
-       sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
-       nonce: '101',
-       operations: [sendBuOperation],
-       signtureNumber: '1',
-       metadata: '54657374206576616c756174696f6e20666565',
-};
-
-sdk.transaction.evaluateFee(args).then(data => {
- console.log(data);
-});
-
-```
-
-### sign
-
-- **接口说明**
-
-   该接口用于实现交易的签名
-
-- **调用方法**
-
-```js
-sdk.transaction.sign(args);
-```
-
-- **请求参数**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   blob|String|必填，待签名的交易Blob
-   privateKeys|Array|必填，私钥列表
-
-
-- **响应数据**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   signatures|Array<[Signature](#signature)>|签名后的数据列表
-
-- **错误码**
-
-   异常       |     错误码   |   描述   
-   -----------  | ----------- | -------- 
-   INVALID_BLOB_ERROR|11056|Invalid blob
-   PRIVATEKEY_NULL_ERROR|11057|PrivateKeys cannot be empty
-   PRIVATEKEY_ONE_ERROR|11058|One of privateKeys is invalid
-   SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```js
-const signatureInfo = sdk.transaction.sign({
-       privateKeys: [ 'privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq' ],
-       blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704'
-});
-
-console.log(signatureInfo);
-```
-
-### submit
-
-- **接口说明**
-
-   该接口用于实现交易的提交。
-
-- **调用方法**
-
-`sdk.transaction.submit(args);`
-
-- **请求参数**
-
-   参数 args 为 Object 类型, 包含如下参数：
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   blob|String|必填，交易blob
-   signature|Array<[Signature](#signature)>|必填，签名列表
-
-- **响应数据**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   hash|String|交易hash
-
-- **错误码**
-
-   异常       |     错误码   |   描述   
-   -----------  | ----------- | -------- 
-   INVALID_BLOB_ERROR|11056|Invalid blob
-    INVALID_SIGNATURE_ERROR | 15027      | Invalid signature 
-   SYSTEM_ERROR|20000|System error
-
-- **示例**
-
-```js
-const args = {
-  blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704',
-  signature: {
-     signData: 'D2B5E3045F2C1B7D363D4F58C1858C30ABBBB0F41E4B2E18AF680553CA9C3689078E215C097086E47A4393BCA715C7A5D2C180D8750F35C6798944F79CC5000A',
-     publicKey: 'b0011765082a9352e04678ef38d38046dc01306edef676547456c0c23e270aaed7ffe9e31477'
-  },
-
-let transactionInfo = yield sdk.transaction.submit(args);
-```
-
-### getInfo
-
-- **接口说明**
-
-   该接口用于实现根据交易hash查询交易。
-
-- **调用方法**
-
-`sdk.transaction.getInfo(hash);`
-
-- **请求参数**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   hash|String|交易hash
-
-- **响应数据**
-
-   参数      |     类型     |        描述       
-   ----------- | ------------ | ---------------- 
-   totalCount|String|返回的总交易数
-   transactions|Array<[TransactionHistory](#transactionhistory)>|交易内容
-
-- **错误码**
-
-   异常       |     **错误码**   
-   -----------  | ----------- 
-   INVALID_HASH_ERROR|11055
-   REQUEST_NULL_ERROR|12001
-   CONNECTNETWORK_ERROR|11007
-   SYSTEM_ERROR|20000
-
-- **示例**
-
-```js
-const hash = '1653f54fbba1134f7e35acee49592a7c29384da10f2f629c9a214f6e54747705';
-sdk.transaction.getInfo(hash).then(data => {
- console.log(data);
-})
-```
 
 ## 区块服务
 
