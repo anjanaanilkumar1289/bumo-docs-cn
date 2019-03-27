@@ -517,10 +517,10 @@ enum ChainMessageType {
 
 - 请求参数
 
-      | 参数      | 类型                    | 描述                   |
-      | --------- | ----------------------- | ---------------------- |
-      | api_list  | array<ChainMessageType> | 申请注册的消息类型列表 |
-      | timestamp | int64                   | 申请时间               |
+    | 参数      | 类型                    | 描述                   |
+    | --------- | ----------------------- | ---------------------- |
+    | api_list  | array<ChainMessageType> | 申请注册的消息类型列表 |
+    | timestamp | int64                   | 申请时间               |
 
 - 响应消息类型
 

@@ -88,7 +88,7 @@ public static AccountCreateResult createAccount() {
 
 
 **注意**： 
-- 主见环境：账户激活可以通过小布口袋（钱包）给该资方账户转50.03BU（用于支付资产发行时需要的交易费用），即可激活该账户。
+- 主网环境：账户激活可以通过小布口袋（钱包）给该资方账户转50.03BU（用于支付资产发行时需要的交易费用），即可激活该账户。
 
 - 测试环境：通过访问[水龙头](https://faucet.bumotest.io)，将待激活（或充值）的账户地址输入到编辑框中，点击"Confirm"，就完成了激活（或充值）。
 
@@ -300,12 +300,12 @@ public static AccountCreateResult createAccount() {
 在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
 <img src="/docs/assets/BUBrowser.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 查询结果如下：
 
 <img src="/docs/assets/execution_result_of_transaction.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 #### 调用接口查询
 

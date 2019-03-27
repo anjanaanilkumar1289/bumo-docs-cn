@@ -1,8 +1,8 @@
 ---
-id: version-1.0.0.10-sto_10
-title: BUMO STO 10 协议
-sidebar_label: STO 10
-original_id: sto_10
+id: version-1.0.0.10-sdk_go
+title: BUMO GO SDK
+sidebar_label: GO
+original_id: sdk_go
 ---
 
 ## 简介
@@ -156,7 +156,7 @@ tlog(topic,args...);
 
 ## 功能函数
 
-BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#setdocument)、[getDocument](#getdocument)、[createTranche](#createtranche)、[balanceOf](#balanceof)、[balanceOfTranche](#balanceoftranche)、[tranchesOf](#tranchesof)、[transferWithData](#transferwithdata)、[transferFromToTranche](#transferfromtotranche)、[transferTranche](#transfertranche)、[transferToTranche](#transfertotranche)、[transfersToTranche](#transferstotranche)[isControllable](#iscontrollable)、[controllerTransfer](#controllertransfer)、[controllerRedeem](#controllerredeem)、[authorizeOperator](#authorizeoperator)、[revokeOperator](#revokeoperator)、[authorizeOperatorForTranche](#authorizeoperatorfortranche)、[revokeOperatorForTranche](#revokeoperatorfortranche)、[isOperator](#isoperator)、[isOperatorForTranche](#isoperatorfortranche)、[operatorTransferTranche](#operatortransfertranche)、[operatorRedeemTranche](#operatorredeemtranche)、[isIssuable](#isissuable)[issue](#issue)、[issueToTranche](#issuetotranche)、[redeem](#redeem)、[redeemFrom](#redeemfrom)、[redeemTranche](#redeemtranche)、[redeemFromTranche](#redeemfromtranche)、[canTransfer](#cantransfer)、[canTransferTranche](#cantransfertranche)、[canTransferToTranche](#cantransfertotranche)、[transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)、[approveTranche](#approvetranche)、[allowance](#allowance)、[allowanceForTranche](#allowancefortranche)。
+BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#setdocument)、[getDocument](#getdocument)、[createTranche](#createtranche)、[balanceOf](#balanceof)、[balanceOfTranche](#balanceoftranche)、[tranchesOf](#tranchesof)、[transferWithData](#transferwithdata)、[transferFromToTranche](#transferfromtotranche)、[transferTranche](#transfertranche)、[transferToTranche](#transfertotranche)、[transfersToTranche](#transferstotranche)、[isControllable](#iscontrollable)、[controllerTransfer](#controllertransfer)、[controllerRedeem](#controllerredeem)、[authorizeOperator](#authorizeoperator)、[revokeOperator](#revokeoperator)、[authorizeOperatorForTranche](#authorizeoperatorfortranche)、[revokeOperatorForTranche](#revokeoperatorfortranche)、[isOperator](#isoperator)、[isOperatorForTranche](#isoperatorfortranche)、[operatorTransferTranche](#operatortransfertranche)、[operatorRedeemTranche](#operatorredeemtranche)、[isIssuable](#isissuable)、[issue](#issue)、[issueToTranche](#issuetotranche)、[redeem](#redeem)、[redeemFrom](#redeemfrom)、[redeemTranche](#redeemtranche)、[redeemFromTranche](#redeemfromtranche)、[canTransfer](#cantransfer)、[canTransferTranche](#cantransfertranche)、[canTransferToTranche](#cantransfertotranche)、[transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)、[approveTranche](#approvetranche)、[allowance](#allowance)、[allowanceForTranche](#allowancefortranche)。
 
 
 
@@ -355,7 +355,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
   tlog('createTranche', sender, id, description, limits, tokenHolders);
   ```
 
-  topic: 方法名，这里是 'setDocument'
+  topic: 方法名，这里是 'createTranche'
 
   sender:  合约调用账户地址
 
@@ -509,7 +509,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     tlog('transferWithData', sender, to, value, data);
     ```
 
-    topic: 方法名，这里是 'transfer'
+    topic: 方法名，这里是 'transferWithData'
 
     ​sender:  合约调用账户地址
 
@@ -562,7 +562,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
       tlog('transferFromWithData', sender, from, to, value, data);
     ```
 
-    ​          topic: 方法名，这里是 'transfer'
+    ​          topic: 方法名，这里是 'transferFromWithData'
 
     ​          sender:  合约调用账户地址
 
@@ -617,20 +617,24 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 - 事件
 
   ```javascript
-  tlog('transferFromToTranche', sender, from, description, limits, tokenHolders);
+  tlog('transferFromToTranche', sender, from + '_' + fromTranche, to + '_' + toTranche, value, data);
   ```
 
-  topic: 方法名，这里是 'setDocument'
+  topic: 方法名，这里是 'transferFromToTranche'
 
   sender:  合约调用账户地址
 
-  id: trancheid
+  from: Token 支出方地址
 
-  description: tranche描述
+  fromTranche: Token 支出方 tranche 的 id
 
-  limits: 约束条件, json 字符串
+  to: Token 收入方地址
 
-  tokenHolders: 分发的账户列表, json 字符串
+  toTranche: Token 收入方 tranche 的 id
+
+  value: Token 数量
+
+  data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
 
 ### transferTranche
 
@@ -665,6 +669,24 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     成功：true
 
     失败：抛出异常
+
+- 事件
+
+    ```javascript
+    tlog('transferTranche', sender, tranche, to, value, data);
+    ```
+
+    topic: 方法名，这里是 'transferTranche'
+
+    sender:  合约调用账户地址
+
+    tranche: tranche的id
+
+    to: Token 收入方地址
+
+    value: Token 数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
 
 ### transferToTranche
 
@@ -701,6 +723,26 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     成功：true
 
     失败：抛出异常
+
+- 事件
+
+    ```javascript
+    tlog('transferToTranche', sender, fromTranche, to + '_' + toTranche, value, data);
+    ```
+
+    topic: 方法名，这里是 'transferToTranche'
+
+    sender:  合约调用账户地址
+
+    fromTranche: Token 支出方 tranche 的 id
+
+    to: Token 收入方地址
+
+    toTranche: Token 收入方 tranche 的 id
+
+    value: Token 数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
 
 ### transfersToTranche
 
@@ -741,6 +783,26 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     成功：返回目标账户的 tranche
 
     失败：抛出异常
+
+- 事件
+
+    ```javascript
+    tlog('transfersToTranche', sender, fromTranche, toTranche, tokenHolders, data);
+    ```
+
+    topic: 方法名，这里是 'transfersToTranche'
+
+    sender:  合约调用账户地址
+
+    fromTranche: Token 支出方 tranche 的 id
+
+    tokenHolders: Token 收入方列表，json字符串
+
+    toTranche: Token 收入方 tranche 的 id
+
+    value: Token 数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
 
 
 
@@ -812,6 +874,30 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('controllerTransfer', sender, from + '_' + fromTranche, to + '_' + toTranche, value, data + "; " + operatorData);
+    ```
+
+    topic: 方法名，这里是 'controllerTransfer'
+
+    sender:  合约调用账户地址
+
+    from: Token 支出方地址
+
+    fromTranche: Token 支出方 tranche 的 id
+
+    to: Token 收入方地址
+
+    toTranche: Token 收入方 tranche 的 id
+
+    value: Token 数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
+    operatorData: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
 ### controllerRedeem
 
 > **注意：**在某些法域中，发行人（或由发行人委托的实体）可能需要保留强制转移 token的能力。这可能是为了解决法律纠纷或法院命令，或补救投资者失去访问他们的私钥。
@@ -847,6 +933,24 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
   失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('controllerRedeem', sender, tokenHolder, tranche, value, data);
+    ```
+
+    topic: 方法名，这里是 'controllerRedeem'
+
+    sender:  合约调用账户地址
+
+    tokenHolder: Token 持有人地址
+
+    tranche: Tranche 的 id
+
+    value: Token 数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
 
 
 ### authorizeOperator
@@ -876,6 +980,18 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('authorizeOperator', sender, operator);
+    ```
+
+    topic: 方法名，这里是 'authorizeOperator'
+
+    sender:  合约调用账户地址
+
+    operator: 操作人
+
 ### revokeOperator
 
 - 功能
@@ -902,6 +1018,18 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     成功: true
 
     失败: 抛出异常
+
+- 事件
+
+    ```javascript
+    tlog('revokeOperator', sender, operator);
+    ```
+
+    topic: 方法名，这里是 'revokeOperator'
+
+    sender:  合约调用账户地址
+
+    operator: 操作人
 
 ### authorizeOperatorForTranche
 
@@ -931,6 +1059,20 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('authorizeOperatorForTranche', sender, tranche, operator);
+    ```
+
+    topic: 方法名，这里是 'authorizeOperatorForTranche'
+
+    sender:  合约调用账户地址
+
+    tranche: Tranche 的 id
+
+    operator: 操作人
+
 ### revokeOperatorForTranche
 
 - 功能
@@ -958,6 +1100,20 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     成功: true
 
     失败: 抛出异常
+
+- 事件
+
+    ```javascript
+    tlog('revokeOperatorForTranche', sender, tranche, operator);
+    ```
+
+    topic: 方法名，这里是 'revokeOperatorForTranche'
+
+    sender:  合约调用账户地址
+
+    tranche: Tranche 的 id
+
+    operator: 操作人
 
 
 
@@ -1052,6 +1208,28 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败：抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('operatorTransferTranche', sender, tranche, from, to, value, data + '; ' + operatorData);
+    ```
+
+    topic: 方法名，这里是 'operatorTransferTranche'
+
+    sender:  合约调用账户地址
+
+    tranche: Tranche 的 id
+
+    from: Token 支出方地址
+
+    to: Token 收入方地址
+
+    value: Token 数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
+    operatorData: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
 
 
 ### operatorRedeemTranche
@@ -1083,6 +1261,24 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     成功：true
 
     失败：抛出异常
+
+- 事件
+
+    ```javascript
+    tlog('operatorRedeemTranche', sender, tranche, tokenHolder, value, operatorData);
+    ```
+
+    topic: 方法名，这里是 'operatorRedeemTranche'
+
+    sender:  合约调用账户地址
+
+    tranche: Tranche 的 id
+
+    tokenHolder: Token 持有人
+
+    value: Token 数量
+
+    operatorData: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
 
 ### isIssuable
 
@@ -1137,6 +1333,22 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('issue', sender, tokenHolder, nowSupply, data);
+    ```
+
+    topic: 方法名，这里是 'issue'
+
+    sender:  合约调用账户地址
+
+    tokenHolder: Token 持有人
+
+    nowSupply: 当前的发行量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
 ### issueToTranche
 
 - 功能
@@ -1167,6 +1379,24 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('issueToTranche', sender, tranche, tokenHolder, nowSupply, data);
+    ```
+
+    topic: 方法名，这里是 'issueToTranche'
+
+    sender:  合约调用账户地址
+
+    tranche: Tranche 的 id
+
+    tokenHolder: Token 持有人
+
+    nowSupply: 当前的发行量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
 
 
 ### redeem
@@ -1196,6 +1426,20 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
     成功: true
 
     失败: 抛出异常
+
+- 事件
+
+    ```javascript
+    tlog('redeem', sender, value, data);
+    ```
+
+    topic: 方法名，这里是 'redeem'
+
+    sender:  合约调用账户地址
+
+    value: 赎回的数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
 
 
 
@@ -1228,6 +1472,22 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('redeemFrom', sender, tokenHolder, value, data);
+    ```
+
+    topic: 方法名，这里是 'redeemFrom'
+
+    sender:  合约调用账户地址
+
+    tokenHolder: Token 持有人地址
+
+    value: 赎回的数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
 
 
 ### redeemTranche
@@ -1259,6 +1519,22 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('redeemTranche', sender, tranche, value, data);
+    ```
+
+    topic: 方法名，这里是 'redeemTranche'
+
+    sender:  合约调用账户地址
+
+    tranche: Tranche 的 id
+
+    value: 赎回的数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
 ### redeemFromTranche
 
 - 功能
@@ -1289,6 +1565,24 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败: 抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('redeemFrom', sender, tranche, tokenHolder, value, data);
+    ```
+
+    topic: 方法名，这里是 'redeemFrom'
+
+    sender:  合约调用账户地址
+
+    tranche: Tranche 的 id
+
+    tokenHolder: Token 持有人地址
+
+    value: 赎回的数量
+
+    data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
+
 ### canTransfer
 
 - 功能
@@ -1297,7 +1591,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 入口函数
 
-  `main`
+  `query`
 
 - 参数
 
@@ -1316,6 +1610,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 - 返回值
 
 成功: true
+
 失败: 抛出错误信息
 
 ### canTransferTranche
@@ -1326,7 +1621,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 入口函数
 
-  `main`
+  `query`
 
 - 参数
 
@@ -1346,6 +1641,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 - 返回值
 
 　　成功: true
+　　
 　　失败: 抛出错误信息
 
 ### canTransferToTranche
@@ -1356,7 +1652,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 入口函数
 
-  `main`
+  `query`
 
 - 参数
 
@@ -1377,6 +1673,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 - 返回值
 
 　　成功: true
+　　
 　　失败: 抛出错误信息
 
 
@@ -1545,6 +1842,22 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     失败：抛出异常
 
+- 事件
+
+    ```javascript
+    tlog('approveTranche', sender, tranche, spender, value);
+    ```
+
+    topic: 方法名，这里是 'approveTranche'
+
+    sender:  合约调用账户地址
+
+    tranche: Tranche 的 id
+
+    spender: 被授权账户地址
+
+    value: 被授权可转移数量（字符串类型）
+
 ### allowance
 
 - 功能
@@ -1553,7 +1866,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 入口函数
 
-> query
+  `query`
 
 - 参数
 

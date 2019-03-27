@@ -34,20 +34,7 @@ DEX 属性可以通过合约的 `dexInfo` 功能函数查询到，存储在智�
 - feeRate: 单位为 1/(10^8)，例如 feeRate 的值为 50000，那么服务费率是 50000/(10^8) = 5/10000。
 - version：DEX 的版本。如 1.0
 
-## 事件
 
-函数[makeOrder](#makeorder)、[cancelOrder](#cancelorder)、[takeOrder](#takeorder)、[updateFeeRate](#updatefeerate)、[updateOwner](#updateowner)、[clearExpiredOrder](#clearexpiredorder)、[withdrawFee](#withdrawfee)会触发事件，事件是调用tlog接口，在区块链上记录一条交易日志，该日志记录了函数调用详情，方便用户阅读。
-
-tlog定义如下:
-
-```
-tlog(topic,args...);
-
-```
-
-- tlog会产生一笔交易写在区块上
-- topic: 日志主题，必须为字符串类型,参数长度(0,128]
-- args...: 最多可以包含5个参数，参数类型可以是字符串、数值或者布尔类型,每个参数长度(0,1024]
 
 ## 功能函数
 
@@ -60,7 +47,7 @@ tlog(topic,args...);
 - 如果订单的兑出 token 为 CTP 资产，发布订单之前，订单用户需先在对应的 CTP 合约内授信 DEX 合约，授信额度为兑出 token 的额度；
 - 如果订单的兑出 token 为 ATP 资产，发布订单时，需用 payAsset(转移资产) 操作触发，转移的资产内容和数额为兑出资产的内容和数额；
 - 如果订单的兑出 token 为 BU，发布订单时，需用 payCoin(转账) 操作触发，转账的数额为兑出 BU 的数额加兑换服务费；
-- 入口函数 main。
+- 入口函数 `main`。
 
 - 参数 json 结构:
 ```json
@@ -80,13 +67,13 @@ tlog(topic,args...);
     }
 }
 ```
-参数：own 订单兑出的 token 信息，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
+own：订单兑出的 token 信息，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
 
-参数：target 订单兑入的token，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
+target：订单兑入的token，包括 issuer(发行地址)、code(资产代码) 和 value(兑换数量)，其中 CTP token 无 code，BU 无 issuer 和 code。
 
-参数：fee 挂单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除。
+fee：挂单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除。
 
-参数：expiration 订单的截止日期，过期后订单无效。
+expiration：订单的截止日期，过期后订单无效。
 
 - 函数：function makeOrder(own, target, fee, expiration);
 - 返回值：true或者抛异常。
@@ -94,7 +81,7 @@ tlog(topic,args...);
 ### cancelOrder
 
 - 挂单账户取消订单。
-- 入口函数 main。
+- 入口函数 `main`。
 
 - 参数json结构:
     ```json
@@ -105,7 +92,7 @@ tlog(topic,args...);
         }
     }
     ```
-    参数：order 取消的订单号；
+    order： 取消的订单号；
 
 - 函数：function cancelOrder(order)
 - 返回值：true 或者抛异常
@@ -116,7 +103,7 @@ tlog(topic,args...);
 - 如果填单的兑出 token 为 CTP 资产，填单之前，填单用户需先在对应的 CTP 合约内授信 DEX 合约，授信额度为兑出 token 的额度；
 - 如果填单的兑出 token 为 ATP 资产，填单时，需用 payAsset(转移资产) 操作触发，转移的资产内容和数额为兑出资产的内容和数额；
 - 如果填单的兑出 token 为 BU，填单时，需用 payCoin(转账) 操作触发，转账的数额为兑出 BU 的数额加兑换服务费；
-- 入口函数 main。
+- 入口函数 `main`。
 
 - 参数json结构:
     ```json
@@ -129,9 +116,9 @@ tlog(topic,args...);
     }
 
     ```
-    参数：order 填单或局部填单的订单号；
+    order： 填单或局部填单的订单号；
 
-    参数：fee 填单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除；
+    fee： 填单账户支付给 DEX 合约的服务费，以兑出资产计数，如果兑出的 token 非 BU，结算时 DEX 合约会按照兑换比从兑换后的 BU 中扣除；
 
 - 函数：function takeOrder(order)
 - 返回值：true或者抛异常
@@ -139,7 +126,7 @@ tlog(topic,args...);
 ### updateFeeRate
 
 - 更改 DEX 合约的服务费比率，如果非合约拥有者调用，该函数应该被 throw。
-- 入口函数 main。
+- 入口函数 `main`。
 
 - 参数json结构:
     ```json
@@ -150,7 +137,7 @@ tlog(topic,args...);
         }
     }
     ```
-    参数：rate 服务费与 token 兑换额的比率。
+    rate： 服务费与 token 兑换额的比率。
 
 - 函数：function updateFeeRate(rate)
 - 返回值：true或者抛异常
@@ -158,7 +145,7 @@ tlog(topic,args...);
 ### updateOwner
 
 - 更改 DEX 合约的拥有者，更改后，原合约拥有者将失去 DEX 合约的控制权，如果非合约拥有者调用，该函数应该被 throw。
-- 入口函数 main。
+- 入口函数 `main`。
 
 - 参数json结构:
     ```json
@@ -169,7 +156,7 @@ tlog(topic,args...);
         }
     }
     ```
-    参数：address DEX 合约新拥有者的地址。
+    address： DEX 合约新拥有者的地址。
 
 - 函数：function updateOwner(address)
 - 返回值：true或者抛异常
@@ -191,7 +178,7 @@ tlog(topic,args...);
 ### withdrawFee
 
 - 从 DEX 合约中提现服务费，如果非合约拥有者调用，该函数应该被 throw。
-- 入口函数 main。
+- 入口函数 `main`。
 
 - 参数json结构:
     ```json
@@ -210,7 +197,7 @@ tlog(topic,args...);
 ### dexInfo
 
 - 返回 DEX 合约的基本信息。
-- 入口函数 query。
+- 入口函数 `query`。
 
 - 参数json结构:
     ```json
@@ -238,7 +225,7 @@ tlog(topic,args...);
 ### getOrder
 
 - 根据订单号获取订单详细信息。
-- 入口函数 query。
+- 入口函数 `query`。
 - 参数json结构:
     ```json
     {
@@ -248,7 +235,7 @@ tlog(topic,args...);
         }
     }
     ```
-    参数：order 订单号；
+    order： 订单号；
 
 - 函数：function getOrder(order)
 - 返回值：
@@ -272,7 +259,7 @@ tlog(topic,args...);
 ### getOrderInterval
 
 - 获取订单号的有效区间。
-- 入口函数 query。
+- 入口函数 `query`。
 
 - 参数json结构:
     ```json
@@ -360,7 +347,7 @@ tlog(topic,args...);
 
 ### query
 
-- 负责数据查询，其中包含了[dexInfo](#dexinfo)、[dexInfo](#dexinfo)、[getOrder](#getorder)、[getOrderInterval](#getorderinterval)等接口。
+- 负责数据查询，其中包含了[dexInfo](#dexinfo)、[getOrder](#getorder)、[getOrderInterval](#getorderinterval)等接口。
 - 函数体
 
     ```js

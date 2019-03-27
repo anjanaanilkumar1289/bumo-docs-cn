@@ -175,7 +175,7 @@ sdk.transaction.submit({
 
 - **调用方法**
 
-`sdk.transaction.buildBlob(args);`
+  `sdk.transaction.buildBlob(args);`
 
 - **请求参数**
 
@@ -214,17 +214,17 @@ sdk.transaction.submit({
 
 - **示例**
 
-```js
-const args = {
- sourceAddress,
- gasPrice,
- feeLimit,
- nonce,
- operations: [ sendBuOperation ],
- metadata: '6f68206d79207478',
-};
-const blobInfo = sdk.transaction.buildBlob(args);
-```
+   ```js
+   const args = {
+   sourceAddress,
+   gasPrice,
+   feeLimit,
+   nonce,
+   operations: [ sendBuOperation ],
+   metadata: '6f68206d79207478',
+   };
+   const blobInfo = sdk.transaction.buildBlob(args);
+   ```
 
 ### evaluateFee
 
@@ -234,7 +234,7 @@ const blobInfo = sdk.transaction.buildBlob(args);
 
 - **调用方法**
 
-`sdk.transaction.evaluateFee(args)`
+  `sdk.transaction.evaluateFee(args)`
 
 - **请求参数**
 
@@ -266,20 +266,20 @@ const blobInfo = sdk.transaction.buildBlob(args);
 
 - **示例**
 
-```js
-const args = {
-       sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
-       nonce: '101',
-       operations: [sendBuOperation],
-       signtureNumber: '1',
-       metadata: '54657374206576616c756174696f6e20666565',
-};
+   ```js
+   const args = {
+         sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
+         nonce: '101',
+         operations: [sendBuOperation],
+         signtureNumber: '1',
+         metadata: '54657374206576616c756174696f6e20666565',
+   };
 
-sdk.transaction.evaluateFee(args).then(data => {
- console.log(data);
-});
+   sdk.transaction.evaluateFee(args).then(data => {
+   console.log(data);
+   });
 
-```
+   ```
 
 ### sign
 
@@ -289,9 +289,7 @@ sdk.transaction.evaluateFee(args).then(data => {
 
 - **调用方法**
 
-```js
-sdk.transaction.sign(args);
-```
+  `sdk.transaction.sign(args);`
 
 - **请求参数**
 
@@ -318,14 +316,14 @@ sdk.transaction.sign(args);
 
 - **示例**
 
-```js
-const signatureInfo = sdk.transaction.sign({
-       privateKeys: [ 'privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq' ],
-       blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704'
-});
+   ```js
+   const signatureInfo = sdk.transaction.sign({
+         privateKeys: [ 'privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq' ],
+         blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704'
+   });
 
-console.log(signatureInfo);
-```
+   console.log(signatureInfo);
+   ```
 
 ### submit
 
@@ -335,7 +333,7 @@ console.log(signatureInfo);
 
 - **调用方法**
 
-`sdk.transaction.submit(args);`
+  `sdk.transaction.submit(args);`
 
 - **请求参数**
 
@@ -362,16 +360,16 @@ console.log(signatureInfo);
 
 - **示例**
 
-```js
-const args = {
-  blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704',
-  signature: {
-     signData: 'D2B5E3045F2C1B7D363D4F58C1858C30ABBBB0F41E4B2E18AF680553CA9C3689078E215C097086E47A4393BCA715C7A5D2C180D8750F35C6798944F79CC5000A',
-     publicKey: 'b0011765082a9352e04678ef38d38046dc01306edef676547456c0c23e270aaed7ffe9e31477'
-  },
+   ```js
+   const args = {
+   blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704',
+   signature: {
+      signData: 'D2B5E3045F2C1B7D363D4F58C1858C30ABBBB0F41E4B2E18AF680553CA9C3689078E215C097086E47A4393BCA715C7A5D2C180D8750F35C6798944F79CC5000A',
+      publicKey: 'b0011765082a9352e04678ef38d38046dc01306edef676547456c0c23e270aaed7ffe9e31477'
+   },
 
-let transactionInfo = yield sdk.transaction.submit(args);
-```
+   let transactionInfo = yield sdk.transaction.submit(args);
+   ```
 
 ### getInfo
 
@@ -381,7 +379,7 @@ let transactionInfo = yield sdk.transaction.submit(args);
 
 - **调用方法**
 
-`sdk.transaction.getInfo(hash);`
+  `sdk.transaction.getInfo(hash);`
 
 - **请求参数**
 
@@ -407,12 +405,12 @@ let transactionInfo = yield sdk.transaction.submit(args);
 
 - **示例**
 
-```js
-const hash = '1653f54fbba1134f7e35acee49592a7c29384da10f2f629c9a214f6e54747705';
-sdk.transaction.getInfo(hash).then(data => {
- console.log(data);
-})
-```
+   ```js
+   const hash = '1653f54fbba1134f7e35acee49592a7c29384da10f2f629c9a214f6e54747705';
+   sdk.transaction.getInfo(hash).then(data => {
+   console.log(data);
+   })
+   ```
 
 ## 操作
 
@@ -426,7 +424,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.accountActivateOperation(args);`
+  `sdk.operation.accountActivateOperation(args);`
 
 - **请求参数**
 
@@ -464,7 +462,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.accountSetMetadataOperation(args);`
+  `sdk.operation.accountSetMetadataOperation(args);`
 
 - **请求参数**
 
@@ -502,7 +500,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.accountSetPrivilegeOperation(args);`
+  `sdk.operation.accountSetPrivilegeOperation(args);`
 
 - **请求参数**
 
@@ -546,7 +544,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.buSendOperation(args);`
+  `sdk.operation.buSendOperation(args);`
 
 - **请求参数**
 
@@ -584,7 +582,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.assetIssueOperation(args);`
+  `sdk.operation.assetIssueOperation(args);`
 
 - **请求参数**
 
@@ -622,7 +620,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.assetSendOperation(args);`
+  `sdk.operation.assetSendOperation(args);`
 
 - **请求参数**
 
@@ -663,7 +661,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.contractCreateOperation(args);`
+  `sdk.operation.contractCreateOperation(args);`
 
 - **请求参数**
 
@@ -704,7 +702,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.contractInvokeByAssetOperation(args);`
+  `sdk.operation.contractInvokeByAssetOperation(args);`
 
 - **请求参数**
 
@@ -750,7 +748,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.contractInvokeByBUOperation(args);`
+  `sdk.operation.contractInvokeByBUOperation(args);`
 
 - **请求参数**
 
@@ -790,7 +788,7 @@ sdk.transaction.getInfo(hash).then(data => {
 
 - **调用方法**
 
-`sdk.operation.logCreateOperation(args);`
+  `sdk.operation.logCreateOperation(args);`
 
 - **请求参数**
 
@@ -825,31 +823,29 @@ sdk.transaction.getInfo(hash).then(data => {
 
 ### create
 - **接口说明**
-该接口用于生成私钥及地址。
+  该接口用于生成私钥及地址。
 
 - **调用方法**
 
-```js
-sdk.account.create()
-```
+  `sdk.account.create()`
 
 - **响应数据**
 
-| 参数       | 类型   | 描述 |
-| ---------- | ------ | ---- |
-| privateKey | String | 私钥 |
-| publicKey  | String | 公钥 |
-| address    | String | 地址 |
+   | 参数       | 类型   | 描述 |
+   | ---------- | ------ | ---- |
+   | privateKey | String | 私钥 |
+   | publicKey  | String | 公钥 |
+   | address    | String | 地址 |
 
 - **示例**
 
-```js
-sdk.account.create().then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.account.create().then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### checkValid
 - **接口说明**
@@ -858,9 +854,7 @@ sdk.account.create().then(result => {
 
 - **调用方法**
 
-```js
-sdk.account.checkValid(address)
-```
+  `sdk.account.checkValid(address)`
 
 - **请求参数**
 
@@ -882,15 +876,15 @@ sdk.account.checkValid(address)
 
 - **示例**
 
-```js
-const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
+   ```js
+   const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
 
-sdk.account.checkValid(address).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   sdk.account.checkValid(address).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getInfo
 
@@ -900,7 +894,7 @@ sdk.account.checkValid(address).then(result => {
 
 - **调用方法**
 
-`sdk.account.getInfo(address);`
+  `sdk.account.getInfo(address);`
 
 - **请求参数**
 
@@ -927,15 +921,15 @@ sdk.account.checkValid(address).then(result => {
 
 - **示例**
 
-```js
-const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
+   ```js
+   const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
 
-sdk.account.getInfo(address).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   sdk.account.getInfo(address).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getNonce
 
@@ -945,7 +939,7 @@ sdk.account.getInfo(address).then(result => {
 
 - **调用方法**
 
-`sdk.account.getNonce(address);`
+  `sdk.account.getNonce(address);`
 
 - **请求参数**
 
@@ -969,15 +963,15 @@ sdk.account.getInfo(address).then(result => {
 
 - **示例**
 
-```js
-const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
+   ```js
+   const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
 
-sdk.account.getNonce(address).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   sdk.account.getNonce(address).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getBalance
 
@@ -987,7 +981,7 @@ sdk.account.getNonce(address).then(result => {
 
 - **调用方法**
 
-`sdk.account.getBalance(address);`
+  `sdk.account.getBalance(address);`
 
 - **请求参数**
 
@@ -1011,11 +1005,11 @@ sdk.account.getNonce(address).then(result => {
 
 - **示例**
 
-```js
-const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
+   ```js
+   const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
 
-const info = sdk.account.getBalance(address);
-```
+   const info = sdk.account.getBalance(address);
+   ```
 
 ### getAssets
 
@@ -1025,7 +1019,7 @@ const info = sdk.account.getBalance(address);
 
 - **调用方法**
 
-`sdk.account.getAssets(address);`
+  `sdk.account.getAssets(address);`
 
 - **请求参数**
 
@@ -1050,15 +1044,15 @@ const info = sdk.account.getBalance(address);
 
 - **示例**
 
-```js
-const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
+   ```js
+   const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
 
-sdk.account.getAssets(address).then(result => {
-       console.log(result);
-}).catch(err => {
-       console.log(err.message);
-});
-```
+   sdk.account.getAssets(address).then(result => {
+         console.log(result);
+   }).catch(err => {
+         console.log(err.message);
+   });
+   ```
 
 ### getMetadata
 
@@ -1068,7 +1062,7 @@ sdk.account.getAssets(address).then(result => {
 
 - **调用方法**
 
-`sdk.account.getMetadata(args);`
+  `sdk.account.getMetadata(args);`
 
 - **请求参数**
 
@@ -1098,19 +1092,19 @@ sdk.account.getAssets(address).then(result => {
 
 - **示例**
 
-```js
+   ```js
 
-const args = {
-    address: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
-	key: 'test'
-};
+   const args = {
+      address: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
+      key: 'test'
+   };
 
-sdk.account.getMetadata(args).then(result => {
-       console.log(result);
-}).catch(err => {
-       console.log(err.message);
-});
-```
+   sdk.account.getMetadata(args).then(result => {
+         console.log(result);
+   }).catch(err => {
+         console.log(err.message);
+   });
+   ```
 
 ## 资产服务
 
@@ -1124,7 +1118,7 @@ sdk.account.getMetadata(args).then(result => {
 
 - **调用方法**
 
-`sdk.token.asset.getInfo(args);`
+  `sdk.token.asset.getInfo(args);`
 
 - **请求参数**
 
@@ -1154,18 +1148,18 @@ sdk.account.getMetadata(args).then(result => {
 
 - **示例**
 
-```js
-const args = {
-       address: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
-       code: 'TST',
-       issuer: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
-};
+   ```js
+   const args = {
+         address: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
+         code: 'TST',
+         issuer: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
+   };
 
 
-sdk.token.asset.getInfo(args).then(data => {
- console.log(data);
-});
-```
+   sdk.token.asset.getInfo(args).then(data => {
+   console.log(data);
+   });
+   ```
 
 ## 合约服务
 
@@ -1179,7 +1173,7 @@ sdk.token.asset.getInfo(args).then(data => {
 
 - **调用方法**
 
-`sdk.contract.checkValid(contractAddress)`
+  `sdk.contract.checkValid(contractAddress)`
 
 - **请求参数**
 
@@ -1203,15 +1197,15 @@ sdk.token.asset.getInfo(args).then(data => {
 
 - **示例**
 
-```js
-const contractAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
+   ```js
+   const contractAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
 
-sdk.contract.checkValid(contractAddress).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   sdk.contract.checkValid(contractAddress).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getInfo
 
@@ -1221,7 +1215,7 @@ sdk.contract.checkValid(contractAddress).then(result => {
 
 - **调用方法**
 
-`sdk.contract.getInfo(contractAddress);`
+  `sdk.contract.getInfo(contractAddress);`
 
 - **请求参数**
 
@@ -1247,54 +1241,54 @@ sdk.contract.checkValid(contractAddress).then(result => {
 
 - **示例**
 
-```js
-const contractAddress = 'buQqbhTrfAqZtiX79zp4MWwUVfpcadvtz2TM';
+   ```js
+   const contractAddress = 'buQqbhTrfAqZtiX79zp4MWwUVfpcadvtz2TM';
 
-sdk.contract.getInfo(contractAddress).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   sdk.contract.getInfo(contractAddress).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getAddress
 
 - **接口说明**
 
-该接口用于查询合约地址
+  该接口用于查询合约地址
 
 - **调用方法**
 
-`sdk.contract.getAddress(hash);`
+  `sdk.contract.getAddress(hash);`
 
 - **请求参数**
 
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-hash     |   String     |  创建合约交易的hash   
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   hash     |   String     |  创建合约交易的hash   
 
 - **响应数据**
 
-参数      |     类型     |        描述       
------------ | ------------ | ---------------- 
-contractAddressList|List<[ContractAddressInfo](#contractaddressinfo)>|合约地址列表
+   参数      |     类型     |        描述       
+   ----------- | ------------ | ---------------- 
+   contractAddressList|List<[ContractAddressInfo](#contractaddressinfo)>|合约地址列表
 
 - **错误码**
 
-异常       |     错误码   |   描述   
------------  | ----------- | -------- 
-INVALID_HASH_ERROR|11055|Invalid transaction hash
-CONNECTNETWORK_ERROR|11007|Failed to connect to the network
-SYSTEM_ERROR|20000|System error
+   异常       |     错误码   |   描述   
+   -----------  | ----------- | -------- 
+   INVALID_HASH_ERROR|11055|Invalid transaction hash
+   CONNECTNETWORK_ERROR|11007|Failed to connect to the network
+   SYSTEM_ERROR|20000|System error
 
 - **示例**
 
-```js
-const hash = 'f298d08ec3987adc3aeef73e81cbb49cbad2316145ba190700de2d78657880c0';
-sdk.contract.getAddress(hash).then(data => {
- console.log(data);
-})
-```
+   ```js
+   const hash = 'f298d08ec3987adc3aeef73e81cbb49cbad2316145ba190700de2d78657880c0';
+   sdk.contract.getAddress(hash).then(data => {
+   console.log(data);
+   })
+   ```
 
 ### call 
 
@@ -1304,7 +1298,7 @@ sdk.contract.getAddress(hash).then(data => {
 
 - **调用方法**
 
-`sdk.contract.call(args);`
+  `sdk.contract.call(args);`
 
 - **请求参数**
 
@@ -1344,19 +1338,19 @@ sdk.contract.getAddress(hash).then(data => {
 
 - **示例**
 
-```js
-const args = {
-    code: '"use strict";log(undefined);function query() { getBalance(thisAddress); }',
-    feeLimit: '1000000000',
-    optType: 2
-}
+   ```js
+   const args = {
+      code: '"use strict";log(undefined);function query() { getBalance(thisAddress); }',
+      feeLimit: '1000000000',
+      optType: 2
+   }
 
-sdk.contract.call(args).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   sdk.contract.call(args).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 
 ## 区块服务
@@ -1371,7 +1365,7 @@ sdk.contract.call(args).then(result => {
 
 - **调用方法**
 
-`sdk.block.getNumber();`
+  `sdk.block.getNumber();`
 
 - **响应数据**
 
@@ -1389,13 +1383,13 @@ sdk.contract.call(args).then(result => {
 
 - **示例**
 
-```js
-sdk.block.getNumber().then((result) => {
- console.log(result);
-}).catch((err) => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getNumber().then((result) => {
+   console.log(result);
+   }).catch((err) => {
+   console.log(err.message);
+   });
+   ```
 
 ### checkStatus
 
@@ -1405,30 +1399,30 @@ sdk.block.getNumber().then((result) => {
 
 - **调用方法**
 
-`sdk.block.checkStatus();`
+  `sdk.block.checkStatus();`
 
 - **响应数据**
 
-参数      |     类型     |        描述       |
------------ | ------------ | ---------------- |
-isSynchronous    |   Boolean     |  区块是否同步   |
+   参数      |     类型     |        描述       |
+   ----------- | ------------ | ---------------- |
+   isSynchronous    |   Boolean     |  区块是否同步   |
 
 - **错误码**
 
-异常       |     错误码   |   描述   |
------------  | ----------- | -------- |
-CONNECTNETWORK_ERROR|11007|Failed to connect to the network
-SYSTEM_ERROR|20000|System error
+   异常       |     错误码   |   描述   |
+   -----------  | ----------- | -------- |
+   CONNECTNETWORK_ERROR|11007|Failed to connect to the network
+   SYSTEM_ERROR|20000|System error
 
 - **示例**
 
-```js
-sdk.block.checkStatus().then((result) => {
- console.log(result);
-}).catch((err) => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.checkStatus().then((result) => {
+   console.log(result);
+   }).catch((err) => {
+   console.log(err.message);
+   });
+   ```
 
 ### getTransactions
 
@@ -1464,14 +1458,14 @@ sdk.block.checkStatus().then((result) => {
 
 - **示例**
 
-```js
-sdk.block.getTransactions(100).then(result => {
- console.log(result);
- console.log(JSON.stringify(result));
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getTransactions(100).then(result => {
+   console.log(result);
+   console.log(JSON.stringify(result));
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getInfo
 
@@ -1481,7 +1475,7 @@ sdk.block.getTransactions(100).then(result => {
 
 - **调用方法**
 
-`sdk.block.getInfo(blockNumber);`
+  `sdk.block.getInfo(blockNumber);`
 
 - **请求参数**
 
@@ -1508,13 +1502,13 @@ sdk.block.getTransactions(100).then(result => {
 
 - **示例**
 
-```js
-sdk.block.getInfo(100).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getInfo(100).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getLatestInfo
 
@@ -1524,7 +1518,7 @@ sdk.block.getInfo(100).then(result => {
 
 - **调用方法**
 
-`sdk.block. getLatestInfo();`
+  `sdk.block. getLatestInfo();`
 
 - **响应数据**
 
@@ -1545,13 +1539,13 @@ sdk.block.getInfo(100).then(result => {
 
 - **示例**
 
-```js
-sdk.block.getLatestInfo().then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getLatestInfo().then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getValidators
 
@@ -1561,7 +1555,7 @@ sdk.block.getLatestInfo().then(result => {
 
 - **调用方法**
 
-`sdk.block.getValidators(blockNumber);`
+  `sdk.block.getValidators(blockNumber);`
 
 - **请求参数**
 
@@ -1585,13 +1579,13 @@ sdk.block.getLatestInfo().then(result => {
 
 - **示例**
 
-```js
-sdk.block.getValidators(100).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getValidators(100).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getLatestValidators
 
@@ -1601,7 +1595,7 @@ sdk.block.getValidators(100).then(result => {
 
 - **调用方法**
 
-`sdk.block.getLatestValidators();`
+  `sdk.block.getLatestValidators();`
 
 - **响应数据**
 
@@ -1618,13 +1612,13 @@ sdk.block.getValidators(100).then(result => {
 
 - **示例**
 
-```js
-sdk.block.getLatestValidators().then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getLatestValidators().then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getReward
 
@@ -1634,7 +1628,7 @@ sdk.block.getLatestValidators().then(result => {
 
 - **调用方法**
 
-`sdk.block.getReward(blockNumber);`
+  `sdk.block.getReward(blockNumber);`
 
 - **请求参数**
 
@@ -1660,13 +1654,13 @@ sdk.block.getLatestValidators().then(result => {
 
 - **示例**
 
-```js
-sdk.block.getReward(100).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getReward(100).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getLatestReward
 
@@ -1676,7 +1670,7 @@ sdk.block.getReward(100).then(result => {
 
 - **调用方法**
 
-`BlockGetLatestRewardResponse getLatestReward();`
+  `BlockGetLatestRewardResponse getLatestReward();`
 
 - **响应数据**
 
@@ -1694,13 +1688,13 @@ sdk.block.getReward(100).then(result => {
 
 - **示例**
 
-```js
-sdk.block.getLatestReward().then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getLatestReward().then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getFees
 
@@ -1710,7 +1704,7 @@ sdk.block.getLatestReward().then(result => {
 
 - **调用方法**
 
-`sdk.block.getFees(blockNumber);`
+  `sdk.block.getFees(blockNumber);`
 
 - **请求参数**
 
@@ -1734,13 +1728,13 @@ sdk.block.getLatestReward().then(result => {
 
 - **示例**
 
-```js
-sdk.block.getFees(100).then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getFees(100).then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 ### getLatestFees
 
@@ -1750,7 +1744,7 @@ sdk.block.getFees(100).then(result => {
 
 - **调用方法**
 
-`sdk.block.getLatestFees();`
+  `sdk.block.getLatestFees();`
 
 - **响应数据**
 
@@ -1767,13 +1761,13 @@ sdk.block.getFees(100).then(result => {
 
 - **示例**
 
-```js
-sdk.block.getLatestFees().then(result => {
- console.log(result);
-}).catch(err => {
- console.log(err.message);
-});
-```
+   ```js
+   sdk.block.getLatestFees().then(result => {
+   console.log(result);
+   }).catch(err => {
+   console.log(err.message);
+   });
+   ```
 
 
 

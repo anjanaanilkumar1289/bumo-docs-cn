@@ -12,7 +12,7 @@ ATP 30(Account based Tokenization Protocol) 是“Non-Fungible Tokens”，英�
 - 在合约范围内 tokenId 是唯一的
 - tokenId 只能被一个 owner (i.e. address) 所拥有
 - 一个owner可以拥有多个 NFTs，它的 balance 只记数量
-- ATP 30提供 approve, transfer, transferFrom 接口用于所属权转移
+- ATP 30提供 [approve](#approve),  [transfer](#transfer), and [transferFrom](#transferfrom) 接口用于所属权转移
 
 
 ## 标准
@@ -211,6 +211,12 @@ BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsuppl
         }
     }
     ```
+
+- json参数
+
+  | 参数    | 描述     |
+  | ------- | -------- |
+  | tokenId | Token 惟一标识 |
 
 - 函数：
 
@@ -415,6 +421,12 @@ BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsuppl
     }
     ```
 
+- json参数
+
+  | 参数    | 描述     |
+  | ------- | -------- |
+  | owner | Token 拥有人 |
+
 - 函数：
 
   ```js
@@ -454,6 +466,12 @@ BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsuppl
         }
     }
     ```
+
+- json参数
+
+  | 参数    | 描述     |
+  | ------- | -------- |
+  | tokenId | Token 惟一标识 |
 
 - 函数：
 
@@ -555,7 +573,7 @@ BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsuppl
 
 ## 合约入口
 
-#### init
+### init
 
 - 创建合约时候，触发合约 `init` 入口函数，负责合约创建时的初始化。
 
@@ -581,7 +599,7 @@ BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsuppl
 
   true或者抛异常
 
-#### main
+### main
 
 - 负责数据写入，其中包含了 [issue](#issue)、[transfer](#transfer)、[transferFrom](#transferfrom)、[approve](#approve)。
 
@@ -612,7 +630,7 @@ BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsuppl
     }
     ```
 
-#### query
+### query
 
 - 负责数据查询，其中包含了[totalSupply](#totalsupply)、[balanceOf](#balanceof)、[ownerOf](#ownerof)、[tokensOfOwner](#tokensofowner)、[tokenInfo](#tokeninfo)、[name](#name)、[symbol](#symbol)等接口。
 

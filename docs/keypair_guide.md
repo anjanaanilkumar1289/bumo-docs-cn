@@ -629,7 +629,7 @@ Protocol Buffers（ProtoBuf）是一种轻便高效的结构化数据存储格�
 
 ## 交易提交示例
 
-场景：账户A（``buQVkUUBKpDKRmHYWw1MU8U7ngoQehno165i``）创建账户B（通过Keypair中的 生成地址_ 来生成新账户地址）。
+场景：账户A（``buQVkUUBKpDKRmHYWw1MU8U7ngoQehno165i``）创建账户B（通过Keypair中的 [生成地址](#生成地址)  来生成新账户地址）。
 
 ### 接口生成transaction\_blob示例
 
@@ -687,7 +687,7 @@ Protocol Buffers（ProtoBuf）是一种轻便高效的结构化数据存储格�
 
 2. 完成交易数据填充。
 
-    通过 Keypair 中的生成地址_ 生成的新账户B的地址是``buQoP2eRymAcUm3uvWgQ8RnjtrSnXBXfAzsV``，填充的json数据如下：
+    通过 Keypair 中的 [生成地址](#生成地址)  生成的新账户B的地址是``buQoP2eRymAcUm3uvWgQ8RnjtrSnXBXfAzsV``，填充的json数据如下：
 
     ``` json
     {

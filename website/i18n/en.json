@@ -98,8 +98,8 @@
         "sidebar_label": "IOS"
       },
       "sdk_java": {
-        "title": "BUMO Java SDK",
-        "sidebar_label": "Java"
+        "title": "BUMO JAVA SDK",
+        "sidebar_label": "JAVA"
       },
       "sdk_nodejs": {
         "title": "BUMO Nodejs SDK",
@@ -222,8 +222,8 @@
         "sidebar_label": "IOS"
       },
       "version-1.0.0.10-sdk_java": {
-        "title": "BUMO Java SDK",
-        "sidebar_label": "Java"
+        "title": "BUMO JAVA SDK",
+        "sidebar_label": "JAVA"
       },
       "version-1.0.0.10-sdk_nodejs": {
         "title": "BUMO Nodejs SDK",
@@ -236,10 +236,6 @@
       "version-1.0.0.10-smart_contract_development_guide_for_java": {
         "title": "BUMO 智能合约 Java 开发指南",
         "sidebar_label": "智能合约 Java 开发指南"
-      },
-      "version-1.0.0.10-sto_10": {
-        "title": "BUMO STO 10 协议",
-        "sidebar_label": "STO 10"
       },
       "version-1.0.0.10-syntax_in_smart_contract": {
         "title": "BUMO 智能合约语法说明",

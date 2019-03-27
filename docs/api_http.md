@@ -37,7 +37,7 @@ BUMO 区块链提供了http API接口。您可以在 安装目录/config/bumo.js
 
 - 根据意愿组装交易对象`Transaction`, 不同的交易有不同的数据结构(详见:[交易](#交易))
 - 交易对象序列化为字节流 `transaction_blob`(详见:[序列化交易](#序列化交易))
-- 用私钥`skey`对`transaction_blob`签名得到`sign_data`，`skey`的公钥为`pkey`(详见:[Keypair手册](../keypair_guide)
+- 用私钥`skey`对`transaction_blob`签名得到`sign_data`，`skey`的公钥为`pkey`(详见:[Keypair手册](../keypair_guide))
 - 提交交易(详见:[提交交易](#提交交易))
 - 根据交易的hash查询以确定交易是否成功(详见:[查询交易](#查询交易))
 
