@@ -6,7 +6,7 @@ sidebar_label: STO 10
 
 ## 简介
 
-STO 10 ∂(Security Token Standard)是指基于 BUMO 智能合约发行证券型 token 的标准协议。该标准在 CTP 10 的基础上制定了增发 token，销毁 token，存储相关法律文件，将 token进行分片 ( tranche )，为 tranche 设置锁定期等约束条件，允许将指定 tranche 的 token 授权给第三方操作人，添加控制者 ( 如监控部门 ) 的相关功能。
+STO 10 (Security Token Standard)是指基于 BUMO 智能合约发行证券型 token 的标准协议。该标准在 CTP 10 的基础上制定了增发 token，销毁 token，存储相关法律文件，将 token进行分片 ( tranche )，为 tranche 设置锁定期等约束条件，允许将指定 tranche 的 token 授权给第三方操作人，添加控制者 ( 如监控部门 ) 的相关功能。
 
 ## 目标
 

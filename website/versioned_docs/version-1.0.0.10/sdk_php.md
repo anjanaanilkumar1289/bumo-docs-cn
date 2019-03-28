@@ -58,7 +58,7 @@ class AccountGetNonceResponse {
 3. result: 返回结果。一个结构体，其类名是**服务名** + **方法名** + **Result**，其成员是各个接口返回值的成员，例如：账户服务下的getNonce接口的结果类名是AccountGetNonceResult，成员有nonce, 完整结构如下：
 ```php
 class AccountGetNonceResult {
-	$nonce; // long
+	$nonce; // int64
 }
 ```
 
@@ -68,11 +68,29 @@ class AccountGetNonceResult {
 
 ### 生成SDK实例
 
-调用SDK的接口getInstance来实现，调用如下：
+调用SDK的接口getInstance来实现。
+
+#### 简单配置
+
+调用如下：
+
 ```php
 $url = "http://seed1.bumotest.io";
 $sdk = \src\SDK::getInstance($url);
 ```
+
+#### 超时配置
+
+调用如下：
+
+```php
+$url = "http://seed1.bumotest.io";
+$sdkConfigure = new \src\model\request\SDKConfigure();
+$sdkConfigure->setTimeOut(15000);
+$sdk = \src\SDK::getInstanceWithConfigure($sdkConfigure);
+```
+
+
 
 ### 生成公私钥地址
 
@@ -219,7 +237,7 @@ if ($signResponse->error_code == 0) {
 
 #### 提交交易
 
-该接口用于向BU区块链发送交易请求，触发交易的执行。其中transactionBlob和signResult是上面接口得到的，接口调用如下：
+该接口用于向BU区块链发送交易请求，触发交易的执行。其中transactionBlob和signResult是上面接口得到的，接口详情请见[submit](#submit)，调用如下：
 ```php 
 // 初始化请求参数
 $submitRequest = new \src\model\request\TransactionSubmitRequest();
@@ -263,11 +281,11 @@ if (0 == $response->error_code) {
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
     sourceAddress|String|必填，发起该操作的源账户地址
-    nonce|Long|必填，待发起的交易序列号，函数里+1，大小限制[1, max(int64)]
-    gasPrice|Long|必填，交易燃料单价，单位MO，1 BU = 10^8 MO，大小限制[1000, max(int64)]
-    feeLimit|Long|必填，交易要求的最低的手续费，单位MO，1 BU = 10^8 MO，大小限制[1, max(int64)]
+    nonce|int64|必填，待发起的交易序列号，函数里+1，大小限制[1, max(int64)]
+    gasPrice|int64|必填，交易燃料单价，单位MO，1 BU = 10^8 MO，大小限制[1000, max(int64)]
+    feeLimit|int64|必填，交易要求的最低的手续费，单位MO，1 BU = 10^8 MO，大小限制[1, max(int64)]
     operation|BaseOperation[]|必填，待提交的操作列表，不能为空
-    ceilLedgerSeq|long|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
+    ceilLedgerSeq|int64|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
     metadata|String|选填，备注
 
 - **响应数据**
@@ -391,12 +409,12 @@ if (0 == $response->error_code) {
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ----------------  
-    sourceAddress|String|必填，发起该操作的源账户地址|
-    nonce|Long|必填，待发起的交易序列号，大小限制[1, max(int64)]|
-    operation|BaseOperation[]|必填，待提交的操作列表，不能为空|
-    signtureNumber|Integer|选填，待签名者的数量，默认是1，大小限制[1, max(uint32)]|
-    ceilLedgerSeq|Long|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制|
-    metadata|String|选填，备注|
+    sourceAddress|String|必填，发起该操作的源账户地址
+    nonce|int64|必填，待发起的交易序列号，大小限制[1, max(int64)]
+    operation|BaseOperation[]|必填，待提交的操作列表，不能为空
+    signtureNumber|Integer|选填，待签名者的数量，默认是1，大小限制[1, max(uint32)]
+    ceilLedgerSeq|int64|选填，距离当前区块高度指定差值的区块内执行的限制，当区块超出当时区块高度与所设差值的和后，交易执行失败。必须大于等于0，是0时不限制
+    metadata|String|选填，备注
 
 - **响应数据**
 
@@ -604,7 +622,7 @@ if (0 == $response->error_code) {
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    totalCount|Long|返回的总交易数
+    totalCount|int64|返回的总交易数
     transactions|[TransactionHistory](#transactionhistory)[]|交易内容
 
 - **错误码**
@@ -663,7 +681,7 @@ metadata      |   String |  选填，备注
    ------------- | -------- | ---------------------------------- 
    sourceAddress |   String |  选填，操作源账户地址 
    destAddress   |   String |  必填，目标账户地址                     
-   initBalance   |   Long   |  必填，初始化资产，单位MO，1 BU = 10^8 MO, 大小(0, Long.MAX_VALUE] 
+   initBalance   |   int64   |  必填，初始化资产，单位MO，1 BU = 10^8 MO, 大小(0, max(int64)] 
    metadata|String|选填，备注
 
 ### AccountSetMetadataOperation
@@ -683,7 +701,7 @@ metadata      |   String |  选填，备注
    sourceAddress |   String |  选填，操作源账户地址
    key           |   String  |  必填，metadata的关键词，长度限制[1, 1024]
    value         |   String  |  必填，metadata的内容，长度限制[0, 256000]
-   version       |   Long    |  选填，metadata的版本
+   version       |   int64   |  选填，metadata的版本
    deleteFlag    |   Boolean |  选填，是否删除metadata
    metadata|String|选填，备注           
 
@@ -704,7 +722,7 @@ metadata      |   String |  选填，备注
    sourceAddress |   String |  选填，操作源账户地址
    masterWeight|String|选填，账户自身权重，大小限制[0, (Integer.MAX_VALUE * 2L + 1)]
    signers|[Signer](#signer)[]|选填，签名者权重列表
-   txThreshold|String|选填，交易门限，大小限制[0, Long.MAX_VALUE]
+   txThreshold|String|选填，交易门限，大小限制[0, max(int64)]
    typeThreshold|[TypeThreshold](#typethreshold)[]|选填，指定类型交易门限
    metadata|String|选填，备注
 
@@ -724,7 +742,7 @@ metadata      |   String |  选填，备注
    ------------- | --------- | ------------------------
    sourceAddress|String|选填，操作源账户地址
    code|String|必填，资产编码，长度限制[1, 64]
-   assetAmount|Long|必填，资产发行数量，大小限制[0, Long.MAX_VALUE]
+   assetAmount|int64|必填，资产发行数量，大小限制[0, max(int64)]
    metadata|String|选填，备注
 
 ### AssetSendOperation
@@ -747,7 +765,7 @@ metadata      |   String |  选填，备注
    destAddress|String|必填，目标账户地址
    code|String|必填，资产编码，长度限制[1, 64]
    issuer|String|必填，资产发行账户地址
-   assetAmount|Long|必填，资产数量，大小限制[0, Long.MAX_VALUE]
+   assetAmount|int64|必填，资产数量，大小限制[0, max(int64)]
    metadata|String|选填，备注
 
 ### BUSendOperation
@@ -768,7 +786,7 @@ metadata      |   String |  选填，备注
    ------------- | --------- | ---------------------
    sourceAddress|String|选填，操作源账户地址
    destAddress|String|必填，目标账户地址
-   buAmount|Long|必填，资产发行数量，大小限制[0, Long.MAX_VALUE]
+   buAmount|int64|必填，资产发行数量，大小限制[0, max(int64)]
    metadata|String|选填，备注
 
 ### ContractCreateOperation
@@ -786,7 +804,7 @@ metadata      |   String |  选填，备注
    成员变量    |     类型   |        描述          
    ------------- | --------- | ---------------------
    sourceAddress|String|选填，操作源账户地址
-   initBalance|Long|必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, Long.MAX_VALUE]
+   initBalance|int64|必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, max(int64)]
    type|Integer|选填，合约的语种，默认是0
    payload|String|必填，对应语种的合约代码
    initInput|String|选填，合约代码中init方法的入参
@@ -812,7 +830,7 @@ metadata      |   String |  选填，备注
    contractAddress|String|必填，合约账户地址
    code|String|选填，资产编码，长度限制[0, 64];当为空时，仅触发合约;
    issuer|String|选填，资产发行账户地址，当null时，仅触发合约
-   assetAmount|Long|选填，资产数量，大小限制[0, Long.MAX_VALUE]，当是0时，仅触发合约
+   assetAmount|int64|选填，资产数量，大小限制[0, max(int64)]，当是0时，仅触发合约
    input|String|选填，待触发的合约的main()入参
    metadata|String|选填，备注
 
@@ -834,7 +852,7 @@ metadata      |   String |  选填，备注
    ------------- | --------- | ---------------------
    sourceAddress|String|选填，操作源账户地址
    contractAddress|String|必填，合约账户地址
-   buAmount|Long|选填，资产发行数量，大小限制[0, Long.MAX_VALUE]，当0时仅触发合约
+   buAmount|int64|选填，资产发行数量，大小限制[0, max(int64)]，当0时仅触发合约
    input|String|选填，待触发的合约的main()入参
    metadata|String|选填，备注
 
@@ -943,8 +961,8 @@ metadata      |   String |  选填，备注
     参数    |     类型      |        描述       
     --------- | ------------- | ---------------- 
         address	  |    String     |    账户地址       
-        balance	  |    Long       |    账户余额，单位MO，1 BU = 10^8 MO, 必须大于0
-        nonce	  |    Long       |    账户交易序列号，必须大于0
+        balance	  |    int64      |    账户余额，单位MO，1 BU = 10^8 MO, 必须大于0
+        nonce	  |    int64      |    账户交易序列号，必须大于0
         priv	  | [Priv](#priv) |    账户权限
 
 - **错误码**
@@ -1002,7 +1020,7 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    nonce       |   Long       |  账户交易序列号   
+    nonce       |   int64      |  账户交易序列号   
 
 - **错误码**
 
@@ -1058,7 +1076,7 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    balance     |   Long       |  BU的余额, 单位MO，1 BU = 10^8 MO 
+    balance     |   int64      |  BU的余额, 单位MO，1 BU = 10^8 MO 
 
 - **错误码**
 
@@ -1472,8 +1490,8 @@ metadata      |   String |  选填，备注
     input|String|选填，合约入参
     contractBalance|String|选填，赋予合约的初始 BU 余额, 单位MO，1 BU = 10^8 MO, 大小限制[1, max(int64)]
     optType|Integer|必填，0: 调用合约的读写接口 init, 1: 调用合约的读写接口 main, 2 :调用只读接口 query
-    feeLimit|Long|交易要求的最低手续费， 大小限制[1, max(int64)]
-    gasPrice|Long|交易燃料单价，大小限制[1000, max(int64)]
+    feeLimit|int64|交易要求的最低手续费， 大小限制[1, max(int64)]
+    gasPrice|int64|交易燃料单价，大小限制[1000, max(int64)]
 
 
 - **响应数据**
@@ -1544,8 +1562,7 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    header|BlockHeader|区块头
-    blockNumber|Long|最新的区块高度，对应底层字段seq
+    blockNumber|int64|最新的区块高度，对应底层字段seq
 
 - **错误码**
 
@@ -1628,13 +1645,13 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    blockNumber|Long|必填，待查询的区块高度，必须大于0
+    blockNumber|int64|必填，待查询的区块高度，必须大于0
 
 - **响应数据**
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    totalCount|Long|返回的总交易数
+    totalCount|int64|返回的总交易数
     transactions|[TransactionHistory](#transactionhistory)[]|交易内容
 
 - **错误码**
@@ -1685,15 +1702,15 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    blockNumber|Long|必填，待查询的区块高度
+    blockNumber|int64|必填，待查询的区块高度
 
 - **响应数据**
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    closeTime|Long|区块关闭时间
-    number|Long|区块高度
-    txCount|Long|交易总量
+    closeTime|int64|区块关闭时间
+    number|int64|区块高度
+    txCount|int64|交易总量
     version|String|区块版本
 
 - **错误码**
@@ -1743,9 +1760,9 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    closeTime|Long|区块关闭时间
-    number|Long|区块高度，对应底层字段seq
-    txCount|Long|交易总量
+    closeTime|int64|区块关闭时间
+    number|int64|区块高度，对应底层字段seq
+    txCount|int64|交易总量
     version|String|区块版本
 
 
@@ -1790,7 +1807,7 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    blockNumber|Long|必填，待查询的区块高度，必须大于0
+    blockNumber|int64|必填，待查询的区块高度，必须大于0
 
 - **响应数据**
 
@@ -1888,13 +1905,13 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    blockNumber|Long|必填，待查询的区块高度，必须大于0
+    blockNumber|int64|必填，待查询的区块高度，必须大于0
 
 - **响应数据**
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    blockReward|Long|区块奖励数
+    blockReward|int64|区块奖励数
     validatorsReward|[ValidatorReward](#validatorreward)[]|验证节点奖励情况
 
 
@@ -1945,7 +1962,7 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    blockReward|Long|区块奖励数
+    blockReward|int64|区块奖励数
     validatorsReward|[ValidatorReward](#validatorreward)[]|验证节点奖励情况
 
 - **错误码**
@@ -1989,7 +2006,7 @@ metadata      |   String |  选填，备注
 
     参数      |     类型     |        描述       
     ----------- | ------------ | ---------------- 
-    blockNumber|Long|必填，待查询的区块高度，必须大于0
+    blockNumber|int64|必填，待查询的区块高度，必须大于0
 
 - **响应数据**
 
@@ -2064,12 +2081,11 @@ metadata      |   String |  选填，备注
     }
     ```
 
-    
 ## 数据对象
 #### Priv
 成员      |     类型     |      描述       
 -----------  | ------------ | ---------------- 
-masterWeight |	 Long	    | 账户自身权重，大小限制[0, max(uint32)] 
+masterWeight |	 int64	   | 账户自身权重，大小限制[0, max(uint32)] 
 signers	     |[Signer](#signer)[]|   签名者权重列表
 threshold	 |[Threshold](#threshold)|	门限
 
@@ -2077,26 +2093,26 @@ threshold	 |[Threshold](#threshold)|	门限
 成员      |     类型     |      描述       
 -----------  | ------------ | ---------------- 
 address	     |   String	    |   签名者区块链账户地址
-weight	     |   Long	    | 签名者权重，大小限制[0, max(uint32)] 
+weight	     |   int64	   | 签名者权重，大小限制[0, max(uint32)] 
 
 #### Threshold
 成员      |     类型     |      描述       
 -----------  | ------------ | ---------------- 
-txThreshold	 |    Long	    | 交易默认门限，大小限制[0, max(int64)] 
+txThreshold	 |    int64	   | 交易默认门限，大小限制[0, max(int64)] 
 typeThresholds|[TypeThreshold](#typethreshold)[]|不同类型交易的门限
 
 #### TypeThreshold
 成员      |     类型     |      描述       
 -----------  | ------------ | ---------------- 
-type         |    Long	    |    操作类型，必须大于0
-threshold    |    Long      | 门限值，大小限制[0, max(int64)] 
+type         |    int64	   |    操作类型，必须大于0
+threshold    |    int64     | 门限值，大小限制[0, max(int64)] 
 
 #### AssetInfo
 
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
 key       | [Key](#key)  | 资产惟一标识
-assetAmount    | Long        | 资产数量
+assetAmount    | int64       | 资产数量
 
  #### Key
 
@@ -2110,7 +2126,7 @@ issuer   |   String    |   资产发行账户地址
 ----------- | ----------- | ---------------- 
 key         |  String     |  metadata的关键词
 value       |  String     |  metadata的内容
-version     |  Long      |  metadata的版本
+version     |  int64     |  metadata的版本
 
 #### ContractInfo
 
@@ -2129,11 +2145,11 @@ operationIndex|Integer|所在操作的下标
 #### ContractStat
 
 成员      |     类型     |      描述       
------------ | ------------ | ---------------- |
-applyTime|Long|接收时间
-memoryUsage|Long|内存占用量
-stackUsage|Long|堆栈占用量
-step|Long|几步完成
+----------- | ------------ | ---------------- 
+applyTime|int64|接收时间
+memoryUsage|int64|内存占用量
+stackUsage|int64|堆栈占用量
+step|int64|几步完成
 
 #### TransactionEnvs
 
@@ -2153,9 +2169,9 @@ trigger|[ContractTrigger](#contracttrigger)|合约触发者
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
 sourceAddress|String|交易发起的源账户地址
-feeLimit|Long|交易要求的最低费用
-gasPrice|Long|交易燃料单价
-nonce|Long|交易序列号
+feeLimit|int64|交易要求的最低费用
+gasPrice|int64|交易燃料单价
+nonce|int64|交易序列号
 operations|[Operation](#operation)[]|操作列表
 
 #### ContractTrigger
@@ -2192,7 +2208,7 @@ destAddress|String|目标账户地址
 contract|[Contract](#contract)|合约信息
 priv|[Priv](#priv)|账户权限
 metadata|[MetadataInfo](#metadatainfo)[]|账户
-initBalance|Long|账户资产, 单位MO，1 BU = 10^8 MO 
+initBalance|int64|账户资产, 单位MO，1 BU = 10^8 MO 
 initInput|String|合约init函数的入参
 
 #### Contract
@@ -2208,14 +2224,14 @@ payload|String|对应语种的合约代码
 ----------- | ------------ | ---------------- 
 key|String|metadata的关键词
 value|String|metadata的内容
-version|Long|metadata的版本
+version|int64|metadata的版本
 
 #### OperationIssueAsset
 
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
 code|String|资产编码
-assetAmount|Long|资产数量
+assetAmount|int64|资产数量
 
 #### OperationPayAsset
 
@@ -2230,7 +2246,7 @@ input|String|合约main函数入参
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
 destAddress|String|待转移的目标账户地址
-buAmount|Long|待转移的BU数量
+buAmount|int64|待转移的BU数量
 input|String|合约main函数入参
 
 #### OperationSetMetadata
@@ -2239,7 +2255,7 @@ input|String|合约main函数入参
 ----------- | ------------ | ---------------- 
 key|String|metadata的关键词
 value|String|metadata的内容
-version|Long|metadata的版本
+version|int64|metadata的版本
 deleteFlag|boolean|是否删除metadata
 
 #### OperationSetPrivilege
@@ -2273,50 +2289,50 @@ transactionFees|[TransactionFees](#transactionfees)|交易费用
 #### TransactionFees
 成员      |     类型     |      描述    
 ----------- | ------------ | ---------------- 
-feeLimit|Long|交易要求的最低费用
-gasPrice|Long|交易燃料单价
+feeLimit|int64|交易要求的最低费用
+gasPrice|int64|交易燃料单价
 
 #### Signature
 
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
-signData|Long|签名后数据
-publicKey|Long|公钥
+signData|int64|签名后数据
+publicKey|int64|公钥
 
 #### TransactionHistory
 
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
 actualFee|String|交易实际费用
-closeTime|Long|交易关闭时间
-errorCode|Long|交易错误码
+closeTime|int64|交易关闭时间
+errorCode|int64|交易错误码
 errorDesc|String|交易描述
 hash|String|交易hash
-ledgerSeq|Long|区块序列号
+ledgerSeq|int64|区块序列号
 transaction|[TransactionInfo](#transactioninfo)|交易内容列表
 signatures|[Signature](#signature)[]|签名列表
-txSize|Long|交易大小
+txSize|int64|交易大小
 
 #### ValidatorInfo
 
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
 address|String|共识节点地址
-plegeCoinAmount|Long|验证节点押金
+plegeCoinAmount|int64|验证节点押金
 
 #### ValidatorReward
 
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
 validator|String|验证节点地址
-reward|Long|验证节点奖励
+reward|int64|验证节点奖励
 
 #### Fees
 
 成员      |     类型     |      描述       
 ----------- | ------------ | ---------------- 
-baseReserve|Long|账户最低资产限制
-gasPrice|Long|交易燃料单价，单位MO，1 BU = 10^8 MO
+baseReserve|int64|账户最低资产限制
+gasPrice|int64|交易燃料单价，单位MO，1 BU = 10^8 MO
 
 ## 错误码
 

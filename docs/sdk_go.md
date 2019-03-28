@@ -536,7 +536,7 @@ metadata      |   String |  选填，备注
    ------------- | -------- | ---------------------------------- 
    sourceAddress |   String |  选填，操作源账户地址 
    destAddress   |   String |  必填，目标账户地址                     
-   initBalance   |   Long   |  必填，初始化资产，单位MO，1 BU = 10^8 MO, 大小(0, Long.MAX_VALUE] 
+   initBalance   |   int64   |  必填，初始化资产，单位MO，1 BU = 10^8 MO, 大小(0, max(int64)] 
    metadata|String|选填，备注
 
 ### AccountSetMetadataOperation
@@ -556,7 +556,7 @@ metadata      |   String |  选填，备注
    sourceAddress |   String |  选填，操作源账户地址
    key           |   String  |  必填，metadata的关键词，长度限制[1, 1024]
    value         |   String  |  必填，metadata的内容，长度限制[0, 256000]
-   version       |   Long    |  选填，metadata的版本
+   version       |   int64   |  选填，metadata的版本
    deleteFlag    |   Boolean |  选填，是否删除metadata
    metadata|String|选填，备注           
 
@@ -575,9 +575,9 @@ metadata      |   String |  选填，备注
    成员变量    |     类型   |        描述               
    ------------- | --------- | --------------------------
    sourceAddress |   String |  选填，操作源账户地址
-   masterWeight|String|选填，账户自身权重，大小限制[0, (Integer.MAX_VALUE * 2L + 1)]
+   masterWeight|String|选填，账户自身权重，大小限制[0, max(uint32)]
    signers|[Signer](#signer)[]|选填，签名者权重列表
-   txThreshold|String|选填，交易门限，大小限制[0, Long.MAX_VALUE]
+   txThreshold|String|选填，交易门限，大小限制[0, max(int64)]
    typeThreshold|[TypeThreshold](#typethreshold)[]|选填，指定类型交易门限
    metadata|String|选填，备注
 
@@ -597,7 +597,7 @@ metadata      |   String |  选填，备注
    ------------- | --------- | ------------------------
    sourceAddress|String|选填，操作源账户地址
    code|String|必填，资产编码，长度限制[1, 64]
-   assetAmount|Long|必填，资产发行数量，大小限制[0, Long.MAX_VALUE]
+   assetAmount|int64|必填，资产发行数量，大小限制[0, max(int64)]
    metadata|String|选填，备注
 
 ### AssetSendOperation
@@ -620,7 +620,7 @@ metadata      |   String |  选填，备注
    destAddress|String|必填，目标账户地址
    code|String|必填，资产编码，长度限制[1, 64]
    issuer|String|必填，资产发行账户地址
-   assetAmount|Long|必填，资产数量，大小限制[0, Long.MAX_VALUE]
+   assetAmount|int64|必填，资产数量，大小限制[0, max(int64)]
    metadata|String|选填，备注
 
 ### BUSendOperation
@@ -641,7 +641,7 @@ metadata      |   String |  选填，备注
    ------------- | --------- | ---------------------
    sourceAddress|String|选填，操作源账户地址
    destAddress|String|必填，目标账户地址
-   buAmount|Long|必填，资产发行数量，大小限制[0, Long.MAX_VALUE]
+   buAmount|int64|必填，资产发行数量，大小限制[0, max(int64)]
    metadata|String|选填，备注
 
 ### ContractCreateOperation
@@ -659,7 +659,7 @@ metadata      |   String |  选填，备注
    成员变量    |     类型   |        描述          
    ------------- | --------- | ---------------------
    sourceAddress|String|选填，操作源账户地址
-   initBalance|Long|必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, Long.MAX_VALUE]
+   initBalance|int64|必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, max(int64)]
    type|Integer|选填，合约的语种，默认是0
    payload|String|必填，对应语种的合约代码
    initInput|String|选填，合约代码中init方法的入参
@@ -685,7 +685,7 @@ metadata      |   String |  选填，备注
    contractAddress|String|必填，合约账户地址
    code|String|选填，资产编码，长度限制[0, 64];当为空时，仅触发合约;
    issuer|String|选填，资产发行账户地址，当null时，仅触发合约
-   assetAmount|Long|选填，资产数量，大小限制[0, Long.MAX_VALUE]，当是0时，仅触发合约
+   assetAmount|int64|选填，资产数量，大小限制[0, max(int64)]，当是0时，仅触发合约
    input|String|选填，待触发的合约的main()入参
    metadata|String|选填，备注
 
@@ -707,7 +707,7 @@ metadata      |   String |  选填，备注
    ------------- | --------- | ---------------------
    sourceAddress|String|选填，操作源账户地址
    contractAddress|String|必填，合约账户地址
-   buAmount|Long|选填，资产发行数量，大小限制[0, Long.MAX_VALUE]，当0时仅触发合约
+   buAmount|int64|选填，资产发行数量，大小限制[0, max(int64)]，当0时仅触发合约
    input|String|选填，待触发的合约的main()入参
    metadata|String|选填，备注
 
@@ -1273,7 +1273,6 @@ metadata      |   String |  选填，备注
 
    参数      |     类型     |        描述       
    ----------- | ------------ | ---------------- 
-   header|BlockHeader|区块头
    blockNumber|int64|最新的区块高度，对应底层字段seq
 
 - **错误码**

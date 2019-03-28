@@ -63,7 +63,7 @@ npm install bumo-sdk --save
 const BumoSDK = require('bumo-sdk');
 
 const options = {
- host: 'seed1.bumotest.io:26002',
+    host: 'seed1.bumotest.io:26002',
 };
 
 const sdk = new BumoSDK(options);
@@ -75,9 +75,9 @@ const sdk = new BumoSDK(options);
 const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
 
 sdk.account.getInfo(address).then(info=> {
- console.log(info);
+    console.log(info);
 }).catch(err => {
- console.log(err.message);
+    console.log(err.message);
 });
 ```
 
@@ -98,12 +98,12 @@ const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
 
 sdk.account.getNonce(address).then(info => {
 
- if (info.errorCode !== 0) {
-   console.log(info);
-   return;
- }
+    if (info.errorCode !== 0) {
+        console.log(info);
+        return;
+    }
 
- const nonce = new BigNumber(info.result.nonce).plus(1).toString(10);
+    const nonce = new BigNumber(info.result.nonce).plus(1).toString(10);
 });
 
 // 本例中使用了big-number.js 将nonce的值加1，并返回字符串类型
@@ -124,15 +124,15 @@ const info = sdk.operation.buSendOperation({
 
 #### 序列化交易
 
-该接口用于序列化交易，并生成交易Blob串，便于网络传输。其中nonce和operation是上面接口得到的，接口详情请见[sign](#sign)，调用如下：
+该接口用于序列化交易，并生成交易Blob串，便于网络传输。其中nonce和operation是上面接口得到的，接口详情请见[buildBlob](#buildblob)，调用如下：
 ```js
 let blobInfo = sdk.transaction.buildBlob({
-  sourceAddress: 'buQnc3AGCo6ycWJCce516MDbPHKjK7ywwkuo',
-  gasPrice: '3000',
-  feeLimit: '1000',
-  nonce: '102',
-  operations: [ sendBuOperation ],
-  metadata: '74657374206275696c6420626c6f62',
+    sourceAddress: 'buQnc3AGCo6ycWJCce516MDbPHKjK7ywwkuo',
+    gasPrice: '3000',
+    feeLimit: '1000',
+    nonce: '102',
+    operations: [ sendBuOperation ],
+    metadata: '74657374206275696c6420626c6f62',
 });
 
 const blob = blobInfo.result;
@@ -140,11 +140,11 @@ const blob = blobInfo.result;
 
 #### 签名交易
 
-该接口用于交易发起者使用其账户私钥对交易进行签名。其中transactionBlob是上面接口得到的，接口详情请见[buildBlob](#buildblob)，调用如下：
+该接口用于交易发起者使用其账户私钥对交易进行签名。其中transactionBlob是上面接口得到的，接口详情请见[sign](#sign)，调用如下：
 ```js
- const signatureInfo = sdk.transaction.sign({
-  privateKeys: [ privateKey ],
-  blob,
+const signatureInfo = sdk.transaction.sign({
+    privateKeys: [ privateKey ],
+    blob,
 });
 
 const signature = signatureInfo.result;
@@ -152,13 +152,13 @@ const signature = signatureInfo.result;
 
 #### 提交交易
 
-该接口用于向BU区块链发送交易请求，触发交易的执行。其中transactionBlob和signResult是上面接口得到的，接口调用如下：
+该接口用于向BU区块链发送交易请求，触发交易的执行。其中transactionBlob和signResult是上面接口得到的，接口详情请见 [submit](#submit)，调用如下：
 ```js
 sdk.transaction.submit({
-  blob,
-  signature: signature,
+    blob,
+    signature: signature,
 }).then(data => {
-      console.log(data);
+    console.log(data);
 });
 ```
 
@@ -217,12 +217,12 @@ sdk.transaction.submit({
 
    ```js
    const args = {
-   sourceAddress,
-   gasPrice,
-   feeLimit,
-   nonce,
-   operations: [ sendBuOperation ],
-   metadata: '6f68206d79207478',
+       sourceAddress,
+       gasPrice,
+       feeLimit,
+       nonce,
+       operations: [ sendBuOperation ],
+       metadata: '6f68206d79207478',
    };
    const blobInfo = sdk.transaction.buildBlob(args);
    ```
@@ -269,15 +269,15 @@ sdk.transaction.submit({
 
    ```js
    const args = {
-         sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
-         nonce: '101',
-         operations: [sendBuOperation],
-         signtureNumber: '1',
-         metadata: '54657374206576616c756174696f6e20666565',
+       sourceAddress: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
+       nonce: '101',
+       operations: [sendBuOperation],
+       signtureNumber: '1',
+       metadata: '54657374206576616c756174696f6e20666565',
    };
 
    sdk.transaction.evaluateFee(args).then(data => {
-   console.log(data);
+       console.log(data);
    });
 
    ```
@@ -319,8 +319,8 @@ sdk.transaction.submit({
 
    ```js
    const signatureInfo = sdk.transaction.sign({
-         privateKeys: [ 'privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq' ],
-         blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704'
+       privateKeys: [ 'privbyQCRp7DLqKtRFCqKQJr81TurTqG6UKXMMtGAmPG3abcM9XHjWvq' ],
+       blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704'
    });
 
    console.log(signatureInfo);
@@ -363,13 +363,13 @@ sdk.transaction.submit({
 
    ```js
    const args = {
-   blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704',
-   signature: {
-      signData: 'D2B5E3045F2C1B7D363D4F58C1858C30ABBBB0F41E4B2E18AF680553CA9C3689078E215C097086E47A4393BCA715C7A5D2C180D8750F35C6798944F79CC5000A',
-      publicKey: 'b0011765082a9352e04678ef38d38046dc01306edef676547456c0c23e270aaed7ffe9e31477'
-   },
+       blob: '0A246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370102118C0843D20E8073A56080712246275516E6E5545425245773268423670574847507A77616E5837643238786B364B566370522C0A24627551426A4A443142534A376E7A41627A6454656E416870466A6D7852564545746D78481080A9E08704',
+       signature: {
+           signData: 'D2B5E3045F2C1B7D363D4F58C1858C30ABBBB0F41E4B2E18AF680553CA9C3689078E215C097086E47A4393BCA715C7A5D2C180D8750F35C6798944F79CC5000A',
+           publicKey: 'b0011765082a9352e04678ef38d38046dc01306edef676547456c0c23e270aaed7ffe9e31477'
+       },
 
-   let transactionInfo = yield sdk.transaction.submit(args);
+       let transactionInfo = yield sdk.transaction.submit(args);
    ```
 
 ### getInfo
@@ -397,19 +397,20 @@ sdk.transaction.submit({
 
 - **错误码**
 
-   异常       |     **错误码**   
-   -----------  | ----------- 
-   INVALID_HASH_ERROR|11055
-   REQUEST_NULL_ERROR|12001
-   CONNECTNETWORK_ERROR|11007
-   SYSTEM_ERROR|20000
+   异常       |     **错误码**   |        
+   -----------  | ----------- |-----------  
+   INVALID_HASH_ERROR|11055|Invalid transaction hash
+   REQUEST_NULL_ERROR|12001|Request parameter cannot be null
+   CONNECTNETWORK_ERROR|11007|Failed to connect to the network
+   SYSTEM_ERROR|20000|System error
+   INVALID_REQUEST_ERROR|17004|Request is invalid
 
 - **示例**
 
    ```js
    const hash = '1653f54fbba1134f7e35acee49592a7c29384da10f2f629c9a214f6e54747705';
    sdk.transaction.getInfo(hash).then(data => {
-   console.log(data);
+       console.log(data);
    })
    ```
 
@@ -455,7 +456,7 @@ sdk.transaction.submit({
   | INVALID_METADATA_ERROR                | 15028      | Invalid metadata                             |
   | SYSTEM_ERROR                          | 20000      | System error                                 |
 
-###　设置账户metadata
+### 设置账户metadata
 
 - **费用**
 
@@ -511,7 +512,7 @@ sdk.transaction.submit({
   | ------------- | -------------------------------------- | -------------------------------------------- |
   | sourceAddress | String                                 | 选填，操作源账户地址                         |
   | masterWeight  | String                                 | 选填，账户自身权重，大小限制[0, max(uint32)] |
-  | signers       | [Array<Signer](#signer)>               | 选填，签名者权重列表                         |
+  | signers       | Array<[Signer](#signer)>               | 选填，签名者权重列表                         |
   | txThreshold   | String                                 | 选填，交易门限，大小限制[0, max(int64)]      |
   | typeThreshold | Array<[TypeThreshold](#typethreshold)> | 选填，指定类型交易门限                       |
   | metadata      | String                                 | 选填，备注                                   |
@@ -690,7 +691,6 @@ sdk.transaction.submit({
   | INVALID_SOURCEADDRESS_ERROR               | 11002      | Invalid sourceAddress                     |
   | INVALID_CONTRACTADDRESS_ERROR             | 11037      | Invalid contract address                  |
   | CONTRACTADDRESS_NOT_CONTRACTACCOUNT_ERROR | 11038      | ContractAddress is not a contract account |
-  |                                           |            |                                           |
   | SYSTEM_ERROR                              | 20000      | System error                              |
 
 ### 发送资产触发合约
@@ -881,9 +881,9 @@ sdk.transaction.submit({
    const address = 'buQemmMwmRQY1JkcU7w3nhruoX5N3j6C29uo';
 
    sdk.account.checkValid(address).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -926,9 +926,9 @@ sdk.transaction.submit({
    const address = 'buQemmMwmRQY1JkcU7w3nhruo%X5N3j6C29uo';
 
    sdk.account.getInfo(address).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -968,9 +968,9 @@ sdk.transaction.submit({
    const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
 
    sdk.account.getNonce(address).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1049,9 +1049,9 @@ sdk.transaction.submit({
    const address = 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf';
 
    sdk.account.getAssets(address).then(result => {
-         console.log(result);
+       console.log(result);
    }).catch(err => {
-         console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1096,14 +1096,14 @@ sdk.transaction.submit({
    ```js
 
    const args = {
-      address: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
-      key: 'test'
+       address: 'buQswSaKDACkrFsnP1wcVsLAUzXQsemauEjf',
+       key: 'test'
    };
 
    sdk.account.getMetadata(args).then(result => {
-         console.log(result);
+       console.log(result);
    }).catch(err => {
-         console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1151,20 +1151,20 @@ sdk.transaction.submit({
 
    ```js
    const args = {
-         address: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
-         code: 'TST',
-         issuer: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
+       address: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
+       code: 'TST',
+       issuer: 'buQnnUEBREw2hB6pWHGPzwanX7d28xk6KVcp',
    };
 
-
    sdk.token.asset.getInfo(args).then(data => {
-   console.log(data);
+       console.log(data);
    });
+
    ```
 
 ## 合约服务
 
-合约服务提供合约相关的接口，目前有4个接口：`checkValid`、 `getInfo`、 `getAddress`、 `call`
+合约服务提供合约相关的接口，目前有4个接口：`checkValid`、 `getInfo`、 `getAddress` 和  `call`。
 
 ### checkValid
 
@@ -1202,9 +1202,9 @@ sdk.transaction.submit({
    const contractAddress = 'buQhP94E8FjWDF3zfsxjqVQDeBypvzMrB3y3';
 
    sdk.contract.checkValid(contractAddress).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1246,9 +1246,9 @@ sdk.transaction.submit({
    const contractAddress = 'buQqbhTrfAqZtiX79zp4MWwUVfpcadvtz2TM';
 
    sdk.contract.getInfo(contractAddress).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1287,7 +1287,7 @@ sdk.transaction.submit({
    ```js
    const hash = 'f298d08ec3987adc3aeef73e81cbb49cbad2316145ba190700de2d78657880c0';
    sdk.contract.getAddress(hash).then(data => {
-   console.log(data);
+       console.log(data);
    })
    ```
 
@@ -1341,15 +1341,15 @@ sdk.transaction.submit({
 
    ```js
    const args = {
-      code: '"use strict";log(undefined);function query() { getBalance(thisAddress); }',
-      feeLimit: '1000000000',
-      optType: 2
+       code: '"use strict";log(undefined);function query() { getBalance(thisAddress); }',
+       feeLimit: '1000000000',
+       optType: 2
    }
 
    sdk.contract.call(args).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1372,7 +1372,6 @@ sdk.transaction.submit({
 
    参数      |     类型     |        描述       
    ----------- | ------------ | ---------------- 
-   header|[BlockHeader](#blockheader)|区块头
    blockNumber|String|最新的区块高度，对应底层字段seq
 
 - **错误码**
@@ -1419,9 +1418,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.checkStatus().then((result) => {
-   console.log(result);
+       console.log(result);
    }).catch((err) => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1461,10 +1460,10 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getTransactions(100).then(result => {
-   console.log(result);
-   console.log(JSON.stringify(result));
+       console.log(result);
+       console.log(JSON.stringify(result));
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1505,9 +1504,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getInfo(100).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1542,9 +1541,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getLatestInfo().then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1582,9 +1581,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getValidators(100).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1615,9 +1614,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getLatestValidators().then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1657,9 +1656,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getReward(100).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1691,9 +1690,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getLatestReward().then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1731,9 +1730,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getFees(100).then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 
@@ -1764,9 +1763,9 @@ sdk.transaction.submit({
 
    ```js
    sdk.block.getLatestFees().then(result => {
-   console.log(result);
+       console.log(result);
    }).catch(err => {
-   console.log(err.message);
+       console.log(err.message);
    });
    ```
 

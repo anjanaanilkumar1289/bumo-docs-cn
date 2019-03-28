@@ -1438,7 +1438,6 @@ metadata      |   String |  选填，备注
 
    参数      |     类型     |        描述       
    ----------- | ------------ | ---------------- 
-   header|BlockHeader|区块头
    blockNumber|Long|最新的区块高度，对应底层字段seq
 
 - **错误码**
@@ -2126,6 +2125,15 @@ data|String[]|日志内容
 | transaction | [TransactionInfo](#transactioninfo) | 交易内容列表 |
 | signatures  | [Signature](#signature)[]           | 签名列表     |
 | txSize      | Long                                | 交易大小     |
+
+#### BlockHeader
+
+| Member    | Type   | Description  |
+| --------- | ------ | ------------ |
+| closeTime | Long   | 区块关闭时间 |
+| number    | Long   | 区块高度     |
+| txCount   | Long   | 交易数量     |
+| version   | String | 区块版本号   |
 
 #### ValidatorReward
 

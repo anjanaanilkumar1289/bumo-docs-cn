@@ -694,8 +694,14 @@ issueAsset("CNY", 10000);
   本次支付操作的 Asset，为对象类型，如下：
 
 - **示例**
-  ```JavaScript
-  {"amount": 1000, "key": {"issuer": "buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY", "code":"CNY"}}
+  ```json
+  {
+      "amount": 1000, 
+      "key": {
+          "issuer": "buQsZNDpqHJZ4g5hz47CqVMk5154w1bHKsHY", 
+          "code":"CNY"
+      }
+  }
   ```
 
 #### blockNumber

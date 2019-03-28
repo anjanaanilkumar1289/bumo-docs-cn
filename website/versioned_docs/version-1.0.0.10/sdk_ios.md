@@ -180,7 +180,7 @@ BUSendOperation *operation = [BUSendOperation new];
 
 #### 序列化交易
 
-该接口用于序列化交易，并生成交易Blob串，便于网络传输。其中nonce和operation是上面接口得到的，接口详情请见[sign](#sign)，调用如下：
+该接口用于序列化交易，并生成交易Blob串，便于网络传输。其中nonce和operation是上面接口得到的，接口详情请见[buildBlob](#buildblob)，调用如下：
 ```objc
 // 初始化变量
 int64_t gasPrice = 1000;
@@ -607,8 +607,8 @@ BaseOperation是buildBlob接口中所有操作的基类。
 
 成员变量    |     类型  |        描述                           
 ------------- | -------- | ----------------------------------   
-sourceAddress |   String |  选填，操作源账户地址
-metadata      |   String |  选填，备注
+sourceAddress | NSString* |  选填，操作源账户地址
+metadata      | NSString* |  选填，备注
 
 ### AccountActivateOperation
 
@@ -624,10 +624,10 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型  |        描述                           
    ------------- | -------- | ---------------------------------- 
-   sourceAddress |   String |  选填，操作源账户地址 
-   destAddress   |   String |  必填，目标账户地址                     
-   initBalance   |   Long   |  必填，初始化资产，单位MO，1 BU = 10^8 MO, 大小(0, Long.MAX_VALUE] 
-   metadata|String|选填，备注
+   sourceAddress | NSString* |  选填，操作源账户地址 
+   destAddress   | NSString* |  必填，目标账户地址                     
+   initBalance   |   int64   |  必填，初始化资产，单位MO，1 BU = 10^8 MO, 大小(0, max(int64)] 
+   metadata|NSString*|选填，备注
 
 ### AccountSetMetadataOperation
 
@@ -643,12 +643,12 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述                         
    ------------- | --------- | ------------------------------- 
-   sourceAddress |   String |  选填，操作源账户地址
-   key           |   String  |  必填，metadata的关键词，长度限制[1, 1024]
-   value         |   String  |  必填，metadata的内容，长度限制[0, 256000]
-   version       |   Long    |  选填，metadata的版本
+   sourceAddress | NSString* |  选填，操作源账户地址
+   key           | NSString*  |  必填，metadata的关键词，长度限制[1, 1024]
+   value         | NSString*  |  必填，metadata的内容，长度限制[0, 256000]
+   version       |   int64   |  选填，metadata的版本
    deleteFlag    |   Boolean |  选填，是否删除metadata
-   metadata|String|选填，备注           
+   metadata|NSString*|选填，备注           
 
 ### AccountSetPrivilegeOperation
 
@@ -664,12 +664,12 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述               
    ------------- | --------- | --------------------------
-   sourceAddress |   String |  选填，操作源账户地址
-   masterWeight|String|选填，账户自身权重，大小限制[0, (Integer.MAX_VALUE * 2L + 1)]
-   signers|[Signer](#signer)[]|选填，签名者权重列表
-   txThreshold|String|选填，交易门限，大小限制[0, Long.MAX_VALUE]
+   sourceAddress | NSString* |  选填，操作源账户地址
+   masterWeight|NSString*|选填，账户自身权重，大小限制[0, max(UINT32)]
+   signers|[SignerInfo](#signerinfo)[]|选填，签名者权重列表
+   txThreshold|NSString*|选填，交易门限，大小限制[0, max(int64)]
    typeThreshold|[TypeThreshold](#typethreshold)[]|选填，指定类型交易门限
-   metadata|String|选填，备注
+   metadata|NSString*|选填，备注
 
 ### AssetIssueOperation
 
@@ -685,10 +685,10 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述             
    ------------- | --------- | ------------------------
-   sourceAddress|String|选填，操作源账户地址
-   code|String|必填，资产编码，长度限制[1, 64]
-   assetAmount|Long|必填，资产发行数量，大小限制[0, Long.MAX_VALUE]
-   metadata|String|选填，备注
+   sourceAddress|NSString*|选填，操作源账户地址
+   code|NSString*|必填，资产编码，长度限制[1, 64]
+   assetAmount|int64|必填，资产发行数量，大小限制[0, max(int64)]
+   metadata|NSString*|选填，备注
 
 ### AssetSendOperation
 
@@ -706,12 +706,12 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述            
    ------------- | --------- | ----------------------
-   sourceAddress|String|选填，操作源账户地址
-   destAddress|String|必填，目标账户地址
-   code|String|必填，资产编码，长度限制[1, 64]
-   issuer|String|必填，资产发行账户地址
-   assetAmount|Long|必填，资产数量，大小限制[0, Long.MAX_VALUE]
-   metadata|String|选填，备注
+   sourceAddress|NSString*|选填，操作源账户地址
+   destAddress|NSString*|必填，目标账户地址
+   code|NSString*|必填，资产编码，长度限制[1, 64]
+   issuer|NSString*|必填，资产发行账户地址
+   assetAmount|int64|必填，资产数量，大小限制[0, max(int64)]
+   metadata|NSString*|选填，备注
 
 ### BUSendOperation
 
@@ -729,10 +729,10 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述          
    ------------- | --------- | ---------------------
-   sourceAddress|String|选填，操作源账户地址
-   destAddress|String|必填，目标账户地址
-   buAmount|Long|必填，资产发行数量，大小限制[0, Long.MAX_VALUE]
-   metadata|String|选填，备注
+   sourceAddress|NSString*|选填，操作源账户地址
+   destAddress|NSString*|必填，目标账户地址
+   buAmount|int64|必填，资产发行数量，大小限制[0, max(int64)]
+   metadata|NSString*|选填，备注
 
 ### ContractCreateOperation
 
@@ -748,12 +748,12 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述          
    ------------- | --------- | ---------------------
-   sourceAddress|String|选填，操作源账户地址
-   initBalance|Long|必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, Long.MAX_VALUE]
+   sourceAddress|NSString*|选填，操作源账户地址
+   initBalance|int64|必填，给合约账户的初始化资产，单位MO，1 BU = 10^8 MO, 大小限制[1, max(int64)]
    type|Integer|选填，合约的语种，默认是0
-   payload|String|必填，对应语种的合约代码
-   initInput|String|选填，合约代码中init方法的入参
-   metadata|String|选填，备注
+   payload|NSString*|必填，对应语种的合约代码
+   initInput|NSString*|选填，合约代码中init方法的入参
+   metadata|NSString*|选填，备注
 
 ### ContractInvokeByAssetOperation
 
@@ -771,13 +771,13 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述          
    ------------- | --------- | ---------------------
-   sourceAddress|String|选填，操作源账户地址
-   contractAddress|String|必填，合约账户地址
-   code|String|选填，资产编码，长度限制[0, 64];当为空时，仅触发合约;
-   issuer|String|选填，资产发行账户地址，当null时，仅触发合约
-   assetAmount|Long|选填，资产数量，大小限制[0, Long.MAX_VALUE]，当是0时，仅触发合约
-   input|String|选填，待触发的合约的main()入参
-   metadata|String|选填，备注
+   sourceAddress|NSString*|选填，操作源账户地址
+   contractAddress|NSString*|必填，合约账户地址
+   code|NSString*|选填，资产编码，长度限制[0, 64];当为空时，仅触发合约;
+   issuer|NSString*|选填，资产发行账户地址，当null时，仅触发合约
+   assetAmount|int64|选填，资产数量，大小限制[0, max(int64)]，当是0时，仅触发合约
+   input|NSString*|选填，待触发的合约的main()入参
+   metadata|NSString*|选填，备注
 
 ### ContractInvokeByBUOperation
 
@@ -795,11 +795,11 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述          
    ------------- | --------- | ---------------------
-   sourceAddress|String|选填，操作源账户地址
-   contractAddress|String|必填，合约账户地址
-   buAmount|Long|选填，资产发行数量，大小限制[0, Long.MAX_VALUE]，当0时仅触发合约
-   input|String|选填，待触发的合约的main()入参
-   metadata|String|选填，备注
+   sourceAddress|NSString*|选填，操作源账户地址
+   contractAddress|NSString*|必填，合约账户地址
+   buAmount|int64|选填，资产发行数量，大小限制[0, max(int64)]，当0时仅触发合约
+   input|NSString*|选填，待触发的合约的main()入参
+   metadata|NSString*|选填，备注
 
 ### LogCreateOperation
 
@@ -815,10 +815,10 @@ metadata      |   String |  选填，备注
 
    成员变量    |     类型   |        描述          
    ------------- | --------- | ---------------------
-   sourceAddress|String|选填，操作源账户地址
-   topic|String|必填，日志主题，长度限制[1, 128]
+   sourceAddress|NSString*|选填，操作源账户地址
+   topic|NSString*|必填，日志主题，长度限制[1, 128]
    datas|List<String>|必填，日志内容，每个字符串长度限制[1, 1024]
-   metadata|String|选填，备注
+   metadata|NSString*|选填，备注
 
 
 ## 账户服务
@@ -2159,6 +2159,8 @@ txSize|int64_t|交易大小
 ----------- | ------------ | ---------------- 
 address|NSString*|共识节点地址
 plegeCoinAmount|int64_t|验证节点押金
+
+
 
 #### ValidatorReward
 
