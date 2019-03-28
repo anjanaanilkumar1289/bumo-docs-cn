@@ -1,8 +1,8 @@
 ---
-id: version-1.0.0.10-sdk_go
-title: BUMO GO SDK
-sidebar_label: GO
-original_id: sdk_go
+id: version-1.0.0.10-sto_10
+title: BUMO STO 10 协议
+sidebar_label: STO 10
+original_id: sto_10
 ---
 
 ## 简介

@@ -935,7 +935,7 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 - 事件
 
     ```javascript
-    tlog('controllerRedeem', sender, tokenHolder, tranche, value, data + '; ' + operatorData);
+    tlog('controllerRedeem', sender, tokenHolder, tranche, value, data);
     ```
 
     topic: 方法名，这里是 'controllerRedeem'

@@ -15,7 +15,7 @@
       },
       "asset_issuance_development_guide_for_java": {
         "title": "BUMO 资产发行 JAVA 开发指南",
-        "sidebar_label": "资产发行 JAVA 开发指南"
+        "sidebar_label": "资产发行 JAVA 开发"
       },
       "atp_10": {
         "title": "BUMO ATP 10 协议",
@@ -31,11 +31,11 @@
       },
       "bupocket_user_guide": {
         "title": "BUMO 小布口袋 APP 用户手册",
-        "sidebar_label": "小布口袋 APP 用户手册"
+        "sidebar_label": "小布口袋 APP"
       },
       "codemach_editor_user_guide": {
         "title": "BUMO 合约编辑器用户手册",
-        "sidebar_label": "合约编辑器用户手册"
+        "sidebar_label": "合约编辑器"
       },
       "contract_hello_world": {
         "title": "BUMO 智能合约（hello world）",
@@ -51,7 +51,7 @@
       },
       "faucet_user_guide": {
         "title": "BUMO 水龙头用户手册",
-        "sidebar_label": "水龙头用户手册"
+        "sidebar_label": "水龙头"
       },
       "installation_maintenance_guide": {
         "title": "BUMO 节点安装运维指南",
@@ -59,7 +59,7 @@
       },
       "integration_guide_for_exchanges": {
         "title": "BUMO 交易所对接指南",
-        "sidebar_label": "交易所对接指南"
+        "sidebar_label": "交易所对接"
       },
       "introduction_to_beps": {
         "title": "BUMO BEPs 简介",
@@ -75,19 +75,19 @@
       },
       "keypair_generator_user_guide": {
         "title": "BUMO 密钥对生成器用户手册",
-        "sidebar_label": "密钥对生成器用户手册"
+        "sidebar_label": "密钥对生成器"
       },
       "keypair_guide": {
-        "title": "BUMO Keypair手册",
-        "sidebar_label": "Keypair手册"
+        "title": "BUMO Keypair 指导",
+        "sidebar_label": "Keypair"
       },
       "legal_evidence_development_guide_for_java": {
         "title": "BUMO 存证 JAVA 开发指南",
-        "sidebar_label": "存证 JAVA 开发指南"
+        "sidebar_label": "存证 JAVA 开发"
       },
       "quick_wallet_user_guide": {
         "title": "BOMO 轻钱包用户手册",
-        "sidebar_label": "轻钱包用户手册"
+        "sidebar_label": "轻钱包"
       },
       "sdk_go": {
         "title": "BUMO GO SDK",
@@ -111,7 +111,7 @@
       },
       "smart_contract_development_guide_for_java": {
         "title": "BUMO 智能合约 Java 开发指南",
-        "sidebar_label": "智能合约 Java 开发指南"
+        "sidebar_label": "智能合约 Java 开发"
       },
       "sto_10": {
         "title": "BUMO STO 10 协议",
@@ -139,7 +139,7 @@
       },
       "version-1.0.0.10-asset_issuance_development_guide_for_java": {
         "title": "BUMO 资产发行 JAVA 开发指南",
-        "sidebar_label": "资产发行 JAVA 开发指南"
+        "sidebar_label": "资产发行 JAVA 开发"
       },
       "version-1.0.0.10-atp_10": {
         "title": "BUMO ATP 10 协议",
@@ -155,11 +155,11 @@
       },
       "version-1.0.0.10-bupocket_user_guide": {
         "title": "BUMO 小布口袋 APP 用户手册",
-        "sidebar_label": "小布口袋 APP 用户手册"
+        "sidebar_label": "小布口袋 APP"
       },
       "version-1.0.0.10-codemach_editor_user_guide": {
         "title": "BUMO 合约编辑器用户手册",
-        "sidebar_label": "合约编辑器用户手册"
+        "sidebar_label": "合约编辑器"
       },
       "version-1.0.0.10-contract_hello_world": {
         "title": "BUMO 智能合约（hello world）",
@@ -175,7 +175,7 @@
       },
       "version-1.0.0.10-faucet_user_guide": {
         "title": "BUMO 水龙头用户手册",
-        "sidebar_label": "水龙头用户手册"
+        "sidebar_label": "水龙头"
       },
       "version-1.0.0.10-installation_maintenance_guide": {
         "title": "BUMO 节点安装运维指南",
@@ -183,7 +183,7 @@
       },
       "version-1.0.0.10-integration_guide_for_exchanges": {
         "title": "BUMO 交易所对接指南",
-        "sidebar_label": "交易所对接指南"
+        "sidebar_label": "交易所对接"
       },
       "version-1.0.0.10-introduction_to_beps": {
         "title": "BUMO BEPs 简介",
@@ -199,19 +199,19 @@
       },
       "version-1.0.0.10-keypair_generator_user_guide": {
         "title": "BUMO 密钥对生成器用户手册",
-        "sidebar_label": "密钥对生成器用户手册"
+        "sidebar_label": "密钥对生成器"
       },
       "version-1.0.0.10-keypair_guide": {
-        "title": "BUMO Keypair手册",
-        "sidebar_label": "Keypair手册"
+        "title": "BUMO Keypair 指导",
+        "sidebar_label": "Keypair"
       },
       "version-1.0.0.10-legal_evidence_development_guide_for_java": {
         "title": "BUMO 存证 JAVA 开发指南",
-        "sidebar_label": "存证 JAVA 开发指南"
+        "sidebar_label": "存证 JAVA 开发"
       },
       "version-1.0.0.10-quick_wallet_user_guide": {
         "title": "BOMO 轻钱包用户手册",
-        "sidebar_label": "轻钱包用户手册"
+        "sidebar_label": "轻钱包"
       },
       "version-1.0.0.10-sdk_go": {
         "title": "BUMO GO SDK",
@@ -235,7 +235,11 @@
       },
       "version-1.0.0.10-smart_contract_development_guide_for_java": {
         "title": "BUMO 智能合约 Java 开发指南",
-        "sidebar_label": "智能合约 Java 开发指南"
+        "sidebar_label": "智能合约 Java 开发"
+      },
+      "version-1.0.0.10-sto_10": {
+        "title": "BUMO STO 10 协议",
+        "sidebar_label": "STO 10"
       },
       "version-1.0.0.10-syntax_in_smart_contract": {
         "title": "BUMO 智能合约语法说明",

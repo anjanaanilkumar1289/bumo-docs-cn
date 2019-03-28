@@ -1,7 +1,7 @@
 ---
 id: bupocket_user_guide
 title: BUMO 小布口袋 APP 用户手册
-sidebar_label: 小布口袋 APP 用户手册
+sidebar_label: 小布口袋 APP
 ---
 
 ## 小布口袋APP 简介
@@ -26,8 +26,7 @@ sidebar_label: 小布口袋 APP 用户手册
 * 账户地址是以bu为开头的一串字符串。
 * 交易费用会根据具体的交易来结算，实际交易中产生的费用不会大于最多支付交易费用。
 
-<img src="/docs/assets/bupockettransfer.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupockettransfer.png" style= "margin-left: 20px">
 
 ## 添加资产
 
@@ -42,8 +41,7 @@ sidebar_label: 小布口袋 APP 用户手册
 * 如果当前开关为关闭状态，单击开关后，开关置为开启状态，该资产展示在资产首页中。
 * 如果当前开关为开启状态，单击开关后，开关置为关闭状态，该资产从资产首页中隐藏。
 
-<img src="/docs/assets/bupocketaddasset.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketaddasset.png" style= "margin-left: 20px">
 
 ## 登记资产
 
@@ -53,8 +51,7 @@ sidebar_label: 小布口袋 APP 用户手册
 
 **注意**：如果资产已经登记过或者BU余额不足，会弹出相应的提示框。单击取消则BUMO 工具箱中的登记资产操作被取消。
 
-<img src="/docs/assets/bupocketregisterasset.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketregisterasset.png" style= "margin-left: 20px">
 
 ## 发行资产
 
@@ -74,8 +71,7 @@ sidebar_label: 小布口袋 APP 用户手册
 4. 在确认密码处再次输入新密码。
 5. 单击下一步则修改密码成功，直接跳转到钱包首页。    
 
-<img src="/docs/assets/bupocketchangepassword.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketchangepassword.png" style= "margin-left: 20px">
 
 ## 设置货币单位和语言
 
@@ -86,8 +82,7 @@ sidebar_label: 小布口袋 APP 用户手册
 2. 单击货币单位进入货币单位选择页面。
 3. 单击选择相应的货币单位即设置成功。
 
-<img src="/docs/assets/bupocketsetcurrency.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketsetcurrency.png"　style= "margin-left: 20px">
 
 
 ### 设置语言
@@ -97,8 +92,7 @@ sidebar_label: 小布口袋 APP 用户手册
 2. 单击多语言进入语言选择页面。
 3. 单击选择相应的语言即设置成功。
 
-<img src="/docs/assets/bupocketsetlanguage.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketsetlanguage.png"　style= "margin-left: 20px">
 
 ## 导入助记词/Keystore/私钥
 
@@ -114,8 +108,7 @@ sidebar_label: 小布口袋 APP 用户手册
 6. 在确认密码处再次输入密码。
 7. 单击开始导入，则导入钱包成功。
 
-<img src="/docs/assets/bupocketmnenomics.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketmnenomics.png"　style= "margin-left: 20px">
 
 **说明**：
 * 非首次导入钱包时，不显示立即导入按钮，可通过单击钱包管理页面右侧的加号按钮进入导入钱包页面。
@@ -135,8 +128,7 @@ sidebar_label: 小布口袋 APP 用户手册
 
 **注意**：Keystore 文件的密码遗失是无法找回的，请务必保管好Keystore文件及密码。
 
-<img src="/docs/assets/bupocketimportkeystore.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketimportkeystore.png"　style= "margin-left: 20px">
 
 ### 导入私钥
 
@@ -153,8 +145,7 @@ sidebar_label: 小布口袋 APP 用户手册
 **注意**：助记词、私钥、Keystore 文件及密码，以上三样任何人
 拿到一样就可以拿走您的数字资产，请务必妥善保管！
 
-<img src="/docs/assets/bupocketimportprivatekey.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketimportprivatekey.png"　style= "margin-left: 20px">
 
 ## 导出Keystore和私钥
 
@@ -169,8 +160,7 @@ sidebar_label: 小布口袋 APP 用户手册
 4. 输入密码后单击确认，弹出导出Keystore 页面。
 5. 单击复制Keystore 将拷贝的Keystore 内容保存到安全的地方。
 
-<img src="/docs/assets/bupocketexportkeystore.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketexportkeystore.png"　style= "margin-left: 20px">
 
 ### 导出私钥
 
@@ -181,8 +171,7 @@ sidebar_label: 小布口袋 APP 用户手册
 4. 输入密码后单击确认，弹出导出私钥页面。
 5. 单击复制私钥将拷贝的私钥内容保存到安全的地方。
 
-<img src="/docs/assets/bupocketexportprivatekey.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/bupocketexportprivatekey.png"　style= "margin-left: 20px">
 
 ## 修改钱包名称
 
@@ -193,5 +182,4 @@ sidebar_label: 小布口袋 APP 用户手册
 4. 在钱包名称文本框输入新的钱包名。
 5. 单击确认则钱包名称修改成功。 
 
-<img src="/docs/assets/bupocketchangename.png"
-​     style= "margin-left: 20px">   
+<img src="/docs/assets/bupocketchangename.png"　style= "margin-left: 20px">   

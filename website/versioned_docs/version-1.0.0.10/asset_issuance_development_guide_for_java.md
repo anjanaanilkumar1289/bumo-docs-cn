@@ -1,7 +1,7 @@
 ---
 id: version-1.0.0.10-asset_issuance_development_guide_for_java
 title: BUMO 资产发行 JAVA 开发指南
-sidebar_label: 资产发行 JAVA 开发指南
+sidebar_label: 资产发行 JAVA 开发
 original_id: asset_issuance_development_guide_for_java
 ---
 
@@ -336,7 +336,7 @@ public static AccountCreateResult createAccount() {
 | 0      | Successful operation                                         |
 | 1      | Inner service defect                                         |
 | 2      | Parameters error                                             |
-| 3      | Objects already exist, such as repeated transactions***      |
+| 3      | Objects already exist, such as repeated transactions         |
 | 4      | Objects do not exist, such as null account, transactions and blocks etc. |
 | 5      | Transactions expired. It means the transaction has been removed from the buffer, but it still has probability to be executed. |
 | 7      | Math calculation is overflown                                |
@@ -355,7 +355,7 @@ public static AccountCreateResult createAccount() {
 | 102    | The target account already exists                            |
 | 103    | Accounts do not exist                                        |
 | 104    | Low reserve in the account                                   |
-| 105    | Amount of assets exceeds the limitation*** ( int64 )         |
+| 105    | Amount of assets exceeds the limitation ( int64 )            |
 | 106    | Insufficient initial reserve for account creation            |
 | 111    | Low transaction fee                                          |
 | 114    | TX buffer is full                                            |

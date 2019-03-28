@@ -1,7 +1,7 @@
 ---
 id: integration_guide_for_exchanges
 title: BUMO 交易所对接指南
-sidebar_label: 交易所对接指南
+sidebar_label: 交易所对接
 ---
 
 
@@ -189,7 +189,6 @@ JAVA SDK的使用包括了[生成用户充值地址](#生成用户充值地址)�
 ```
 
 **注意**：
-
 - 关于Bumo-sdk-java 如何使用，请访问：[JAVA SDK](../sdk_java)
 
 - 关于交易所对接示例，请访问以下链接：[ExchangeDemo.java](https://github.com/bumoproject/bumo-sdk-java/blob/master/examples/src/main/java/io/bumo/sdk/example/ExchangeDemo.java)

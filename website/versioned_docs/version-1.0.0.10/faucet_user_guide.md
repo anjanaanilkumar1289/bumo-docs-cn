@@ -1,7 +1,7 @@
 ---
 id: version-1.0.0.10-faucet_user_guide
 title: BUMO 水龙头用户手册
-sidebar_label: 水龙头用户手册
+sidebar_label: 水龙头
 original_id: faucet_user_guide
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: smart_contract_development_guide_for_java
 title: BUMO 智能合约 Java 开发指南
-sidebar_label: 智能合约 Java 开发指南
+sidebar_label: 智能合约 Java 开发
 ---
 
 ## 概述
@@ -199,19 +199,19 @@ function query(input_str){
 如果出现背景是红色的 warning 提示，表示语法有问题，如下图：
 
 <img src="/docs/assets/warnings.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 如果没有语法问题，弹出的提示如下图：
 
 <img src="/docs/assets/nowarnings.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 ### 文本压缩
 
 打开在线文本压缩页面: [第三方工具](https://jsmin.51240.com/) ，将验证无误的智能合约代码拷贝到页面中的编辑框中，然后点击 **压缩** 按钮，将压缩后的字符串拷贝下来，如下图：
 
 <img src="/docs/assets/compressedString.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 ### 创建SDK实例-1
 
@@ -471,12 +471,12 @@ public String submitTransaction(String transactionBlob, Signature[] signatures) 
 在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
 <img src="/docs/assets/BUExplorer1.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 查询结果如下：
 
 <img src="/docs/assets/BUResult1.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 
 #### 调用接口查询-1
@@ -508,7 +508,7 @@ public String submitTransaction(String transactionBlob, Signature[] signatures) 
 | 0      | Successful operation                                         |
 | 1      | Inner service defect                                         |
 | 2      | Parameters error                                             |
-| 3      | Objects already exist, such as repeated transactions***      |
+| 3      | Objects already exist, such as repeated transactions         |
 | 4      | Objects do not exist, such as null account, transactions and blocks etc. |
 | 5      | Transactions expired. It means the transaction has been removed from the buffer, but it still has probability to be executed. |
 | 7      | Math calculation is overflown                                |
@@ -527,7 +527,7 @@ public String submitTransaction(String transactionBlob, Signature[] signatures) 
 | 102    | The target account already exists                            |
 | 103    | Accounts do not exist                                        |
 | 104    | Low reserve in the account                                   |
-| 105    | Amount of assets exceeds the limitation*** ( int64 )         |
+| 105    | Amount of assets exceeds the limitation ( int64 )            |
 | 106    | Insufficient initial reserve for account creation            |
 | 111    | Low transaction fee                                          |
 | 114    | TX buffer is full                                            |
@@ -556,7 +556,7 @@ public String submitTransaction(String transactionBlob, Signature[] signatures) 
 并将 10000 CGO转移给另一个账户 `buQXPeTjT173kagZ7j8NWAPJAgJCpJHFdyc7`。
 
 
-本场景的具体执行过程包括 :[创建SDK实例-2](#创建SDK实例-2)、[获取资方账户的序列号-2](#获取资方账户的序列号-2)、[组装分配CGO和转移CGO](#组装分配cgo和转移cgo)、[序列化交易-2](#序列化交易-2)、[签名交易-2](#签名交易-2)、[发送交易-2](#发送交易-2)、[查询交易是否执行成功-2](#查询交易是否执行成功-2)。
+本场景的具体执行过程包括 :[创建SDK实例-2](#创建sdk实例-2)、[获取资方账户的序列号-2](#获取资方账户的序列号-2)、[组装分配CGO和转移CGO](#组装分配cgo和转移cgo)、[序列化交易-2](#序列化交易-2)、[签名交易-2](#签名交易-2)、[发送交易-2](#发送交易-2)、[查询交易是否执行成功-2](#查询交易是否执行成功-2)。
 
 
 
@@ -760,12 +760,12 @@ public Signature[] signTransaction(String transactionBlob) {
 在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
 <img src="/docs/assets/BUExplorer2.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 查询结果如下：
 
 <img src="/docs/assets/BUResult2.png"
-     style= "margin-left: 20px">
+​     style= "margin-left: 20px">
 
 
 
@@ -798,7 +798,7 @@ public Signature[] signTransaction(String transactionBlob) {
 | 0      | Successful operation                                         |
 | 1      | Inner service defect                                         |
 | 2      | Parameters error                                             |
-| 3      | Objects already exist, such as repeated transactions***      |
+| 3      | Objects already exist, such as repeated transactions         |
 | 4      | Objects do not exist, such as null account, transactions and blocks etc. |
 | 5      | Transactions expired. It means the transaction has been removed from the buffer, but it still has probability to be executed. |
 | 7      | Math calculation is overflown                                |
@@ -817,7 +817,7 @@ public Signature[] signTransaction(String transactionBlob) {
 | 102    | The target account already exists                            |
 | 103    | Accounts do not exist                                        |
 | 104    | Low reserve in the account                                   |
-| 105    | Amount of assets exceeds the limitation*** ( int64 )         |
+| 105    | Amount of assets exceeds the limitation ( int64 )            |
 | 106    | Insufficient initial reserve for account creation            |
 | 111    | Low transaction fee                                          |
 | 114    | TX buffer is full                                            |
@@ -838,17 +838,17 @@ public Signature[] signTransaction(String transactionBlob) {
 
 
 
-### 实例场景三
+## 实例场景三
 
 该实现主要实现智能合约的查询功能。
 
 在 BuChain 上通过智能合约账户 `buQcEk2dpUv6uoXjAqisVRyP1bBSeWUHCtF2` 查询账户 `buQXPeTjT173kagZ7j8NWAPJAgJCpJHFdyc7` 的 CGO 的余额。
 
-本节主要讲解 : [创建SDK实例-3](#创建SDK实例-3) 和 [查询余额](#查询余额)。
+本节主要讲解 : [创建SDK实例-3](#创建sdk实例-3) 和 [查询余额](#查询余额)。
 
 
 
-#### 创建SDK实例-3
+### 创建SDK实例-3
 
 创建实例并设置url(部署的某节点的IP和端口)。
 ```java
@@ -866,7 +866,7 @@ public Signature[] signTransaction(String transactionBlob) {
 
 
 
-#### 查询余额
+### 查询余额
 
 查询余额的代码示例如下：
 ```java

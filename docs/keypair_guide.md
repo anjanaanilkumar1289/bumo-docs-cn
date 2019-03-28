@@ -1,7 +1,7 @@
 ---
 id: keypair_guide
-title: BUMO Keypair手册
-sidebar_label: Keypair手册
+title: BUMO Keypair 指导
+sidebar_label: Keypair
 ---
 
 ## 概述

@@ -1,7 +1,7 @@
 ---
 id: version-1.0.0.10-integration_guide_for_exchanges
 title: BUMO 交易所对接指南
-sidebar_label: 交易所对接指南
+sidebar_label: 交易所对接
 original_id: integration_guide_for_exchanges
 ---
 

@@ -1,7 +1,7 @@
 ---
 id: codemach_editor_user_guide
 title: BUMO 合约编辑器用户手册
-sidebar_label: 合约编辑器用户手册
+sidebar_label: 合约编辑器
 ---
 
 ## CodeMach Editor 简介

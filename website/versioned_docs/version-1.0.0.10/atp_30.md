@@ -556,7 +556,7 @@ BUMO ATP 30协议中的函数包括 [issue](#issue)、[totalSupply](#totalsuppl
 - 函数：
 
   ```js
-  function symbol(tokenId)
+  function symbol()
   ```
 
 - 返回值：

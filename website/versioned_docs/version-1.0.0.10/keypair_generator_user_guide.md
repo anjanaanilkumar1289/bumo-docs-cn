@@ -1,7 +1,7 @@
 ---
 id: version-1.0.0.10-keypair_generator_user_guide
 title: BUMO 密钥对生成器用户手册
-sidebar_label: 密钥对生成器用户手册
+sidebar_label: 密钥对生成器
 original_id: keypair_generator_user_guide
 ---
 
@@ -9,7 +9,7 @@ original_id: keypair_generator_user_guide
 Keypair Generator是网页版地址和私钥生成器，通过该入口，可随机生成账户地址和私钥。Keypair Generator目前也有正式版和测试版，正式版网址为https://keypair.bumo.io/，测试版网址为https://keypair.bumotest.io/。
 
 ## 使用
-下面是Keypair Generator的页面，单击右上方**简体中文/English**按钮可切换中英文语言；单击**Go Quick Wallet**按钮可跳转到Quick Wallet页面，Quick Wallet的使用可参考 [Quick Wallet用户手册](#../quick_wallet_user_guide)。
+下面是Keypair Generator的页面，单击右上方**简体中文/English**按钮可切换中英文语言；单击**Go Quick Wallet**按钮可跳转到Quick Wallet页面，Quick Wallet的使用可参考 [Quick Wallet用户手册](../quick_wallet_user_guide)。
 
 <img src="/docs/assets/keypairgenerator_1.png" style= "margin-left: 20px">
 

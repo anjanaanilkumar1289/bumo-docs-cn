@@ -1,7 +1,7 @@
 ---
 id: quick_wallet_user_guide
 title: BOMO 轻钱包用户手册
-sidebar_label: 轻钱包用户手册
+sidebar_label: 轻钱包
 ---
 
 ## 简介

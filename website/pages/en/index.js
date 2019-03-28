@@ -274,7 +274,7 @@ class Index extends React.Component {
           },
           {
             url: `${baseUrl}docs/api_websocket`,
-            label: 'Websockt'
+            label: 'Websocket'
           }
         ]
       },
@@ -314,15 +314,15 @@ class Index extends React.Component {
           },
           {
             url: `${baseUrl}docs/asset_issuance_development_guide_for_java`,
-            label: '资产发行 Java 开发指南'
+            label: '资产发行 Java 开发'
           },
           {
             url: `${baseUrl}docs/asset_issuance_development_guide_for_java`,
-            label: '存证 Java 开发指南 '
+            label: '存证 Java 开发'
           },
           {
             url: `${baseUrl}docs/smart_contract_development_guide`,
-            label: '智能合约 Java 开发指南'
+            label: '智能合约 Java 开发'
           }
         ]
       },
@@ -336,7 +336,7 @@ class Index extends React.Component {
           },
           {
             url: `${baseUrl}docs/bupocket_user_guide`,
-            label: '小布口袋'
+            label: '小布口袋 APP'
           }
         ]
       },

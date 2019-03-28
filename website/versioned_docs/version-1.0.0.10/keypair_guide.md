@@ -1,7 +1,7 @@
 ---
 id: version-1.0.0.10-keypair_guide
-title: BUMO Keypair手册
-sidebar_label: Keypair手册
+title: BUMO Keypair 指导
+sidebar_label: Keypair
 original_id: keypair_guide
 ---
 
