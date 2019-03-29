@@ -300,13 +300,11 @@ public static AccountCreateResult createAccount() {
 
 在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
-<img src="/docs/assets/BUBrowser.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/BUBrowser.png" style= "margin-left: 20px">
 
 查询结果如下：
 
-<img src="/docs/assets/execution_result_of_transaction.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/execution_result_of_transaction.png" style= "margin-left: 20px">
 
 #### 调用接口查询
 

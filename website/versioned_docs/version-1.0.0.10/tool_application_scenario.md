@@ -48,7 +48,7 @@ B的密钥：*privbzvYJo6XR6JfQNobxpJjd6F5erzzEZbpGzMZENjppovFVe5JDMdh*
 
 <img src="/docs/assets/accountaddressgeneration_2.jpg" style= "margin-left: 20px">
 
-**说明**：单击**Go Quick Wallet* 可直接跳转到Quick Wallet页面，Quick Wallet 使用说明请参考*Quick Wallet用户手册*。
+**说明**：单击**Go Quick Wallet** 可直接跳转到Quick Wallet页面，Quick Wallet 使用说明请参考 [Quick Wallet用户手册](../quick_wallet_user_guide)。
 
 ### 获取测试BU
 
@@ -60,8 +60,6 @@ B的密钥：*privbzvYJo6XR6JfQNobxpJjd6F5erzzEZbpGzMZENjppovFVe5JDMdh*
 2. 在**Account Address**字段输入A的账户地址并单击**Confirm**，会显示发送测试BU 到A账户成功，如图所示，此时A账户拥有100 测试BU。过一段时间后再次重复为A账户获取BU，则A账户拥有200 测试BU。
 
 <img src="/docs/assets/acquiretestbu_2.jpg" style= "margin-left: 20px">
-
-**说明**：单击**Go Quick Wallet** 可直接跳转到Quick Wallet页面，Quick Wallet 使用说明请参考 [Quick Wallet用户手册](../quick_wallet_user_guide)。
 
 ### 转账BU
 

@@ -198,20 +198,17 @@ function query(input_str){
 打开在线检测页面: [bumo-jslint](http://jslint.bumocdn.com/ )，将上面的智能合约代码拷贝到编辑框中，点击 **JSLint** 按钮，这里提示智能合约代码没有问题。 
 如果出现背景是红色的 warning 提示，表示语法有问题，如下图：
 
-<img src="/docs/assets/warnings.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/warnings.png" style= "margin-left: 20px">
 
 如果没有语法问题，弹出的提示如下图：
 
-<img src="/docs/assets/nowarnings.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/nowarnings.png" style= "margin-left: 20px">
 
 ### 文本压缩
 
 打开在线文本压缩页面: [第三方工具](https://jsmin.51240.com/) ，将验证无误的智能合约代码拷贝到页面中的编辑框中，然后点击 **压缩** 按钮，将压缩后的字符串拷贝下来，如下图：
 
-<img src="/docs/assets/compressedString.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/compressedString.png" style= "margin-left: 20px">
 
 ### 创建SDK实例-1
 
@@ -470,13 +467,11 @@ public String submitTransaction(String transactionBlob, Signature[] signatures) 
 
 在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
-<img src="/docs/assets/BUExplorer1.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/BUExplorer1.png" style= "margin-left: 20px">
 
 查询结果如下：
 
-<img src="/docs/assets/BUResult1.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/BUResult1.png" style= "margin-left: 20px">
 
 
 #### 调用接口查询-1
@@ -759,13 +754,11 @@ public Signature[] signTransaction(String transactionBlob) {
 
 在BUMO区块链浏览器中查询上面的hash，[主网](https://explorer.bumo.io)，[测试网](https://explorer.bumotest.io)，操作如下图：
 
-<img src="/docs/assets/BUExplorer2.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/BUExplorer2.png" style= "margin-left: 20px">
 
 查询结果如下：
 
-<img src="/docs/assets/BUResult2.png"
-​     style= "margin-left: 20px">
+<img src="/docs/assets/BUResult2.png" style= "margin-left: 20px">
 
 
 
