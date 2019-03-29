@@ -1,7 +1,8 @@
 ---
-id: introduction_to_smart_contract
+id: version-1.2.0-introduction_to_smart_contract
 title: BUMO 智能合约介绍
 sidebar_label: 介绍
+original_id: introduction_to_smart_contract
 ---
 
 ## 合约定义

@@ -42,7 +42,7 @@
         "sidebar_label": "智能合约（hello world）"
       },
       "contract_new_interfaces": {
-        "title": "BUMO 智能合约新接口",
+        "title": "BUMO 智能合约开发（新接口）",
         "sidebar_label": "新接口"
       },
       "dex_10": {
@@ -252,6 +252,18 @@
       "version-1.0.0.10-tool_application_scenario": {
         "title": "BUMO 工具应用场景示例",
         "sidebar_label": "工具应用场景示例"
+      },
+      "version-1.2.0-contract_new_interfaces": {
+        "title": "BUMO 智能合约开发（新接口）",
+        "sidebar_label": "新接口"
+      },
+      "version-1.2.0-introduction_to_smart_contract": {
+        "title": "BUMO 智能合约介绍",
+        "sidebar_label": "介绍"
+      },
+      "version-1.2.0-syntax_in_smart_contract": {
+        "title": "BUMO 智能合约语法说明",
+        "sidebar_label": "语法说明"
       }
     },
     "links": {

@@ -140,7 +140,7 @@ function main(input)
 ```
 
 ## 规则列表
- 
+
 - 严格检测声明，所有的源码在开始必须要添加 `"use strict";` 字段
 
 - 语句块内尽量使用 `let` 声明变量
@@ -155,7 +155,7 @@ function main(input)
 
 - 禁用 `++` 和 `--`，使用 `+=` 和 `-=` 替代
 
-- 禁止使用 `eval`, `void`, `this` 关键字
+- 禁止使用 `eval`, `void` 关键字
 
 - 禁止使用 `new` 创建 `Number`, `String`, `Boolean`对象，可以使用其构造调用来获取对象
 
