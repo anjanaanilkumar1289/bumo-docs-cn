@@ -14,7 +14,7 @@ Keypair Generator是网页版地址和私钥生成器，通过该入口，可随
 <img src="/docs/assets/keypairgenerator_1.png" style= "margin-left: 20px">
 
 
-单击**Generator**按钮直接生成随机账户地址和相应的私钥，如图所示，关于Keypair的生成原理和过程可参考*Keypair用户手册*。
+单击**Generator**按钮直接生成随机账户地址和相应的私钥，如图所示，关于Keypair的生成原理和过程可参考 [Keypair用户手册](#../keypair_guide)。
 
 <img src="/docs/assets/keypairgenerator_2.png" style= "margin-left: 20px">
 
