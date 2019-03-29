@@ -254,7 +254,7 @@ if (0 == $response->error_code) {
 
 ## 交易服务
 
-交易服务主要是交易相关的接口，目前有5个接口：buildBlob, evaluateFee, sign, submit, getInfo。
+交易服务主要是交易相关的接口，目前有5个接口：`buildBlob`, `evaluateFee`, `sign`, `submit`, `getInfo`。
 
 ### buildBlob
 
@@ -1226,7 +1226,7 @@ metadata      |   String |  选填，备注
 
 ## 资产服务
 
-遵循ATP1.0协议，账户服务主要是资产相关的接口，目前有1个接口：getInfo
+遵循ATP1.0协议，账户服务主要是资产相关的接口，目前有1个接口：`getInfo`
 
 ### getInfo
 
@@ -1293,7 +1293,7 @@ metadata      |   String |  选填，备注
 
 ## 合约服务
 
-合约服务主要是合约相关的接口，目前有4个接口：checkValid, getInfo, getAddress, call
+合约服务主要是合约相关的接口，目前有4个接口：`checkValid`, `getInfo`, `getAddress`, `call`
 
 ### checkValid
 
@@ -1539,7 +1539,7 @@ metadata      |   String |  选填，备注
 
 ## 区块服务
 
-区块服务主要是区块相关的接口，目前有11个接口：getNumber, checkStatus, getTransactions , getInfo, getLatestInfo, getValidators, getLatestValidators, getReward, getLatestReward, getFees, getLatestFees。
+区块服务主要是区块相关的接口，目前有11个接口：`getNumber`, `checkStatus`, `getTransactions`, `getInfo`, `getLatestInfo`, `getValidators`, `getLatestValidators`, `getReward`, `getLatestReward`, `getFees`, `getLatestFees`。
 
 ### getNumber
 

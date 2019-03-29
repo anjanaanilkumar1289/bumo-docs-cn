@@ -185,7 +185,7 @@ resDataSign := testSdk.Transaction.Sign(reqData)
 
 #### 提交交易
 
-该接口用于向BU区块链发送交易请求，触发交易的执行。其中transactionBlob和signResult是上面接口得到的，接口调用如下：
+该接口用于向BU区块链发送交易请求，触发交易的执行。其中transactionBlob和signResult是上面接口得到的，接口详情见[submit](#submit)调用如下：
 ```go
 //初始化传入参数
 var reqData model.TransactionSubmitRequest
@@ -2012,4 +2012,3 @@ CONNECTN_BLOCKCHAIN_ERROR|19999|Failed to connect to the blockchain
 SYSTEM_ERROR|20000|System error
 GET_ENCPUBLICKEY_ERROR|14000|The function ‘GetEncPublicKey’ failed
 SIGN_ERROR|14001|The function ‘Sign’ failed
-||

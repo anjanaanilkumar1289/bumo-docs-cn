@@ -2103,7 +2103,7 @@ deleteFlag|boolean|是否删除metadata
 成员    |     类型   |        描述       
 ----------- | ------------ | ---------------- 
 masterWeight|NSString*|账户自身权重，大小限制[0, max(uint32)]
-signers|NSArray<[Signer](#signer) *> *|签名者权重列表
+signers|NSArray<[SignerInfo](#signerinfo) *> *|签名者权重列表
 txThreshold|NSString*|交易门限，大小限制[0, max(int64)]
 typeThreshold|[TypeThreshold](#typethreshold)*|指定类型交易门限
 

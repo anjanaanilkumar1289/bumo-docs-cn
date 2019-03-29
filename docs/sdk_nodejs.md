@@ -396,7 +396,7 @@ sdk.transaction.submit({
 
 - **错误码**
 
-   异常       |     **错误码**   |        
+   异常       |     **错误码**   | 描述 
    -----------  | ----------- |-----------  
    INVALID_HASH_ERROR|11055|Invalid transaction hash
    REQUEST_NULL_ERROR|12001|Request parameter cannot be null

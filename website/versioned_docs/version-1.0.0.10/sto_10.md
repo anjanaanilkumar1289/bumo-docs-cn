@@ -800,8 +800,6 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
     toTranche: Token 收入方 tranche 的 id
 
-    value: Token 数量
-
     data: 允许随传输一起提交任意数据，以便进行解释或记录。这可以是授权传输的签名数据（例如，动态白名单），但是足够灵活以适应其他用例。
 
 
@@ -1609,9 +1607,9 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 返回值
 
-成功: true
+    成功: true
 
-失败: 抛出错误信息
+    失败: 抛出错误信息
 
 ### canTransferTranche
 
@@ -1640,9 +1638,9 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 返回值
 
-　　成功: true
-　　
-　　失败: 抛出错误信息
+    成功: true
+
+    失败: 抛出错误信息
 
 ### canTransferToTranche
 
@@ -1672,9 +1670,9 @@ BUMO ATP 20 协议中的函数包括[tokenInfo](#tokeninfo)、[setDocument](#set
 
 - 返回值
 
-　　成功: true
-　　
-　　失败: 抛出错误信息
+    成功: true
+
+    失败: 抛出错误信息
 
 
 
