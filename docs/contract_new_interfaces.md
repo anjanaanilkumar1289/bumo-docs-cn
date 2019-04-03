@@ -668,7 +668,7 @@ Chain.load(metadata_key);
 
 ### 消息（Chain.msg）
 
-消息是在交易里触发智能合约执行产生的信息。在触发的合约执行的过程中，交易信息不会被改变，消息会发生变化。例如在合约中调用`contractCall`，`contractQuery`的时候，消息会变化。
+消息是在交易里触发智能合约执行产生的信息。在触发的合约执行的过程中，交易信息不会被改变，消息会发生变化。例如在合约中调用 [Chain.contractCall](#chaincontractcall)，[Chain.contractQuery](#chaincontractquery)的时候，消息会变化。
 
 
 
@@ -729,7 +729,7 @@ Chain.load(metadata_key);
 #### Chain.msg.nonce
 - 变量描述
 
-  本次交易里的发起者的nonce值，即`Chain.msg.initiator`账号的 nonce值。
+  本次交易里的发起者的nonce值，即[Chain.msg.initiator](#chainmsginitiator)账号的 nonce值。
 
 
 
