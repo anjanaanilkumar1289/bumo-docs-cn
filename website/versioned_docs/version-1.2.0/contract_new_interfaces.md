@@ -99,7 +99,7 @@ Chain.issueAsset("CNY", 10000);
 
 ## Chain 对象方法
 
-本章节介绍Chain对象的一些方法，包括 [Chain.load](#chainload)、 [Chain.store](#chainstore)、 [Chain.del](#chaindel)、 [Chain.getBlockHash](#chaingetblockhash)、 [Chain.tlog](#chaintlog)、 [Chain.getAccountMetadata](#chaingetaccountmetadata)、 [Chain.getBalance](#chaingetbalance)、[Chain.getAccountAsset](#chaingetaccountasset)、[Chain.getContractProperty](#chaingetcontractproperty)、[Chain.payCoin](#chainpaycoin)、[Chain.issueAsset](#chainissueasset)、[Chain.payAsset](#chainpayasset)、[Chain.delegateCall](#chaindelegatecall)、[Chain.delegateQuery](#chaindelegatequery)、[Chain.contractCall](#chaincontractcall)、[Chain.contractQuery](#chaincontractquery)、[Chain.contractCreate](#chaincontractcreate)。
+本章节介绍 Chain 对象的一些方法，包括 [Chain.load](#chainload)、 [Chain.store](#chainstore)、 [Chain.del](#chaindel)、 [Chain.getBlockHash](#chaingetblockhash)、 [Chain.tlog](#chaintlog)、 [Chain.getAccountMetadata](#chaingetaccountmetadata)、 [Chain.getBalance](#chaingetbalance)、[Chain.getAccountAsset](#chaingetaccountasset)、[Chain.getContractProperty](#chaingetcontractproperty)、[Chain.payCoin](#chainpaycoin)、[Chain.issueAsset](#chainissueasset)、[Chain.payAsset](#chainpayasset)、[Chain.delegateCall](#chaindelegatecall)、[Chain.delegateQuery](#chaindelegatequery)、[Chain.contractCall](#chaincontractcall)、[Chain.contractQuery](#chaincontractquery)、[Chain.contractCreate](#chaincontractcreate)。
 
 ### Chain.load
 - 函数描述
@@ -759,7 +759,7 @@ Chain.load(metadata_key);
 
   例如账号x发起了一笔交易调用合约Y，本次执行过程中，该值就是Y合约账号的地址。
   
-  ```text
+  ```js
   let bar = Chain.msg.thisAddress;
   /*
   bar的值是Y合约的账号地址。
@@ -770,7 +770,7 @@ Chain.load(metadata_key);
 
 ## Utils 对象方法
 
-本章节介绍Chain对象的一些方法，包括 [Utils.log](#utilslog)、[Utils.stoI64Check](#utilsstoi64check)、[Utils.int64Add](#utilsint64add)、[Utils.int64Sub](#utilsint64sub)、[Utils.int64Mul](#utilsint64mul)、[Utils.int64Mod](#utilsint64mod)、[Utils.int64Div](#utilsint64div)、
+本章节介绍 Utils 对象的一些方法，包括 [Utils.log](#utilslog)、[Utils.stoI64Check](#utilsstoi64check)、[Utils.int64Add](#utilsint64add)、[Utils.int64Sub](#utilsint64sub)、[Utils.int64Mul](#utilsint64mul)、[Utils.int64Mod](#utilsint64mod)、[Utils.int64Div](#utilsint64div)、[Utils.int64Compare](#utilsint64compare)、[Utils.assert](#utilsassert)、[Utils.sha256](#utilssha256)、[Utils.ecVerify](#utilsecverify)、[Utils.toBaseUnit](#utilstobaseunit)、[Utils.addressCheck](#utilsaddresscheck)、[Utils.toAddress](#utils.toaddress)。
 
 ### Utils.log
 
@@ -874,7 +874,7 @@ Chain.load(metadata_key);
   let ret = Utils.int64Sub('12345678912345', 1);
   /*
     权限：只读
-    返回：成功返回字符串 '123456789123464'，失败抛异常
+    返回：成功返回字符串 '12345678912344'，失败抛异常
   */
   ```
 
