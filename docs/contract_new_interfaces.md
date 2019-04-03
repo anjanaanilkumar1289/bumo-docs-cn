@@ -769,7 +769,7 @@ Chain.load(metadata_key);
 
 ## Utils 对象方法
 
-本章节介绍 Utils 对象的一些方法，包括 [Utils.log](#utilslog)、[Utils.stoI64Check](#utilsstoi64check)、[Utils.int64Add](#utilsint64add)、[Utils.int64Sub](#utilsint64sub)、[Utils.int64Mul](#utilsint64mul)、[Utils.int64Mod](#utilsint64mod)、[Utils.int64Div](#utilsint64div)、[Utils.int64Compare](#utilsint64compare)、[Utils.assert](#utilsassert)、[Utils.sha256](#utilssha256)、[Utils.ecVerify](#utilsecverify)、[Utils.toBaseUnit](#utilstobaseunit)、[Utils.addressCheck](#utilsaddresscheck)、[Utils.toAddress](#utils.toaddress)。
+本章节介绍 Utils 对象的一些方法，包括 [Utils.log](#utilslog)、[Utils.stoI64Check](#utilsstoi64check)、[Utils.int64Add](#utilsint64add)、[Utils.int64Sub](#utilsint64sub)、[Utils.int64Mul](#utilsint64mul)、[Utils.int64Mod](#utilsint64mod)、[Utils.int64Div](#utilsint64div)、[Utils.int64Compare](#utilsint64compare)、[Utils.assert](#utilsassert)、[Utils.sha256](#utilssha256)、[Utils.ecVerify](#utilsecverify)、[Utils.toBaseUnit](#utilstobaseunit)、[Utils.addressCheck](#utilsaddresscheck)、[Utils.toAddress](#utilstoaddress)。
 
 ### Utils.log
 
