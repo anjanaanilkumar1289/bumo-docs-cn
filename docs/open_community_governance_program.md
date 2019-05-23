@@ -365,6 +365,8 @@ BUMO开放社群治理计划运行中产生的纠纷，受新加坡法律管辖�
 
 2. BUMO小助手的微信二维码 
 
+<img src="/docs/assets/assistant.png" style= "margin-left: 20px">
+
 3. BUMO基金会的工作邮箱：Supernode@bumo.io
 
 4. 保证金转入地址：buQqzdS9YSnokDjvzg4YaNatcFQfkgXqk6ss
