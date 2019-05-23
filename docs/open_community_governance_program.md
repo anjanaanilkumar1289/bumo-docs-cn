@@ -361,6 +361,8 @@ BUMO开放社群治理计划运行中产生的纠纷，受新加坡法律管辖�
 
 1. 小布口袋的下载二维码 
 
+<img src="/docs/assets/bu_pocket.png" style= "margin-left: 20px">
+
 2. BUMO小助手的微信二维码 
 
 3. BUMO基金会的工作邮箱：Supernode@bumo.io
