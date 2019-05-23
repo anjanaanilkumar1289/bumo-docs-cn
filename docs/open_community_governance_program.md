@@ -143,6 +143,7 @@ Windows	|Supports WinXP/2003/Vista/7/8/10 to building, and Win10 is recommended
 Mac	|MAC OS X 10.11.4 or later
 
 最低硬件要求如下表所示：
+
 Item|	Value
 -------|-------
 CPU	|8 core
@@ -285,7 +286,7 @@ BUMO基金会对投票用户不设置任何奖励。
 
 ### 奖励发放时间
 
-节点奖励发放时间：新加坡时间（GMT+08:00）每个自然日01:00清算奖励并发放到竞选节点的Token账户地址。
+节点奖励发放时间：新加坡时间（GMT+08:00）每个自然日清算奖励并发放到竞选节点的Token账户地址。
 
 节点共建支持者奖励与节点奖励同期发放，会由于技术原因稍有延迟。
 
