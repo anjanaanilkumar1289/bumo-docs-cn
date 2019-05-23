@@ -1,5 +1,5 @@
 ---
-id: open_community_governance_initiative
+id: open_community_governance_program
 title: BUMO开放社群治理计划
 sidebar_label: BUMO开放社群治理计划
 ---
