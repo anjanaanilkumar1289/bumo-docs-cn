@@ -2,22 +2,8 @@
   "docs": {
     "快速入门": [
       "introduction_to_bumo",
-      "installation_maintenance_guide",
+      "installation_for_synchronous_node",
       "contract_hello_world"
-    ],
-    "智能合约": [
-      "introduction_to_smart_contract",
-      "contract_new_interfaces",
-      "syntax_in_smart_contract",
-      "codemach_editor_user_guide"
-    ],
-    "BEPs协议": [
-      "introduction_to_beps",
-      "atp_10",
-      "atp_20",
-      "atp_30",
-      "sto_10",
-      "dex_10"
     ],
     "API": [
       "keypair_guide",
@@ -32,10 +18,29 @@
       "sdk_ios"
     ],
     "开发指南": [
+      "installation_maintenance_guide",
       "integration_guide_for_exchanges",
       "asset_issuance_development_guide_for_java",
       "legal_evidence_development_guide_for_java",
       "smart_contract_development_guide_for_java"
+    ],
+    "智能合约": [
+      "introduction_to_smart_contract",
+      "contract_new_interfaces",
+      "syntax_in_smart_contract",
+      "codemach_editor_user_guide"
+    ],
+    "BEPs协议": [
+      "introduction_to_beps",
+      "atp_10",
+      "atp_20",
+      "atp_30",
+      "sto_10",
+      "dex_10",
+      "dpos_10"
+    ],
+    "社群": [
+      "open_community_governance_program"
     ],
     "钱包": [
       "quick_wallet_user_guide",

@@ -1,7 +1,8 @@
 ---
-id: installation_maintenance_guide
+id: version-1.3.1-installation_maintenance_guide
 title: BUMO 节点安装运维指南
 sidebar_label: 节点安装运维指南
+original_id: installation_maintenance_guide
 ---
 
 

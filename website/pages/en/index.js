@@ -213,6 +213,76 @@ class Index extends React.Component {
     
     const featureArray = [
       {
+        image: `${baseUrl}img/index/api.png`,
+        name: 'API',
+        linkList: [
+          {
+            url: `${baseUrl}docs/keypair_guide`,
+            label: 'Keypair'
+          },
+          {
+            url: `${baseUrl}docs/api_http`,
+            label: 'HTTP'
+          },
+          {
+            url: `${baseUrl}docs/api_websocket`,
+            label: 'Websocket'
+          }
+        ]
+      },
+      {
+        image: `${baseUrl}img/index/sdk.png`,
+        name: 'SDK',
+        linkList: [
+          {
+            url: `${baseUrl}docs/sdk_java`,
+            label: 'JAVA'
+          },
+          {
+            url: `${baseUrl}docs/sdk_nodejs`,
+            label: 'Node.js'
+          },
+          {
+            url: `${baseUrl}docs/sdk_go`,
+            label: 'GO'
+          },
+          {
+            url: `${baseUrl}docs/sdk_php`,
+            label: 'PHP'
+          },
+          {
+            url: `${baseUrl}docs/sdk_ios`,
+            label: 'IOS'
+          }
+        ]
+      },
+      {
+        image: `${baseUrl}img/index/docs.png`,
+        name: '开发指南',
+        linkList: [
+          {
+            url: `${baseUrl}docs/installation_maintenance_guide`,
+            label: '节点安装运维'
+          },
+          {
+            url: `${baseUrl}docs/integration_guide_for_exchanges`,
+            label: '交易所对接'
+          },
+          {
+            url: `${baseUrl}docs/asset_issuance_development_guide_for_java`,
+            label: '资产发行 Java 开发'
+          },
+          {
+            url: `${baseUrl}docs/asset_issuance_development_guide_for_java`,
+            label: '存证 Java 开发'
+          },
+          {
+            url: `${baseUrl}docs/smart_contract_development_guide`,
+            label: '智能合约 Java 开发'
+          }
+        ]
+      },
+      {
         image: `${baseUrl}img/index/contract.png`,
         name: '智能合约',
         linkList: [
@@ -265,68 +335,12 @@ class Index extends React.Component {
         ]
       },
       {
-        image: `${baseUrl}img/index/api.png`,
-        name: 'API',
+        image: `${baseUrl}img/index/community.png`,
+        name: '社群',
         linkList: [
           {
-            url: `${baseUrl}docs/keypair_guide`,
-            label: 'Keypair'
-          },
-          {
-            url: `${baseUrl}docs/api_http`,
-            label: 'HTTP'
-          },
-          {
-            url: `${baseUrl}docs/api_websocket`,
-            label: 'Websocket'
-          }
-        ]
-      },
-      {
-        image: `${baseUrl}img/index/sdk.png`,
-        name: 'SDK',
-        linkList: [
-          {
-            url: `${baseUrl}docs/sdk_java`,
-            label: 'JAVA'
-          },
-          {
-            url: `${baseUrl}docs/sdk_nodejs`,
-            label: 'Node.js'
-          },
-          {
-            url: `${baseUrl}docs/sdk_go`,
-            label: 'GO'
-          },
-          {
-            url: `${baseUrl}docs/sdk_php`,
-            label: 'PHP'
-          },
-          {
-            url: `${baseUrl}docs/sdk_ios`,
-            label: 'IOS'
-          }
-        ]
-      },
-      {
-        image: `${baseUrl}img/index/docs.png`,
-        name: '开发指南',
-        linkList: [
-          {
-            url: `${baseUrl}docs/integration_guide_for_exchanges`,
-            label: '交易所对接'
-          },
-          {
-            url: `${baseUrl}docs/asset_issuance_development_guide_for_java`,
-            label: '资产发行 Java 开发'
-          },
-          {
-            url: `${baseUrl}docs/asset_issuance_development_guide_for_java`,
-            label: '存证 Java 开发'
-          },
-          {
-            url: `${baseUrl}docs/smart_contract_development_guide`,
-            label: '智能合约 Java 开发'
+            url: `${baseUrl}docs/open_community_governance_program`,
+            label: '开放社群治理计划'
           }
         ]
       },
